@@ -20,6 +20,8 @@ const NAV_ITEMS = [
   { number: "02", label: "ABOUT", href: "/admin/about" },
   { number: "03", label: "HOME", href: "/admin/home" },
   { number: "04", label: "NOW", href: "/admin/now" },
+  { number: "05", label: "TIMELINE", href: "/admin/timeline" },
+  { number: "06", label: "INFLUENCES", href: "/admin/influences" },
 ] as const;
 
 /**

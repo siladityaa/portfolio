@@ -23,13 +23,17 @@ import {
   aboutContentSchema,
   caseStudySchema,
   homeContentSchema,
+  influencesContentSchema,
   nowContentSchema,
+  timelineContentSchema,
 } from "@/content/schemas";
 import type {
   AboutContent,
   CaseStudy,
   HomeContent,
+  InfluencesContent,
   NowContent,
+  TimelineContent,
 } from "@/content/types";
 import {
   ConflictError,
@@ -197,6 +201,54 @@ export async function saveNow(payload: unknown): Promise<SaveResult> {
   );
   if (result.status === "ok") {
     revalidatePath("/");
+    revalidatePath("/about");
+  }
+  return result;
+}
+
+/* ---------- timeline --------------------------------------------------- */
+
+export async function saveTimeline(payload: unknown): Promise<SaveResult> {
+  const parsed = timelineContentSchema.safeParse(payload);
+  if (!parsed.success) {
+    return {
+      status: "invalid",
+      message: `Payload failed validation: ${parsed.error.issues
+        .map((i) => `${i.path.join(".")}: ${i.message}`)
+        .join("; ")}`,
+    };
+  }
+  const result = await runSave<TimelineContent>(
+    "content/timeline.json",
+    parsed.data,
+    "timeline",
+    "timeline",
+  );
+  if (result.status === "ok") {
+    revalidatePath("/about");
+  }
+  return result;
+}
+
+/* ---------- influences ------------------------------------------------- */
+
+export async function saveInfluences(payload: unknown): Promise<SaveResult> {
+  const parsed = influencesContentSchema.safeParse(payload);
+  if (!parsed.success) {
+    return {
+      status: "invalid",
+      message: `Payload failed validation: ${parsed.error.issues
+        .map((i) => `${i.path.join(".")}: ${i.message}`)
+        .join("; ")}`,
+    };
+  }
+  const result = await runSave<InfluencesContent>(
+    "content/influences.json",
+    parsed.data,
+    "influences",
+    "influences",
+  );
+  if (result.status === "ok") {
     revalidatePath("/about");
   }
   return result;

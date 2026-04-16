@@ -1,3 +1,6 @@
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import { Wordmark } from "@/components/chrome/Wordmark";
 import { NavLinks } from "@/components/chrome/NavLinks";
 import { NowPlaying } from "@/components/chrome/NowPlaying";
@@ -36,6 +39,10 @@ export default function SiteLayout({
 
       {/* Custom cursor — client component, hidden on touch devices. */}
       <CustomCursor />
+
+      {/* Vercel Analytics + Speed Insights — public pages only, not /admin. */}
+      <Analytics />
+      <SpeedInsights />
     </>
   );
 }

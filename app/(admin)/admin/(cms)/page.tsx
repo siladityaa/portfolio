@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import { loadAllCaseStudies } from "@/lib/content";
+import { timeline, education, awards } from "@/content/timeline";
+import { influences } from "@/content/influences";
 
 interface CollectionTile {
   number: string;
@@ -31,7 +33,7 @@ export default async function AdminDashboard() {
     {
       number: "02",
       label: "About",
-      description: "Pulled quote, personal + professional bio, timeline, influences.",
+      description: "Pulled quote, personal + professional bio.",
       href: "/admin/about",
       count: "1 PAGE",
     },
@@ -45,9 +47,23 @@ export default async function AdminDashboard() {
     {
       number: "04",
       label: "Now",
-      description: "Now-playing tracks, currently/reading/building/listening, previously block.",
+      description: "Curated-fallback tracks, pinned override, currently/previously facts.",
       href: "/admin/now",
       count: "1 BLOCK",
+    },
+    {
+      number: "05",
+      label: "Timeline",
+      description: "Work history, education, and awards shown on /about.",
+      href: "/admin/timeline",
+      count: `${timeline.length + education.length + awards.length} ROWS`,
+    },
+    {
+      number: "06",
+      label: "Influences",
+      description: "Brands, people, studios, and objects shown on /about.",
+      href: "/admin/influences",
+      count: `${influences.length} ${influences.length === 1 ? "ITEM" : "ITEMS"}`,
     },
   ];
 
