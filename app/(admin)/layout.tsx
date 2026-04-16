@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 
-import { AdminShell } from "@/components/admin/AdminShell";
-
 /**
- * Admin route group layout — wraps every page under `(admin)/` with the
- * AdminShell (top bar + sidebar nav). Deliberately does NOT render the
- * public four-corner chrome (Wordmark, NavLinks, NowPlaying, LocalClock,
- * CustomCursor, PageTransition).
+ * Admin route group layout — everything under `(admin)/` gets noindex'd
+ * and the CMS title. Does NOT render the AdminShell (top bar + sidebar) —
+ * that happens in `admin/(cms)/layout.tsx`, which only wraps the gated
+ * editor pages. The login and forbidden pages live outside `(cms)` and
+ * render without any shell so they feel like dedicated fullscreen states.
  *
- * Search engines never index `/admin/*`.
+ * Does NOT render the public four-corner chrome (Wordmark, NavLinks,
+ * NowPlaying, LocalClock, CustomCursor, PageTransition) — that's `(site)`.
  *
- * Step 6 will gate this whole tree behind GitHub OAuth via middleware.
+ * The whole tree is gated by `proxy.ts` at the repo root (GitHub OAuth,
+ * single-user allow-list). Only `/admin/login` and `/admin/forbidden` are
+ * excluded from the gate.
  */
 export const metadata: Metadata = {
   title: "CMS — Siladityaa Sharma",
@@ -22,5 +24,5 @@ export default function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <AdminShell>{children}</AdminShell>;
+  return <>{children}</>;
 }

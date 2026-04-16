@@ -1,9 +1,17 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+interface AdminUser {
+  name: string;
+  login: string;
+  avatarUrl: string;
+}
+
 interface AdminShellProps {
   /** Optional breadcrumb shown to the right of the wordmark, e.g. "CASE STUDIES / AMBIENT AI" */
   breadcrumb?: string;
+  /** Currently signed-in admin user. `null` while auth is still booting — render nothing. */
+  user?: AdminUser | null;
   children: ReactNode;
 }
 
@@ -24,7 +32,7 @@ const NAV_ITEMS = [
  * Auth (Step 6) will gate this whole tree via middleware. The shell
  * itself is intentionally agnostic to auth — it just renders.
  */
-export function AdminShell({ breadcrumb, children }: AdminShellProps) {
+export function AdminShell({ breadcrumb, user, children }: AdminShellProps) {
   return (
     <div className="min-h-screen">
       {/* Top bar — fixed, full width, hairline-bottom */}
@@ -49,10 +57,28 @@ export function AdminShell({ breadcrumb, children }: AdminShellProps) {
           >
             ← VIEW SITE
           </Link>
-          {/* Logout button placeholder — wired in Step 6 */}
-          <span className="text-mono-s text-[color:color-mix(in_srgb,var(--surface-graphite)_60%,transparent)]">
-            LOGOUT
-          </span>
+          {user ? (
+            <span className="hidden items-center gap-2 text-mono-s text-[color:var(--surface-graphite)] sm:flex">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={user.avatarUrl}
+                alt=""
+                width={18}
+                height={18}
+                className="rounded-full"
+              />
+              {user.login.toUpperCase()}
+            </span>
+          ) : null}
+          {/* Logout — POST so prefetchers can't sign the user out accidentally. */}
+          <form method="POST" action="/api/auth/logout">
+            <button
+              type="submit"
+              className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+            >
+              LOGOUT
+            </button>
+          </form>
         </div>
       </header>
 

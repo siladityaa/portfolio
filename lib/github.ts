@@ -1,18 +1,23 @@
 /**
  * Thin wrapper around @octokit/rest for CMS save flow.
  *
- * All file writes go to the branch specified in `GITHUB_REPO_BRANCH`. During
- * Step 4 this is a throwaway branch (`cms-test`) so we can sanity-check the
- * save pipeline without touching `main`. Step 5 flips it to `main`.
+ * All file writes go to the branch specified in `GITHUB_REPO_BRANCH` — `main`
+ * in the shipped config. (During the Phase 6 build-out we briefly pointed at
+ * a throwaway `cms-test` branch so the save pipeline could be verified
+ * without touching prod; git log on main carries the switchover commit.)
  *
  * Token sourcing:
- *   - Step 4: `GITHUB_TEST_TOKEN` env var — a hand-rolled PAT with `public_repo` scope.
- *   - Step 6: the OAuth-derived access token from the JWE session cookie
- *     (signed by the single-user GitHub login allow-list).
+ *   - Primary: the OAuth-derived access token pulled from the JWE session
+ *     cookie by `getTokenFromSession` below. Gated by the single-user allow-
+ *     list in the OAuth callback.
+ *   - Dev fallback: `GITHUB_TEST_TOKEN` env var, honored only when
+ *     `NODE_ENV !== "production"`. Lets you keep working locally if OAuth
+ *     breaks. Never set this in Vercel production env.
  *
  * `@octokit/rest` is Node-only (pulls in `node:crypto`, `node:fs`) so any
- * caller MUST declare `export const runtime = "nodejs"`. Server actions that
- * import this file do.
+ * caller MUST run on the Node runtime. Server actions in standalone
+ * `actions.ts` files inherit their runtime from the importing page — we
+ * leave admin pages on the default Node runtime and never flip them to Edge.
  */
 import { Octokit } from "@octokit/rest";
 
@@ -147,17 +152,35 @@ export async function writeJsonFile(
 }
 
 /**
- * Step 4 helper: pulls the test PAT from the environment. In Step 6 this is
- * replaced with a call that reads the access token out of the JWE session
- * cookie via `lib/auth.ts`. Until then, calling this without the env var set
- * throws a clear error.
+ * Reads the OAuth access token from the encrypted session cookie set by the
+ * `/api/auth/callback` route. This is the production path — the token was
+ * minted by GitHub after the allow-listed user signed in, so a present
+ * session cookie implies "authorized to write to the repo".
+ *
+ * Returns `null` if the cookie is missing, malformed, or expired. Callers
+ * should treat `null` as "not authenticated" and refuse to write.
+ *
+ * Dev-only fallback: if the session cookie is absent and `GITHUB_TEST_TOKEN`
+ * is set, use that PAT instead. Gated on `NODE_ENV !== "production"` so prod
+ * can never silently use a long-lived PAT, even if someone leaks one into
+ * the Vercel env accidentally.
  */
-export function getTokenFromEnv(): string {
-  const token = process.env.GITHUB_TEST_TOKEN;
-  if (!token) {
-    throw new GitHubSaveError(
-      "GITHUB_TEST_TOKEN is not set. See .env.example — Step 4 uses a hand-rolled PAT.",
-    );
+export async function getTokenFromSession(): Promise<string | null> {
+  // Dynamic import to avoid pulling next/headers into Edge-runtime code paths
+  // that don't need it. This file is only imported from server actions, which
+  // always run on Node, so `cookies()` is safe.
+  const { cookies } = await import("next/headers");
+  const { SESSION_COOKIE_NAME, decryptSession } = await import("@/lib/auth");
+
+  const jar = await cookies();
+  const session = await decryptSession(jar.get(SESSION_COOKIE_NAME)?.value);
+  if (session?.accessToken) {
+    return session.accessToken;
   }
-  return token;
+
+  if (process.env.NODE_ENV !== "production") {
+    const fallback = process.env.GITHUB_TEST_TOKEN;
+    if (fallback) return fallback;
+  }
+  return null;
 }

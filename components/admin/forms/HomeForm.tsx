@@ -22,9 +22,9 @@ interface HomeFormProps {
 /**
  * Home page editor — two fields (hero sentence + mono subline).
  *
- * Wired in Step 4 to the `saveHome` server action, which commits
- * `content/home.json` to the GitHub repo's `cms-test` branch (Step 5
- * flips it to `main`). Save state machine lives in `useSaveFlow`.
+ * Calls the `saveHome` server action, which commits `content/home.json` to
+ * the GitHub repo's `main` branch (the branch is configured via
+ * `GITHUB_REPO_BRANCH`). Save state machine lives in `useSaveFlow`.
  */
 export function HomeForm({ defaultValues }: HomeFormProps) {
   const methods = useForm<HomeContent>({

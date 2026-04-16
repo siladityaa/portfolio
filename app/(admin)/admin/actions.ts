@@ -34,7 +34,7 @@ import type {
 import {
   ConflictError,
   GitHubSaveError,
-  getTokenFromEnv,
+  getTokenFromSession,
   makeOctokit,
   readJsonFile,
   writeJsonFile,
@@ -59,7 +59,19 @@ async function runSave<T>(
   slug: string,
 ): Promise<SaveResult> {
   try {
-    const octokit = makeOctokit(getTokenFromEnv());
+    // Proxy already gated the admin route to a valid session, but server
+    // actions can in theory be hit via a stale RSC round-trip so we re-check
+    // at the action boundary too. Belt + suspenders — the auth check is
+    // always cheap, writing bad data is not.
+    const token = await getTokenFromSession();
+    if (!token) {
+      return {
+        status: "error",
+        message:
+          "Not authenticated. Your session may have expired — please sign in again.",
+      };
+    }
+    const octokit = makeOctokit(token);
     const existing = await readJsonFile(octokit, path);
     const { commitSha } = await writeJsonFile(
       octokit,

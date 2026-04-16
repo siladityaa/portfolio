@@ -415,7 +415,36 @@ public/
 12. **Real influence-card copy on `/about`.** `content/influences.ts` has 12 entries with placeholder "why" lines. Refine each to your real take in 15–20 words.
 13. **Real `now.ts` content** — currently playing tracks, currently/reading/building/listening, previously block. Update before Phase 4 deploy.
 14. **Mobile responsive pass on the case-study chapter layout.** Below 1280px the TOC and ruler hide and the body becomes single-column — verified working but could use tighter vertical rhythm and a "scroll to top" affordance on long pages.
-15. **Replace `gray-matter` with `@content-collections/next`** for typed MDX at build time. Phase 1 deferred this — the gray-matter loader is fine at this scale, but typed content collections give compile-time errors when an MDX frontmatter doesn't match the schema.
+15. **Replace `gray-matter` with `@content-collections/next`** for typed MDX at build time. Phase 1 deferred this — the gray-matter loader is fine at this scale, but typed content collections give compile-time errors when an MDX frontmatter doesn't match the schema. *(Superseded by Phase 6 — content moved off MDX to typed JSON + Zod.)*
+
+### Phase 6 — CMS (/admin), GitHub-backed, single-user (shipped 2026-04-16)
+
+The goal: edit every piece of content — case studies, home, about, now — without prompting Claude. Built in six sequenced steps; each independently verifiable.
+
+**What shipped:**
+
+1. **Content layer migration (Step 0).** All five case studies moved from `.mdx` → `.json`. `gray-matter` removed. New JSON sources at `content/{home,about,now,timeline,influences}.json` + `content/work/*.json`. Zod schemas in `content/schemas.ts` are now the single source of truth — `content/types.ts` re-exports `z.infer` types, killing the drift between runtime validation and TypeScript.
+2. **Route group split (Step 1).** Root `app/layout.tsx` stripped to html/body/fonts/theme-bootstrap only. Public chrome moved to `app/(site)/layout.tsx`. Admin lives in `app/(admin)/` with `metadata.robots = { index: false }`.
+3. **Admin shell + read-only lists (Step 2).** `AdminShell` (top bar + sidebar nav) matches the public site's design language — Instrument Serif + JetBrains Mono, hairline seams, paper/ink/graphite palette. Four collection list views + edit page scaffolding.
+4. **Forms on react-hook-form + Zod (Step 3).** `HomeForm`, `AboutForm`, `NowForm`, `CaseStudyForm`, `ChapterEditor`, `SectionAccordion`, all 10 section `*Fields` subforms, `AddSectionCombobox`, `defaultSection` factory. Dirty-state tracking via `DirtyWarning` (`beforeunload` handler).
+5. **GitHub write path (Step 4).** `lib/github.ts` wraps `@octokit/rest`: `readJsonFile` (returns `{sha, data}` or `null` on 404), `writeJsonFile` (409/422 → typed `ConflictError`). Server actions in `app/(admin)/admin/actions.ts` re-parse via Zod on the server, commit with `cms: update <collection> — <slug>`, call `revalidatePath` on success. First verified against a throwaway `cms-test` branch.
+6. **Branch flip (Step 5).** `GITHUB_REPO_BRANCH` switched from `cms-test` to `main`. `cms-test` branch deleted. Every save now ships.
+7. **Single-user OAuth gate (Step 6).** GitHub OAuth App with `public_repo` scope. Callback re-checks the allow-list (`ADMIN_GITHUB_LOGIN`) — mismatched logins bounce to `/admin/forbidden` with the session cookie cleared. Session is a JWE (`jose`, `dir` alg, `A256GCM`) in an httpOnly, `sameSite=lax`, 7-day cookie. `proxy.ts` (Next 16 renamed `middleware.ts`) gates `/admin/:path*` — unauthed nav redirects to `/admin/login?from=<path>` preserving the intended destination. Server actions read the OAuth token from the session cookie; commits are attributed to the real GitHub identity automatically. Dev-only fallback to `GITHUB_TEST_TOKEN` gated on `NODE_ENV !== "production"`.
+
+**First real CMS commit on `main`:** `4802a7f` — `cms: update home — home`, attributed to `@siladityaa`, touching only `content/home.json`.
+
+**v1 cuts (deferred to Phase 6.5 if they earn their keep):**
+- Drag-and-drop reorder (up/down buttons ship in v1).
+- Live preview pane.
+- Autosave / draft state.
+- Image upload (path strings with inline `<img>` preview validation).
+- Edit history beyond `git log`.
+- Rich-text editor for prose blocks (plain `<textarea>` ships in v1).
+- Production OAuth App registration — v1 is `localhost`-only; register a second app or add a callback URL when promoting to prod.
+
+**Environment contract (see `.env.example`):** 6 required vars — `GITHUB_REPO_{OWNER,NAME,BRANCH}`, `GITHUB_OAUTH_CLIENT_{ID,SECRET}`, `ADMIN_GITHUB_LOGIN`, `SESSION_COOKIE_SECRET` (≥32 chars, rotate = invalidates all sessions), `ADMIN_BASE_URL`. One dev-only optional: `GITHUB_TEST_TOKEN`.
+
+**What stays out of the admin:** `content/timeline.json`, `content/influences.json`, and the hardcoded chapter-ruler labels. v1 covers the four collections that actually change week-to-week; timeline + influences are annual edits and not worth a form yet.
 
 ---
 

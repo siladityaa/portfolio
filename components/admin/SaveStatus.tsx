@@ -10,7 +10,7 @@ import clsx from "clsx";
  * value — this component just renders it.
  *
  * Copy rules:
- *   - `saved`:    "SAVED · LIVE IN ~60s"  (Vercel rebuild from cms-test branch)
+ *   - `saved`:    "SAVED · LIVE IN ~60s"  (Vercel rebuild from the main branch)
  *   - `conflict`: shown as a modal, not here (see ConflictModal.tsx)
  *   - `invalid`:  shouldn't happen — client-side Zod should catch first
  *   - `error`:    red signal, shows the server-returned message verbatim
