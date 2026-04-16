@@ -213,6 +213,19 @@ export const nowEntrySchema = z.object({
 });
 
 export const nowContentSchema = z.object({
+  /**
+   * Editorial override for the NowPlaying widget. When present, the widget
+   * renders this exact track instead of querying Last.fm — useful when you
+   * want to pin "the album I'm obsessing over this week" regardless of what
+   * the scrobbler most recently caught. Clear it to resume live data.
+   */
+  pinned: trackSchema.optional(),
+  /**
+   * Curated fallback list. Used when Last.fm returns nothing and no
+   * `pinned` override is set — e.g. in offline dev, before the scrobbler
+   * has captured anything, or if the API key is unset. The widget shows
+   * the first entry from this list in that case.
+   */
   nowPlaying: z.array(trackSchema),
   nowFacts: z.array(nowEntrySchema),
   previouslyFacts: z.array(nowEntrySchema),
