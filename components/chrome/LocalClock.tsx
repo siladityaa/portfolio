@@ -1,0 +1,52 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+/**
+ * Brief §3 — fixed bottom-right. Shows Los Angeles time in mono-s, updates
+ * every 60 seconds. SSR renders a stable placeholder to avoid hydration
+ * mismatches; the real time fills in on mount.
+ */
+export function LocalClock() {
+  const [time, setTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Los_Angeles",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+    function tick() {
+      setTime(formatter.format(new Date()));
+    }
+
+    tick();
+    // Align the first interval to the next minute boundary so the display
+    // updates at :00, then tick every 60s.
+    const now = new Date();
+    const msToNextMinute = 60_000 - (now.getSeconds() * 1000 + now.getMilliseconds());
+    const kickoff = window.setTimeout(() => {
+      tick();
+      const interval = window.setInterval(tick, 60_000);
+      // Attach to a ref via closure for cleanup.
+      cleanup = () => window.clearInterval(interval);
+    }, msToNextMinute);
+
+    let cleanup: (() => void) | undefined;
+    return () => {
+      window.clearTimeout(kickoff);
+      cleanup?.();
+    };
+  }, []);
+
+  return (
+    <div
+      aria-label="Local time, Los Angeles"
+      className="fixed right-[clamp(24px,4vw,64px)] bottom-[clamp(24px,4vw,64px)] z-50 text-mono-s text-[color:var(--surface-graphite)] tabular-nums"
+    >
+      LAX · {time ?? "--:--"} PT
+    </div>
+  );
+}

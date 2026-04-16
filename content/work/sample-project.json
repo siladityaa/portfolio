@@ -1,0 +1,183 @@
+{
+  "slug": "sample-project",
+  "title": "Sample Project",
+  "timeline": "2024 — 2025",
+  "role": "Sole Product designer\nDesign Engineer",
+  "team": "Design · Research · Hardware · ML",
+  "credits": "Huiqiao Z. /Design manager\nYiming M., Jason L. /PM",
+  "status": "nda",
+  "tags": [
+    "wearables",
+    "ai"
+  ],
+  "keyColor": "#2E3A3A",
+  "hero": {
+    "src": "/work/sample/hero.jpg",
+    "alt": "Hero still for sample project",
+    "caption": "Pre-approved ambient still"
+  },
+  "brief": "A placeholder case study that exercises every chapter section type from the new xiangyi-style layout. Replace with a real project in Phase 4.",
+  "chapters": [
+    {
+      "slug": "context",
+      "eyebrow": "The starting point",
+      "title": "Context",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — a paragraph framing the public problem space. Why this work exists, what the constraints were, and what made the team take it on. Two or three sentences is plenty here; the rest of the page will do the heavy lifting."
+        },
+        {
+          "kind": "cardGrid",
+          "cards": [
+            {
+              "title": "PM",
+              "body": "Held the framing and the metric the team was chasing.",
+              "chip": {
+                "label": "PM",
+                "tone": "pm"
+              }
+            },
+            {
+              "title": "Design",
+              "body": "Held the look, the interaction model, and the system.",
+              "chip": {
+                "label": "Design",
+                "tone": "design"
+              }
+            },
+            {
+              "title": "Engineer",
+              "body": "Held the rendering pipeline and the perf budget.",
+              "chip": {
+                "label": "Engineer",
+                "tone": "engineer"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "how-it-drives-growth",
+      "eyebrow": "The trick",
+      "title": "How the work drove growth",
+      "sections": [
+        {
+          "kind": "infoTable",
+          "columns": [
+            "Category",
+            "Foundational experience",
+            "Core iterations"
+          ],
+          "rows": [
+            {
+              "label": "Scope",
+              "cells": [
+                [
+                  "Foundation components",
+                  "Legacy component standard",
+                  "Core page design specs"
+                ],
+                [
+                  "Bridge feature gaps",
+                  "Improve content efficiency",
+                  "Boost consumption UX"
+                ]
+              ]
+            },
+            {
+              "label": "Design role",
+              "cells": [
+                "High",
+                "High"
+              ]
+            },
+            {
+              "label": "Value",
+              "cells": [
+                "Strategic — long-term value",
+                "Tactical — reliable returns"
+              ]
+            }
+          ],
+          "footnote": "*Core data: DAU + Life Time (LT) + Playtime"
+        },
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — three sentences describing how the strategy translates into shipped work. Use **bold inline highlights** for the load-bearing nouns."
+        }
+      ]
+    },
+    {
+      "slug": "iterations",
+      "eyebrow": "A no-brainer",
+      "title": "Core iterations, steady growth",
+      "sections": [
+        {
+          "kind": "tabGroup",
+          "tabs": [
+            {
+              "label": "Side nav redesign",
+              "body": "TODO(siladityaa) — 1–2 sentences about what the side nav redesign accomplished and why the team prioritised it.",
+              "image": {
+                "src": "/work/sample/sidenav.jpg",
+                "alt": "Side nav redesign mockup"
+              }
+            },
+            {
+              "label": "Suggest account",
+              "body": "TODO(siladityaa) — the account-suggestion experiment, what shipped, what the result was.",
+              "image": {
+                "src": "/work/sample/suggest.jpg",
+                "alt": "Account suggestion mockup"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "divider"
+        },
+        {
+          "kind": "mockupFrame",
+          "src": "/work/sample/full-mock.jpg",
+          "alt": "Full TikTok.com home — production mockup",
+          "caption": "Production mockup, second iteration"
+        }
+      ]
+    },
+    {
+      "slug": "locked-systems",
+      "eyebrow": "Behind the lock",
+      "title": "Design system exploration",
+      "sections": [
+        {
+          "kind": "lockedSection",
+          "number": "04",
+          "title": "Sensor feedback variants",
+          "description": "A component library for sensor feedback states, with 140+ variants across five device postures."
+        },
+        {
+          "kind": "pullQuote",
+          "body": "A quote from the team that sharpened the framing.",
+          "attribution": "Partner PM"
+        }
+      ]
+    },
+    {
+      "slug": "reflection",
+      "eyebrow": "Looking back",
+      "title": "Reflection",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — one paragraph in first person about what you learned. What you'd change, what you'd keep, what surprised you. Around sixty words. This is the human moment in the case study."
+        }
+      ]
+    }
+  ],
+  "next": {
+    "slug": "ambient-ai",
+    "title": "Ambient AI for wearables"
+  }
+}

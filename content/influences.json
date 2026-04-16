@@ -1,0 +1,64 @@
+{
+  "influences": [
+    {
+      "name": "Nothing",
+      "category": "brand",
+      "why": "Proves you can make hardware feel playful without sacrificing restraint — permission to ship joy."
+    },
+    {
+      "name": "Teenage Engineering",
+      "category": "studio",
+      "why": "Every label, number, and unit suffix on the OP-1 is a love note to craft."
+    },
+    {
+      "name": "Polestar",
+      "category": "brand",
+      "why": "A color system so disciplined that the single accent colour carries the entire brand."
+    },
+    {
+      "name": "Dieter Rams",
+      "category": "person",
+      "why": "The ten principles are load-bearing forty years on — a good product is honest, and I re-read them when I'm lost."
+    },
+    {
+      "name": "Alvar Aalto",
+      "category": "architect",
+      "why": "Modernism that still feels warm — proof that minimal doesn't have to mean cold."
+    },
+    {
+      "name": "Charles & Ray Eames",
+      "category": "person",
+      "why": "Playful rigour. They treated a chair and a film and a toy with the same curiosity."
+    },
+    {
+      "name": "Massimo Vignelli",
+      "category": "person",
+      "why": "Unimark's NYC subway map reminds me that editing is the craft — what you leave out does the work."
+    },
+    {
+      "name": "Bruno Munari",
+      "category": "person",
+      "why": "Design as a question, not an answer. Munari kept playing, and you can feel it in his output."
+    },
+    {
+      "name": "Satyajit Ray",
+      "category": "filmmaker",
+      "why": "Storytelling that earns every frame — a reminder that quietness is a design choice."
+    },
+    {
+      "name": "Dayanita Singh",
+      "category": "person",
+      "why": "Her book-objects taught me that a portfolio is just an edited sequence with opinions."
+    },
+    {
+      "name": "Kanye West",
+      "category": "musician",
+      "why": "Obsessive iteration in public. Every album is a different take on the same question."
+    },
+    {
+      "name": "Daft Punk",
+      "category": "musician",
+      "why": "Two helmets and a drum machine — brand as a tight constraint that unlocks everything downstream."
+    }
+  ]
+}

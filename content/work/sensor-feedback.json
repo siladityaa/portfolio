@@ -1,0 +1,114 @@
+{
+  "slug": "sensor-feedback",
+  "title": "Sensor feedback system",
+  "timeline": "2023 — 2024",
+  "role": "Product Designer",
+  "team": "Design · Hardware · Firmware",
+  "credits": "Meta Reality Labs · Wearables hardware\nHardware + firmware partners",
+  "status": "nda",
+  "tags": [
+    "wearables",
+    "consumer"
+  ],
+  "keyColor": "#3B2E2A",
+  "hero": {
+    "src": "/work/sensor-feedback/hero.jpg",
+    "alt": "Sensor feedback system — ambient still"
+  },
+  "brief": "TODO(siladityaa) — Frame the public problem: how a wearable communicates without a screen when the user's attention is elsewhere. Keep to ~80 words.",
+  "chapters": [
+    {
+      "slug": "context",
+      "eyebrow": "The starting point",
+      "title": "Context",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — public framing paragraph for the sensor feedback work. What the device does, what the user is doing while wearing it, and why a screen wasn't an option."
+        },
+        {
+          "kind": "pullQuote",
+          "body": "TODO(siladityaa) — a quote from a partner that sharpened the framing.",
+          "attribution": "Partner Engineer"
+        }
+      ]
+    },
+    {
+      "slug": "postures",
+      "eyebrow": "The trick",
+      "title": "Five postures, one device",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — explain how the same wearable has to mean different things across different physical postures, and how the design system tracks that."
+        },
+        {
+          "kind": "cardGrid",
+          "cards": [
+            {
+              "title": "Posture A",
+              "body": "TODO — what the wearable communicates here.",
+              "chip": {
+                "label": "Posture",
+                "tone": "neutral"
+              }
+            },
+            {
+              "title": "Posture B",
+              "body": "TODO — what shifts in this state.",
+              "chip": {
+                "label": "Posture",
+                "tone": "neutral"
+              }
+            },
+            {
+              "title": "Posture C",
+              "body": "TODO — and again.",
+              "chip": {
+                "label": "Posture",
+                "tone": "neutral"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "vocabulary",
+      "eyebrow": "Behind the lock",
+      "title": "Haptic vocabulary",
+      "sections": [
+        {
+          "kind": "lockedSection",
+          "number": "03",
+          "title": "Haptic vocabulary",
+          "description": "A vocabulary of discrete haptic moments — buzzes, taps, and pulses — mapped to intent and device posture. 140+ variants documented in the full deck."
+        },
+        {
+          "kind": "divider"
+        },
+        {
+          "kind": "mockupFrame",
+          "src": "/work/sensor-feedback/spec.jpg",
+          "alt": "Spec sheet for the haptic vocabulary",
+          "caption": "Spec sheet placeholder — pre-approved render goes here"
+        }
+      ]
+    },
+    {
+      "slug": "shipping",
+      "eyebrow": "Looking back",
+      "title": "Reflection",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — first-person reflection on designing with hardware constraints. What you'd repeat, what you'd cut."
+        }
+      ]
+    }
+  ],
+  "next": {
+    "slug": "tactile-cli",
+    "title": "A tactile command line"
+  }
+}

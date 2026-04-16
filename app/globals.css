@@ -1,26 +1,200 @@
 @import "tailwindcss";
 
+/* Tailwind v4: opt dark-mode utilities into the `.dark` class on <html>
+   rather than `prefers-color-scheme` (our theme bootstrap script manages it). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =============================================================================
+   Design tokens — Siladityaa portfolio
+   Source of truth: portfolio_build_plan.md §2 (visual system)
+   Tailwind v4 CSS-first: @theme below makes these available as utilities.
+   ============================================================================= */
+
+@theme {
+  /* Colors — 4-token system. Signal is the one color that does work. */
+  --color-paper: #f6f5f1;
+  --color-paper-dark: #0b0b0c;
+  --color-ink: #111113;
+  --color-ink-dark: #f6f5f1;
+  --color-graphite: #6b6b70;
+  --color-graphite-dark: #8a8a8f;
+  --color-signal: #ff3b00;
+  --color-signal-dark: #ff4a14;
+
+  /* Fonts — display (Instrument Serif) + mono (JetBrains Mono).
+     PP Editorial New kept in the fallback chain so a future license swap is
+     a single next/font/local drop with zero component changes. */
+  --font-display:
+    var(--font-display-serif), "PP Editorial New", "Instrument Serif", Georgia,
+    serif;
+  --font-mono:
+    var(--font-mono-ui), "JetBrains Mono", "Berkeley Mono", ui-monospace,
+    SFMono-Regular, Menlo, monospace;
+
+  /* Motion — one easing curve, used everywhere. */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =============================================================================
+   Light / dark surfaces
+   Strategy: `class` on <html>. A tiny inline script in layout.tsx sets the
+   class before hydration to prevent flash.
+   ============================================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --surface-paper: var(--color-paper);
+  --surface-ink: var(--color-ink);
+  --surface-graphite: var(--color-graphite);
+  --surface-signal: var(--color-signal);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html.dark {
+  color-scheme: dark;
+  --surface-paper: var(--color-paper-dark);
+  --surface-ink: var(--color-ink-dark);
+  --surface-graphite: var(--color-graphite-dark);
+  --surface-signal: var(--color-signal-dark);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =============================================================================
+   Base layer
+   ============================================================================= */
+
+@layer base {
+  html,
+  body {
+    background: var(--surface-paper);
+    color: var(--surface-ink);
+    font-family: var(--font-display);
+    font-feature-settings: "kern", "liga", "calt";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Hide the native cursor whenever the custom cursor is active. */
+  html.cursor-custom,
+  html.cursor-custom *,
+  html.cursor-custom *::before,
+  html.cursor-custom *::after {
+    cursor: none !important;
+  }
+
+  /* Keyboard focus uses the signal color — brief §8. */
+  :focus-visible {
+    outline: 2px solid var(--surface-signal);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--surface-ink);
+    color: var(--surface-paper);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =============================================================================
+   Utilities — signature details from brief §2.3 / §2.2
+   ============================================================================= */
+
+@layer utilities {
+  /* 1px hairline seam at the top edge of every major section (brief §2.3). */
+  .hairline-top {
+    border-top: 1px solid color-mix(in srgb, var(--surface-graphite) 35%, transparent);
+  }
+  .hairline-bottom {
+    border-bottom: 1px solid color-mix(in srgb, var(--surface-graphite) 35%, transparent);
+  }
+
+  /* Case-study 3-column grid: TOC | content | ruler.
+     Below 1280px the rails collapse and the body becomes single-column.
+     Above, the grid distributes rail widths and centers content. */
+  .case-study-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+  @media (min-width: 1280px) {
+    .case-study-grid {
+      grid-template-columns:
+        minmax(160px, 200px)
+        minmax(0, 920px)
+        minmax(40px, 80px);
+      column-gap: clamp(24px, 3vw, 56px);
+      padding-inline: clamp(24px, 4vw, 64px);
+      max-width: 1600px;
+      margin-inline: auto;
+      justify-content: center;
+    }
+  }
+  .case-study-rail {
+    display: none;
+  }
+  @media (min-width: 1280px) {
+    .case-study-rail {
+      display: block;
+    }
+  }
+
+  /* Type scale, per brief §2.2 */
+  .text-display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(3.25rem, 8vw, 6.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+  }
+  .text-display-l {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+  }
+  .text-display-m {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+  .text-display-s {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+  .text-body {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+  .text-mono-m {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+  .text-mono-s {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}
+
+/* =============================================================================
+   Motion defaults — respect prefers-reduced-motion.
+   Framer Motion variants also branch on this via lib/motion.ts.
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

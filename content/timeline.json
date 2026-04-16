@@ -1,0 +1,104 @@
+{
+  "timeline": [
+    {
+      "company": "Meta Reality Labs",
+      "role": "Senior Product Designer",
+      "kind": "full-time",
+      "start": "2024-08",
+      "end": "present",
+      "location": "Los Angeles, CA",
+      "current": true
+    },
+    {
+      "company": "ArtCenter College of Design",
+      "role": "Adjunct Instructor",
+      "kind": "part-time",
+      "start": "2022-05",
+      "end": "present",
+      "location": "Pasadena, CA",
+      "highlight": "Interactive Prototyping 2",
+      "current": true
+    },
+    {
+      "company": "Meta",
+      "role": "Product Designer",
+      "kind": "full-time",
+      "start": "2022-02",
+      "end": "2024-08",
+      "location": "Remote",
+      "highlight": "Ray-Ban Stories and Second-Gen Ray-Ban Meta Smart Glasses"
+    },
+    {
+      "company": "Meta",
+      "role": "Product Design Intern",
+      "kind": "internship",
+      "start": "2021-06",
+      "end": "2021-08",
+      "location": "Remote",
+      "highlight": "Project Nazare — true AR glasses"
+    },
+    {
+      "company": "ArtCenter College of Design",
+      "role": "Teaching Assistant",
+      "kind": "part-time",
+      "start": "2019-06",
+      "end": "2021-12",
+      "location": "Pasadena, CA"
+    },
+    {
+      "company": "Kley",
+      "role": "UX Designer & Developer",
+      "kind": "internship",
+      "start": "2020-05",
+      "end": "2020-09",
+      "location": "Los Angeles, CA"
+    },
+    {
+      "company": "Under Armour",
+      "role": "Interaction Designer (Sponsored Studio)",
+      "kind": "contract",
+      "start": "2020-01",
+      "end": "2020-05",
+      "location": "Pasadena, CA",
+      "highlight": "UA Perform — ML-powered athlete companion"
+    },
+    {
+      "company": "IMVU",
+      "role": "Interaction Designer (Sponsored Studio)",
+      "kind": "contract",
+      "start": "2019-05",
+      "end": "2019-09",
+      "location": "Pasadena, CA"
+    },
+    {
+      "company": "Adobe Project 1324",
+      "role": "Mentor",
+      "kind": "service",
+      "start": "2018-09",
+      "end": "2019-02",
+      "location": "Remote"
+    },
+    {
+      "company": "Indian Student Association, ArtCenter",
+      "role": "President",
+      "kind": "service",
+      "start": "2018-05",
+      "end": "2019-08",
+      "location": "Pasadena, CA"
+    }
+  ],
+  "education": [
+    {
+      "school": "ArtCenter College of Design",
+      "degree": "Bachelor of Science, Interaction Design",
+      "start": "2017",
+      "end": "2021",
+      "highlight": "Graduated with Honors · Minor in Business"
+    }
+  ],
+  "awards": [
+    { "name": "International Design Awards" },
+    { "name": "Muse Design Awards" },
+    { "name": "Adobe Design Achievement Awards" }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "nowPlaying": [
+    { "title": "Runaway", "artist": "Kanye West", "album": "MBDTF" },
+    { "title": "State of Mind", "artist": "Novo Amor", "album": "Woodgate, NY" },
+    { "title": "Something About Us", "artist": "Daft Punk", "album": "Discovery" },
+    { "title": "Take Care", "artist": "Drake", "album": "Take Care" }
+  ],
+  "nowFacts": [
+    { "label": "CURRENTLY", "value": "Wearables & AI @ Meta" },
+    { "label": "READING", "value": "The Inevitable — Kevin Kelly" },
+    { "label": "BUILDING", "value": "This portfolio, over weekends" },
+    { "label": "LISTENING", "value": "Daft Punk — Discovery" }
+  ],
+  "previouslyFacts": [
+    { "label": "PREVIOUSLY", "value": "Ray-Ban Meta Smart Glasses" },
+    { "label": "BEFORE THAT", "value": "Ray-Ban Stories" },
+    { "label": "STUDIED AT", "value": "ArtCenter College of Design" },
+    { "label": "RAISED IN", "value": "New Delhi, India" }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "slug": "field-notes",
+  "title": "Field notes for hardware",
+  "timeline": "2021",
+  "role": "Designer\nWriter",
+  "team": "Solo concept",
+  "credits": "Solo",
+  "status": "public",
+  "tags": [
+    "concept",
+    "consumer"
+  ],
+  "keyColor": "#3A2E1E",
+  "hero": {
+    "src": "/work/field-notes/hero.jpg",
+    "alt": "Field notes for hardware — hero still"
+  },
+  "brief": "TODO(siladityaa) — a concept for a portable notebook that knows what you're looking at. 80 words, plain prose, first person if it helps.",
+  "chapters": [
+    {
+      "slug": "premise",
+      "eyebrow": "The starting point",
+      "title": "The premise",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — the concept pitch. What it would do, why it would matter, and the kind of person who would use it."
+        },
+        {
+          "kind": "cardGrid",
+          "cards": [
+            {
+              "title": "Capture",
+              "body": "TODO — what the device captures and how often.",
+              "chip": {
+                "label": "Input",
+                "tone": "neutral"
+              }
+            },
+            {
+              "title": "Recall",
+              "body": "TODO — how the user gets the captured material back.",
+              "chip": {
+                "label": "Output",
+                "tone": "neutral"
+              }
+            },
+            {
+              "title": "Forget",
+              "body": "TODO — what the device forgets, on purpose.",
+              "chip": {
+                "label": "Privacy",
+                "tone": "neutral"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "form",
+      "eyebrow": "What it looks like",
+      "title": "Form factor",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — describe the physical form. Pocket-sized, notebook-shaped, etc. The materials."
+        },
+        {
+          "kind": "imageGrid",
+          "cols": 2,
+          "images": [
+            {
+              "src": "/work/field-notes/sketch-1.jpg",
+              "alt": "Form study sketch 1",
+              "caption": "Form study, attempt one"
+            },
+            {
+              "src": "/work/field-notes/sketch-2.jpg",
+              "alt": "Form study sketch 2",
+              "caption": "Attempt two — narrower"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "reflection",
+      "eyebrow": "Looking back",
+      "title": "What I'd build today",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — what you'd build now if you picked this up again, given the AI tools and on-device capability that have arrived since 2021."
+        }
+      ]
+    }
+  ],
+  "next": {
+    "slug": "sample-project",
+    "title": "Sample Project"
+  }
+}

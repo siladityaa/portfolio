@@ -1,0 +1,108 @@
+{
+  "slug": "tactile-cli",
+  "title": "A tactile command line",
+  "timeline": "2022",
+  "role": "Designer\nBuilder",
+  "team": "Solo side project",
+  "credits": "Solo — built over a couple of weekends",
+  "status": "public",
+  "tags": [
+    "concept"
+  ],
+  "keyColor": "#1E2E3A",
+  "hero": {
+    "src": "/work/tactile-cli/hero.jpg",
+    "alt": "A tactile command line — hero still"
+  },
+  "brief": "TODO(siladityaa) — a weekend project exploring what a modern command line looks like when it's shaped for touch and voice instead of the keyboard. Keep it to 80 words.",
+  "chapters": [
+    {
+      "slug": "prompt",
+      "eyebrow": "The starting point",
+      "title": "The prompt",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — what started the weekend. The question you were trying to answer. Why the command line, why now."
+        },
+        {
+          "kind": "pullQuote",
+          "body": "TODO(siladityaa) — a one-sentence quote you stole from a manual or a friend.",
+          "attribution": "A friend"
+        }
+      ]
+    },
+    {
+      "slug": "directions",
+      "eyebrow": "The trick",
+      "title": "Three directions to try",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — set up the three concept directions and why each was worth a sketch."
+        },
+        {
+          "kind": "tabGroup",
+          "tabs": [
+            {
+              "label": "Hold to type",
+              "body": "TODO — direction one. What changed about input.",
+              "image": {
+                "src": "/work/tactile-cli/dir-1.jpg",
+                "alt": "Direction one mockup"
+              }
+            },
+            {
+              "label": "Voice with autocomplete",
+              "body": "TODO — direction two. The voice approach with text scaffolding.",
+              "image": {
+                "src": "/work/tactile-cli/dir-2.jpg",
+                "alt": "Direction two mockup"
+              }
+            },
+            {
+              "label": "Spatial commands",
+              "body": "TODO — direction three. Commands as tiny spatial objects.",
+              "image": {
+                "src": "/work/tactile-cli/dir-3.jpg",
+                "alt": "Direction three mockup"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "build",
+      "eyebrow": "What I built",
+      "title": "Prototype",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — what you actually built and why this direction won. A few sentences."
+        },
+        {
+          "kind": "mockupFrame",
+          "src": "/work/tactile-cli/proto.jpg",
+          "alt": "Final prototype screenshot",
+          "caption": "Final prototype, late one Sunday"
+        }
+      ]
+    },
+    {
+      "slug": "reflection",
+      "eyebrow": "Looking back",
+      "title": "What it taught me",
+      "sections": [
+        {
+          "kind": "proseBlock",
+          "body": "TODO(siladityaa) — first-person reflection on the side-project rhythm and what it taught you about your day job."
+        }
+      ]
+    }
+  ],
+  "next": {
+    "slug": "field-notes",
+    "title": "Field notes for hardware"
+  }
+}
