@@ -45,6 +45,14 @@ export function NavLinks() {
           </Link>
         ),
       )}
+
+      {/* Subtle ⌘K hint — hidden on touch devices (no keyboard) */}
+      <kbd
+        aria-label="Press Command K to search"
+        className="hidden rounded border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-1.5 py-0.5 text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)] md:inline-block"
+      >
+        ⌘K
+      </kbd>
     </nav>
   );
 }
