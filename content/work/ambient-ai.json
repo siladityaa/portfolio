@@ -5,7 +5,7 @@
   "role": "Senior Product Designer\nDesign Engineer",
   "team": "Design · Research · ML · Hardware",
   "credits": "Meta Reality Labs · Wearables AI\nPM, Research, ML, Hardware partners",
-  "status": "nda",
+  "status": "public",
   "tags": [
     "wearables",
     "ai"
@@ -110,32 +110,10 @@
       ]
     },
     {
-      "slug": "signal-architecture",
-      "eyebrow": "Behind the lock",
-      "title": "Signal architecture",
-      "sections": [
-        {
-          "kind": "lockedSection",
-          "number": "03",
-          "title": "Signal architecture",
-          "description": "A system for surfacing useful moments without interrupting the user — happy to walk through the full framework in person."
-        }
-      ]
-    },
-    {
       "slug": "interaction-model",
-      "eyebrow": "Behind the lock",
+      "eyebrow": "Interaction design",
       "title": "Interaction model",
       "sections": [
-        {
-          "kind": "lockedSection",
-          "number": "04",
-          "title": "Interaction model",
-          "description": "The gestures, prompts, and audio cues that replace the screen when there's no screen. Every primitive is documented in the full deck."
-        },
-        {
-          "kind": "divider"
-        },
         {
           "kind": "pullQuote",
           "body": "TODO(siladityaa) — a quote from a research session that sharpened the framing.",

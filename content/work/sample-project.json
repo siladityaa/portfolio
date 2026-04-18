@@ -5,7 +5,7 @@
   "role": "Sole Product designer\nDesign Engineer",
   "team": "Design · Research · Hardware · ML",
   "credits": "Huiqiao Z. /Design manager\nYiming M., Jason L. /PM",
-  "status": "nda",
+  "status": "public",
   "tags": [
     "wearables",
     "ai"
@@ -147,16 +147,10 @@
       ]
     },
     {
-      "slug": "locked-systems",
-      "eyebrow": "Behind the lock",
+      "slug": "design-system",
+      "eyebrow": "Systems thinking",
       "title": "Design system exploration",
       "sections": [
-        {
-          "kind": "lockedSection",
-          "number": "04",
-          "title": "Sensor feedback variants",
-          "description": "A component library for sensor feedback states, with 140+ variants across five device postures."
-        },
         {
           "kind": "pullQuote",
           "body": "A quote from the team that sharpened the framing.",

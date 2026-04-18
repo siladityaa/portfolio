@@ -18,7 +18,7 @@ import { z } from "zod";
    Case study frontmatter + chapters + body section union
    ============================================================================= */
 
-export const caseStudyStatusSchema = z.enum(["public", "nda"]);
+export const caseStudyStatusSchema = z.enum(["public"]);
 
 export const caseStudyTagSchema = z.enum([
   "wearables",
@@ -62,13 +62,6 @@ export const beforeAfterSchema = z.object({
   kind: z.literal("beforeAfter"),
   before: z.object({ src: z.string(), label: z.string() }),
   after: z.object({ src: z.string(), label: z.string() }),
-});
-
-export const lockedSectionSchema = z.object({
-  kind: z.literal("lockedSection"),
-  number: z.string(),
-  title: z.string(),
-  description: z.string(),
 });
 
 export const tabGroupSchema = z.object({
@@ -133,13 +126,12 @@ export const dividerSchema = z.object({
   kind: z.literal("divider"),
 });
 
-/** All 10 body section kinds, discriminated on `kind`. */
+/** All 9 body section kinds, discriminated on `kind`. */
 export const chapterSectionSchema = z.discriminatedUnion("kind", [
   proseBlockSchema,
   imageGridSchema,
   pullQuoteSchema,
   beforeAfterSchema,
-  lockedSectionSchema,
   tabGroupSchema,
   infoTableSchema,
   cardGridSchema,

@@ -5,7 +5,6 @@ import { ProseBlock } from "./ProseBlock";
 import { ImageGrid } from "./ImageGrid";
 import { PullQuote } from "./PullQuote";
 import { BeforeAfter } from "./BeforeAfter";
-import { LockedSection } from "./LockedSection";
 import { TabGroup } from "./TabGroup";
 import { InfoTable } from "./InfoTable";
 import { CardGrid } from "./CardGrid";
@@ -61,8 +60,6 @@ function SectionRenderer({
       return <PullQuote section={section} />;
     case "beforeAfter":
       return <BeforeAfter section={section} />;
-    case "lockedSection":
-      return <LockedSection section={section} projectTitle={projectTitle} />;
     case "tabGroup":
       return <TabGroup section={section} />;
     case "infoTable":

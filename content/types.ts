@@ -21,7 +21,6 @@ import type {
   imageGridSchema,
   pullQuoteSchema,
   beforeAfterSchema,
-  lockedSectionSchema,
   tabGroupSchema,
   infoTableSchema,
   cardGridSchema,
@@ -59,7 +58,6 @@ export type ProseBlockSection = z.infer<typeof proseBlockSchema>;
 export type ImageGridSection = z.infer<typeof imageGridSchema>;
 export type PullQuoteSection = z.infer<typeof pullQuoteSchema>;
 export type BeforeAfterSection = z.infer<typeof beforeAfterSchema>;
-export type LockedSectionSection = z.infer<typeof lockedSectionSchema>;
 export type TabGroupSection = z.infer<typeof tabGroupSchema>;
 export type InfoTableSection = z.infer<typeof infoTableSchema>;
 export type CardGridSection = z.infer<typeof cardGridSchema>;

@@ -22,21 +22,12 @@ export function HeroChapter({
   index: number;
 }) {
   const number = String(index + 1).padStart(3, "0");
-  const isNda = cs.status === "nda";
 
   return (
     <header className="pt-[clamp(140px,22vh,260px)] pb-[clamp(80px,12vh,160px)]">
-      {/* Breadcrumb + status */}
-      <div className="flex items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
+      {/* Breadcrumb */}
+      <div className="text-mono-s text-[color:var(--surface-graphite)]">
         <span>CASE STUDY {number}</span>
-        <span>·</span>
-        <span
-          className={
-            isNda ? "text-[color:var(--surface-signal)]" : undefined
-          }
-        >
-          {isNda ? "NDA · ASK FOR DECK" : "PUBLIC"}
-        </span>
       </div>
 
       {/* Title — display-l, italic, generous max-width */}

@@ -91,10 +91,8 @@ export function CustomCursor() {
   const isExpanded =
     state === "view" ||
     state === "open" ||
-    state === "request" ||
     state === "crosshair";
   const size = isExpanded ? 56 : 20;
-  const isSignal = state === "request";
 
   const positionProps = reducedMotion
     ? { style: { left: x, top: y } }
@@ -112,12 +110,8 @@ export function CustomCursor() {
         animate={{
           width: size,
           height: size,
-          backgroundColor: isSignal
-            ? "var(--surface-signal)"
-            : "rgba(0,0,0,0)",
-          borderColor: isSignal
-            ? "var(--surface-signal)"
-            : "#f6f5f1",
+          backgroundColor: "rgba(0,0,0,0)",
+          borderColor: "#f6f5f1",
         }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border"
@@ -128,7 +122,6 @@ export function CustomCursor() {
           </span>
         ) : label && isExpanded ? (
           <span className="whitespace-nowrap text-[10px] font-medium uppercase tracking-wider text-[#f6f5f1]">
-            {state === "request" ? "◆ " : null}
             {label}
           </span>
         ) : null}

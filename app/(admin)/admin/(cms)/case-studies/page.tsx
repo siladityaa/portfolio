@@ -51,14 +51,8 @@ export default async function CaseStudiesIndex() {
                   ))}
                 </div>
               </div>
-              <span
-                className={`col-span-4 self-start text-right text-mono-s ${
-                  cs.status === "nda"
-                    ? "text-[color:var(--surface-signal)]"
-                    : "text-[color:var(--surface-graphite)]"
-                }`}
-              >
-                {cs.status === "nda" ? "NDA" : "PUBLIC"}
+              <span className="col-span-4 self-start text-right text-mono-s text-[color:var(--surface-graphite)]">
+                PUBLIC
               </span>
             </Link>
           </li>

@@ -5,7 +5,7 @@
   "role": "Product Designer",
   "team": "Design · Hardware · Firmware",
   "credits": "Meta Reality Labs · Wearables hardware\nHardware + firmware partners",
-  "status": "nda",
+  "status": "public",
   "tags": [
     "wearables",
     "consumer"
@@ -75,18 +75,9 @@
     },
     {
       "slug": "vocabulary",
-      "eyebrow": "Behind the lock",
+      "eyebrow": "Deep dive",
       "title": "Haptic vocabulary",
       "sections": [
-        {
-          "kind": "lockedSection",
-          "number": "03",
-          "title": "Haptic vocabulary",
-          "description": "A vocabulary of discrete haptic moments — buzzes, taps, and pulses — mapped to intent and device posture. 140+ variants documented in the full deck."
-        },
-        {
-          "kind": "divider"
-        },
         {
           "kind": "mockupFrame",
           "src": "/work/sensor-feedback/spec.jpg",

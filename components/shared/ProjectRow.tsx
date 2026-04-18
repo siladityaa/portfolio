@@ -4,15 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import clsx from "clsx";
 
-import { RequestAccessButton } from "./RequestAccessButton";
-
 export interface ProjectRowData {
   number: string; // "001"
   year: string; // "2024 — 2025"
-  client: string; // "META · CONFIDENTIAL"
+  client: string;
   title: string;
   slug: string;
-  status: "public" | "nda";
+  status: "public";
   keyColor: string;
 }
 
@@ -68,22 +66,15 @@ export function ProjectRowList({ rows }: ProjectListProps) {
                 <span className="hidden md:inline">{row.year}</span>
                 <span>{row.client}</span>
                 <div className="mt-0 md:mt-2">
-                  {row.status === "nda" ? (
-                    <RequestAccessButton
-                      projectTitle={row.title}
-                      variant="row-dot"
-                    />
-                  ) : (
-                    <span
-                      className={clsx(
-                        isHovered
-                          ? "text-[color:rgba(246,245,241,0.85)]"
-                          : "text-[color:var(--surface-graphite)]",
-                      )}
-                    >
-                      [● PUBLIC]
-                    </span>
-                  )}
+                  <span
+                    className={clsx(
+                      isHovered
+                        ? "text-[color:rgba(246,245,241,0.85)]"
+                        : "text-[color:var(--surface-graphite)]",
+                    )}
+                  >
+                    [● PUBLIC]
+                  </span>
                 </div>
               </div>
 

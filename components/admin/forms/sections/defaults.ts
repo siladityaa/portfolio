@@ -29,13 +29,6 @@ export function defaultSection(kind: ChapterSection["kind"]): ChapterSection {
         before: { src: "", label: "Before" },
         after: { src: "", label: "After" },
       };
-    case "lockedSection":
-      return {
-        kind: "lockedSection",
-        number: "01",
-        title: "",
-        description: "",
-      };
     case "tabGroup":
       return {
         kind: "tabGroup",
@@ -91,11 +84,6 @@ export const SECTION_KIND_META: ReadonlyArray<{
     kind: "beforeAfter",
     label: "Before / After",
     description: "Side-by-side comparison with labelled pill chips.",
-  },
-  {
-    kind: "lockedSection",
-    label: "Locked section (NDA)",
-    description: "A hairline-bordered card with a lock glyph and a 'Request full case study' CTA.",
   },
   {
     kind: "tabGroup",

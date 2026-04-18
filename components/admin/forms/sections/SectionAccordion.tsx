@@ -11,7 +11,6 @@ import { ProseBlockFields } from "./ProseBlockFields";
 import { ImageGridFields } from "./ImageGridFields";
 import { PullQuoteFields } from "./PullQuoteFields";
 import { BeforeAfterFields } from "./BeforeAfterFields";
-import { LockedSectionFields } from "./LockedSectionFields";
 import { TabGroupFields } from "./TabGroupFields";
 import { InfoTableFields } from "./InfoTableFields";
 import { CardGridFields } from "./CardGridFields";
@@ -33,7 +32,6 @@ const KIND_LABEL: Record<ChapterSection["kind"], string> = {
   imageGrid: "IMAGE GRID",
   pullQuote: "PULL QUOTE",
   beforeAfter: "BEFORE / AFTER",
-  lockedSection: "LOCKED SECTION (NDA)",
   tabGroup: "TAB GROUP",
   infoTable: "INFO TABLE",
   cardGrid: "CARD GRID",
@@ -145,8 +143,6 @@ function SubformDispatcher({
       return <PullQuoteFields pathPrefix={pathPrefix} />;
     case "beforeAfter":
       return <BeforeAfterFields pathPrefix={pathPrefix} />;
-    case "lockedSection":
-      return <LockedSectionFields pathPrefix={pathPrefix} />;
     case "tabGroup":
       return <TabGroupFields pathPrefix={pathPrefix} />;
     case "infoTable":
@@ -173,8 +169,6 @@ function previewForSection(section: ChapterSection): string | null {
       return ellipsis(section.body);
     case "pullQuote":
       return ellipsis(section.body);
-    case "lockedSection":
-      return ellipsis(section.title);
     case "imageGrid":
       return `${section.images.length} image${section.images.length === 1 ? "" : "s"}, ${section.cols} col${section.cols === 1 ? "" : "s"}`;
     case "beforeAfter":

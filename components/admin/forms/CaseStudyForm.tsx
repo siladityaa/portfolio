@@ -27,7 +27,6 @@ interface CaseStudyFormProps {
 
 const STATUS_OPTIONS = [
   { value: "public", label: "Public" },
-  { value: "nda", label: "NDA — ask for deck" },
 ] as const;
 
 const TAG_OPTIONS = [
