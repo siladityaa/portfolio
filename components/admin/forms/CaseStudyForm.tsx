@@ -13,7 +13,13 @@ import { SelectField } from "./fields/SelectField";
 import { TagsField } from "./fields/TagsField";
 import { ColorField } from "./fields/ColorField";
 import { PathField } from "./fields/PathField";
+import { ImageUploadField } from "./fields/ImageUploadField";
 import { ChapterEditor } from "./ChapterEditor";
+import {
+  SortableList,
+  SortableItem,
+  DragHandle,
+} from "./fields/SortableList";
 import { SaveButton } from "@/components/admin/SaveButton";
 import { SaveStatus } from "@/components/admin/SaveStatus";
 import { ConflictModal } from "@/components/admin/ConflictModal";
@@ -151,7 +157,11 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
           <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
             Hero
           </h2>
-          <PathField name="hero.src" label="IMAGE PATH" />
+          <ImageUploadField
+            name="hero.src"
+            label="HERO IMAGE"
+            uploadDir={`work/${defaultValues.slug}`}
+          />
           <TextField name="hero.alt" label="ALT TEXT" />
           <TextField name="hero.caption" label="CAPTION (optional)" />
         </section>
@@ -221,18 +231,31 @@ function ChaptersList() {
   const chapters = useFieldArray<CaseStudy, "chapters">({ name: "chapters" });
 
   return (
-    <div className="flex flex-col gap-6">
-      {chapters.fields.map((field, i) => (
-        <ChapterEditor
-          key={field.id}
-          chapterIndex={i}
-          total={chapters.fields.length}
-          onMoveUp={() => chapters.move(i, i - 1)}
-          onMoveDown={() => chapters.move(i, i + 1)}
-          onDelete={() => chapters.remove(i)}
-        />
-      ))}
-    </div>
+    <SortableList
+      ids={chapters.fields.map((f) => f.id)}
+      onReorder={(from, to) => chapters.move(from, to)}
+    >
+      <div className="flex flex-col gap-6">
+        {chapters.fields.map((field, i) => (
+          <SortableItem key={field.id} id={field.id}>
+            <div className="flex items-start gap-2">
+              <div className="pt-6">
+                <DragHandle className="text-[color:var(--surface-graphite)] hover:text-[color:var(--surface-ink)]" />
+              </div>
+              <div className="flex-1">
+                <ChapterEditor
+                  chapterIndex={i}
+                  total={chapters.fields.length}
+                  onMoveUp={() => chapters.move(i, i - 1)}
+                  onMoveDown={() => chapters.move(i, i + 1)}
+                  onDelete={() => chapters.remove(i)}
+                />
+              </div>
+            </div>
+          </SortableItem>
+        ))}
+      </div>
+    </SortableList>
   );
 }
 

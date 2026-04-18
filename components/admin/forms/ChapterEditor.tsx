@@ -6,6 +6,11 @@ import type { CaseStudy, ChapterSection } from "@/content/types";
 
 import { TextField } from "./fields/TextField";
 import { ListActions } from "./fields/ListActions";
+import {
+  SortableList,
+  SortableItem,
+  DragHandle,
+} from "./fields/SortableList";
 import { SectionAccordion } from "./sections/SectionAccordion";
 import { AddSectionCombobox } from "./sections/AddSectionCombobox";
 import { defaultSection } from "./sections/defaults";
@@ -93,19 +98,36 @@ export function ChapterEditor({
           </span>
         </header>
 
-        <div className="flex flex-col">
-          {sections.fields.map((field, sectionIndex) => (
-            <SectionAccordion
-              key={field.id}
-              pathPrefix={`${chapterPath}.sections.${sectionIndex}`}
-              index={sectionIndex}
-              total={sections.fields.length}
-              onMoveUp={() => sections.move(sectionIndex, sectionIndex - 1)}
-              onMoveDown={() => sections.move(sectionIndex, sectionIndex + 1)}
-              onDelete={() => sections.remove(sectionIndex)}
-            />
-          ))}
-        </div>
+        <SortableList
+          ids={sections.fields.map((f) => f.id)}
+          onReorder={(from, to) => sections.move(from, to)}
+        >
+          <div className="flex flex-col">
+            {sections.fields.map((field, sectionIndex) => (
+              <SortableItem key={field.id} id={field.id}>
+                <div className="flex items-start">
+                  <div className="flex items-center pt-5 pr-2">
+                    <DragHandle className="text-[color:var(--surface-graphite)] hover:text-[color:var(--surface-ink)]" />
+                  </div>
+                  <div className="flex-1">
+                    <SectionAccordion
+                      pathPrefix={`${chapterPath}.sections.${sectionIndex}`}
+                      index={sectionIndex}
+                      total={sections.fields.length}
+                      onMoveUp={() =>
+                        sections.move(sectionIndex, sectionIndex - 1)
+                      }
+                      onMoveDown={() =>
+                        sections.move(sectionIndex, sectionIndex + 1)
+                      }
+                      onDelete={() => sections.remove(sectionIndex)}
+                    />
+                  </div>
+                </div>
+              </SortableItem>
+            ))}
+          </div>
+        </SortableList>
 
         <div className="mt-6">
           <AddSectionCombobox onAdd={appendSection} />

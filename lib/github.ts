@@ -152,6 +152,55 @@ export async function writeJsonFile(
 }
 
 /**
+ * Write a binary file (image, etc.) to the repo. The content is already
+ * base64-encoded by the caller (the browser's FileReader.readAsDataURL
+ * gives us this directly after stripping the data-URI prefix).
+ *
+ * Returns the committed path so the form can update its field value.
+ */
+export async function writeBinaryFile(
+  octokit: Octokit,
+  path: string,
+  base64Content: string,
+  message: string,
+): Promise<{ commitSha: string | undefined }> {
+  const { owner, repo, branch } = getRepoCoordinates();
+
+  // Check if the file already exists (we need its SHA to overwrite)
+  let existingSha: string | null = null;
+  try {
+    const res = await octokit.repos.getContent({ owner, repo, path, ref: branch });
+    if (!Array.isArray(res.data) && res.data.type === "file") {
+      existingSha = res.data.sha;
+    }
+  } catch {
+    // File doesn't exist yet — that's fine
+  }
+
+  try {
+    const res = await octokit.repos.createOrUpdateFileContents({
+      owner,
+      repo,
+      path,
+      branch,
+      message,
+      content: base64Content,
+      ...(existingSha ? { sha: existingSha } : {}),
+    });
+    return { commitSha: res.data.commit.sha };
+  } catch (err: unknown) {
+    const status =
+      typeof err === "object" && err !== null && "status" in err
+        ? (err as { status: number }).status
+        : undefined;
+    if (status === 409 || status === 422) {
+      throw new ConflictError(`The file ${path} changed on GitHub since upload started.`);
+    }
+    throw new GitHubSaveError(`Failed to write ${path} to GitHub.`, err);
+  }
+}
+
+/**
  * Reads the OAuth access token from the encrypted session cookie set by the
  * `/api/auth/callback` route. This is the production path — the token was
  * minted by GitHub after the allow-listed user signed in, so a present

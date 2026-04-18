@@ -41,6 +41,7 @@ import {
   getTokenFromSession,
   makeOctokit,
   readJsonFile,
+  writeBinaryFile,
   writeJsonFile,
 } from "@/lib/github";
 
@@ -252,4 +253,58 @@ export async function saveInfluences(payload: unknown): Promise<SaveResult> {
     revalidatePath("/about");
   }
   return result;
+}
+
+/* ---------- image upload ------------------------------------------------ */
+
+export type UploadResult =
+  | { status: "ok"; path: string; commitSha?: string }
+  | { status: "error"; message: string };
+
+/**
+ * Upload an image file to the repo under `public/`.
+ *
+ * Expects:
+ *   - `destPath`: the desired path within the repo, e.g. `public/work/ambient-ai/hero.jpg`
+ *   - `base64`: the raw base64 content (no data-URI prefix)
+ *   - `filename`: original filename, used only in the commit message
+ *
+ * Returns the public-facing path (e.g. `/work/ambient-ai/hero.jpg`) on success.
+ */
+export async function uploadImage(
+  destPath: string,
+  base64: string,
+  filename: string,
+): Promise<UploadResult> {
+  try {
+    if (!destPath.startsWith("public/")) {
+      return { status: "error", message: "Image path must start with public/" };
+    }
+
+    const token = await getTokenFromSession();
+    if (!token) {
+      return {
+        status: "error",
+        message: "Not authenticated. Please sign in again.",
+      };
+    }
+
+    const octokit = makeOctokit(token);
+    const { commitSha } = await writeBinaryFile(
+      octokit,
+      destPath,
+      base64,
+      `cms: upload image — ${filename}`,
+    );
+
+    // Convert repo path to public-facing path:
+    // "public/work/slug/image.jpg" → "/work/slug/image.jpg"
+    const publicPath = destPath.replace(/^public/, "");
+
+    return { status: "ok", path: publicPath, commitSha };
+  } catch (err: unknown) {
+    const message =
+      err instanceof Error ? err.message : "Unknown error uploading image.";
+    return { status: "error", message };
+  }
 }

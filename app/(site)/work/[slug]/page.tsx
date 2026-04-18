@@ -11,6 +11,7 @@ import { NextProject } from "@/components/case-study/NextProject";
 import { KeyboardNav } from "@/components/case-study/KeyboardNav";
 import { ScrollToTop } from "@/components/case-study/ScrollToTop";
 import { MobileChapterNav } from "@/components/case-study/MobileChapterNav";
+import { StickyChapterPill } from "@/components/case-study/StickyChapterPill";
 
 export async function generateStaticParams() {
   const all = await loadAllCaseStudies();
@@ -73,6 +74,9 @@ export default async function CaseStudyPage({
       <ChapterSpy chapterSlugs={chapterSlugs}>
         {/* Mobile: sticky horizontal chapter nav (hidden ≥1280px) */}
         <MobileChapterNav chapters={cs.chapters} />
+
+        {/* Desktop: sticky chapter pill at top-center (hidden <1280px) */}
+        <StickyChapterPill chapters={cs.chapters} />
 
         <div className="case-study-grid">
           {/* Left rail — TOC */}
