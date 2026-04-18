@@ -7,6 +7,8 @@ import { NowPlaying } from "@/components/chrome/NowPlaying";
 import { LocalClock } from "@/components/chrome/LocalClock";
 import { CustomCursor } from "@/components/chrome/CustomCursor";
 import { PageTransition } from "@/components/chrome/PageTransition";
+import { ConsoleEasterEgg } from "@/components/chrome/ConsoleEasterEgg";
+import { CommandPalette } from "@/components/chrome/CommandPalette";
 
 /**
  * Public site layout — wraps everything under `(site)/` with the
@@ -39,6 +41,10 @@ export default function SiteLayout({
 
       {/* Custom cursor — client component, hidden on touch devices. */}
       <CustomCursor />
+
+      {/* Phase 5 chrome — Easter egg + command palette */}
+      <ConsoleEasterEgg />
+      <CommandPalette />
 
       {/* Vercel Analytics + Speed Insights — public pages only, not /admin. */}
       <Analytics />

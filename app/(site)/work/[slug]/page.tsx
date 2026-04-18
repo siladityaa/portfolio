@@ -9,6 +9,8 @@ import { CaseStudyTOC } from "@/components/case-study/CaseStudyTOC";
 import { ScrollRuler } from "@/components/case-study/ScrollRuler";
 import { NextProject } from "@/components/case-study/NextProject";
 import { KeyboardNav } from "@/components/case-study/KeyboardNav";
+import { ScrollToTop } from "@/components/case-study/ScrollToTop";
+import { MobileChapterNav } from "@/components/case-study/MobileChapterNav";
 
 export async function generateStaticParams() {
   const all = await loadAllCaseStudies();
@@ -69,6 +71,9 @@ export default async function CaseStudyPage({
       <KeyboardNav prevSlug={prevSlug} nextSlug={nextSlug} />
 
       <ChapterSpy chapterSlugs={chapterSlugs}>
+        {/* Mobile: sticky horizontal chapter nav (hidden ≥1280px) */}
+        <MobileChapterNav chapters={cs.chapters} />
+
         <div className="case-study-grid">
           {/* Left rail — TOC */}
           <div className="case-study-rail">
@@ -76,7 +81,7 @@ export default async function CaseStudyPage({
           </div>
 
           {/* Center column — hero + chapters */}
-          <div>
+          <div className="px-[clamp(20px,4vw,48px)] xl:px-0">
             <HeroChapter cs={cs} index={Math.max(index, 0)} />
             {cs.chapters.map((chapter) => (
               <ChapterContent key={chapter.slug} chapter={chapter} cs={cs} />
@@ -91,6 +96,9 @@ export default async function CaseStudyPage({
       </ChapterSpy>
 
       <NextProject cs={cs} />
+
+      {/* Mobile: scroll-to-top fab after long case studies */}
+      <ScrollToTop />
     </article>
   );
 }

@@ -54,20 +54,20 @@ export function ProjectRowList({ rows }: ProjectListProps) {
                 : undefined
             }
           >
-            <div className="mx-auto flex min-h-[240px] max-w-[1280px] items-center gap-12 px-[clamp(24px,4vw,64px)] py-12">
-              {/* Left: metadata column */}
+            <div className="mx-auto flex min-h-[180px] max-w-[1280px] flex-col gap-6 px-[clamp(24px,4vw,64px)] py-8 md:min-h-[240px] md:flex-row md:items-center md:gap-12 md:py-12">
+              {/* Left: metadata column — stacks above title on mobile */}
               <div
                 className={clsx(
-                  "flex w-[220px] shrink-0 flex-col gap-1 text-mono-s",
+                  "flex flex-row flex-wrap gap-x-4 gap-y-1 text-mono-s md:w-[220px] md:shrink-0 md:flex-col md:gap-x-0",
                   isHovered
                     ? "text-[color:rgba(246,245,241,0.85)]"
                     : "text-[color:var(--surface-graphite)]",
                 )}
               >
                 <span>PROJECT {row.number}</span>
-                <span>{row.year}</span>
+                <span className="hidden md:inline">{row.year}</span>
                 <span>{row.client}</span>
-                <div className="mt-2">
+                <div className="mt-0 md:mt-2">
                   {row.status === "nda" ? (
                     <RequestAccessButton
                       projectTitle={row.title}
