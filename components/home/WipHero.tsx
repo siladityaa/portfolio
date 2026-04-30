@@ -35,14 +35,13 @@ export function WipHero() {
           animate="visible"
           className="flex flex-col items-center gap-10"
         >
-          {/* Main heading */}
+          {/* Main heading — real hero tagline */}
           <motion.div variants={revealBlock} className="flex flex-col items-center gap-4">
             <span className="text-mono-s text-[color:var(--surface-graphite)]">
               SILADITYAA SHARMA
             </span>
-            <h1 className="max-w-[20ch] text-display-xl italic text-[color:var(--surface-ink)]">
-              Portfolio under construction
-              <BlinkingCursor />
+            <h1 className="max-w-[26ch] text-display-xl italic text-[color:var(--surface-ink)]">
+              Human-centered product designer — currently focused on wearables and AI at Meta.
             </h1>
           </motion.div>
 
@@ -51,8 +50,16 @@ export function WipHero() {
             variants={revealBlock}
             className="text-mono-s text-[color:var(--surface-graphite)]"
           >
-            SENIOR PRODUCT DESIGNER · WEARABLES + AI · META REALITY LABS
+            SENIOR PRODUCT DESIGNER · WEARABLES + AI · BASED IN LOS ANGELES
           </motion.p>
+
+          {/* WIP notice */}
+          <motion.div variants={revealBlock} className="flex items-center gap-3">
+            <span className="text-mono-s italic text-[color:var(--surface-graphite)]" style={{ fontFamily: "var(--font-display)" }}>
+              Portfolio under construction
+            </span>
+            <BlinkingCursor />
+          </motion.div>
 
           {/* Progress bar */}
           <motion.div variants={revealBlock} className="w-full max-w-[400px]">
