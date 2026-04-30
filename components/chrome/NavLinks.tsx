@@ -2,13 +2,21 @@ import Link from "next/link";
 
 /**
  * Brief §3 — fixed top-right corner, mono-s. WORK and ABOUT are in-app
- * routes (ABOUT still 404s until Phase 3). RESUME is an external link to
- * the separate resume subdomain.
+ * routes. RESUME is an external link to the separate resume subdomain.
+ *
+ * WIP mode: WORK and ABOUT are hidden (those routes redirect to home).
+ * Set WIP_MODE to false to restore them.
  */
+const WIP_MODE = true;
+
 export function NavLinks() {
   const items = [
-    { label: "WORK", href: "/#work", cursor: "view" as const },
-    { label: "ABOUT", href: "/about", cursor: "view" as const },
+    ...(!WIP_MODE
+      ? [
+          { label: "WORK", href: "/#work", cursor: "view" as const },
+          { label: "ABOUT", href: "/about", cursor: "view" as const },
+        ]
+      : []),
     {
       label: "RESUME",
       href: "https://resume.siladityaa.com",
@@ -46,13 +54,15 @@ export function NavLinks() {
         ),
       )}
 
-      {/* Subtle ⌘K hint — hidden on touch devices (no keyboard) */}
-      <kbd
-        aria-label="Press Command K to search"
-        className="hidden rounded border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-1.5 py-0.5 text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)] md:inline-block"
-      >
-        ⌘K
-      </kbd>
+      {/* Subtle ⌘K hint — hidden on touch devices and in WIP mode */}
+      {!WIP_MODE && (
+        <kbd
+          aria-label="Press Command K to search"
+          className="hidden rounded border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-1.5 py-0.5 text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)] md:inline-block"
+        >
+          ⌘K
+        </kbd>
+      )}
     </nav>
   );
 }

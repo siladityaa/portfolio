@@ -47,8 +47,20 @@ function isPublicAdminPath(pathname: string): boolean {
   return false;
 }
 
+/**
+ * WIP mode — redirect all public content pages to home.
+ * Remove this block (and the matcher entry) to restore the full site.
+ */
+const WIP_MODE = true;
+const WIP_ALLOWED = new Set(["/", "/_not-found"]);
+
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // WIP gate: redirect /about, /work/*, /colophon to home
+  if (WIP_MODE && !pathname.startsWith("/admin") && !pathname.startsWith("/api") && !pathname.startsWith("/_next") && !WIP_ALLOWED.has(pathname)) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
 
   if (isPublicAdminPath(pathname)) {
     return NextResponse.next();
@@ -89,5 +101,12 @@ export async function proxy(request: NextRequest) {
  * subject to the auth gate (that would deadlock the login flow).
  */
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: [
+    "/admin/:path*",
+    // WIP mode: catch public content pages for redirect.
+    // Remove these when WIP_MODE is turned off.
+    "/about",
+    "/work/:path*",
+    "/colophon",
+  ],
 };
