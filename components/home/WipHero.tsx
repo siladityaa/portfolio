@@ -37,9 +37,6 @@ export function WipHero() {
         >
           {/* Main heading — real hero tagline */}
           <motion.div variants={revealBlock} className="flex flex-col items-center gap-4">
-            <span className="text-mono-s text-[color:var(--surface-graphite)]">
-              SILADITYAA SHARMA
-            </span>
             <h1 className="max-w-[26ch] text-display-xl italic text-[color:var(--surface-ink)]">
               Human-centered product designer — currently focused on wearables and AI at Meta.
             </h1>

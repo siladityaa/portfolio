@@ -30,6 +30,10 @@ export default function SiteLayout({
     <>
       {/* Chrome — four corners, always present on every public page. */}
       <Wordmark />
+      {/* WIP: name centered at top, aligned with Wordmark + NavLinks */}
+      <span className="fixed left-1/2 top-[clamp(24px,4vw,64px)] z-50 -translate-x-1/2 text-mono-s text-[color:var(--surface-graphite)]">
+        SILADITYAA SHARMA
+      </span>
       <NavLinks />
       <NowPlaying />
       <LocalClock />
