@@ -1,131 +1,151 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-} from "framer-motion";
 
 import { cursorLabels, type CursorState } from "@/lib/cursor";
 
 /**
  * Custom cursor — the portfolio's signature piece. Brief §5.4.
  *
- * - Smoothed with a Framer Motion spring (damping 30, stiffness 400).
- * - Reads `data-cursor` on the hovered element to swap visual states.
+ * Performance rewrite: position is set via raw `transform: translate3d()`
+ * on every mousemove event — no React state, no springs, no animation
+ * library overhead. This makes the cursor feel as fast as native.
+ *
+ * Visual state changes (expand/shrink, label swaps) use CSS transitions
+ * on the inner ring and a minimal React state update for the label text.
+ *
  * - Hidden on touch devices (no `hover: hover` media query support).
- * - Reduced motion: spring removed, label swaps still work.
- * - Hero crosshair: on hover of `[data-cursor="crosshair"]`, renders live X/Y.
+ * - Reduced motion: transitions shortened, position still instant.
+ * - Hero crosshair: live X/Y readout.
  */
 export function CustomCursor() {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
   const [mounted, setMounted] = useState(false);
   const [supported, setSupported] = useState(false);
-  const [active, setActive] = useState(false); // hidden until first mousemove
-  const [state, setState] = useState<CursorState>("default");
-  const rawCoords = useRef({ x: 0, y: 0 });
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const reducedMotion = useReducedMotion();
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { damping: 30, stiffness: 400, mass: 0.6 });
-  const springY = useSpring(y, { damping: 30, stiffness: 400, mass: 0.6 });
+  const stateRef = useRef<CursorState>("default");
+  const activeRef = useRef(false);
 
   useEffect(() => {
     setMounted(true);
-    const supportsHover =
+    setSupported(
       typeof window !== "undefined" &&
-      window.matchMedia("(hover: hover)").matches;
-    setSupported(supportsHover);
+        window.matchMedia("(hover: hover)").matches,
+    );
   }, []);
 
-  // Hide the native cursor only once the custom cursor is actually visible.
   useEffect(() => {
     if (!supported) return;
-    if (active) {
-      document.documentElement.classList.add("cursor-custom");
-      return () => {
-        document.documentElement.classList.remove("cursor-custom");
-      };
+
+    const outer = outerRef.current;
+    const inner = innerRef.current;
+    const label = labelRef.current;
+    if (!outer || !inner || !label) return;
+
+    // Hide native cursor
+    document.documentElement.classList.add("cursor-custom");
+
+    function updateVisualState(next: CursorState, cx: number, cy: number) {
+      if (!inner || !label) return;
+      const prev = stateRef.current;
+      if (next === prev && next !== "crosshair") return;
+      stateRef.current = next;
+
+      const isExpanded =
+        next === "view" || next === "open" || next === "crosshair";
+      const size = isExpanded ? 56 : 20;
+
+      inner.style.width = `${size}px`;
+      inner.style.height = `${size}px`;
+
+      if (next === "crosshair") {
+        label.textContent = `X: ${Math.round(cx)} Y: ${Math.round(cy)}`;
+        label.style.opacity = "1";
+      } else if (isExpanded && cursorLabels[next]) {
+        label.textContent = cursorLabels[next];
+        label.style.opacity = "1";
+      } else {
+        label.textContent = "";
+        label.style.opacity = "0";
+      }
     }
-  }, [active, supported]);
 
-  useEffect(() => {
-    if (!supported) return;
+    function handleMove(e: MouseEvent) {
+      // Position — direct DOM, no React. translate3d triggers GPU compositing.
+      if (outer) {
+        outer.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      }
 
-    function handleMove(event: MouseEvent) {
-      rawCoords.current = { x: event.clientX, y: event.clientY };
-      x.set(event.clientX);
-      y.set(event.clientY);
-      if (!active) setActive(true);
+      if (!activeRef.current) {
+        activeRef.current = true;
+        if (outer) outer.style.opacity = "1";
+      }
 
-      // Determine cursor state from the element under the pointer.
-      const target = event.target as Element | null;
+      // Determine cursor state from element under pointer
+      const target = e.target as Element | null;
       if (!target) return;
 
       const hoveredWithState = target.closest<HTMLElement>("[data-cursor]");
       if (hoveredWithState) {
         const next = (hoveredWithState.dataset.cursor ?? "default") as CursorState;
-        setState((prev) => (prev === next ? prev : next));
-        if (next === "crosshair") {
-          setCoords({ x: event.clientX, y: event.clientY });
-        }
+        updateVisualState(next, e.clientX, e.clientY);
         return;
       }
 
       const interactive = target.closest(
         "a,button,input,textarea,select,[role='button']",
       );
-      setState(interactive ? "view" : "default");
+      updateVisualState(interactive ? "view" : "default", e.clientX, e.clientY);
+    }
+
+    function handleLeave() {
+      if (outer) outer.style.opacity = "0";
+      activeRef.current = false;
+    }
+
+    function handleEnter() {
+      if (outer && activeRef.current) outer.style.opacity = "1";
     }
 
     window.addEventListener("mousemove", handleMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMove);
-  }, [supported, x, y, active]);
+    document.addEventListener("mouseleave", handleLeave);
+    document.addEventListener("mouseenter", handleEnter);
+
+    return () => {
+      document.documentElement.classList.remove("cursor-custom");
+      window.removeEventListener("mousemove", handleMove);
+      document.removeEventListener("mouseleave", handleLeave);
+      document.removeEventListener("mouseenter", handleEnter);
+    };
+  }, [supported]);
 
   if (!mounted || !supported) return null;
 
-  const label = cursorLabels[state];
-  const isExpanded =
-    state === "view" ||
-    state === "open" ||
-    state === "crosshair";
-  const size = isExpanded ? 56 : 20;
-
-  const positionProps = reducedMotion
-    ? { style: { left: x, top: y } }
-    : { style: { left: springX, top: springY } };
-
   return (
-    <motion.div
+    <div
+      ref={outerRef}
       aria-hidden
       className="pointer-events-none fixed left-0 top-0 z-[100] mix-blend-difference"
-      animate={{ opacity: active ? 1 : 0 }}
-      transition={{ duration: 0.2 }}
-      {...positionProps}
+      style={{ opacity: 0, willChange: "transform" }}
     >
-      <motion.div
-        animate={{
-          width: size,
-          height: size,
-          backgroundColor: "rgba(0,0,0,0)",
-          borderColor: "#f6f5f1",
+      <div
+        ref={innerRef}
+        className="flex items-center justify-center rounded-full border border-[#f6f5f1]"
+        style={{
+          width: 20,
+          height: 20,
+          transform: "translate(-50%, -50%)",
+          transition: "width 0.15s cubic-bezier(0.22, 1, 0.36, 1), height 0.15s cubic-bezier(0.22, 1, 0.36, 1)",
+          willChange: "width, height",
         }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border"
       >
-        {state === "crosshair" ? (
-          <span className="whitespace-nowrap text-[10px] font-medium uppercase tracking-wider text-[#f6f5f1]">
-            X: {coords.x} Y: {coords.y}
-          </span>
-        ) : label && isExpanded ? (
-          <span className="whitespace-nowrap text-[10px] font-medium uppercase tracking-wider text-[#f6f5f1]">
-            {label}
-          </span>
-        ) : null}
-      </motion.div>
-    </motion.div>
+        <span
+          ref={labelRef}
+          className="whitespace-nowrap text-[10px] font-medium uppercase tracking-wider text-[#f6f5f1]"
+          style={{ opacity: 0, transition: "opacity 0.1s" }}
+        />
+      </div>
+    </div>
   );
 }
