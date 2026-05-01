@@ -7,8 +7,22 @@ import { useEffect, useState } from "react";
  * every 60 seconds. SSR renders a stable placeholder to avoid hydration
  * mismatches; the real time fills in on mount.
  */
+function getGreeting(): string {
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    hour: "numeric",
+    hour12: false,
+  });
+  const hour = parseInt(formatter.format(new Date()), 10);
+  if (hour >= 5 && hour < 12) return "GOOD MORNING";
+  if (hour >= 12 && hour < 17) return "GOOD AFTERNOON";
+  if (hour >= 17 && hour < 21) return "GOOD EVENING";
+  return "GOOD NIGHT";
+}
+
 export function LocalClock() {
   const [time, setTime] = useState<string | null>(null);
+  const [greeting, setGreeting] = useState<string | null>(null);
 
   useEffect(() => {
     const formatter = new Intl.DateTimeFormat("en-US", {
@@ -20,6 +34,7 @@ export function LocalClock() {
 
     function tick() {
       setTime(formatter.format(new Date()));
+      setGreeting(getGreeting());
     }
 
     tick();
@@ -46,7 +61,7 @@ export function LocalClock() {
       aria-label="Local time, Los Angeles"
       className="fixed right-[clamp(24px,4vw,64px)] bottom-[clamp(24px,4vw,64px)] z-50 text-mono-s text-[color:var(--surface-graphite)] tabular-nums"
     >
-      LAX · {time ?? "--:--"} PT
+      {greeting ?? "HELLO"} · LAX · {time ?? "--:--"}
     </div>
   );
 }

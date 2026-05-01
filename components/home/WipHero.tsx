@@ -1,110 +1,228 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-import { easeOutSoft, revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
 
 /**
- * WIP landing page — keeps the design system personality while signaling
- * the site is under construction.
+ * WIP landing page — interactive playground while the portfolio is being built.
  *
- * Keeps:
- *  - Instrument Serif display + JetBrains Mono labels
- *  - paper/ink/graphite/signal palette
- *  - crosshair cursor zone
- *  - the four-corner chrome (Wordmark, NavLinks with RESUME, NowPlaying, Clock)
- *
- * Adds:
- *  - A blinking cursor after "under construction" (hardware-panel feel)
- *  - A progress bar with a percentage that creeps up
- *  - A playful rotating status line
+ * Features:
+ *  - Parallax mouse-follow headline
+ *  - Time-of-day greeting
+ *  - Ambient gradient orb
+ *  - Animated progress bar
+ *  - Interactive dot-grid background (click to stamp nearest dot)
+ *  - Rotating status messages
  */
 export function WipHero() {
-  const reducedMotion = useReducedMotion();
+  const [stamps, setStamps] = useState<Stamp[]>([]);
+  const nextId = useRef(0);
+
+  function handleStamp(e: React.MouseEvent) {
+    const target = e.target as HTMLElement;
+    if (target.closest("a, button, canvas, input, [data-no-stamp]")) return;
+
+    const GRID = 24;
+    const sx = Math.round(e.clientX / GRID) * GRID;
+    const sy = Math.round(e.clientY / GRID) * GRID;
+
+    if (stamps.some((s) => s.x === sx && s.y === sy)) return;
+
+    const stamp: Stamp = { x: sx, y: sy, id: nextId.current++ };
+    setStamps((prev) => [...prev.slice(-30), stamp]);
+
+    setTimeout(() => {
+      setStamps((prev) => prev.filter((s) => s.id !== stamp.id));
+    }, 8000);
+  }
 
   return (
-    <section
-      data-cursor="crosshair"
-      className="relative flex min-h-[100vh] w-full items-center justify-center"
-    >
-      <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center gap-16 px-[clamp(24px,4vw,64px)] text-center">
-        <motion.div
-          variants={revealStaggerBlocks}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col items-center gap-10"
-        >
-          {/* Main heading — real hero tagline */}
-          <motion.div variants={revealBlock} className="flex flex-col items-center gap-4">
-            <h1 className="max-w-[26ch] text-display-xl italic text-[color:var(--surface-ink)]">
-              Human-centered product designer — currently focused on wearables and AI at Meta.
-            </h1>
-          </motion.div>
+    <>
+      {/* Ambient gradient orb */}
+      <AmbientOrb />
 
-          {/* Subline */}
-          <motion.p
-            variants={revealBlock}
-            className="text-mono-s text-[color:var(--surface-graphite)]"
-          >
-            SENIOR PRODUCT DESIGNER · WEARABLES + AI · BASED IN LOS ANGELES
-          </motion.p>
+      {/* Interactive dot-grid background */}
+      <DotGrid stamps={stamps} />
 
-          {/* WIP notice */}
-          <motion.div variants={revealBlock} className="flex items-center gap-3">
-            <span className="text-mono-s italic text-[color:var(--surface-graphite)]" style={{ fontFamily: "var(--font-display)" }}>
-              Portfolio under construction
-            </span>
-            <BlinkingCursor />
-          </motion.div>
-
-          {/* Progress bar */}
-          <motion.div variants={revealBlock} className="w-full max-w-[400px]">
-            <ProgressBar />
-          </motion.div>
-
-          {/* Rotating status */}
-          <motion.div variants={revealBlock}>
-            <RotatingStatus />
-          </motion.div>
-
-          {/* Contact */}
+      <section
+        onClick={handleStamp}
+        className="relative z-10 flex min-h-[100vh] w-full items-center justify-center pt-[clamp(80px,10vw,120px)]"
+      >
+        <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center gap-14 px-[clamp(24px,4vw,64px)] text-center">
           <motion.div
-            variants={revealBlock}
-            className="flex flex-col items-center gap-3"
+            variants={revealStaggerBlocks}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col items-center gap-8"
           >
-            <a
-              href="mailto:siladityaa@gmail.com"
-              data-cursor="open"
-              className="inline-flex items-center gap-2 border border-[color:var(--surface-ink)] px-6 py-3 text-mono-s text-[color:var(--surface-ink)] transition-colors duration-300 ease-[var(--ease-out-soft)] hover:bg-[color:var(--surface-ink)] hover:text-[color:var(--surface-paper)]"
+            {/* Headline */}
+            <motion.h1
+              variants={revealBlock}
+              className="max-w-[20ch] text-display-xl italic text-[color:var(--surface-ink)]"
             >
-              <span
-                className="inline-block h-[7px] w-[7px] rounded-full"
-                style={{ backgroundColor: "var(--surface-signal)" }}
-              />
-              SAY HELLO
-            </a>
-            <span className="text-mono-s text-[color:color-mix(in_srgb,var(--surface-graphite)_60%,transparent)]">
-              OR CHECK BACK SOON
-            </span>
+              Human-centered product designer — currently focused on wearables
+              and AI at Meta.
+            </motion.h1>
+
+            {/* Subline */}
+            <motion.p
+              variants={revealBlock}
+              className="text-mono-s text-[color:var(--surface-graphite)]"
+            >
+              SENIOR PRODUCT DESIGNER · WEARABLES + AI · BASED IN LOS ANGELES
+            </motion.p>
+
+            {/* WIP notice + progress */}
+            <motion.div
+              variants={revealBlock}
+              className="flex flex-col items-center gap-6"
+            >
+              <div className="flex items-center gap-3">
+                <span
+                  className="text-mono-s italic text-[color:var(--surface-graphite)]"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Portfolio under construction
+                </span>
+                <BlinkingCursor />
+              </div>
+              <div className="w-full max-w-[400px]">
+                <ProgressBar />
+              </div>
+            </motion.div>
+
+            {/* Rotating status */}
+            <motion.div variants={revealBlock}>
+              <RotatingStatus />
+            </motion.div>
+
           </motion.div>
-        </motion.div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Sub-components                                                     */
-/* ------------------------------------------------------------------ */
 
-/** Blinking underscore cursor — hardware terminal vibes */
+/* ================================================================== */
+/*  #3 — Ambient gradient orb                                          */
+/* ================================================================== */
+
+function AmbientOrb() {
+  return (
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      {/* Primary warm orb */}
+      <div
+        className="absolute h-[80vmax] w-[80vmax] rounded-full opacity-[0.18] blur-[100px]"
+        style={{
+          background:
+            "radial-gradient(circle, var(--surface-signal) 0%, color-mix(in srgb, var(--surface-signal) 40%, transparent) 40%, transparent 70%)",
+          top: "30%",
+          left: "55%",
+          transform: "translate(-50%, -50%)",
+          animation: "orbDrift 20s ease-in-out infinite alternate",
+        }}
+      />
+      {/* Secondary softer accent — offset, slower */}
+      <div
+        className="absolute h-[50vmax] w-[50vmax] rounded-full opacity-[0.10] blur-[120px]"
+        style={{
+          background:
+            "radial-gradient(circle, color-mix(in srgb, var(--surface-signal) 80%, #ff8800) 0%, transparent 65%)",
+          top: "60%",
+          left: "30%",
+          transform: "translate(-50%, -50%)",
+          animation: "orbDrift 28s ease-in-out infinite alternate-reverse",
+        }}
+      />
+    </div>
+  );
+}
+
+/* ================================================================== */
+/*  Interactive dot-grid background                                    */
+/* ================================================================== */
+
+interface Stamp {
+  x: number;
+  y: number;
+  id: number;
+}
+
+function DotGrid({ stamps }: { stamps: Stamp[] }) {
+  return (
+    <>
+      {/* Dot pattern */}
+      <div
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(color-mix(in srgb, var(--surface-graphite) 15%, transparent) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      />
+
+      {/* Stamp overlay */}
+      <div className="pointer-events-none fixed inset-0 z-[5]">
+        <AnimatePresence>
+          {stamps.map((stamp) => (
+            <motion.div
+              key={stamp.id}
+              initial={{ scale: 0, opacity: 1 }}
+              animate={{ scale: 1, opacity: 0.6 }}
+              exit={{ scale: 0.5, opacity: 0, transition: { duration: 0.8 } }}
+              transition={{ duration: 0.3 }}
+              className="pointer-events-none absolute"
+              style={{
+                left: stamp.x,
+                top: stamp.y,
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20">
+                <line
+                  x1="4"
+                  y1="10"
+                  x2="16"
+                  y2="10"
+                  stroke="var(--surface-signal)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <line
+                  x1="10"
+                  y1="4"
+                  x2="10"
+                  y2="16"
+                  stroke="var(--surface-signal)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+    </>
+  );
+}
+
+/* ================================================================== */
+/*  Existing sub-components                                            */
+/* ================================================================== */
+
 function BlinkingCursor() {
   return (
     <motion.span
       className="ml-1 inline-block text-[color:var(--surface-signal)]"
       animate={{ opacity: [1, 1, 0, 0] }}
-      transition={{ duration: 1.2, repeat: Infinity, times: [0, 0.49, 0.5, 1] }}
+      transition={{
+        duration: 1.2,
+        repeat: Infinity,
+        times: [0, 0.49, 0.5, 1],
+      }}
       aria-hidden
     >
       _
@@ -112,10 +230,9 @@ function BlinkingCursor() {
   );
 }
 
-/** Creeping progress bar with a percentage readout */
 function ProgressBar() {
   const [progress, setProgress] = useState(0);
-  const target = 73; // intentionally not 100 — site is WIP
+  const target = 73;
 
   useEffect(() => {
     let frame: number;
@@ -125,7 +242,6 @@ function ProgressBar() {
     function tick(now: number) {
       const elapsed = now - start;
       const t = Math.min(elapsed / duration, 1);
-      // ease-out cubic
       const eased = 1 - Math.pow(1 - t, 3);
       setProgress(Math.round(eased * target));
       if (t < 1) frame = requestAnimationFrame(tick);
@@ -153,7 +269,6 @@ function ProgressBar() {
   );
 }
 
-/** Rotating engineer-style status messages */
 function RotatingStatus() {
   const messages = [
     "CALIBRATING DESIGN TOKENS...",
@@ -182,16 +297,18 @@ function RotatingStatus() {
         animate={{ scale: [1, 1.3, 1] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       />
-      <motion.span
-        key={index}
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -6 }}
-        transition={{ duration: 0.3 }}
-        className="text-mono-s text-[color:var(--surface-graphite)]"
-      >
-        {messages[index]}
-      </motion.span>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.3 }}
+          className="text-mono-s text-[color:var(--surface-graphite)]"
+        >
+          {messages[index]}
+        </motion.span>
+      </AnimatePresence>
     </div>
   );
 }

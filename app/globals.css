@@ -197,6 +197,18 @@ html.dark {
    Framer Motion variants also branch on this via lib/motion.ts.
    ============================================================================= */
 
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes orbDrift {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  33%  { transform: translate(-45%, -55%) scale(1.05); }
+  66%  { transform: translate(-55%, -45%) scale(0.95); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
