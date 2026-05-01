@@ -28,7 +28,7 @@ export function NavLinks() {
   return (
     <nav
       aria-label="Primary"
-      className="fixed right-[clamp(24px,4vw,64px)] top-[clamp(24px,4vw,64px)] z-50 flex gap-6"
+      className="fixed right-[clamp(24px,4vw,64px)] top-[clamp(24px,4vw,64px)] z-50 flex h-[54px] items-center gap-6"
     >
       {items.map((item) =>
         item.external ? (
