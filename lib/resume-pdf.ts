@@ -1,91 +1,88 @@
 import jsPDF from "jspdf";
 
 /**
- * Generate an ATS-friendly PDF of the resume.
+ * Generate an ATS-friendly, single-page PDF of the resume.
  *
  * ATS-friendly means: real text (not images), simple formatting, standard
  * fonts, clear section headings, and no columns or tables that confuse
  * parsers. We use Helvetica (built into jsPDF / every PDF reader) for
  * maximum compatibility.
+ *
+ * Letter size = 612 × 792 pt. With 36pt margins we get 720pt of vertical
+ * space — every pixel counts.
  */
 export function generateResumePDF() {
   const doc = new jsPDF({ unit: "pt", format: "letter" });
   const pageWidth = doc.internal.pageSize.getWidth();
-  const margin = 50;
-  const contentWidth = pageWidth - margin * 2;
-  let y = 50;
+  const m = 40; // margin
+  const w = pageWidth - m * 2; // content width
+  let y = 38;
 
-  const checkPageBreak = (needed: number) => {
-    const pageHeight = doc.internal.pageSize.getHeight();
-    if (y + needed > pageHeight - 50) {
-      doc.addPage();
-      y = 50;
-    }
+  /* ---- helper: section divider ---- */
+  const divider = () => {
+    doc.setDrawColor(195, 195, 195);
+    doc.setLineWidth(0.4);
+    doc.line(m, y, pageWidth - m, y);
+    y += 10;
   };
 
-  /* ------------------------------------------------------------------ */
+  /* ================================================================== */
   /* Header                                                              */
-  /* ------------------------------------------------------------------ */
+  /* ================================================================== */
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(22);
+  doc.setFontSize(18);
   doc.setTextColor(17, 17, 19);
-  doc.text("Siladityaa Sharma", margin, y);
-  y += 20;
+  doc.text("Siladityaa Sharma", m, y);
+  y += 15;
 
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.setTextColor(107, 107, 112);
+  doc.setFontSize(8.5);
+  doc.setTextColor(100, 100, 100);
   doc.text(
-    "Senior Product Designer  ·  Meta Reality Labs  ·  Los Angeles, CA",
-    margin,
+    "Senior Product Designer  |  Meta Reality Labs  |  Los Angeles, CA",
+    m,
     y
   );
-  y += 16;
+  y += 11;
 
-  doc.setFontSize(9);
+  doc.setFontSize(8);
   doc.text(
-    "hi@siladityaa.com  ·  linkedin.com/in/siladityaa  ·  siladityaa.com",
-    margin,
+    "hi@siladityaa.com  |  linkedin.com/in/siladityaa  |  siladityaa.com",
+    m,
     y
   );
-  y += 24;
+  y += 12;
 
-  // Divider
-  doc.setDrawColor(200, 200, 200);
-  doc.setLineWidth(0.5);
-  doc.line(margin, y, pageWidth - margin, y);
-  y += 16;
+  divider();
 
-  /* ------------------------------------------------------------------ */
+  /* ================================================================== */
   /* Summary                                                             */
-  /* ------------------------------------------------------------------ */
+  /* ================================================================== */
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(11);
+  doc.setFontSize(9);
   doc.setTextColor(17, 17, 19);
-  doc.text("SUMMARY", margin, y);
-  y += 14;
+  doc.text("SUMMARY", m, y);
+  y += 11;
 
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(9.5);
-  doc.setTextColor(45, 45, 45);
+  doc.setFontSize(8);
+  doc.setTextColor(40, 40, 40);
   const summary =
-    "Creative technologist with user experience research and design expertise across AI, wearables, and hardware. Known for exploring future-states and creating engaging scenarios to inform design ideas from concept to shippable products. A demonstrated history in prototyping simple to complex concepts, regardless of feasibility.";
-  const summaryLines = doc.splitTextToSize(summary, contentWidth);
-  doc.text(summaryLines, margin, y);
-  y += summaryLines.length * 13 + 16;
+    "Creative technologist with UX research and design expertise across AI, wearables, and hardware. Known for exploring future-states and creating engaging scenarios to inform design ideas from concept to shippable products.";
+  const sLines = doc.splitTextToSize(summary, w);
+  doc.text(sLines, m, y);
+  y += sLines.length * 10 + 8;
 
-  /* ------------------------------------------------------------------ */
+  divider();
+
+  /* ================================================================== */
   /* Experience                                                          */
-  /* ------------------------------------------------------------------ */
-  doc.setDrawColor(200, 200, 200);
-  doc.line(margin, y - 8, pageWidth - margin, y - 8);
-  y += 4;
-
+  /* ================================================================== */
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(11);
+  doc.setFontSize(9);
   doc.setTextColor(17, 17, 19);
-  doc.text("EXPERIENCE", margin, y);
-  y += 18;
+  doc.text("EXPERIENCE", m, y);
+  y += 13;
 
   const jobs = [
     {
@@ -111,7 +108,7 @@ export function generateResumePDF() {
     {
       title: "Product Design Intern",
       company: "Meta",
-      period: "Jun 2021 — Sep 2021",
+      period: "Jun — Sep 2021",
       location: "Remote",
       bullets: [
         "Contributed to early-stage AR glasses interaction design under NDA. Explored novel input paradigms for head-worn computing.",
@@ -120,7 +117,7 @@ export function generateResumePDF() {
     {
       title: "UX Designer & Developer Intern",
       company: "Kley",
-      period: "May 2020 — Jul 2020",
+      period: "May — Jul 2020",
       location: "Remote",
       bullets: [
         "Designed and developed user interfaces for an early-stage startup, wearing both design and front-end engineering hats.",
@@ -128,148 +125,131 @@ export function generateResumePDF() {
     },
   ];
 
-  for (const job of jobs) {
-    checkPageBreak(80);
+  for (let j = 0; j < jobs.length; j++) {
+    const job = jobs[j];
 
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
+    doc.setFontSize(8.5);
     doc.setTextColor(17, 17, 19);
-    doc.text(job.title, margin, y);
+    doc.text(job.title, m, y);
 
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(9);
-    doc.setTextColor(107, 107, 112);
-    doc.text(job.period, pageWidth - margin, y, { align: "right" });
-    y += 13;
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text(job.period, pageWidth - m, y, { align: "right" });
+    y += 11;
 
     doc.setFont("helvetica", "italic");
-    doc.setFontSize(9);
+    doc.setFontSize(8);
     doc.setTextColor(80, 80, 80);
-    doc.text(`${job.company}  ·  ${job.location}`, margin, y);
-    y += 14;
+    doc.text(`${job.company}  ·  ${job.location}`, m, y);
+    y += 11;
 
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(9.5);
-    doc.setTextColor(45, 45, 45);
+    doc.setFontSize(8);
+    doc.setTextColor(40, 40, 40);
     for (const bullet of job.bullets) {
-      checkPageBreak(30);
-      const lines = doc.splitTextToSize(bullet, contentWidth - 14);
+      const lines = doc.splitTextToSize(bullet, w - 12);
       lines.forEach((line: string, i: number) => {
-        doc.text(i === 0 ? `•  ${line}` : `   ${line}`, margin + 4, y);
-        y += 12;
+        doc.text(i === 0 ? `•  ${line}` : `   ${line}`, m + 4, y);
+        y += 10;
       });
     }
-    y += 10;
+    y += j < jobs.length - 1 ? 6 : 8;
   }
 
-  /* ------------------------------------------------------------------ */
+  divider();
+
+  /* ================================================================== */
   /* Education                                                           */
-  /* ------------------------------------------------------------------ */
-  checkPageBreak(80);
-  doc.setDrawColor(200, 200, 200);
-  doc.line(margin, y - 4, pageWidth - margin, y - 4);
-  y += 8;
-
+  /* ================================================================== */
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(11);
+  doc.setFontSize(9);
   doc.setTextColor(17, 17, 19);
-  doc.text("EDUCATION", margin, y);
-  y += 18;
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(10);
-  doc.text("ArtCenter College of Design", margin, y);
+  doc.text("EDUCATION", m, y);
   y += 13;
 
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(9);
-  doc.setTextColor(80, 80, 80);
-  doc.text("BS Interaction Design  ·  Business Minor  ·  Pasadena, CA", margin, y);
-  y += 16;
-
-  doc.setFontSize(9.5);
-  doc.setTextColor(45, 45, 45);
-  const eduItems = [
-    "Graduated with Honors",
-    "Provost List — GPA above 3.80",
-    "Interaction Design Scholarship Recipient",
-  ];
-  for (const item of eduItems) {
-    doc.text(`•  ${item}`, margin + 4, y);
-    y += 12;
-  }
-  y += 12;
-
-  /* ------------------------------------------------------------------ */
-  /* Skills                                                              */
-  /* ------------------------------------------------------------------ */
-  checkPageBreak(80);
-  doc.setDrawColor(200, 200, 200);
-  doc.line(margin, y - 4, pageWidth - margin, y - 4);
-  y += 8;
-
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(11);
-  doc.setTextColor(17, 17, 19);
-  doc.text("SKILLS", margin, y);
-  y += 18;
+  doc.setFontSize(8.5);
+  doc.text("ArtCenter College of Design", m, y);
 
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(9.5);
-  doc.setTextColor(45, 45, 45);
+  doc.setFontSize(8);
+  doc.setTextColor(100, 100, 100);
+  doc.text("Pasadena, CA", pageWidth - m, y, { align: "right" });
+  y += 11;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(60, 60, 60);
+  doc.text(
+    "BS Interaction Design  ·  Business Minor  ·  Graduated with Honors  ·  Provost List (GPA 3.80+)",
+    m,
+    y
+  );
+  y += 14;
+
+  divider();
+
+  /* ================================================================== */
+  /* Skills                                                              */
+  /* ================================================================== */
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.setTextColor(17, 17, 19);
+  doc.text("SKILLS", m, y);
+  y += 13;
+
+  doc.setFontSize(8);
+  doc.setTextColor(40, 40, 40);
 
   const skillSections = [
     {
-      label: "Design",
+      label: "Design:",
       items:
-        "Interaction Design, UX Research, Design Thinking, Human-Centered Design, UI Design, UX Design, Wireframes & Prototypes, Journey Maps & Personas, Design Systems, Prototyping",
+        "Interaction Design, UX Research, Design Thinking, Human-Centered Design, UI Design, UX Design, Wireframes & Prototypes, Design Systems, Prototyping",
     },
     {
-      label: "Technical",
+      label: "Technical:",
       items:
         "HTML/CSS/JavaScript, Adobe Creative Suite, Motion Graphics, Figma, Principle, After Effects",
     },
     {
-      label: "Soft Skills",
+      label: "Soft Skills:",
       items:
         "Leadership, Communication, Cross-discipline Collaboration, Problem Solving, Mentorship",
     },
   ];
 
   for (const section of skillSections) {
-    checkPageBreak(30);
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(9.5);
-    doc.text(`${section.label}:  `, margin, y);
-    const labelWidth = doc.getTextWidth(`${section.label}:  `);
+    doc.text(section.label + " ", m, y);
+    const lw = doc.getTextWidth(section.label + " ");
     doc.setFont("helvetica", "normal");
-    const skillLines = doc.splitTextToSize(
-      section.items,
-      contentWidth - labelWidth
-    );
-    doc.text(skillLines[0], margin + labelWidth, y);
-    if (skillLines.length > 1) {
-      for (let i = 1; i < skillLines.length; i++) {
-        y += 12;
-        doc.text(skillLines[i], margin + labelWidth, y);
-      }
+    const skLines = doc.splitTextToSize(section.items, w - lw);
+    doc.text(skLines[0], m + lw, y);
+    for (let i = 1; i < skLines.length; i++) {
+      y += 10;
+      doc.text(skLines[i], m + lw, y);
     }
-    y += 16;
+    y += 13;
   }
 
-  /* ------------------------------------------------------------------ */
-  /* Awards                                                              */
-  /* ------------------------------------------------------------------ */
-  checkPageBreak(80);
-  doc.setDrawColor(200, 200, 200);
-  doc.line(margin, y - 4, pageWidth - margin, y - 4);
-  y += 8;
+  y -= 3;
+  divider();
 
+  /* ================================================================== */
+  /* Awards                                                              */
+  /* ================================================================== */
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(11);
+  doc.setFontSize(9);
   doc.setTextColor(17, 17, 19);
-  doc.text("AWARDS & RECOGNITION", margin, y);
-  y += 18;
+  doc.text("AWARDS", m, y);
+  y += 13;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(40, 40, 40);
 
   const awards = [
     { title: "International Design Award — Silver & Bronze", year: "2020" },
@@ -279,21 +259,17 @@ export function generateResumePDF() {
     { title: "Bradford Hall End Scholarship — Recipient", year: "2019" },
   ];
 
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(9.5);
-  doc.setTextColor(45, 45, 45);
   for (const award of awards) {
-    checkPageBreak(16);
-    doc.text(`•  ${award.title}`, margin + 4, y);
-    doc.setTextColor(107, 107, 112);
-    doc.text(award.year, pageWidth - margin, y, { align: "right" });
-    doc.setTextColor(45, 45, 45);
-    y += 14;
+    doc.text(`•  ${award.title}`, m + 4, y);
+    doc.setTextColor(100, 100, 100);
+    doc.text(award.year, pageWidth - m, y, { align: "right" });
+    doc.setTextColor(40, 40, 40);
+    y += 11;
   }
 
-  /* ------------------------------------------------------------------ */
+  /* ================================================================== */
   /* Save                                                                */
-  /* ------------------------------------------------------------------ */
+  /* ================================================================== */
   const now = new Date();
   const dateStr = `${now.getFullYear()}_${String(now.getMonth() + 1).padStart(2, "0")}`;
   doc.save(`Siladityaa_Sharma_Resume_${dateStr}.pdf`);
