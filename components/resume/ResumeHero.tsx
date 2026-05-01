@@ -26,15 +26,14 @@ export function ResumeHero() {
       >
         <div className="max-w-[640px] flex flex-col gap-4">
           <p className="text-body text-[color:var(--surface-ink)]">
-            Creative technologist with user experience research and design
-            expertise across AI, wearables, and hardware. Known for exploring
-            future-states and creating engaging scenarios to inform design ideas
-            from concept to shippable products.
+            A creative technologist known for the ability to explore
+            future-states and create engaging future scenarios to inform design
+            ideas.
           </p>
           <p className="text-body text-[color:var(--surface-graphite)]">
             A demonstrated history in prototyping simple to complex concepts,
             regardless of feasibility. From wild conceptualization and ideation
-            to realistic, shippable products — I love the entire spectrum.
+            to realistic, shippable products - I love the entire spectrum.
           </p>
         </div>
 
