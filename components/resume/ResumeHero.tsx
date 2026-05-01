@@ -40,9 +40,10 @@ export function ResumeHero() {
 
         {/* Quick stats */}
         <div className="flex gap-8 md:flex-col md:gap-6 md:border-l md:border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] md:pl-8">
-          <Stat value="3+" label="Years at Meta" />
-          <Stat value="3+" label="Years in Academia" />
-          <Stat value="5+" label="Product Launches" />
+          <Stat value="5+" label="Years in Tech" />
+          <Stat value="10+" label="Product Launches" />
+          <Stat value="1M+" label="Products Sold" />
+          <Stat value="2+" label="Years in Academia" />
         </div>
       </motion.div>
 
