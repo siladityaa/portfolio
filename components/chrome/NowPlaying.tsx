@@ -265,7 +265,7 @@ export function NowPlaying() {
   return (
     <div
       aria-label="Now playing"
-      className="fixed left-[clamp(24px,4vw,64px)] bottom-[clamp(24px,4vw,64px)] z-50 flex items-center gap-2 text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)]"
+      className="fixed bottom-[clamp(24px,4vw,64px)] left-1/2 z-50 flex w-[calc(100%-48px)] -translate-x-1/2 items-center justify-center gap-2 whitespace-nowrap text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] md:left-[clamp(24px,4vw,64px)] md:w-auto md:translate-x-0 md:justify-start"
     >
       {canPlay ? (
         <button

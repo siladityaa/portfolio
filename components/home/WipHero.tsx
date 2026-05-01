@@ -57,6 +57,14 @@ export function WipHero() {
             animate="visible"
             className="flex flex-col items-center gap-8"
           >
+            {/* Mobile clock — inline, hidden on desktop where the fixed chrome shows */}
+            <motion.div
+              variants={revealBlock}
+              className="block text-mono-s text-[color:var(--surface-graphite)] tabular-nums md:hidden"
+            >
+              <MobileClock />
+            </motion.div>
+
             {/* Headline */}
             <motion.h1
               variants={revealBlock}
@@ -310,5 +318,47 @@ function RotatingStatus() {
         </motion.span>
       </AnimatePresence>
     </div>
+  );
+}
+
+/* ================================================================== */
+/*  Mobile clock — inline version for small screens                    */
+/* ================================================================== */
+
+function MobileClock() {
+  const [time, setTime] = useState<string | null>(null);
+  const [greeting, setGreeting] = useState("HELLO");
+
+  useEffect(() => {
+    const timeFmt = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Los_Angeles",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+    const hourFmt = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Los_Angeles",
+      hour: "numeric",
+      hour12: false,
+    });
+
+    function tick() {
+      setTime(timeFmt.format(new Date()));
+      const hour = parseInt(hourFmt.format(new Date()), 10);
+      if (hour >= 5 && hour < 12) setGreeting("GOOD MORNING");
+      else if (hour >= 12 && hour < 17) setGreeting("GOOD AFTERNOON");
+      else if (hour >= 17 && hour < 21) setGreeting("GOOD EVENING");
+      else setGreeting("GOOD NIGHT");
+    }
+
+    tick();
+    const interval = setInterval(tick, 60_000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <>
+      {greeting} · LAX · {time ?? "--:--"}
+    </>
   );
 }

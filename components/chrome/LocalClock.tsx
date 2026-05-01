@@ -59,7 +59,7 @@ export function LocalClock() {
   return (
     <div
       aria-label="Local time, Los Angeles"
-      className="fixed right-[clamp(24px,4vw,64px)] bottom-[clamp(24px,4vw,64px)] z-50 hidden text-mono-s text-[color:var(--surface-graphite)] tabular-nums md:block"
+      className="fixed right-[clamp(24px,4vw,64px)] bottom-[clamp(24px,4vw,64px)] z-50 hidden whitespace-nowrap text-mono-s text-[color:var(--surface-graphite)] tabular-nums md:block"
     >
       {greeting ?? "HELLO"} · LAX · {time ?? "--:--"}
     </div>
