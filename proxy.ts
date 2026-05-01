@@ -52,7 +52,7 @@ function isPublicAdminPath(pathname: string): boolean {
  * Remove this block (and the matcher entry) to restore the full site.
  */
 const WIP_MODE = true;
-const WIP_ALLOWED = new Set(["/", "/_not-found"]);
+const WIP_ALLOWED = new Set(["/", "/_not-found", "/resume"]);
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -60,6 +60,11 @@ export async function proxy(request: NextRequest) {
   // WIP gate: redirect /about, /work/*, /colophon to home
   if (WIP_MODE && !pathname.startsWith("/admin") && !pathname.startsWith("/api") && !pathname.startsWith("/_next") && !WIP_ALLOWED.has(pathname)) {
     return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // Non-admin paths that made it past the WIP gate — let them through.
+  if (!pathname.startsWith("/admin")) {
+    return NextResponse.next();
   }
 
   if (isPublicAdminPath(pathname)) {
@@ -108,5 +113,6 @@ export const config = {
     "/about",
     "/work/:path*",
     "/colophon",
+    "/resume",
   ],
 };

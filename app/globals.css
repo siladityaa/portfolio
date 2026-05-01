@@ -202,6 +202,15 @@ html.dark {
   50%, 100% { opacity: 0; }
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
 @keyframes orbDrift {
   0%   { transform: translate(-50%, -50%) scale(1); }
   33%  { transform: translate(-45%, -55%) scale(1.05); }

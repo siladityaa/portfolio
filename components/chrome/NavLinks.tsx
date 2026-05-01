@@ -19,9 +19,8 @@ export function NavLinks() {
       : []),
     {
       label: "RESUME",
-      href: "https://resume.siladityaa.com",
-      cursor: "open" as const,
-      external: true,
+      href: "/resume",
+      cursor: "view" as const,
     },
   ];
 
@@ -30,29 +29,16 @@ export function NavLinks() {
       aria-label="Primary"
       className="fixed right-[clamp(24px,4vw,64px)] top-[clamp(24px,4vw,64px)] z-50 flex h-[54px] items-center gap-6"
     >
-      {items.map((item) =>
-        item.external ? (
-          <a
-            key={item.label}
-            href={item.href}
-            data-cursor={item.cursor}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
-          >
-            {item.label}
-          </a>
-        ) : (
-          <Link
-            key={item.label}
-            href={item.href}
-            data-cursor={item.cursor}
-            className="text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
-          >
-            {item.label}
-          </Link>
-        ),
-      )}
+      {items.map((item) => (
+        <Link
+          key={item.label}
+          href={item.href}
+          data-cursor={item.cursor}
+          className="text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+        >
+          {item.label}
+        </Link>
+      ))}
 
       {/* Subtle ⌘K hint — hidden on touch devices and in WIP mode */}
       {!WIP_MODE && (
