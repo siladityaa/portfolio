@@ -49,7 +49,7 @@ export function ResumeHero() {
 
       {/* Tags */}
       <motion.div variants={revealBlock} className="flex flex-wrap gap-2">
-        {["AI", "Hardware", "Wearables", "Los Angeles, CA"].map((tag) => (
+        {["AI", "Hardware", "Wearables"].map((tag) => (
           <span
             key={tag}
             className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_20%,transparent)] px-3 py-1 text-mono-s text-[color:var(--surface-graphite)]"
