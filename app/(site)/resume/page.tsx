@@ -6,6 +6,7 @@ import { ResumeEducation } from "@/components/resume/ResumeEducation";
 import { ResumeSkills } from "@/components/resume/ResumeSkills";
 import { ResumeAwards } from "@/components/resume/ResumeAwards";
 import { ResumeContact } from "@/components/resume/ResumeContact";
+import { ResumeDownloadFAB } from "@/components/resume/ResumeDownloadFAB";
 
 export const metadata: Metadata = {
   title: "Resume — Siladityaa Sharma",
@@ -39,6 +40,8 @@ export default function ResumePage() {
       <ResumeSkills />
       <ResumeAwards />
       <ResumeContact />
+
+      <ResumeDownloadFAB />
     </article>
   );
 }
