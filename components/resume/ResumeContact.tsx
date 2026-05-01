@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
 
@@ -22,6 +23,20 @@ const links = [
 ];
 
 export function ResumeContact() {
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownload = useCallback(async () => {
+    setDownloading(true);
+    try {
+      const { generateResumePDF } = await import("@/lib/resume-pdf");
+      generateResumePDF();
+    } catch (err) {
+      console.error("PDF generation failed:", err);
+    } finally {
+      setDownloading(false);
+    }
+  }, []);
+
   return (
     <motion.section
       variants={revealStaggerBlocks}
@@ -59,6 +74,20 @@ export function ResumeContact() {
         ))}
       </motion.div>
 
+      {/* Download PDF */}
+      <motion.div variants={revealBlock}>
+        <button
+          type="button"
+          onClick={handleDownload}
+          disabled={downloading}
+          data-cursor="open"
+          className="group inline-flex items-center gap-3 rounded-full border border-[color:var(--surface-ink)] px-6 py-3 text-mono-s text-[color:var(--surface-ink)] transition-all duration-300 ease-[var(--ease-out-soft)] hover:bg-[color:var(--surface-ink)] hover:text-[color:var(--surface-paper)] disabled:opacity-50"
+        >
+          <DownloadIcon />
+          <span>{downloading ? "GENERATING..." : "DOWNLOAD RESUME PDF"}</span>
+        </button>
+      </motion.div>
+
       <motion.p
         variants={revealBlock}
         className="text-mono-s text-[color:var(--surface-graphite)]"
@@ -67,5 +96,24 @@ export function ResumeContact() {
         JETBRAINS MONO
       </motion.p>
     </motion.section>
+  );
+}
+
+function DownloadIcon() {
+  return (
+    <svg
+      aria-hidden
+      width="14"
+      height="14"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M8 2 v8 M4.5 7.5 L8 11 L11.5 7.5" />
+      <path d="M3 13 h10" />
+    </svg>
   );
 }
