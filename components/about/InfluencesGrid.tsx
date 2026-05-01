@@ -16,7 +16,7 @@ export function InfluencesGrid() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-3">
             <span className="text-mono-s text-[color:var(--surface-graphite)]">
-              03 — INFLUENCES
+              02 — INFLUENCES
             </span>
             <p className="mt-6 max-w-[28ch] text-body text-[color:var(--surface-graphite)]">
               Twelve things I keep coming back to — one sentence on each.

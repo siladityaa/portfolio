@@ -25,7 +25,6 @@ export default function AboutPage() {
       <div className="pt-[clamp(120px,18vh,200px)]" />
       <PulledQuote />
       <BioColumns />
-      <Timeline />
       <InfluencesGrid />
       <CurrentlyPreviously />
       <Footer />
