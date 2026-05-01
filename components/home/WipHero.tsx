@@ -48,14 +48,14 @@ export function WipHero() {
 
       <section
         onClick={handleStamp}
-        className="relative z-10 flex min-h-[100vh] w-full items-center justify-center pt-[clamp(80px,10vw,120px)]"
+        className="relative z-10 flex h-[100dvh] w-full items-center justify-center pt-[clamp(56px,8vw,120px)] pb-[clamp(56px,8vw,80px)]"
       >
-        <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center gap-14 px-[clamp(24px,4vw,64px)] text-center">
+        <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center gap-6 px-[clamp(24px,4vw,64px)] text-center md:gap-14">
           <motion.div
             variants={revealStaggerBlocks}
             initial="hidden"
             animate="visible"
-            className="flex flex-col items-center gap-8"
+            className="flex flex-col items-center gap-5 md:gap-8"
           >
             {/* Mobile clock — inline, hidden on desktop where the fixed chrome shows */}
             <motion.div
@@ -85,7 +85,7 @@ export function WipHero() {
             {/* WIP notice + progress */}
             <motion.div
               variants={revealBlock}
-              className="flex flex-col items-center gap-6"
+              className="flex flex-col items-center gap-4 md:gap-6"
             >
               <div className="flex items-center gap-3">
                 <span
