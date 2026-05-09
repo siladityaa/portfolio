@@ -1,7 +1,11 @@
 import Link from "next/link";
 
-import { loadAllCaseStudies } from "@/lib/content";
+import { loadAllCaseStudiesAdmin } from "@/lib/content-admin";
 import { NewCaseStudyForm } from "@/components/admin/NewCaseStudyForm";
+
+// Always render fresh from GitHub — never cache so deletes/creates show
+// up immediately in the admin list.
+export const dynamic = "force-dynamic";
 
 /**
  * List view for the case-studies collection. Reads all .json files from
@@ -9,7 +13,7 @@ import { NewCaseStudyForm } from "@/components/admin/NewCaseStudyForm";
  * a link to its edit page.
  */
 export default async function CaseStudiesIndex() {
-  const studies = await loadAllCaseStudies();
+  const studies = await loadAllCaseStudiesAdmin();
 
   return (
     <div className="mx-auto max-w-[920px] px-[clamp(24px,4vw,64px)] py-[clamp(80px,12vh,160px)]">

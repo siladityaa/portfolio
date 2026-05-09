@@ -1,18 +1,21 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
-import { loadAllCaseStudies, loadCaseStudy } from "@/lib/content";
+import { loadCaseStudyAdmin } from "@/lib/content-admin";
 import { CaseStudyForm } from "@/components/admin/forms/CaseStudyForm";
 import { DeleteCaseStudyButton } from "@/components/admin/DeleteCaseStudyButton";
 
-export async function generateStaticParams() {
-  const all = await loadAllCaseStudies();
-  return all.map((cs) => ({ slug: cs.slug }));
-}
+// Always render fresh from GitHub so newly-created case studies are
+// reachable immediately and edits reflect the live repo state.
+export const dynamic = "force-dynamic";
 
 /**
  * Case study editor — frontmatter, hero, brief, bento gallery + danger
  * zone for permanently deleting the case study from the repo.
+ *
+ * Reads through `loadCaseStudyAdmin` (GitHub-backed) instead of the
+ * filesystem-backed `loadCaseStudy` so the page reflects the live
+ * state of the repo, not the deployed bundle.
  */
 export default async function CaseStudyEditPage({
   params,
@@ -20,7 +23,7 @@ export default async function CaseStudyEditPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const cs = await loadCaseStudy(slug);
+  const cs = await loadCaseStudyAdmin(slug);
   if (!cs) notFound();
 
   return (

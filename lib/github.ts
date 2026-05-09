@@ -201,6 +201,43 @@ export async function writeBinaryFile(
 }
 
 /**
+ * List the names of every case study JSON file currently in the repo.
+ * Use this in the admin so the list reflects the live GitHub state
+ * (including newly-created or just-deleted entries) instead of the
+ * cached deployed bundle.
+ */
+export async function listCaseStudySlugs(
+  octokit: Octokit,
+): Promise<string[]> {
+  const { owner, repo, branch } = getRepoCoordinates();
+  try {
+    const res = await octokit.repos.getContent({
+      owner,
+      repo,
+      path: "content/work",
+      ref: branch,
+    });
+    if (!Array.isArray(res.data)) return [];
+    return res.data
+      .filter((entry) => entry.type === "file" && entry.name.endsWith(".json"))
+      .map((entry) => entry.name.replace(/\.json$/, ""));
+  } catch (err: unknown) {
+    if (
+      typeof err === "object" &&
+      err !== null &&
+      "status" in err &&
+      (err as { status: number }).status === 404
+    ) {
+      return [];
+    }
+    throw new GitHubSaveError(
+      "Failed to list content/work/ from GitHub.",
+      err,
+    );
+  }
+}
+
+/**
  * Delete a file from the repo. Requires the current `sha` so we don't
  * race against another writer.
  */
