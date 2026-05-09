@@ -168,6 +168,7 @@ export function MinimalCaseStudy({
           src={cs.hero?.src}
           alt={cs.hero?.alt ?? cs.title}
           fallback="MAIN ASSET TBD"
+          size="hero"
         />
 
         {bentoPlacementsForCount(bento.length).map((placement, i) => (
@@ -253,6 +254,9 @@ interface BentoTileProps {
   className?: string;
   fallback?: string;
   variants?: import("framer-motion").Variants;
+  /** "hero" gets a taller mobile slot than "support" so the dominant
+   *  asset reads at proper size on phones. */
+  size?: "hero" | "support";
 }
 
 function BentoTile({
@@ -261,11 +265,17 @@ function BentoTile({
   className = "",
   fallback = "—",
   variants,
+  size = "support",
 }: BentoTileProps) {
+  // Generous mobile heights so assets aren't squished into a 200px slot.
+  // lg:min-h-0 hands sizing back to the bento grid above 1024px.
+  const mobileHeight =
+    size === "hero" ? "min-h-[58vh]" : "min-h-[42vh]";
+
   return (
     <motion.div
       variants={variants}
-      className={`relative min-h-[200px] overflow-hidden rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)] lg:min-h-0 ${className}`}
+      className={`relative ${mobileHeight} overflow-hidden rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)] lg:min-h-0 ${className}`}
     >
       {src ? (
         <MediaFrame src={src} alt={alt} />
@@ -282,6 +292,12 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
   // Strip query strings before sniffing extension so URLs like
   // `https://blob.vercel-storage.com/hero.mp4?token=…` still detect as video.
   const ext = src.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
+
+  // On mobile the bento collapses to a single column with generous tile
+  // heights, so we want the full asset visible (object-contain). On lg+
+  // the grid sizes are intentional and we want clean fills (object-cover).
+  const fitClasses = "object-contain lg:object-cover";
+
   if (ext === "mp4" || ext === "webm" || ext === "mov") {
     return (
       <video
@@ -290,7 +306,7 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
         loop
         muted
         playsInline
-        className="absolute inset-0 h-full w-full object-cover"
+        className={`absolute inset-0 h-full w-full ${fitClasses}`}
       />
     );
   }
@@ -302,7 +318,7 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
       <img
         src={src}
         alt={alt}
-        className="absolute inset-0 h-full w-full object-cover"
+        className={`absolute inset-0 h-full w-full ${fitClasses}`}
       />
     );
   }
@@ -312,7 +328,7 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
       alt={alt}
       fill
       sizes="(min-width: 1024px) 33vw, 100vw"
-      className="object-cover"
+      className={fitClasses}
       // Skip Next.js image optimization for animated formats — re-encoding
       // would strip animation. WebP can be either, so we play it safe.
       unoptimized={ext === "gif" || ext === "webp" || ext === "apng"}
