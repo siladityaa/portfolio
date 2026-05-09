@@ -140,8 +140,9 @@ export function MinimalCaseStudy({
             {
               "--cs-bg":
                 "color-mix(in srgb, var(--surface-graphite) 4%, transparent)",
-              "--cs-bg-hover": `color-mix(in srgb, ${cs.keyColor} 22%, transparent)`,
-              "--cs-border-hover": `color-mix(in srgb, ${cs.keyColor} 60%, transparent)`,
+              // Full keyColor on hover — solid background fills the tile.
+              "--cs-bg-hover": cs.keyColor,
+              "--cs-border-hover": cs.keyColor,
               backgroundColor: "var(--cs-bg)",
             } as React.CSSProperties
           }
