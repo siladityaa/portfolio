@@ -133,12 +133,21 @@ export function MinimalCaseStudy({
         animate="visible"
         className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-7 lg:grid-rows-4"
       >
-        {/* TEXT CARD — explicitly placed at cols 1-2, rows 1-3 */}
+        {/* TEXT CARD — explicitly placed at cols 1-2, rows 1-4 (full height) */}
         <motion.div
           variants={revealBlock}
-          className="flex flex-col gap-5 overflow-y-auto rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-6 pb-10 scrollbar-none lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-5 lg:p-7 lg:pb-12"
+          style={
+            {
+              "--cs-bg":
+                "color-mix(in srgb, var(--surface-graphite) 4%, transparent)",
+              "--cs-bg-hover": `color-mix(in srgb, ${cs.keyColor} 22%, transparent)`,
+              "--cs-border-hover": `color-mix(in srgb, ${cs.keyColor} 60%, transparent)`,
+              backgroundColor: "var(--cs-bg)",
+            } as React.CSSProperties
+          }
+          className="group flex flex-col gap-5 overflow-y-auto rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] p-6 pb-10 scrollbar-none transition-colors duration-500 ease-[var(--ease-out-soft)] hover:!bg-[var(--cs-bg-hover)] hover:!border-[color:var(--cs-border-hover)] lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-5 lg:p-7 lg:pb-12"
         >
-          <h1 className="text-display-s italic leading-tight text-[color:var(--surface-ink)]">
+          <h1 className="text-display-m italic leading-tight text-[color:var(--surface-ink)]">
             {cs.title}
           </h1>
 
