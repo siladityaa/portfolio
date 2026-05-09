@@ -5,6 +5,7 @@ import { Wordmark } from "@/components/chrome/Wordmark";
 import { NavLinks } from "@/components/chrome/NavLinks";
 import { NowPlaying } from "@/components/chrome/NowPlaying";
 import { LocalClock } from "@/components/chrome/LocalClock";
+import { PageChrome } from "@/components/chrome/PageChrome";
 import { CustomCursor } from "@/components/chrome/CustomCursor";
 import { PageTransition } from "@/components/chrome/PageTransition";
 import { ConsoleEasterEgg } from "@/components/chrome/ConsoleEasterEgg";
@@ -29,6 +30,7 @@ export default function SiteLayout({
   return (
     <>
       {/* Chrome — four corners, always present on every public page. */}
+      <PageChrome />
       <Wordmark />
       <NavLinks />
       <NowPlaying />
