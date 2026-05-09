@@ -64,29 +64,47 @@ export function ImageUploadField({
 
   const handleFile = useCallback(
     async (file: File) => {
-      if (!file.type.startsWith("image/")) {
-        setUploadError("Only image files are allowed.");
+      const isImage = file.type.startsWith("image/");
+      const isVideo = file.type.startsWith("video/");
+      if (!isImage && !isVideo) {
+        setUploadError("Only image or video files are allowed.");
         return;
       }
-      // Hard cap on what we'll accept BEFORE compression. Vercel rejects
-      // any function body over 4.5MB; base64 adds ~33% overhead, so the
-      // effective ceiling for the post-compression payload is ~3MB raw.
-      // 20MB pre-compression is plenty of headroom for typical sources.
-      if (file.size > 20 * 1024 * 1024) {
-        setUploadError("File must be under 20MB.");
+      // Hard cap. Vercel rejects any function body over 4.5MB; base64 adds
+      // ~33% overhead, so even after compression the payload ceiling is
+      // ~3MB raw. Images compress; videos can't (locally), so videos
+      // larger than this need to be hosted elsewhere and pasted as a URL
+      // in the manual field below.
+      const HARD_CAP = 20 * 1024 * 1024;
+      if (file.size > HARD_CAP) {
+        setUploadError(
+          isVideo
+            ? "Video too big to upload directly (Vercel function body cap is 4.5MB). Host it elsewhere — Vercel Blob, Cloudinary, etc — and paste the URL in the field below."
+            : "File must be under 20MB.",
+        );
+        return;
+      }
+
+      // Videos can't be compressed in the browser the way images can —
+      // refuse upload if the raw file is over the body limit. The user
+      // can still paste a hosted URL into the manual field below.
+      if (isVideo && file.size > 3 * 1024 * 1024) {
+        setUploadError(
+          `Video is ${(file.size / 1024 / 1024).toFixed(1)}MB — over the 3MB direct-upload limit. Host it elsewhere (Vercel Blob, Cloudinary, etc) and paste the URL below.`,
+        );
         return;
       }
 
       setUploadError(null);
 
       try {
-        // Compress any file > ~2.5MB raw down to fit Vercel's 4.5MB body
-        // limit. Smaller files pass through unchanged so we don't lose
-        // quality on already-tiny images.
-        const willCompress = file.size > 2.5 * 1024 * 1024;
-        if (willCompress) setPhase("compressing");
-        else setPhase("uploading");
-        const compressed = await ensureUnder(file, 2.5 * 1024 * 1024);
+        // Compress images > 2.5MB so they fit under Vercel's 4.5MB body
+        // cap. Videos pass through untouched (already gated above).
+        const willCompress = isImage && file.size > 2.5 * 1024 * 1024;
+        setPhase(willCompress ? "compressing" : "uploading");
+        const prepared = isImage
+          ? await ensureUnder(file, 2.5 * 1024 * 1024)
+          : file;
         setPhase("uploading");
 
         // Read the (possibly compressed) file as base64
@@ -102,17 +120,16 @@ export function ImageUploadField({
             resolve(base64Data);
           };
           reader.onerror = () => reject(new Error("Failed to read file."));
-          reader.readAsDataURL(compressed);
+          reader.readAsDataURL(prepared);
         });
 
-        // Sanitize filename (use compressed file's name in case extension changed)
-        const sanitized = compressed.name
+        const sanitized = prepared.name
           .toLowerCase()
           .replace(/[^a-z0-9._-]/g, "-")
           .replace(/-+/g, "-");
 
         const destPath = `public/${uploadDir}/${sanitized}`;
-        const result = await uploadImage(destPath, base64, compressed.name);
+        const result = await uploadImage(destPath, base64, prepared.name);
 
         if (result.status === "ok") {
           setValue(name, result.path, {
@@ -206,6 +223,17 @@ export function ImageUploadField({
             >
               404
             </span>
+          ) : isVideoSrc(value) ? (
+            <video
+              src={value}
+              autoPlay
+              loop
+              muted
+              playsInline
+              onLoadedData={() => setLoadFailed(false)}
+              onError={() => setLoadFailed(true)}
+              className="h-[56px] w-[80px] shrink-0 rounded-md border border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] object-cover"
+            />
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -221,7 +249,7 @@ export function ImageUploadField({
             aria-hidden
             className="flex h-[56px] w-[80px] shrink-0 items-center justify-center rounded-md border border-dashed border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] text-mono-s text-[color:var(--surface-graphite)]"
           >
-            IMG
+            MEDIA
           </span>
         )}
 
@@ -245,10 +273,11 @@ export function ImageUploadField({
           {phase === "idle" && (
             <>
               <span className="text-mono-s text-[color:var(--surface-graphite)]">
-                DROP IMAGE OR CLICK TO UPLOAD
+                DROP MEDIA OR CLICK TO UPLOAD
               </span>
               <span className="text-[11px] text-[color:color-mix(in_srgb,var(--surface-graphite)_70%,transparent)]">
-                JPG, PNG, WebP, GIF — auto-compressed if &gt; 2.5MB
+                Images: JPG, PNG, WebP, GIF (auto-compressed) · Video: MP4,
+                WebM up to 3MB (or paste a hosted URL below)
               </span>
             </>
           )}
@@ -258,7 +287,7 @@ export function ImageUploadField({
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/*"
+          accept="image/*,video/mp4,video/webm,video/quicktime"
           onChange={onFileChange}
           className="hidden"
           onClick={(e) => e.stopPropagation()}
@@ -274,6 +303,11 @@ export function ImageUploadField({
         })}
         className="border border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] bg-transparent px-4 py-3 font-mono text-body text-[color:var(--surface-ink)] transition-colors duration-300 ease-[var(--ease-out-soft)] focus:border-[color:var(--surface-ink)] focus:outline-none"
       />
+      <span className="text-[11px] text-[color:color-mix(in_srgb,var(--surface-graphite)_70%,transparent)]">
+        Or paste any URL: a /work/... path for files in the repo, or an
+        external URL (Vercel Blob, Cloudinary, S3, anything served over
+        HTTPS) for files too big to commit.
+      </span>
 
       {/* Error messages */}
       {uploadError ? (
@@ -288,6 +322,12 @@ export function ImageUploadField({
       ) : null}
     </label>
   );
+}
+
+function isVideoSrc(src: string): boolean {
+  if (!src) return false;
+  const lower = src.split("?")[0].toLowerCase();
+  return /\.(mp4|webm|mov)$/.test(lower);
 }
 
 function Spinner() {

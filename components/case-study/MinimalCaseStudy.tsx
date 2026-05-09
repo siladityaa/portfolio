@@ -279,7 +279,9 @@ function BentoTile({
 }
 
 function MediaFrame({ src, alt }: { src: string; alt: string }) {
-  const ext = src.split(".").pop()?.toLowerCase() ?? "";
+  // Strip query strings before sniffing extension so URLs like
+  // `https://blob.vercel-storage.com/hero.mp4?token=…` still detect as video.
+  const ext = src.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
   if (ext === "mp4" || ext === "webm" || ext === "mov") {
     return (
       <video
@@ -288,6 +290,18 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
         loop
         muted
         playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+    );
+  }
+  // External URLs (Vercel Blob, Cloudinary, S3, etc.) bypass Next/Image
+  // since they're not in next.config's remotePatterns allowlist.
+  if (/^https?:\/\//.test(src)) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt={alt}
         className="absolute inset-0 h-full w-full object-cover"
       />
     );
