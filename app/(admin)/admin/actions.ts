@@ -38,6 +38,7 @@ import type {
 import {
   ConflictError,
   GitHubSaveError,
+  deleteFile,
   getTokenFromSession,
   makeOctokit,
   readJsonFile,
@@ -132,6 +133,133 @@ export async function saveCaseStudy(
     revalidatePath("/");
   }
   return result;
+}
+
+/* ---------- create / delete a case study ------------------------------- */
+
+const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+export async function createCaseStudy(
+  slug: string,
+  title: string,
+): Promise<SaveResult & { slug?: string }> {
+  if (!SLUG_RE.test(slug)) {
+    return {
+      status: "invalid",
+      message:
+        "Slug must be lowercase letters, numbers, and dashes only (e.g. my-new-project).",
+    };
+  }
+  if (!title.trim()) {
+    return { status: "invalid", message: "Title is required." };
+  }
+
+  const path = `content/work/${slug}.json`;
+  const stub: CaseStudy = {
+    slug,
+    title: title.trim(),
+    timeline: "",
+    role: "",
+    team: "",
+    status: "public",
+    tags: [],
+    keyColor: "#7B5BFF",
+    hero: { src: "", alt: "" },
+    brief: "",
+    gallery: [],
+  };
+  const parsed = caseStudySchema.safeParse(stub);
+  if (!parsed.success) {
+    return {
+      status: "invalid",
+      message: `Stub failed validation: ${parsed.error.issues
+        .map((i) => `${i.path.join(".")}: ${i.message}`)
+        .join("; ")}`,
+    };
+  }
+
+  try {
+    const token = await getTokenFromSession();
+    if (!token) {
+      return { status: "error", message: "Not authenticated." };
+    }
+    const octokit = makeOctokit(token);
+
+    // Refuse to overwrite an existing file — it would silently clobber a
+    // real case study.
+    const existing = await readJsonFile(octokit, path);
+    if (existing) {
+      return {
+        status: "invalid",
+        message: `A case study with slug "${slug}" already exists.`,
+      };
+    }
+
+    const { commitSha } = await writeJsonFile(
+      octokit,
+      path,
+      parsed.data,
+      `cms: create case-study — ${slug}`,
+      null,
+    );
+    revalidatePath("/admin/case-studies");
+    revalidatePath("/");
+    return { status: "ok", commitSha, slug };
+  } catch (err: unknown) {
+    if (err instanceof ConflictError) {
+      return { status: "conflict", message: err.message };
+    }
+    if (err instanceof GitHubSaveError) {
+      return { status: "error", message: err.message };
+    }
+    const message =
+      err instanceof Error ? err.message : "Unknown error creating case study.";
+    return { status: "error", message };
+  }
+}
+
+export async function deleteCaseStudy(slug: string): Promise<SaveResult> {
+  if (!SLUG_RE.test(slug)) {
+    return { status: "invalid", message: "Invalid slug." };
+  }
+  const path = `content/work/${slug}.json`;
+
+  try {
+    const token = await getTokenFromSession();
+    if (!token) {
+      return { status: "error", message: "Not authenticated." };
+    }
+    const octokit = makeOctokit(token);
+
+    const existing = await readJsonFile(octokit, path);
+    if (!existing?.sha) {
+      return {
+        status: "invalid",
+        message: `No case study found at ${path}.`,
+      };
+    }
+
+    const { commitSha } = await deleteFile(
+      octokit,
+      path,
+      `cms: delete case-study — ${slug}`,
+      existing.sha,
+    );
+    revalidatePath("/admin/case-studies");
+    revalidatePath("/");
+    revalidatePath(`/work/${slug}`);
+    return { status: "ok", commitSha };
+  } catch (err: unknown) {
+    if (err instanceof ConflictError) {
+      return { status: "conflict", message: err.message };
+    }
+    if (err instanceof GitHubSaveError) {
+      return { status: "error", message: err.message };
+    }
+    const message =
+      err instanceof Error ? err.message : "Unknown error deleting case study.";
+    return { status: "error", message };
+  }
 }
 
 /* ---------- home ------------------------------------------------------- */

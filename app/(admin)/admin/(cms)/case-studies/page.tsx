@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { loadAllCaseStudies } from "@/lib/content";
+import { NewCaseStudyForm } from "@/components/admin/NewCaseStudyForm";
 
 /**
  * List view for the case-studies collection. Reads all .json files from
@@ -20,10 +21,14 @@ export default async function CaseStudiesIndex() {
       </h1>
       <p className="mt-6 max-w-[55ch] text-body text-[color:var(--surface-graphite)]">
         {studies.length} {studies.length === 1 ? "case study" : "case studies"}
-        . Click any row to edit its chapters and sections.
+        . Click any row to edit, or add a new one below.
       </p>
 
-      <ul className="mt-16 flex flex-col">
+      <div className="mt-10">
+        <NewCaseStudyForm />
+      </div>
+
+      <ul className="mt-12 flex flex-col">
         {studies.map((cs, i) => (
           <li key={cs.slug}>
             <Link

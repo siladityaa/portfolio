@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { loadAllCaseStudies, loadCaseStudy } from "@/lib/content";
 import { CaseStudyForm } from "@/components/admin/forms/CaseStudyForm";
+import { DeleteCaseStudyButton } from "@/components/admin/DeleteCaseStudyButton";
 
 export async function generateStaticParams() {
   const all = await loadAllCaseStudies();
@@ -10,11 +11,8 @@ export async function generateStaticParams() {
 }
 
 /**
- * Case study editor — Step 3. The full chapter-based form with the
- * 10-section discriminated union, nested useFieldArrays, and the
- * accordion section editor.
- *
- * Save flow lands in Step 4. Auth in Step 6.
+ * Case study editor — frontmatter, hero, brief, bento gallery + danger
+ * zone for permanently deleting the case study from the repo.
  */
 export default async function CaseStudyEditPage({
   params,
@@ -37,13 +35,25 @@ export default async function CaseStudyEditPage({
         {cs.title}
       </h1>
       <p className="mt-4 max-w-[55ch] text-body text-[color:var(--surface-graphite)]">
-        Edit chapters and sections below. Up/down buttons reorder.
-        Add a new chapter or section from the buttons in their headers.
+        Edit the frontmatter, hero asset, brief, and bento gallery for this
+        case study. Save commits to the repo and the public site rebuilds.
       </p>
 
       <div className="mt-16">
         <CaseStudyForm defaultValues={cs} />
       </div>
+
+      {/* Danger zone */}
+      <section className="mt-20 flex flex-col gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] pt-10">
+        <h2 className="text-display-s italic text-[color:var(--surface-signal)]">
+          Danger zone
+        </h2>
+        <p className="max-w-[55ch] text-body text-[color:var(--surface-graphite)]">
+          Permanently remove this case study from the repo. The public page
+          (/work/{slug}) disappears on the next build.
+        </p>
+        <DeleteCaseStudyButton slug={cs.slug} title={cs.title} />
+      </section>
     </div>
   );
 }

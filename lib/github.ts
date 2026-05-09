@@ -201,6 +201,41 @@ export async function writeBinaryFile(
 }
 
 /**
+ * Delete a file from the repo. Requires the current `sha` so we don't
+ * race against another writer.
+ */
+export async function deleteFile(
+  octokit: Octokit,
+  path: string,
+  message: string,
+  currentSha: string,
+): Promise<{ commitSha: string | undefined }> {
+  const { owner, repo, branch } = getRepoCoordinates();
+  try {
+    const res = await octokit.repos.deleteFile({
+      owner,
+      repo,
+      path,
+      branch,
+      message,
+      sha: currentSha,
+    });
+    return { commitSha: res.data.commit.sha };
+  } catch (err: unknown) {
+    const status =
+      typeof err === "object" && err !== null && "status" in err
+        ? (err as { status: number }).status
+        : undefined;
+    if (status === 409 || status === 422) {
+      throw new ConflictError(
+        `The file ${path} changed on GitHub since you opened the editor.`,
+      );
+    }
+    throw new GitHubSaveError(`Failed to delete ${path} from GitHub.`, err);
+  }
+}
+
+/**
  * Reads the OAuth access token from the encrypted session cookie set by the
  * `/api/auth/callback` route. This is the production path — the token was
  * minted by GitHub after the allow-listed user signed in, so a present
