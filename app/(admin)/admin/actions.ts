@@ -431,6 +431,9 @@ export async function uploadImage(
 
     return { status: "ok", path: publicPath, commitSha };
   } catch (err: unknown) {
+    // Log the real error server-side so the cause shows up in Vercel's
+    // function logs. The client only sees a sanitized message string.
+    console.error("uploadImage failed:", err);
     const message =
       err instanceof Error ? err.message : "Unknown error uploading image.";
     return { status: "error", message };
