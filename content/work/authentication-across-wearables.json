@@ -1,15 +1,19 @@
 {
   "slug": "authentication-across-wearables",
   "title": "Authentication across wearables",
-  "timeline": "",
+  "timeline": "2025 - Present",
   "role": "",
   "team": "",
+  "credits": "",
   "status": "public",
-  "tags": [],
-  "keyColor": "#7B5BFF",
+  "tags": [
+    "wearables"
+  ],
+  "keyColor": "#32746D",
   "hero": {
     "src": "",
-    "alt": ""
+    "alt": "",
+    "caption": ""
   },
   "brief": "",
   "gallery": []
