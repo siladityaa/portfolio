@@ -1,3 +1,6 @@
 {
-  "order": []
+  "order": [
+    "meta-ai-wearables",
+    "meta-accounts-for-wearables"
+  ]
 }
