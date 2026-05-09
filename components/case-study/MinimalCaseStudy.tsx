@@ -135,19 +135,19 @@ export function MinimalCaseStudy({
         {/* TEXT CARD — explicitly placed at cols 1-2, rows 1-3 */}
         <motion.div
           variants={revealBlock}
-          className="flex flex-col gap-5 overflow-hidden rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-6 pb-10 lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-4 lg:p-7 lg:pb-12"
+          className="flex flex-col gap-5 overflow-y-auto rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-6 pb-10 scrollbar-none lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-4 lg:p-7 lg:pb-12"
         >
-          <h1 className="text-display-m italic leading-tight text-[color:var(--surface-ink)]">
+          <h1 className="text-display-s italic leading-tight text-[color:var(--surface-ink)]">
             {cs.title}
           </h1>
 
           {brief && (
-            <p className="text-body text-[color:var(--surface-graphite)]">
+            <p className="line-clamp-5 text-body text-[color:var(--surface-graphite)]">
               {brief}
             </p>
           )}
 
-          <dl className="mt-auto flex flex-col gap-3 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-5 text-mono-s">
+          <dl className="mt-auto flex flex-col gap-2 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-4 text-mono-s">
             <Row label="Role" value={cs.role} />
             {cs.team && <Row label="Team" value={cs.team} />}
             {cs.credits && <Row label="Partners" value={cs.credits} />}
