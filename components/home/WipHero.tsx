@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { MetaSymbol } from "@/components/chrome/MetaSymbol";
 
 /**
  * WIP landing page — interactive playground while the portfolio is being built.
@@ -71,7 +72,7 @@ export function WipHero() {
               className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)]"
             >
               Designing intelligence that whispers, not interrupts. Currently
-              at Meta.
+              at <MetaSymbol />.
             </motion.h1>
 
             {/* Subline */}
