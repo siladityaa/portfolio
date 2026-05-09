@@ -1,8 +1,10 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { easeOutSoft, revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { MetaSymbol } from "@/components/chrome/MetaSymbol";
 
 interface HeroProps {
   sentence: string;
@@ -18,7 +20,9 @@ interface HeroProps {
  *
  * Copy is passed in from a server component that reads `content/home.json`
  * via `lib/content-home.ts` — keeps this client component pure and the
- * content CMS-editable.
+ * content CMS-editable. The string `{meta}` in the sentence is replaced
+ * inline with the animated Meta infinity symbol (linked to Meta's AI
+ * Glasses page) so the JSON stays plain text and editable.
  */
 export function Hero({ sentence, subline }: HeroProps) {
   const reducedMotion = useReducedMotion();
@@ -39,7 +43,7 @@ export function Hero({ sentence, subline }: HeroProps) {
             variants={revealBlock}
             className="max-w-[26ch] text-display-xl italic text-[color:var(--surface-ink)]"
           >
-            {sentence}
+            {renderSentence(sentence)}
           </motion.h1>
 
           <motion.p
@@ -67,4 +71,29 @@ export function Hero({ sentence, subline }: HeroProps) {
       </motion.span>
     </section>
   );
+}
+
+/**
+ * Splits the headline on `{meta}` and renders the animated, linked Meta
+ * symbol in place of each occurrence.
+ */
+function renderSentence(sentence: string) {
+  const parts = sentence.split("{meta}");
+  return parts.map((chunk, i) => (
+    <Fragment key={i}>
+      {chunk}
+      {i < parts.length - 1 && (
+        <a
+          href="https://www.meta.com/ai-glasses/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Meta AI Glasses"
+          data-cursor="open"
+          className="inline-block transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-70"
+        >
+          <MetaSymbol />
+        </a>
+      )}
+    </Fragment>
+  ));
 }
