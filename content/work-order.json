@@ -1,5 +1,6 @@
 {
   "order": [
+    "authentication-across-wearables",
     "meta-ai-wearables",
     "meta-accounts-for-wearables"
   ]
