@@ -39,7 +39,9 @@ export function ImageUploadField({
   } = useFormContext();
   const value = useWatch({ control, name });
   const [loadFailed, setLoadFailed] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [phase, setPhase] = useState<
+    "idle" | "compressing" | "uploading" | "success"
+  >("idle");
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -75,14 +77,17 @@ export function ImageUploadField({
         return;
       }
 
-      setUploading(true);
       setUploadError(null);
 
       try {
         // Compress any file > ~2.5MB raw down to fit Vercel's 4.5MB body
         // limit. Smaller files pass through unchanged so we don't lose
         // quality on already-tiny images.
+        const willCompress = file.size > 2.5 * 1024 * 1024;
+        if (willCompress) setPhase("compressing");
+        else setPhase("uploading");
         const compressed = await ensureUnder(file, 2.5 * 1024 * 1024);
+        setPhase("uploading");
 
         // Read the (possibly compressed) file as base64
         const base64 = await new Promise<string>((resolve, reject) => {
@@ -115,19 +120,24 @@ export function ImageUploadField({
             shouldValidate: true,
           });
           setLoadFailed(false);
+          setPhase("success");
+          // Linger on the success state briefly, then return to idle.
+          setTimeout(() => setPhase("idle"), 1800);
         } else {
           setUploadError(result.message);
+          setPhase("idle");
         }
       } catch (err) {
         setUploadError(
           err instanceof Error ? err.message : "Upload failed.",
         );
-      } finally {
-        setUploading(false);
+        setPhase("idle");
       }
     },
     [name, uploadDir, setValue],
   );
+
+  const uploading = phase === "compressing" || phase === "uploading";
 
   const onDrop = useCallback(
     (e: React.DragEvent) => {
@@ -163,16 +173,28 @@ export function ImageUploadField({
       {/* Drop zone + preview */}
       <div
         onDragOver={(e) => {
+          if (uploading) return;
           e.preventDefault();
           setDragOver(true);
         }}
         onDragLeave={() => setDragOver(false)}
-        onDrop={onDrop}
-        onClick={() => fileInputRef.current?.click()}
-        className={`flex cursor-pointer items-center gap-4 rounded-lg border-2 border-dashed p-4 transition-colors duration-200 ${
-          dragOver
-            ? "border-[color:var(--surface-signal)] bg-[color:color-mix(in_srgb,var(--surface-signal)_5%,transparent)]"
-            : "border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] hover:border-[color:var(--surface-graphite)]"
+        onDrop={uploading ? undefined : onDrop}
+        onClick={() => {
+          if (uploading) return;
+          fileInputRef.current?.click();
+        }}
+        className={`flex items-center gap-4 rounded-lg border-2 border-dashed p-4 transition-colors duration-200 ${
+          uploading
+            ? "cursor-progress border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)]"
+            : "cursor-pointer"
+        } ${
+          phase === "success"
+            ? "border-[color:#22a560] bg-[color:color-mix(in_srgb,#22a560_8%,transparent)]"
+            : dragOver
+              ? "border-[color:var(--surface-signal)] bg-[color:color-mix(in_srgb,var(--surface-signal)_5%,transparent)]"
+              : !uploading
+                ? "border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] hover:border-[color:var(--surface-graphite)]"
+                : ""
         }`}
       >
         {/* Thumbnail */}
@@ -205,11 +227,22 @@ export function ImageUploadField({
 
         {/* Upload status / prompt */}
         <div className="flex flex-1 flex-col gap-1">
-          {uploading ? (
-            <span className="text-mono-s text-[color:var(--surface-graphite)]">
-              UPLOADING...
+          {phase === "compressing" && (
+            <span className="flex items-center gap-2 text-mono-s text-[color:var(--surface-ink)]">
+              <Spinner /> COMPRESSING IMAGE…
             </span>
-          ) : (
+          )}
+          {phase === "uploading" && (
+            <span className="flex items-center gap-2 text-mono-s text-[color:var(--surface-ink)]">
+              <Spinner /> UPLOADING TO GITHUB…
+            </span>
+          )}
+          {phase === "success" && (
+            <span className="flex items-center gap-2 text-mono-s text-[color:#22a560]">
+              <CheckIcon /> UPLOADED
+            </span>
+          )}
+          {phase === "idle" && (
             <>
               <span className="text-mono-s text-[color:var(--surface-graphite)]">
                 DROP IMAGE OR CLICK TO UPLOAD
@@ -254,6 +287,41 @@ export function ImageUploadField({
         </span>
       ) : null}
     </label>
+  );
+}
+
+function Spinner() {
+  return (
+    <svg
+      className="h-3 w-3 animate-spin"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <circle cx="8" cy="8" r="6" opacity="0.25" />
+      <path d="M14 8 a6 6 0 0 0 -6 -6" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M3 8.5 L6.5 12 L13 4.5" />
+    </svg>
   );
 }
 

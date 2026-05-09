@@ -24,6 +24,7 @@ import {
   makeOctokit,
   readJsonFile,
 } from "@/lib/github";
+import { applyWorkOrder } from "@/lib/work-order";
 
 export async function loadAllCaseStudiesAdmin(): Promise<CaseStudy[]> {
   const token = await getTokenFromSession();
@@ -42,9 +43,21 @@ export async function loadAllCaseStudiesAdmin(): Promise<CaseStudy[]> {
     }),
   );
 
-  return studies
-    .filter((cs): cs is CaseStudy => cs !== null)
-    .sort((a, b) => extractEndYear(b.timeline) - extractEndYear(a.timeline));
+  // Pull the live order from GitHub so the admin reflects the current
+  // committed state (not the deployed bundle).
+  const orderFile = await readJsonFile<{ order?: string[] }>(
+    octokit,
+    "content/work-order.json",
+  );
+  const order = Array.isArray(orderFile?.data?.order)
+    ? orderFile!.data.order!
+    : [];
+
+  return applyWorkOrder(
+    studies.filter((cs): cs is CaseStudy => cs !== null),
+    order,
+    (a, b) => extractEndYear(b.timeline) - extractEndYear(a.timeline),
+  );
 }
 
 export async function loadCaseStudyAdmin(

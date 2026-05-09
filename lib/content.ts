@@ -3,6 +3,7 @@ import path from "node:path";
 
 import { caseStudySchema } from "@/content/schemas";
 import type { CaseStudy } from "@/content/types";
+import { applyWorkOrder, readWorkOrder } from "@/lib/work-order";
 
 const WORK_DIR = path.join(process.cwd(), "content", "work");
 
@@ -38,12 +39,14 @@ export async function loadAllCaseStudies(): Promise<CaseStudy[]> {
     }),
   );
 
-  // Sort: most recent first, by timeline end year if parseable.
-  return studies.sort((a, b) => {
-    const aYear = extractEndYear(a.timeline);
-    const bYear = extractEndYear(b.timeline);
-    return bYear - aYear;
-  });
+  // Sort: explicit work order first, then by timeline end year for
+  // anything not in the order list.
+  const order = await readWorkOrder();
+  return applyWorkOrder(
+    studies,
+    order,
+    (a, b) => extractEndYear(b.timeline) - extractEndYear(a.timeline),
+  );
 }
 
 export async function loadCaseStudy(slug: string): Promise<CaseStudy | null> {

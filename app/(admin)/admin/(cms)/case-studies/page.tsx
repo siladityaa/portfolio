@@ -1,19 +1,23 @@
-import Link from "next/link";
-
 import { loadAllCaseStudiesAdmin } from "@/lib/content-admin";
 import { NewCaseStudyForm } from "@/components/admin/NewCaseStudyForm";
+import {
+  CaseStudyReorderList,
+  type CaseStudyRow,
+} from "@/components/admin/CaseStudyReorderList";
 
 // Always render fresh from GitHub — never cache so deletes/creates show
 // up immediately in the admin list.
 export const dynamic = "force-dynamic";
 
-/**
- * List view for the case-studies collection. Reads all .json files from
- * `content/work/`, shows each as a row with title, status, tag chips, and
- * a link to its edit page.
- */
 export default async function CaseStudiesIndex() {
   const studies = await loadAllCaseStudiesAdmin();
+  const rows: CaseStudyRow[] = studies.map((cs) => ({
+    slug: cs.slug,
+    title: cs.title,
+    timeline: cs.timeline,
+    galleryCount: cs.gallery?.length ?? 0,
+    tags: cs.tags ?? [],
+  }));
 
   return (
     <div className="mx-auto max-w-[920px] px-[clamp(24px,4vw,64px)] py-[clamp(80px,12vh,160px)]">
@@ -25,51 +29,17 @@ export default async function CaseStudiesIndex() {
       </h1>
       <p className="mt-6 max-w-[55ch] text-body text-[color:var(--surface-graphite)]">
         {studies.length} {studies.length === 1 ? "case study" : "case studies"}
-        . Click any row to edit, or add a new one below.
+        . Click any row to edit, reorder with the arrows, or add a new one
+        below.
       </p>
 
       <div className="mt-10">
         <NewCaseStudyForm />
       </div>
 
-      <ul className="mt-12 flex flex-col">
-        {studies.map((cs, i) => (
-          <li key={cs.slug}>
-            <Link
-              href={`/admin/case-studies/${cs.slug}`}
-              className="group grid grid-cols-12 gap-6 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] py-8 transition-colors duration-500 ease-[var(--ease-out-soft)] last:border-b hover:bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)]"
-            >
-              <span className="col-span-1 text-mono-s text-[color:var(--surface-graphite)]">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="col-span-7">
-                <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
-                  {cs.title}
-                </h2>
-                <div className="mt-2 flex flex-wrap items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
-                  <span>{cs.timeline}</span>
-                  <span>·</span>
-                  <span>
-                    {cs.gallery?.length ?? 0} bento tile
-                    {(cs.gallery?.length ?? 0) === 1 ? "" : "s"}
-                  </span>
-                  {cs.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_40%,transparent)] px-2 py-0.5"
-                    >
-                      {tag.toUpperCase()}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <span className="col-span-4 self-start text-right text-mono-s text-[color:var(--surface-graphite)]">
-                PUBLIC
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="mt-12">
+        <CaseStudyReorderList rows={rows} />
+      </div>
     </div>
   );
 }

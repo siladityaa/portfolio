@@ -262,6 +262,46 @@ export async function deleteCaseStudy(slug: string): Promise<SaveResult> {
   }
 }
 
+/* ---------- reorder case studies --------------------------------------- */
+
+export async function reorderCaseStudies(
+  slugs: string[],
+): Promise<SaveResult> {
+  if (!Array.isArray(slugs) || slugs.some((s) => typeof s !== "string")) {
+    return { status: "invalid", message: "Order must be an array of slugs." };
+  }
+
+  try {
+    const token = await getTokenFromSession();
+    if (!token) {
+      return { status: "error", message: "Not authenticated." };
+    }
+    const octokit = makeOctokit(token);
+    const path = "content/work-order.json";
+    const existing = await readJsonFile(octokit, path);
+    const { commitSha } = await writeJsonFile(
+      octokit,
+      path,
+      { order: slugs },
+      "cms: reorder case studies",
+      existing?.sha ?? null,
+    );
+    revalidatePath("/admin/case-studies");
+    revalidatePath("/");
+    return { status: "ok", commitSha };
+  } catch (err: unknown) {
+    if (err instanceof ConflictError) {
+      return { status: "conflict", message: err.message };
+    }
+    if (err instanceof GitHubSaveError) {
+      return { status: "error", message: err.message };
+    }
+    const message =
+      err instanceof Error ? err.message : "Unknown error reordering.";
+    return { status: "error", message };
+  }
+}
+
 /* ---------- home ------------------------------------------------------- */
 
 export async function saveHome(payload: unknown): Promise<SaveResult> {
