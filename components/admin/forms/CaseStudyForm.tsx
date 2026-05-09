@@ -80,7 +80,8 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
               <TextField
                 name="slug"
                 label="SLUG"
-                description="URL slug — also the JSON filename. Avoid changing this on existing case studies."
+                readOnly
+                description="URL slug — also the JSON filename. Locked once the case study exists; to rename, delete it from the danger zone below and create a new one."
               />
             </div>
             <div className="col-span-6">

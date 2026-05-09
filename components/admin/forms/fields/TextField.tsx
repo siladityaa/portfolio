@@ -8,6 +8,8 @@ interface TextFieldProps {
   placeholder?: string;
   description?: string;
   type?: "text" | "url" | "email";
+  /** Render the input as read-only. Still submits its value, just can't be edited. */
+  readOnly?: boolean;
 }
 
 /**
@@ -20,6 +22,7 @@ export function TextField({
   placeholder,
   description,
   type = "text",
+  readOnly = false,
 }: TextFieldProps) {
   const {
     register,
@@ -54,8 +57,13 @@ export function TextField({
       <input
         type={type}
         placeholder={placeholder}
+        readOnly={readOnly}
         {...register(name)}
-        className="w-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] bg-transparent px-4 py-3 text-body text-[color:var(--surface-ink)] transition-colors duration-300 ease-[var(--ease-out-soft)] focus:border-[color:var(--surface-ink)] focus:outline-none"
+        className={`w-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] bg-transparent px-4 py-3 text-body text-[color:var(--surface-ink)] transition-colors duration-300 ease-[var(--ease-out-soft)] focus:border-[color:var(--surface-ink)] focus:outline-none ${
+          readOnly
+            ? "cursor-not-allowed bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)] opacity-70"
+            : ""
+        }`}
       />
       {errorMessage ? (
         <span className="text-mono-s text-[color:var(--surface-signal)]">
