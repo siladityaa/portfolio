@@ -68,7 +68,7 @@ export function WipHero() {
             {/* Headline */}
             <motion.h1
               variants={revealBlock}
-              className="max-w-[22ch] text-display-l italic text-[color:var(--surface-ink)]"
+              className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)]"
             >
               Product designer — currently focused on wearables and AI at Meta.
             </motion.h1>
