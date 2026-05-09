@@ -142,12 +142,12 @@ export function MinimalCaseStudy({
           </h1>
 
           {brief && (
-            <p className="line-clamp-5 text-body text-[color:var(--surface-graphite)]">
+            <p className="text-body text-[color:var(--surface-graphite)]">
               {brief}
             </p>
           )}
 
-          <dl className="mt-auto flex flex-col gap-2 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-4 text-mono-s">
+          <dl className="flex flex-col gap-2 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-4 text-mono-s">
             <Row label="Role" value={cs.role} />
             {cs.team && <Row label="Team" value={cs.team} />}
             {cs.credits && <Row label="Partners" value={cs.credits} />}
