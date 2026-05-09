@@ -404,9 +404,19 @@ export async function uploadImage(
   base64: string,
   filename: string,
 ): Promise<UploadResult> {
+  console.info(
+    `uploadImage start: path="${destPath}" filename="${filename}" base64_len=${base64?.length ?? 0}`,
+  );
   try {
     if (!destPath.startsWith("public/")) {
+      console.warn("uploadImage rejected: bad path", destPath);
       return { status: "error", message: "Image path must start with public/" };
+    }
+    if (!base64 || typeof base64 !== "string") {
+      return {
+        status: "error",
+        message: "Empty file content. Please pick a file and try again.",
+      };
     }
 
     const token = await getTokenFromSession();
@@ -429,6 +439,7 @@ export async function uploadImage(
     // "public/work/slug/image.jpg" → "/work/slug/image.jpg"
     const publicPath = destPath.replace(/^public/, "");
 
+    console.info(`uploadImage ok: path="${publicPath}" commit=${commitSha}`);
     return { status: "ok", path: publicPath, commitSha };
   } catch (err: unknown) {
     // Log the real error server-side so the cause shows up in Vercel's
