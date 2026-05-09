@@ -12,6 +12,9 @@ export interface ProjectRowData {
   slug: string;
   status: "public";
   keyColor: string;
+  /** Hero asset that previews on row hover. Image or video src. */
+  heroSrc?: string;
+  heroAlt?: string;
 }
 
 interface ProjectListProps {
@@ -95,11 +98,10 @@ export function ProjectRowList({ rows }: ProjectListProps) {
                 >
                   {row.title}
                 </h3>
-                {/* Still-image slot — intentional placeholder block.
-                    Phase 4 drops real imagery here. */}
+                {/* Hero preview — fades + slides in on hover. */}
                 <div
                   className={clsx(
-                    "hidden h-[180px] w-[260px] shrink-0 transition-all duration-500 ease-[var(--ease-out-soft)] md:block",
+                    "hidden h-[180px] w-[260px] shrink-0 overflow-hidden rounded-[2px] transition-all duration-500 ease-[var(--ease-out-soft)] md:block",
                     isHovered
                       ? "translate-x-0 opacity-100"
                       : "translate-x-6 opacity-0",
@@ -109,12 +111,64 @@ export function ProjectRowList({ rows }: ProjectListProps) {
                       "color-mix(in srgb, #f6f5f1 15%, transparent)",
                   }}
                   aria-hidden
-                />
+                >
+                  {row.heroSrc ? (
+                    <HeroPreview
+                      src={row.heroSrc}
+                      alt={row.heroAlt ?? row.title}
+                      active={isHovered}
+                    />
+                  ) : null}
+                </div>
               </Link>
             </div>
           </li>
         );
       })}
     </ul>
+  );
+}
+
+/**
+ * Hover-preview cell. Detects video files (.mp4/.webm/.mov) and renders
+ * them as a muted autoplay loop; everything else renders as a static
+ * <img>. We use a plain <img> rather than next/image because external
+ * URLs (Vercel Blob, Cloudinary, etc.) aren't in the next.config
+ * remotePatterns allowlist, and the local repo paths don't need
+ * optimization for a 260×180 thumb.
+ */
+function HeroPreview({
+  src,
+  alt,
+  active,
+}: {
+  src: string;
+  alt: string;
+  active: boolean;
+}) {
+  const ext = src.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
+  const isVideo = ext === "mp4" || ext === "webm" || ext === "mov";
+
+  if (isVideo) {
+    return (
+      <video
+        src={src}
+        autoPlay={active}
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        className="h-full w-full object-cover"
+      />
+    );
+  }
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      className="h-full w-full object-cover"
+      loading="lazy"
+    />
   );
 }

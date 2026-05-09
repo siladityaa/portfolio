@@ -30,6 +30,8 @@ export async function SelectedWork() {
     slug: cs.slug,
     status: cs.status,
     keyColor: cs.keyColor,
+    heroSrc: cs.hero?.src ?? "",
+    heroAlt: cs.hero?.alt ?? cs.title,
   }));
 
   return (
