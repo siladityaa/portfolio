@@ -1,15 +1,19 @@
 {
   "slug": "meta-accounts-for-wearables",
   "title": "Meta Accounts for Wearables",
-  "timeline": "",
+  "timeline": "2023 - 2024",
   "role": "",
   "team": "",
+  "credits": "",
   "status": "public",
-  "tags": [],
-  "keyColor": "#7B5BFF",
+  "tags": [
+    "wearables"
+  ],
+  "keyColor": "#d76a03",
   "hero": {
     "src": "",
-    "alt": ""
+    "alt": "",
+    "caption": ""
   },
   "brief": "",
   "gallery": []
