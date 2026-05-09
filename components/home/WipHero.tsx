@@ -70,7 +70,8 @@ export function WipHero() {
               variants={revealBlock}
               className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)]"
             >
-              Product designer — currently focused on wearables and AI at Meta.
+              Designing intelligence that whispers, not interrupts. Currently
+              at Meta.
             </motion.h1>
 
             {/* Subline */}
