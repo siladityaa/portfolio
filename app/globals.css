@@ -135,13 +135,17 @@ html.dark {
     }
   }
 
-  /* Type scale, per brief §2.2 */
+  /* Type scale, per brief §2.2.
+     `text-wrap: balance` on display sizes distributes lines evenly and
+     prevents single-word widows on multi-line headlines. `pretty` on
+     body text only prevents widows without forcing equal-length lines. */
   .text-display-xl {
     font-family: var(--font-display);
     font-size: clamp(3.25rem, 8vw, 6.5rem);
     line-height: 1.02;
     letter-spacing: -0.04em;
     font-weight: 400;
+    text-wrap: balance;
   }
   .text-display-l {
     font-family: var(--font-display);
@@ -149,6 +153,7 @@ html.dark {
     line-height: 1.05;
     letter-spacing: -0.03em;
     font-weight: 400;
+    text-wrap: balance;
   }
   .text-display-m {
     font-family: var(--font-display);
@@ -156,17 +161,20 @@ html.dark {
     line-height: 1.1;
     letter-spacing: -0.02em;
     font-weight: 400;
+    text-wrap: balance;
   }
   .text-display-s {
     font-family: var(--font-display);
     font-size: 1.75rem;
     line-height: 1.2;
     font-weight: 400;
+    text-wrap: balance;
   }
   .text-body {
     font-family: var(--font-display);
     font-size: 1.0625rem;
     line-height: 1.55;
+    text-wrap: pretty;
   }
   .text-mono-m {
     font-family: var(--font-mono);
