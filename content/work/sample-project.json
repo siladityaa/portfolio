@@ -20,7 +20,19 @@
   "gallery": [
     {
       "src": "/work/sample-project/02.jpg",
-      "alt": "Sample project asset"
+      "alt": "Detail 1"
+    },
+    {
+      "src": "/work/sample-project/03.jpg",
+      "alt": "Detail 2"
+    },
+    {
+      "src": "/work/sample-project/04.jpg",
+      "alt": "Detail 3"
+    },
+    {
+      "src": "/work/sample-project/05.jpg",
+      "alt": "Detail 4"
     }
   ],
   "chapters": [

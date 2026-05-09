@@ -20,13 +20,23 @@
   "gallery": [
     {
       "src": "/work/ambient-ai/02.jpg",
-      "alt": "Ambient AI prototype",
-      "caption": "Prototype frame"
+      "alt": "Detail 1"
     },
     {
       "src": "/work/ambient-ai/03.jpg",
-      "alt": "Wearable in context",
-      "caption": "In-context exploration"
+      "alt": "Detail 2"
+    },
+    {
+      "src": "/work/ambient-ai/04.jpg",
+      "alt": "Detail 3"
+    },
+    {
+      "src": "/work/ambient-ai/05.jpg",
+      "alt": "Detail 4"
+    },
+    {
+      "src": "/work/ambient-ai/06.jpg",
+      "alt": "Detail 5"
     }
   ],
   "chapters": [

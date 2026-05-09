@@ -19,7 +19,19 @@
   "gallery": [
     {
       "src": "/work/field-notes/02.jpg",
-      "alt": "Field notes exploration"
+      "alt": "Detail 1"
+    },
+    {
+      "src": "/work/field-notes/03.jpg",
+      "alt": "Detail 2"
+    },
+    {
+      "src": "/work/field-notes/04.jpg",
+      "alt": "Detail 3"
+    },
+    {
+      "src": "/work/field-notes/05.jpg",
+      "alt": "Detail 4"
     }
   ],
   "chapters": [

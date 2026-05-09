@@ -18,7 +18,19 @@
   "gallery": [
     {
       "src": "/work/tactile-cli/02.jpg",
-      "alt": "Tactile CLI exploration"
+      "alt": "Detail 1"
+    },
+    {
+      "src": "/work/tactile-cli/03.jpg",
+      "alt": "Detail 2"
+    },
+    {
+      "src": "/work/tactile-cli/04.jpg",
+      "alt": "Detail 3"
+    },
+    {
+      "src": "/work/tactile-cli/05.jpg",
+      "alt": "Detail 4"
     }
   ],
   "chapters": [

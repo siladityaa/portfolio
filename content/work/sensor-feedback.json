@@ -19,7 +19,19 @@
   "gallery": [
     {
       "src": "/work/sensor-feedback/02.jpg",
-      "alt": "Sensor feedback exploration"
+      "alt": "Detail 1"
+    },
+    {
+      "src": "/work/sensor-feedback/03.jpg",
+      "alt": "Detail 2"
+    },
+    {
+      "src": "/work/sensor-feedback/04.jpg",
+      "alt": "Detail 3"
+    },
+    {
+      "src": "/work/sensor-feedback/05.jpg",
+      "alt": "Detail 4"
     }
   ],
   "chapters": [

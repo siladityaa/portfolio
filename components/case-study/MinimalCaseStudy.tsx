@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
 import type { CaseStudy } from "@/content/types";
@@ -17,20 +16,26 @@ interface MinimalCaseStudyProps {
 }
 
 /**
- * Minimal single-viewport case study layout.
+ * Bento case study — every block (text, main asset, supporting assets)
+ * lives inside the same grid. The text card and the hero are the two
+ * largest tiles, the rest fill in around them.
  *
- * Brief from Siladityaa: "very minimal and clean ... single page single
- * viewport no scrolling view ... simple description, my role and other
- * key info ... simple way to show design assets and gifs/videos."
+ *   ┌────────┬─────────────────┬───────────┐
+ *   │  TEXT  │                 │   s2      │
+ *   │  CARD  │                 │   (2x2)   │
+ *   │  (2x3) │   MAIN ASSET    │           │
+ *   │        │   (3x4 — the    ├─────┬─────┤
+ *   │        │    tallest +    │     │ s4  │
+ *   ├────────┤    biggest)     │ s3  ├─────┤
+ *   │  s1    │                 │ 1x2 │ s5  │
+ *   │  (2x1) │                 │     │     │
+ *   └────────┴─────────────────┴─────┴─────┘
  *
- * The page collapses everything a hiring manager actually needs into one
- * frame: title, year, role, team, status, brief, tags, plus a featured
- * media well with a thumbnail strip below it. Click a thumbnail to swap
- * the featured asset. Top strip shows the project counter + back link.
- * Bottom strip handles prev/next navigation.
+ * 7-column grid balances visual weight: hero claims the centre 3 cols
+ * (43%), text + s1 claim the left 2 cols (29%), and the right 2 cols
+ * (29%) host four supporting tiles in mixed portrait/square shapes.
  *
- * Below the lg breakpoint the layout stacks vertically and allows scroll;
- * at lg+ it's a strict 2-column grid sized to the available viewport.
+ * Single viewport at lg+, stacks vertically below.
  */
 export function MinimalCaseStudy({
   cs,
@@ -39,194 +44,173 @@ export function MinimalCaseStudy({
   prevSlug,
   nextSlug,
 }: MinimalCaseStudyProps) {
-  // Pull every image we can find — hero + imageGrid + mockupFrame +
-  // beforeAfter — into a single flat gallery for the thumbnail strip.
-  const media = useMemo(() => collectMedia(cs), [cs]);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const active = media[activeIndex];
-
-  // Brief: drop the leading "TODO(siladityaa) — " marker if it's still
-  // there so placeholder text doesn't bleed into the public layout.
   const brief = (cs.brief ?? "").replace(/^TODO\(.*?\)\s*[—–-]?\s*/i, "");
+  const counter = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+  const bento = (cs.gallery ?? []).slice(0, 5);
 
   return (
     <section
-      className="relative mx-auto flex w-full max-w-[1480px] flex-col px-[clamp(20px,4vw,64px)] pt-[clamp(96px,12vw,140px)] pb-[clamp(72px,9vw,108px)] lg:h-[100dvh] lg:overflow-hidden"
       data-cursor="default"
+      className="relative mx-auto flex w-full max-w-[1640px] flex-col px-[clamp(20px,3vw,48px)] pt-[clamp(120px,15vw,180px)] pb-[clamp(72px,9vw,104px)] lg:h-[100dvh] lg:overflow-hidden"
     >
-      {/* Top meta strip */}
+      {/* Top mono strip */}
       <motion.div
         variants={revealStaggerBlocks}
         initial="hidden"
         animate="visible"
-        className="flex items-center justify-between gap-6 pb-6 lg:pb-8"
+        className="flex shrink-0 flex-wrap items-start justify-between gap-x-12 gap-y-3 pb-[clamp(12px,2vw,20px)]"
       >
-        <motion.div variants={revealBlock}>
+        <motion.div
+          variants={revealBlock}
+          className="flex flex-wrap items-start gap-x-12 gap-y-3 text-mono-s text-[color:var(--surface-graphite)]"
+        >
+          <div className="flex flex-col">
+            <span>SILADITYAA SHARMA</span>
+            <span>{cs.timeline.split(" — ")[0] ?? cs.timeline}</span>
+          </div>
+          <div className="flex flex-col">
+            <span>{cs.team?.split("·")[0]?.trim().toUpperCase() ?? "META"}</span>
+            <span>LOS ANGELES, CA</span>
+          </div>
+          <div className="flex flex-col">
+            <span>
+              {cs.tags?.map((t) => t.toUpperCase()).join(" / ") ?? "PROJECT"}
+            </span>
+            <span>{cs.status === "public" ? "PUBLIC" : "NDA"}</span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          variants={revealBlock}
+          className="flex items-center gap-5 text-mono-s text-[color:var(--surface-graphite)]"
+        >
           <Link
             href="/#work"
             data-cursor="view"
-            className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+            className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           >
-            ← BACK TO WORK
+            ← BACK
           </Link>
+          <span className="tabular-nums">{counter}</span>
+          {prevSlug ? (
+            <Link
+              href={`/work/${prevSlug}`}
+              data-cursor="view"
+              className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+            >
+              ← PREV
+            </Link>
+          ) : (
+            <span className="text-[color:color-mix(in_srgb,var(--surface-graphite)_40%,transparent)]">
+              ← PREV
+            </span>
+          )}
+          {nextSlug ? (
+            <Link
+              href={`/work/${nextSlug}`}
+              data-cursor="view"
+              className="text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+            >
+              NEXT →
+            </Link>
+          ) : (
+            <Link
+              href="/#work"
+              data-cursor="view"
+              className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+            >
+              ALL →
+            </Link>
+          )}
         </motion.div>
-        <motion.span
-          variants={revealBlock}
-          className="text-mono-s text-[color:var(--surface-graphite)] tabular-nums"
-        >
-          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </motion.span>
       </motion.div>
 
-      {/* Two-column body — info on the left, media well on the right */}
+      {/* The bento — text card + hero + supporting assets all share one grid */}
       <motion.div
         variants={revealStaggerBlocks}
         initial="hidden"
         animate="visible"
-        className="grid flex-1 grid-cols-1 gap-10 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] lg:gap-[clamp(40px,5vw,80px)]"
+        className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-7 lg:grid-rows-4"
       >
-        {/* INFO column */}
+        {/* TEXT CARD — explicitly placed at cols 1-2, rows 1-3 */}
         <motion.div
           variants={revealBlock}
-          className="flex flex-col gap-6 lg:gap-8 lg:overflow-y-auto lg:pr-2"
+          className="flex flex-col gap-5 overflow-hidden rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-6 pb-10 lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-4 lg:p-7 lg:pb-12"
         >
-          <div className="flex flex-col gap-2">
-            <span className="text-mono-s text-[color:var(--surface-graphite)]">
-              {cs.timeline}
-            </span>
-            <h1 className="text-display-l italic text-[color:var(--surface-ink)]">
-              {cs.title}
-            </h1>
-          </div>
+          <h1 className="text-display-m italic leading-tight text-[color:var(--surface-ink)]">
+            {cs.title}
+          </h1>
 
           {brief && (
-            <p className="text-body text-[color:var(--surface-ink)]">
+            <p className="text-body text-[color:var(--surface-graphite)]">
               {brief}
             </p>
           )}
 
-          <dl className="flex flex-col gap-3 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-5">
-            <MetaRow label="Role" value={cs.role} />
-            {cs.team && <MetaRow label="Team" value={cs.team} />}
-            {cs.credits && <MetaRow label="Partners" value={cs.credits} />}
-            <MetaRow
-              label="Status"
-              value={cs.status === "public" ? "Public" : "NDA"}
-            />
+          <dl className="mt-auto flex flex-col gap-3 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-5 text-mono-s">
+            <Row label="Role" value={cs.role} />
+            {cs.team && <Row label="Team" value={cs.team} />}
+            {cs.credits && <Row label="Partners" value={cs.credits} />}
           </dl>
-
-          {cs.tags && cs.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {cs.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_20%,transparent)] px-3 py-1 text-mono-s text-[color:var(--surface-graphite)]"
-                >
-                  {tag.toUpperCase()}
-                </span>
-              ))}
-            </div>
-          )}
         </motion.div>
 
-        {/* MEDIA column — featured well + thumb strip */}
-        <motion.div
+        {/* MAIN ASSET — cols 3-5, rows 1-4 (TALLEST + BIGGEST) */}
+        <BentoTile
           variants={revealBlock}
-          className="flex min-h-0 flex-col gap-4"
-        >
-          {active ? (
-            <div className="relative flex-1 overflow-hidden rounded-[2px] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)]">
-              <div
-                className="relative h-full w-full"
-                style={{
-                  aspectRatio: media.length > 0 && active ? undefined : "16/10",
-                }}
-              >
-                <MediaFrame src={active.src} alt={active.alt ?? cs.title} />
-              </div>
-              {active.caption && (
-                <span className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-[color:var(--surface-paper)]/80 px-3 py-1 text-mono-s text-[color:var(--surface-graphite)] backdrop-blur-sm">
-                  {active.caption}
-                </span>
-              )}
-            </div>
-          ) : (
-            <div className="flex flex-1 items-center justify-center rounded-[2px] border border-dashed border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] text-mono-s text-[color:var(--surface-graphite)]">
-              MEDIA TBD
-            </div>
-          )}
+          className="lg:col-start-3 lg:col-end-6 lg:row-start-1 lg:row-end-5"
+          src={cs.hero?.src}
+          alt={cs.hero?.alt ?? cs.title}
+          fallback="MAIN ASSET TBD"
+        />
 
-          {media.length > 1 && (
-            <div className="flex shrink-0 gap-2 overflow-x-auto pb-1 scrollbar-none">
-              {media.map((m, i) => (
-                <button
-                  key={`${m.src}-${i}`}
-                  type="button"
-                  onClick={() => setActiveIndex(i)}
-                  data-cursor="view"
-                  aria-label={`View ${m.alt ?? `image ${i + 1}`}`}
-                  aria-pressed={i === activeIndex}
-                  className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-[2px] border transition-all duration-300 ease-[var(--ease-out-soft)] ${
-                    i === activeIndex
-                      ? "border-[color:var(--surface-ink)] opacity-100"
-                      : "border-[color:color-mix(in_srgb,var(--surface-graphite)_20%,transparent)] opacity-60 hover:opacity-100"
-                  }`}
-                >
-                  <MediaFrame src={m.src} alt={m.alt ?? ""} />
-                </button>
-              ))}
-            </div>
-          )}
-        </motion.div>
+        {/* s1 — cols 1-2, row 4 (small landscape under text card) */}
+        <BentoTile
+          variants={revealBlock}
+          className="lg:col-start-1 lg:col-end-3 lg:row-start-4 lg:row-end-5"
+          src={bento[0]?.src}
+          alt={bento[0]?.alt ?? `${cs.title} detail 1`}
+        />
+
+        {/* s2 — cols 6-7, rows 1-2 (medium square 2x2) */}
+        <BentoTile
+          variants={revealBlock}
+          className="lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3"
+          src={bento[1]?.src}
+          alt={bento[1]?.alt ?? `${cs.title} detail 2`}
+        />
+
+        {/* s3 — col 6, rows 3-4 (tall portrait 1x2) */}
+        <BentoTile
+          variants={revealBlock}
+          className="lg:col-start-6 lg:col-end-7 lg:row-start-3 lg:row-end-5"
+          src={bento[2]?.src}
+          alt={bento[2]?.alt ?? `${cs.title} detail 3`}
+        />
+
+        {/* s4 — col 7, row 3 (small square 1x1) */}
+        <BentoTile
+          variants={revealBlock}
+          className="lg:col-start-7 lg:col-end-8 lg:row-start-3 lg:row-end-4"
+          src={bento[3]?.src}
+          alt={bento[3]?.alt ?? `${cs.title} detail 4`}
+        />
+
+        {/* s5 — col 7, row 4 (small square 1x1) */}
+        <BentoTile
+          variants={revealBlock}
+          className="lg:col-start-7 lg:col-end-8 lg:row-start-4 lg:row-end-5"
+          src={bento[4]?.src}
+          alt={bento[4]?.alt ?? `${cs.title} detail 5`}
+        />
       </motion.div>
 
-      {/* Bottom prev / next */}
-      <motion.div
-        variants={revealStaggerBlocks}
-        initial="hidden"
-        animate="visible"
-        className="flex items-center justify-between gap-6 pt-6 lg:pt-8"
-      >
-        {prevSlug ? (
-          <Link
-            href={`/work/${prevSlug}`}
-            data-cursor="view"
-            className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
-          >
-            ← PREVIOUS
-          </Link>
-        ) : (
-          <span />
-        )}
-        {nextSlug ? (
-          <Link
-            href={`/work/${nextSlug}`}
-            data-cursor="view"
-            className="text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
-          >
-            NEXT →
-          </Link>
-        ) : (
-          <Link
-            href="/#work"
-            data-cursor="view"
-            className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
-          >
-            ALL WORK →
-          </Link>
-        )}
-      </motion.div>
     </section>
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/* Subcomponents                                                              */
-/* -------------------------------------------------------------------------- */
-
-function MetaRow({ label, value }: { label: string; value: string }) {
+function Row({ label, value }: { label: string; value: string }) {
   return (
-    <div className="grid grid-cols-[80px_minmax(0,1fr)] gap-3 text-mono-s">
+    <div className="grid grid-cols-[80px_minmax(0,1fr)] gap-3">
       <dt className="text-[color:var(--surface-graphite)]">
         {label.toUpperCase()}
       </dt>
@@ -237,11 +221,37 @@ function MetaRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-/**
- * Renders an image, video, or gif depending on the file extension. All media
- * fits the parent via `object-contain` so we never crop the asset; the
- * surrounding container handles framing.
- */
+interface BentoTileProps {
+  src?: string;
+  alt: string;
+  className?: string;
+  fallback?: string;
+  variants?: import("framer-motion").Variants;
+}
+
+function BentoTile({
+  src,
+  alt,
+  className = "",
+  fallback = "—",
+  variants,
+}: BentoTileProps) {
+  return (
+    <motion.div
+      variants={variants}
+      className={`relative min-h-[200px] overflow-hidden rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)] lg:min-h-0 ${className}`}
+    >
+      {src ? (
+        <MediaFrame src={src} alt={alt} />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center text-mono-s text-[color:color-mix(in_srgb,var(--surface-graphite)_50%,transparent)]">
+          {fallback}
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
 function MediaFrame({ src, alt }: { src: string; alt: string }) {
   const ext = src.split(".").pop()?.toLowerCase() ?? "";
   if (ext === "mp4" || ext === "webm" || ext === "mov") {
@@ -252,61 +262,19 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
         loop
         muted
         playsInline
-        className="absolute inset-0 h-full w-full object-contain"
+        className="absolute inset-0 h-full w-full object-cover"
       />
     );
   }
-  // Next/Image needs intrinsic sizing; using fill to let parent control it.
   return (
     <Image
       src={src}
       alt={alt}
       fill
-      sizes="(min-width: 1024px) 70vw, 100vw"
-      className="object-contain"
+      sizes="(min-width: 1024px) 33vw, 100vw"
+      className="object-cover"
       unoptimized={ext === "gif"}
       priority
     />
   );
-}
-
-/* -------------------------------------------------------------------------- */
-/* Helpers                                                                    */
-/* -------------------------------------------------------------------------- */
-
-interface MediaItem {
-  src: string;
-  alt?: string;
-  caption?: string;
-}
-
-function collectMedia(cs: CaseStudy): MediaItem[] {
-  const list: MediaItem[] = [];
-  const seen = new Set<string>();
-  const push = (m: MediaItem | null | undefined) => {
-    if (!m || !m.src) return;
-    if (seen.has(m.src)) return;
-    seen.add(m.src);
-    list.push(m);
-  };
-
-  push(cs.hero ?? undefined);
-  for (const item of cs.gallery ?? []) push(item);
-  for (const chapter of cs.chapters ?? []) {
-    for (const sec of chapter.sections ?? []) {
-      switch (sec.kind) {
-        case "imageGrid":
-          for (const item of sec.images ?? []) push(item);
-          break;
-        case "mockupFrame":
-          push({ src: sec.src, alt: sec.alt, caption: sec.caption });
-          break;
-        case "beforeAfter":
-          push(sec.before);
-          push(sec.after);
-          break;
-      }
-    }
-  }
-  return list;
 }
