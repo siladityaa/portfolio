@@ -12,7 +12,7 @@ const LAST_DEPLOYED = new Date().toISOString().slice(0, 10);
 export function Footer() {
   return (
     <footer className="hairline-top mt-[clamp(120px,20vh,200px)]">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-[clamp(24px,4vw,64px)] py-16 md:grid-cols-3">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-[clamp(24px,4vw,64px)] pt-16 pb-[clamp(120px,16vw,180px)] md:grid-cols-3">
         {/* Col 1 — wordmark + tagline */}
         <div className="flex flex-col gap-3">
           <span className="text-mono-s text-[color:var(--surface-ink)]">
