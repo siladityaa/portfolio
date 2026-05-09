@@ -160,50 +160,82 @@ export function MinimalCaseStudy({
           </dl>
         </motion.div>
 
-        {/* MAIN ASSET — cols 3-5, rows 1-4 (TALLEST + BIGGEST) */}
+        {/* MAIN ASSET — geometry depends on how many bento tiles exist so
+            the hero claims any space the supporting tiles don't use. */}
         <BentoTile
           variants={revealBlock}
-          className="lg:col-start-3 lg:col-end-6 lg:row-start-1 lg:row-end-5"
+          className={heroPlacementForCount(bento.length)}
           src={cs.hero?.src}
           alt={cs.hero?.alt ?? cs.title}
           fallback="MAIN ASSET TBD"
         />
 
-        {/* s1 — cols 6-7, rows 1-2 (medium square 2x2) */}
-        <BentoTile
-          variants={revealBlock}
-          className="lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3"
-          src={bento[0]?.src}
-          alt={bento[0]?.alt ?? `${cs.title} detail 1`}
-        />
-
-        {/* s2 — col 6, rows 3-4 (tall portrait 1x2) */}
-        <BentoTile
-          variants={revealBlock}
-          className="lg:col-start-6 lg:col-end-7 lg:row-start-3 lg:row-end-5"
-          src={bento[1]?.src}
-          alt={bento[1]?.alt ?? `${cs.title} detail 2`}
-        />
-
-        {/* s3 — col 7, row 3 (small square 1x1) */}
-        <BentoTile
-          variants={revealBlock}
-          className="lg:col-start-7 lg:col-end-8 lg:row-start-3 lg:row-end-4"
-          src={bento[2]?.src}
-          alt={bento[2]?.alt ?? `${cs.title} detail 3`}
-        />
-
-        {/* s4 — col 7, row 4 (small square 1x1) */}
-        <BentoTile
-          variants={revealBlock}
-          className="lg:col-start-7 lg:col-end-8 lg:row-start-4 lg:row-end-5"
-          src={bento[3]?.src}
-          alt={bento[3]?.alt ?? `${cs.title} detail 4`}
-        />
+        {bentoPlacementsForCount(bento.length).map((placement, i) => (
+          <BentoTile
+            key={i}
+            variants={revealBlock}
+            className={placement}
+            src={bento[i]?.src}
+            alt={bento[i]?.alt ?? `${cs.title} detail ${i + 1}`}
+          />
+        ))}
       </motion.div>
 
     </section>
   );
+}
+
+/**
+ * Hero placement adapts to how many bento tiles exist so it claims any
+ * space the supporting tiles don't fill.
+ *
+ *   0 tiles  → hero spans cols 3–7 (5×4) — full right side
+ *   1+ tiles → hero spans cols 3–5 (3×4) — supporting tiles fill cols 6–7
+ *
+ * Strings are written out in full so Tailwind's JIT picks them up.
+ */
+function heroPlacementForCount(n: number): string {
+  if (n === 0) {
+    return "lg:col-start-3 lg:col-end-8 lg:row-start-1 lg:row-end-5";
+  }
+  return "lg:col-start-3 lg:col-end-6 lg:row-start-1 lg:row-end-5";
+}
+
+/**
+ * Bento tile placements indexed by tile count. Each layout fills the
+ * cols-6/7 right column completely; missing tile slots collapse so the
+ * grid never shows empty cells.
+ */
+function bentoPlacementsForCount(n: number): string[] {
+  switch (n) {
+    case 0:
+      return [];
+    case 1:
+      // Single tile fills the full right column.
+      return ["lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-5"];
+    case 2:
+      // Two equal-height stacked tiles.
+      return [
+        "lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3",
+        "lg:col-start-6 lg:col-end-8 lg:row-start-3 lg:row-end-5",
+      ];
+    case 3:
+      // Top wide tile + two squares below.
+      return [
+        "lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3",
+        "lg:col-start-6 lg:col-end-7 lg:row-start-3 lg:row-end-5",
+        "lg:col-start-7 lg:col-end-8 lg:row-start-3 lg:row-end-5",
+      ];
+    case 4:
+    default:
+      // Top wide tile, tall portrait, and two stacked squares.
+      return [
+        "lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3",
+        "lg:col-start-6 lg:col-end-7 lg:row-start-3 lg:row-end-5",
+        "lg:col-start-7 lg:col-end-8 lg:row-start-3 lg:row-end-4",
+        "lg:col-start-7 lg:col-end-8 lg:row-start-4 lg:row-end-5",
+      ];
+  }
 }
 
 function Row({ label, value }: { label: string; value: string }) {
