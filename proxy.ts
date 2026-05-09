@@ -51,7 +51,7 @@ function isPublicAdminPath(pathname: string): boolean {
  * WIP mode — redirect all public content pages to home.
  * Remove this block (and the matcher entry) to restore the full site.
  */
-const WIP_MODE = true;
+const WIP_MODE = false;
 const WIP_ALLOWED = new Set(["/", "/_not-found", "/resume"]);
 
 export async function proxy(request: NextRequest) {

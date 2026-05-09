@@ -7,7 +7,7 @@ import Link from "next/link";
  * WIP mode: WORK and ABOUT are hidden (those routes redirect to home).
  * Set WIP_MODE to false to restore them.
  */
-const WIP_MODE = true;
+const WIP_MODE = false;
 
 export function NavLinks() {
   const items = [
