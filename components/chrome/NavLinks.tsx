@@ -1,13 +1,14 @@
 import Link from "next/link";
 
+import { WIP_MODE } from "@/lib/wip-mode";
+
 /**
  * Brief §3 — fixed top-right corner, mono-s. WORK and ABOUT are in-app
- * routes. RESUME is an external link to the separate resume subdomain.
+ * routes. RESUME is in-app.
  *
- * WIP mode: WORK and ABOUT are hidden (those routes redirect to home).
- * Set WIP_MODE to false to restore them.
+ * WIP mode hides WORK / ABOUT (those routes redirect to home) and the ⌘K
+ * hint. Toggle from `lib/wip-mode.ts`.
  */
-const WIP_MODE = false;
 
 export function NavLinks() {
   const items = [

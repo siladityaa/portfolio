@@ -31,6 +31,7 @@ import {
   decryptSession,
   isAllowedLogin,
 } from "@/lib/auth";
+import { WIP_MODE, WIP_ALLOWED_ROUTES } from "@/lib/wip-mode";
 
 /** Admin paths that the proxy should let through without a session. */
 const PUBLIC_ADMIN_PATHS = new Set([
@@ -47,18 +48,18 @@ function isPublicAdminPath(pathname: string): boolean {
   return false;
 }
 
-/**
- * WIP mode — redirect all public content pages to home.
- * Remove this block (and the matcher entry) to restore the full site.
- */
-const WIP_MODE = false;
-const WIP_ALLOWED = new Set(["/", "/_not-found", "/resume"]);
-
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // WIP gate: redirect /about, /work/*, /colophon to home
-  if (WIP_MODE && !pathname.startsWith("/admin") && !pathname.startsWith("/api") && !pathname.startsWith("/_next") && !WIP_ALLOWED.has(pathname)) {
+  // WIP gate: redirect /about, /work/*, /colophon to home.
+  // Toggle via lib/wip-mode.ts.
+  if (
+    WIP_MODE &&
+    !pathname.startsWith("/admin") &&
+    !pathname.startsWith("/api") &&
+    !pathname.startsWith("/_next") &&
+    !WIP_ALLOWED_ROUTES.has(pathname)
+  ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
