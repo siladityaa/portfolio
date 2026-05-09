@@ -51,6 +51,11 @@ function isPublicAdminPath(pathname: string): boolean {
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // /about is hidden — always redirect to home regardless of WIP mode.
+  if (pathname === "/about") {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   // WIP gate: redirect /about, /work/*, /colophon to home.
   // Toggle via lib/wip-mode.ts.
   if (

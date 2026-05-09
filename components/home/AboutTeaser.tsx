@@ -23,12 +23,11 @@ export function AboutTeaser() {
           {/* Bio sourced from LinkedIn (2026-04-10). A longer first-person
               version will live on /about in Phase 3. */}
           <p className="max-w-[55ch] text-display-s text-[color:var(--surface-ink)]">
-            Senior Product Designer at Meta Reality Labs in Los Angeles,
-            building wearables and the AI experiences around them — previously
-            shipped Ray-Ban Stories and the second-generation Ray-Ban Meta
-            Smart Glasses. Adjunct Instructor at ArtCenter College of Design,
-            teaching Interactive Prototyping. Graduated ArtCenter with Honors
-            in 2021.
+            Senior product designer with 5 years of shipping consumer
+            experiences at scale. I lead authentication, account, and
+            social-profile design across Meta&rsquo;s wearables ecosystem,
+            where I balance complex platform systems with the visual craft
+            that people actually feel when they use a product.
           </p>
         </div>
 

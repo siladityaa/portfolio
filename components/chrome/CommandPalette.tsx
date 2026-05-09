@@ -22,14 +22,8 @@ interface PaletteItem {
 
 const PAGES: PaletteItem[] = [
   { label: "Home", hint: "/", href: "/" },
-  { label: "About", hint: "/about", href: "/about" },
   { label: "Colophon", hint: "/colophon", href: "/colophon" },
-  {
-    label: "Resume",
-    hint: "resume.siladityaa.com",
-    href: "https://resume.siladityaa.com",
-    external: true,
-  },
+  { label: "Resume", hint: "/resume", href: "/resume" },
 ];
 
 const PROJECTS: PaletteItem[] = [
@@ -100,7 +94,7 @@ export function CommandPalette() {
     [router],
   );
 
-  /* ⌘K / Ctrl-K toggle */
+  /* ⌘K / Ctrl-K toggle + custom event from the search button */
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -112,8 +106,15 @@ export function CommandPalette() {
         setQuery("");
       }
     }
+    function onCmdkOpen() {
+      setOpen(true);
+    }
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    window.addEventListener("cmdk:open", onCmdkOpen as EventListener);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("cmdk:open", onCmdkOpen as EventListener);
+    };
   }, []);
 
   /* Auto-focus input on open */
