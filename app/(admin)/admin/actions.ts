@@ -17,7 +17,7 @@
  * this action will fail to bundle — that's the intentional tripwire.
  */
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 
 import {
   aboutContentSchema,
@@ -27,6 +27,14 @@ import {
   nowContentSchema,
   timelineContentSchema,
 } from "@/content/schemas";
+
+import {
+  TAG_CASE_STUDIES_INDEX,
+  tagCaseStudy,
+} from "@/lib/content";
+import { TAG_WORK_ORDER } from "@/lib/work-order";
+import { TAG_HOME_CONTENT } from "@/lib/content-home";
+import { TAG_ABOUT_CONTENT } from "@/lib/content-about";
 import type {
   AboutContent,
   CaseStudy,
@@ -129,6 +137,8 @@ export async function saveCaseStudy(
     slug,
   );
   if (result.status === "ok") {
+    updateTag(tagCaseStudy(slug));
+    updateTag(TAG_CASE_STUDIES_INDEX);
     revalidatePath(`/work/${slug}`);
     revalidatePath("/");
   }
@@ -202,6 +212,8 @@ export async function createCaseStudy(
       `cms: create case-study — ${slug}`,
       null,
     );
+    updateTag(TAG_CASE_STUDIES_INDEX);
+    updateTag(tagCaseStudy(slug));
     revalidatePath("/admin/case-studies");
     revalidatePath("/");
     return { status: "ok", commitSha, slug };
@@ -245,6 +257,8 @@ export async function deleteCaseStudy(slug: string): Promise<SaveResult> {
       `cms: delete case-study — ${slug}`,
       existing.sha,
     );
+    updateTag(TAG_CASE_STUDIES_INDEX);
+    updateTag(tagCaseStudy(slug));
     revalidatePath("/admin/case-studies");
     revalidatePath("/");
     revalidatePath(`/work/${slug}`);
@@ -286,6 +300,8 @@ export async function reorderCaseStudies(
       "cms: reorder case studies",
       existing?.sha ?? null,
     );
+    updateTag(TAG_WORK_ORDER);
+    updateTag(TAG_CASE_STUDIES_INDEX);
     revalidatePath("/admin/case-studies");
     revalidatePath("/");
     return { status: "ok", commitSha };
@@ -321,6 +337,7 @@ export async function saveHome(payload: unknown): Promise<SaveResult> {
     "home",
   );
   if (result.status === "ok") {
+    updateTag(TAG_HOME_CONTENT);
     revalidatePath("/");
   }
   return result;
@@ -345,6 +362,7 @@ export async function saveAbout(payload: unknown): Promise<SaveResult> {
     "about",
   );
   if (result.status === "ok") {
+    updateTag(TAG_ABOUT_CONTENT);
     revalidatePath("/about");
   }
   return result;

@@ -1,11 +1,14 @@
-import { home } from "@/lib/content-home";
+import { getHome } from "@/lib/content-home";
 import { HomeForm } from "@/components/admin/forms/HomeForm";
 
+// Always fetch fresh in admin so saves show up immediately.
+export const dynamic = "force-dynamic";
+
 /**
- * Home editor — Step 3. Two-field form (hero sentence + mono subline)
- * with local state. Save flow lands in Step 4.
+ * Home editor — two-field form (hero sentence + mono subline).
  */
 export default async function HomeEditPage() {
+  const home = await getHome();
   return (
     <div className="mx-auto max-w-[720px] px-[clamp(24px,4vw,64px)] py-[clamp(80px,12vh,160px)]">
       <span className="text-mono-s text-[color:var(--surface-graphite)]">

@@ -1,4 +1,4 @@
-import { about } from "@/lib/content-about";
+import { getAbout } from "@/lib/content-about";
 
 /**
  * Brief §4.4 — top of /about. A single pulled quote in display-xl,
@@ -8,7 +8,8 @@ import { about } from "@/lib/content-about";
  * Copy comes from `content/about.json` via `lib/content-about.ts` so the
  * CMS can edit it.
  */
-export function PulledQuote() {
+export async function PulledQuote() {
+  const about = await getAbout();
   return (
     <section className="hairline-top">
       <div className="mx-auto flex max-w-[1280px] items-center justify-center px-[clamp(24px,4vw,64px)] py-[clamp(160px,24vh,280px)]">

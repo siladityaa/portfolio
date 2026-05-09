@@ -1,4 +1,4 @@
-import { about } from "@/lib/content-about";
+import { getAbout } from "@/lib/content-about";
 
 /**
  * Brief §4.4 — below the pulled quote. Two columns: one personal, one
@@ -7,7 +7,8 @@ import { about } from "@/lib/content-about";
  *
  * Copy comes from `content/about.json` via `lib/content-about.ts`.
  */
-export function BioColumns() {
+export async function BioColumns() {
+  const about = await getAbout();
   return (
     <section className="hairline-top">
       <div className="mx-auto max-w-[1280px] px-[clamp(24px,4vw,64px)] py-[clamp(120px,18vh,200px)]">

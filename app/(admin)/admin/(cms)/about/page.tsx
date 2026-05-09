@@ -1,16 +1,15 @@
-import { about } from "@/lib/content-about";
+import { getAbout } from "@/lib/content-about";
 import { AboutForm } from "@/components/admin/forms/AboutForm";
 
+// Always fetch fresh in admin so saves show up immediately.
+export const dynamic = "force-dynamic";
+
 /**
- * About editor — Step 3. Three text areas: pulled quote + personal bio +
+ * About editor — three text areas: pulled quote + personal bio +
  * professional bio.
- *
- * The /about page also renders the timeline + influences (sourced from
- * `content/timeline.json` and `content/influences.json`). Those get their
- * own editors as a Phase 6.5 follow-on; the v1 admin focuses on the
- * prose blocks that change most often.
  */
 export default async function AboutEditPage() {
+  const about = await getAbout();
   return (
     <div className="mx-auto max-w-[820px] px-[clamp(24px,4vw,64px)] py-[clamp(80px,12vh,160px)]">
       <span className="text-mono-s text-[color:var(--surface-graphite)]">

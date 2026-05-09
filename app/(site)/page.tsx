@@ -3,7 +3,7 @@ import { SelectedWork } from "@/components/home/SelectedWork";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { Footer } from "@/components/home/Footer";
 import { WipHero } from "@/components/home/WipHero";
-import { home } from "@/lib/content-home";
+import { getHome } from "@/lib/content-home";
 import { WIP_MODE } from "@/lib/wip-mode";
 
 /**
@@ -18,6 +18,7 @@ export default async function Home() {
     return <WipHero />;
   }
 
+  const home = await getHome();
   return (
     <>
       <Hero sentence={home.hero.sentence} subline={home.hero.subline} />
