@@ -12,14 +12,7 @@ import { TextareaField } from "./fields/TextareaField";
 import { SelectField } from "./fields/SelectField";
 import { TagsField } from "./fields/TagsField";
 import { ColorField } from "./fields/ColorField";
-import { PathField } from "./fields/PathField";
 import { ImageUploadField } from "./fields/ImageUploadField";
-import { ChapterEditor } from "./ChapterEditor";
-import {
-  SortableList,
-  SortableItem,
-  DragHandle,
-} from "./fields/SortableList";
 import { SaveButton } from "@/components/admin/SaveButton";
 import { SaveStatus } from "@/components/admin/SaveStatus";
 import { ConflictModal } from "@/components/admin/ConflictModal";
@@ -43,16 +36,12 @@ const TAG_OPTIONS = [
 ] as const;
 
 /**
- * Top-level case study editor.
+ * Case study editor — sized for the bento layout the public site renders.
  *
- * Composition: frontmatter fields → chapters list → save bar.
+ *   Frontmatter → Hero → Brief → Bento gallery → Save
  *
- * The chapters useFieldArray provides add/remove/up/down for chapters.
- * Each chapter renders a ChapterEditor which has its own nested
- * useFieldArray for sections, which renders SectionAccordion for each
- * section, which dispatches to the right `*Fields` subform based on kind.
- *
- * Step 3 — local state, save no-op. Step 4 wires the server action.
+ * Chapters / next-project / section editors were removed alongside the
+ * old long-scroll layout; only fields the public component reads remain.
  */
 export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
   const methods = useForm<CaseStudy>({
@@ -61,10 +50,6 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
     mode: "onChange",
   });
 
-  // Bind the slug into the server action so the save flow can stay generic.
-  // The URL slug is authoritative — even if the user edited the slug field,
-  // we still write to the file named after the URL slug. The server action
-  // rejects mismatches so we can't silently duplicate files.
   const urlSlug = defaultValues.slug;
   const action = useCallback(
     (values: CaseStudy) => saveCaseStudy(urlSlug, values),
@@ -84,7 +69,7 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
       >
         <DirtyWarning />
 
-        {/* Frontmatter — top-level case study fields */}
+        {/* Frontmatter */}
         <section className="flex flex-col gap-6">
           <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
             Frontmatter
@@ -122,7 +107,7 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
             <div className="col-span-12">
               <TextareaField
                 name="credits"
-                label="CREDITS (optional)"
+                label="CREDITS / PARTNERS (optional)"
                 description="One credit per line — collaborator name + their title."
                 rows={3}
               />
@@ -145,21 +130,26 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
               <TagsField
                 name="tags"
                 label="TAGS"
-                description="Categorise the case study. Used by future filter UIs."
+                description="Categorise the case study."
                 options={TAG_OPTIONS}
               />
             </div>
           </div>
         </section>
 
-        {/* Hero — single image with caption */}
+        {/* Hero — the dominant tile in the bento */}
         <section className="flex flex-col gap-6">
-          <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
-            Hero
-          </h2>
+          <header className="flex flex-col gap-2">
+            <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
+              Hero asset
+            </h2>
+            <p className="text-body text-[color:var(--surface-graphite)]">
+              The biggest tile in the bento (3 × 4). Image, GIF, or video.
+            </p>
+          </header>
           <ImageUploadField
             name="hero.src"
-            label="HERO IMAGE"
+            label="HERO ASSET"
             uploadDir={`work/${defaultValues.slug}`}
           />
           <TextField name="hero.alt" label="ALT TEXT" />
@@ -174,12 +164,12 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
           <TextareaField
             name="brief"
             label="BRIEF"
-            description="The framing paragraph in the case study intro. Aim for ~80 words."
+            description="The short paragraph in the text card. Aim for ~60–80 words."
             rows={5}
           />
         </section>
 
-        {/* Bento gallery — supporting tiles in the new minimal layout */}
+        {/* Bento gallery */}
         <section className="flex flex-col gap-6">
           <header className="flex flex-col gap-2">
             <div className="flex items-baseline justify-between">
@@ -189,45 +179,11 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
               <GalleryAddButton />
             </div>
             <p className="text-body text-[color:var(--surface-graphite)]">
-              The five supporting tiles around the hero in the bento grid.
-              Tile shapes are fixed (s1 wide, s2 square, s3 portrait, s4/s5
-              squares) — assets will fill via object-cover.
+              The five supporting tiles around the hero. Tile shapes are
+              fixed — assets fill via object-cover.
             </p>
           </header>
           <GalleryList slug={defaultValues.slug} />
-        </section>
-
-        {/* Chapters — legacy, not rendered in the new minimal layout */}
-        <section className="flex flex-col gap-6 opacity-60">
-          <header className="flex items-baseline justify-between">
-            <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
-              Chapters <span className="text-mono-s text-[color:var(--surface-graphite)]">(legacy)</span>
-            </h2>
-            <ChaptersAddButton />
-          </header>
-          <p className="text-body text-[color:var(--surface-graphite)]">
-            Chapters are no longer rendered in the public case-study layout.
-            Edits here only affect the data file and are kept for safekeeping.
-          </p>
-          <ChaptersList />
-        </section>
-
-        {/* Next project */}
-        <section className="flex flex-col gap-6">
-          <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
-            Next project (optional)
-          </h2>
-          <p className="text-body text-[color:var(--surface-graphite)]">
-            What the case study links to from its big NEXT → footer block.
-          </p>
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-4">
-              <TextField name="next.slug" label="SLUG" />
-            </div>
-            <div className="col-span-8">
-              <TextField name="next.title" label="TITLE" />
-            </div>
-          </div>
         </section>
 
         {/* Save bar */}
@@ -247,67 +203,12 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
   );
 }
 
-/* ---------- Chapters list ---------------------------------------------- */
-
-function ChaptersList() {
-  const chapters = useFieldArray<CaseStudy, "chapters">({ name: "chapters" });
-
-  return (
-    <SortableList
-      ids={chapters.fields.map((f) => f.id)}
-      onReorder={(from, to) => chapters.move(from, to)}
-    >
-      <div className="flex flex-col gap-6">
-        {chapters.fields.map((field, i) => (
-          <SortableItem key={field.id} id={field.id}>
-            <div className="flex items-start gap-2">
-              <div className="pt-6">
-                <DragHandle className="text-[color:var(--surface-graphite)] hover:text-[color:var(--surface-ink)]" />
-              </div>
-              <div className="flex-1">
-                <ChapterEditor
-                  chapterIndex={i}
-                  total={chapters.fields.length}
-                  onMoveUp={() => chapters.move(i, i - 1)}
-                  onMoveDown={() => chapters.move(i, i + 1)}
-                  onDelete={() => chapters.remove(i)}
-                />
-              </div>
-            </div>
-          </SortableItem>
-        ))}
-      </div>
-    </SortableList>
-  );
-}
-
-function ChaptersAddButton() {
-  const chapters = useFieldArray<CaseStudy, "chapters">({ name: "chapters" });
-
-  return (
-    <button
-      type="button"
-      onClick={() =>
-        chapters.append({
-          slug: "new-chapter",
-          eyebrow: "",
-          title: "",
-          sections: [],
-        })
-      }
-      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
-    >
-      + ADD CHAPTER
-    </button>
-  );
-}
-
 /* ---------- Gallery editor (bento supporting tiles) ----------------------- */
 
 const BENTO_LABELS = [
   { label: "TILE 1 — wide landscape (under text card)", shape: "2 × 1" },
   { label: "TILE 2 — medium square (top right)", shape: "2 × 2" },
-  { label: "TILE 3 — tall portrait (bottom-mid right)", shape: "1 × 2" },
+  { label: "TILE 3 — tall portrait (right column)", shape: "1 × 2" },
   { label: "TILE 4 — small square (right column)", shape: "1 × 1" },
   { label: "TILE 5 — small square (right column)", shape: "1 × 1" },
 ];

@@ -5,9 +5,6 @@
  * `content/schemas.ts` via `z.infer`. The schemas are the single source
  * of truth — change a field there and every consumer (loaders, runtime
  * validation, CMS forms) updates automatically.
- *
- * Inspired by xiangyidesign.com/tiktokweb chapter layout, blended with
- * this portfolio's serif + mono visual language.
  */
 
 import type { z } from "zod";
@@ -15,17 +12,7 @@ import type {
   caseStudySchema,
   caseStudyStatusSchema,
   caseStudyTagSchema,
-  chapterSchema,
-  chapterSectionSchema,
-  proseBlockSchema,
-  imageGridSchema,
-  pullQuoteSchema,
-  beforeAfterSchema,
-  tabGroupSchema,
-  infoTableSchema,
-  cardGridSchema,
-  mockupFrameSchema,
-  dividerSchema,
+  galleryItemSchema,
   homeContentSchema,
   aboutContentSchema,
   trackSchema,
@@ -41,28 +28,16 @@ import type {
   influencesContentSchema,
 } from "./schemas";
 
-/* Case study + chapter union ---------------------------------------------- */
+/* Case study ---------------------------------------------------------------- */
 
 export type CaseStudyStatus = z.infer<typeof caseStudyStatusSchema>;
 export type CaseStudyTag = z.infer<typeof caseStudyTagSchema>;
 export type CaseStudyFrontmatter = z.infer<typeof caseStudySchema>;
 
-/** Backwards-compat alias for the prior MDX-era shape. The MDX `body`
- * field is gone post-Phase-6 migration, so CaseStudy === CaseStudyFrontmatter. */
+/** Alias kept so existing imports keep working. */
 export type CaseStudy = CaseStudyFrontmatter;
 
-export type Chapter = z.infer<typeof chapterSchema>;
-export type ChapterSection = z.infer<typeof chapterSectionSchema>;
-
-export type ProseBlockSection = z.infer<typeof proseBlockSchema>;
-export type ImageGridSection = z.infer<typeof imageGridSchema>;
-export type PullQuoteSection = z.infer<typeof pullQuoteSchema>;
-export type BeforeAfterSection = z.infer<typeof beforeAfterSchema>;
-export type TabGroupSection = z.infer<typeof tabGroupSchema>;
-export type InfoTableSection = z.infer<typeof infoTableSchema>;
-export type CardGridSection = z.infer<typeof cardGridSchema>;
-export type MockupFrameSection = z.infer<typeof mockupFrameSchema>;
-export type DividerSection = z.infer<typeof dividerSchema>;
+export type GalleryItem = z.infer<typeof galleryItemSchema>;
 
 /* Page-level content shapes ----------------------------------------------- */
 

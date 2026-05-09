@@ -40,7 +40,10 @@ export default async function CaseStudiesIndex() {
                 <div className="mt-2 flex flex-wrap items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
                   <span>{cs.timeline}</span>
                   <span>·</span>
-                  <span>{cs.chapters.length} chapters</span>
+                  <span>
+                    {cs.gallery?.length ?? 0} bento tile
+                    {(cs.gallery?.length ?? 0) === 1 ? "" : "s"}
+                  </span>
                   {cs.tags.map((tag) => (
                     <span
                       key={tag}

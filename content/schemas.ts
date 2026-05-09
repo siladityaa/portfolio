@@ -15,7 +15,7 @@
 import { z } from "zod";
 
 /* =============================================================================
-   Case study frontmatter + chapters + body section union
+   Case study frontmatter + bento gallery
    ============================================================================= */
 
 export const caseStudyStatusSchema = z.enum(["public"]);
@@ -33,119 +33,10 @@ export const heroSchema = z.object({
   caption: z.string().optional(),
 });
 
-/* --- body section discriminated union (10 kinds) ---------------------------- */
-
-export const proseBlockSchema = z.object({
-  kind: z.literal("proseBlock"),
-  body: z.string(),
-});
-
-export const imageGridSchema = z.object({
-  kind: z.literal("imageGrid"),
-  cols: z.union([z.literal(1), z.literal(2), z.literal(3)]),
-  images: z.array(
-    z.object({
-      src: z.string(),
-      alt: z.string(),
-      caption: z.string().optional(),
-    }),
-  ),
-});
-
-export const pullQuoteSchema = z.object({
-  kind: z.literal("pullQuote"),
-  body: z.string(),
-  attribution: z.string().optional(),
-});
-
-export const beforeAfterSchema = z.object({
-  kind: z.literal("beforeAfter"),
-  before: z.object({ src: z.string(), label: z.string() }),
-  after: z.object({ src: z.string(), label: z.string() }),
-});
-
-export const tabGroupSchema = z.object({
-  kind: z.literal("tabGroup"),
-  tabs: z.array(
-    z.object({
-      label: z.string(),
-      body: z.string().optional(),
-      image: z
-        .object({ src: z.string(), alt: z.string() })
-        .optional(),
-    }),
-  ),
-});
-
-/** Cells in an InfoTable can be either a single line or a bullet list. */
-export const infoTableCellSchema = z.union([
-  z.string(),
-  z.array(z.string()),
-]);
-
-export const infoTableSchema = z.object({
-  kind: z.literal("infoTable"),
-  columns: z.array(z.string()),
-  rows: z.array(
-    z.object({
-      label: z.string(),
-      cells: z.array(infoTableCellSchema),
-    }),
-  ),
-  footnote: z.string().optional(),
-});
-
-export const cardGridChipToneSchema = z.enum([
-  "pm",
-  "design",
-  "engineer",
-  "neutral",
-]);
-
-export const cardGridSchema = z.object({
-  kind: z.literal("cardGrid"),
-  cards: z.array(
-    z.object({
-      title: z.string(),
-      body: z.string(),
-      chip: z
-        .object({ label: z.string(), tone: cardGridChipToneSchema })
-        .optional(),
-    }),
-  ),
-});
-
-export const mockupFrameSchema = z.object({
-  kind: z.literal("mockupFrame"),
+export const galleryItemSchema = z.object({
   src: z.string(),
-  alt: z.string(),
+  alt: z.string().optional(),
   caption: z.string().optional(),
-});
-
-export const dividerSchema = z.object({
-  kind: z.literal("divider"),
-});
-
-/** All 9 body section kinds, discriminated on `kind`. */
-export const chapterSectionSchema = z.discriminatedUnion("kind", [
-  proseBlockSchema,
-  imageGridSchema,
-  pullQuoteSchema,
-  beforeAfterSchema,
-  tabGroupSchema,
-  infoTableSchema,
-  cardGridSchema,
-  mockupFrameSchema,
-  dividerSchema,
-]);
-
-/* --- chapter + case study --------------------------------------------------- */
-
-export const chapterSchema = z.object({
-  slug: z.string(),
-  eyebrow: z.string(),
-  title: z.string(),
-  sections: z.array(chapterSectionSchema),
 });
 
 export const caseStudySchema = z.object({
@@ -160,21 +51,8 @@ export const caseStudySchema = z.object({
   keyColor: z.string(),
   hero: heroSchema,
   brief: z.string(),
-  /** Optional flat gallery of additional media (images / gifs / videos) used
-   *  by the minimal case-study layout's thumbnail strip. */
-  gallery: z
-    .array(
-      z.object({
-        src: z.string(),
-        alt: z.string().optional(),
-        caption: z.string().optional(),
-      }),
-    )
-    .optional(),
-  chapters: z.array(chapterSchema),
-  next: z
-    .object({ slug: z.string(), title: z.string() })
-    .optional(),
+  /** Up to 5 supporting bento tiles. */
+  gallery: z.array(galleryItemSchema).max(5).optional(),
 });
 
 /* =============================================================================
