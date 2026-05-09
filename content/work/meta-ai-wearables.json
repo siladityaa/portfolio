@@ -4,12 +4,17 @@
   "timeline": "",
   "role": "",
   "team": "",
+  "credits": "",
   "status": "public",
-  "tags": [],
-  "keyColor": "#7B5BFF",
+  "tags": [
+    "wearables",
+    "ai"
+  ],
+  "keyColor": "#2b2d42",
   "hero": {
     "src": "",
-    "alt": ""
+    "alt": "",
+    "caption": ""
   },
   "brief": "",
   "gallery": []
