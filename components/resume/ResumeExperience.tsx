@@ -5,7 +5,7 @@ import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
 
 const experience = [
   {
-    company: "Meta Reality Labs",
+    company: "Meta",
     role: "Senior Product Designer",
     period: "Feb 2022 — Present",
     location: "Los Angeles, CA",

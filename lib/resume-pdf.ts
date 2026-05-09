@@ -39,7 +39,7 @@ export function generateResumePDF() {
   doc.setFontSize(8.5);
   doc.setTextColor(100, 100, 100);
   doc.text(
-    "Senior Product Designer  |  Meta Reality Labs  |  Los Angeles, CA",
+    "Senior Product Designer  |  Meta  |  Los Angeles, CA",
     m,
     y
   );
@@ -87,7 +87,7 @@ export function generateResumePDF() {
   const jobs = [
     {
       title: "Senior Product Designer",
-      company: "Meta Reality Labs",
+      company: "Meta",
       period: "Feb 2022 — Present",
       location: "Los Angeles, CA",
       bullets: [

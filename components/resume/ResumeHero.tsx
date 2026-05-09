@@ -16,7 +16,7 @@ export function ResumeHero() {
           Siladityaa Sharma
         </h1>
         <p className="text-mono-s tracking-wider text-[color:var(--surface-graphite)]">
-          SENIOR PRODUCT DESIGNER · META REALITY LABS · LOS ANGELES, CA
+          SENIOR PRODUCT DESIGNER · META · LOS ANGELES, CA
         </p>
       </motion.div>
 
