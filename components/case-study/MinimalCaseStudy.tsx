@@ -299,7 +299,9 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
       fill
       sizes="(min-width: 1024px) 33vw, 100vw"
       className="object-cover"
-      unoptimized={ext === "gif"}
+      // Skip Next.js image optimization for animated formats — re-encoding
+      // would strip animation. WebP can be either, so we play it safe.
+      unoptimized={ext === "gif" || ext === "webp" || ext === "apng"}
       priority
     />
   );
