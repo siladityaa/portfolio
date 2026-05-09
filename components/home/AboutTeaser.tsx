@@ -7,7 +7,7 @@ import { nowFacts } from "@/content/now";
  */
 export function AboutTeaser() {
   return (
-    <section className="hairline-top mt-[clamp(120px,20vh,200px)]">
+    <section className="hairline-top">
       <header className="mx-auto flex max-w-[1280px] items-baseline justify-between gap-4 px-[clamp(24px,4vw,64px)] pt-24 pb-10">
         <span className="text-mono-s text-[color:var(--surface-graphite)]">
           02 — ABOUT

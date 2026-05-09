@@ -43,7 +43,10 @@ export function ProjectRowList({ rows }: ProjectListProps) {
             onMouseEnter={() => setHoveredIndex(i)}
             onMouseLeave={() => setHoveredIndex(null)}
             className={clsx(
-              "group relative hairline-top transition-opacity duration-500 ease-[var(--ease-out-soft)]",
+              // `last:pb-...` extends the final row down to where the next
+              // section's hairline begins, so the hover fill never leaves a
+              // visible gap between the last project and the about section.
+              "group relative hairline-top transition-opacity duration-500 ease-[var(--ease-out-soft)] last:pb-[clamp(120px,20vh,200px)]",
               isDimmed && "opacity-40",
             )}
             style={
