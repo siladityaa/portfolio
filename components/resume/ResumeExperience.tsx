@@ -10,36 +10,29 @@ const experience = [
     period: "Feb 2022 — Present",
     location: "Los Angeles, CA",
     bullets: [
-      "Lead design for AI-powered experiences on Ray-Ban Meta smart glasses, defining interaction patterns for camera, audio, and multimodal AI features used by millions.",
-      "Drove the Facebook to Meta product migration across surfaces, ensuring brand coherence during the company's largest rebrand.",
-      "Designed and shipped the Spotify Tap integration for Ray-Ban Stories, enabling seamless music control through temple gestures.",
+      "Lead identity, account, and social-profile design for the new Meta AI app. Partner with PM and engineering to ship a consumer AI product that spans phone and Ray-Ban Meta glasses, including cross-surface migration logic and regional edge cases. Contributed to the design-system principles guiding the launch.",
+      "Drove the Facebook to Meta account platform migration across product surfaces. Moved millions of users to the new company account system, navigated regulatory and legacy-hardware constraints, and designed the migration flow so users understood what was happening at each step.",
+      "Own the authentication suite across Meta's wearables: passcodes, passive unlock from a paired phone, and emerging biometric methods. A multi-device, multi-user-type system shaped end-to-end with hardware, firmware, and product partners.",
+      "Shipped the Spotify Tap integration on Ray-Ban Stories — a temple-gesture-driven music control surface that became a flagship example of hardware-first interaction design.",
+      "Mentor designers on the team, contribute to design critiques, and partner with research to ground product strategy in qualitative insight. Build functional prototypes in Cursor and Figma when behavior under real data is the only way to settle a debate.",
     ],
   },
   {
     company: "ArtCenter College of Design",
     role: "Adjunct Instructor",
-    period: "May 2022 — Apr 2023",
+    period: "May 2022 — Present",
     location: "Pasadena, CA",
     bullets: [
-      "Taught interaction design and prototyping to undergraduate students, bridging industry practice with academic rigor.",
+      "Teach Interactive Prototyping 2. Mentor undergraduates from idea to multi-modal interactive prototype, with a high bar for visual craft, typography, and layout.",
     ],
   },
   {
     company: "Meta",
     role: "Product Design Intern",
-    period: "Jun 2021 — Sep 2021",
+    period: "Jun — Sep 2021",
     location: "Remote",
     bullets: [
-      "Contributed to early-stage AR glasses interaction design under NDA. Explored novel input paradigms for head-worn computing.",
-    ],
-  },
-  {
-    company: "Kley",
-    role: "UX Designer & Developer Intern",
-    period: "May 2020 — Jul 2020",
-    location: "Remote",
-    bullets: [
-      "Designed and developed user interfaces for an early-stage startup, wearing both design and front-end engineering hats.",
+      "Established design direction in an ambiguous, early-stage AR program (under NDA), exploring novel input paradigms alongside hardware, ML, and research partners.",
     ],
   },
 ];

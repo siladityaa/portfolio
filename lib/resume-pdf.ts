@@ -68,7 +68,7 @@ export function generateResumePDF() {
   doc.setFontSize(8);
   doc.setTextColor(40, 40, 40);
   const summary =
-    "Creative technologist with UX research and design expertise across AI, wearables, and hardware. Known for exploring future-states and creating engaging scenarios to inform design ideas from concept to shippable products.";
+    "Senior product designer with 5 years of shipping consumer experiences at scale. I lead identity, account, and social-profile design across Meta's wearables ecosystem, balancing complex platform systems with the visual craft people actually feel. Comfortable across strategy, storytelling, and execution.";
   const sLines = doc.splitTextToSize(summary, w);
   doc.text(sLines, m, y);
   y += sLines.length * 10 + 8;
@@ -91,18 +91,20 @@ export function generateResumePDF() {
       period: "Feb 2022 — Present",
       location: "Los Angeles, CA",
       bullets: [
-        "Lead design for AI-powered experiences on Ray-Ban Meta smart glasses, defining interaction patterns for camera, audio, and multimodal AI features used by millions.",
-        "Drove the Facebook to Meta product migration across surfaces, ensuring brand coherence during the company's largest rebrand.",
-        "Designed and shipped the Spotify Tap integration for Ray-Ban Stories, enabling seamless music control through temple gestures.",
+        "Lead identity, account, and social-profile design for the new Meta AI app — a consumer AI product spanning phone and Ray-Ban Meta glasses, including cross-surface migration logic and regional edge cases.",
+        "Drove the Facebook to Meta account platform migration. Moved millions of users to the new company account system, navigating regulatory and legacy-hardware constraints.",
+        "Own the authentication suite across Meta's wearables: passcodes, passive unlock from a paired phone, and emerging biometric methods. End-to-end work with hardware, firmware, and product partners.",
+        "Shipped the Spotify Tap integration on Ray-Ban Stories — temple-gesture-driven music control, a flagship example of hardware-first interaction design.",
+        "Mentor designers, contribute to critiques, and partner with research. Build functional prototypes in Cursor and Figma when behavior under real data is the only way to settle a debate.",
       ],
     },
     {
       title: "Adjunct Instructor",
       company: "ArtCenter College of Design",
-      period: "May 2022 — Apr 2023",
+      period: "May 2022 — Present",
       location: "Pasadena, CA",
       bullets: [
-        "Taught interaction design and prototyping to undergraduate students, bridging industry practice with academic rigor.",
+        "Teach Interactive Prototyping 2. Mentor undergraduates from idea to multi-modal interactive prototype, with a high bar for visual craft, typography, and layout.",
       ],
     },
     {
@@ -111,16 +113,7 @@ export function generateResumePDF() {
       period: "Jun — Sep 2021",
       location: "Remote",
       bullets: [
-        "Contributed to early-stage AR glasses interaction design under NDA. Explored novel input paradigms for head-worn computing.",
-      ],
-    },
-    {
-      title: "UX Designer & Developer Intern",
-      company: "Kley",
-      period: "May — Jul 2020",
-      location: "Remote",
-      bullets: [
-        "Designed and developed user interfaces for an early-stage startup, wearing both design and front-end engineering hats.",
+        "Established design direction in an ambiguous, early-stage AR program (under NDA), exploring novel input paradigms alongside hardware, ML, and research partners.",
       ],
     },
   ];
@@ -205,19 +198,19 @@ export function generateResumePDF() {
 
   const skillSections = [
     {
-      label: "Design:",
+      label: "Product & Craft:",
       items:
-        "Interaction Design, UX Research, Design Thinking, Human-Centered Design, UI Design, UX Design, Wireframes & Prototypes, Design Systems, Prototyping",
+        "Account & Identity UX, Design Systems, Visual Design (typography, composition, layout), Interaction Design, Information Architecture, Prototyping",
     },
     {
-      label: "Technical:",
+      label: "Strategy & Process:",
       items:
-        "HTML/CSS/JavaScript, Adobe Creative Suite, Motion Graphics, Figma, Principle, After Effects",
+        "Designing for multiple user types (consumers, admins, cross-platform users), Cross-functional partnership with PM, Engineering, and Research, Mentorship and design critique",
     },
     {
-      label: "Soft Skills:",
+      label: "Tools:",
       items:
-        "Leadership, Communication, Cross-discipline Collaboration, Problem Solving, Mentorship",
+        "Figma, Cursor, HTML/CSS/JavaScript, Principle, After Effects, Adobe Creative Suite",
     },
   ];
 
@@ -252,8 +245,8 @@ export function generateResumePDF() {
   doc.setTextColor(40, 40, 40);
 
   const awards = [
-    { title: "International Design Award — Silver & Bronze", year: "2020" },
     { title: "MUSE Design Awards — Gold", year: "2020" },
+    { title: "International Design Awards — Silver & Bronze", year: "2020" },
     { title: "Adobe Design Achievement Awards — Semifinalist", year: "2020" },
     { title: "Dutch Design Week — Featured Project", year: "2020" },
     { title: "Bradford Hall End Scholarship — Recipient", year: "2019" },

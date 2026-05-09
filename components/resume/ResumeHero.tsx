@@ -16,7 +16,7 @@ export function ResumeHero() {
           Siladityaa Sharma
         </h1>
         <p className="text-mono-s tracking-wider text-[color:var(--surface-graphite)]">
-          SENIOR PRODUCT DESIGNER · META REALITY LABS
+          SENIOR PRODUCT DESIGNER · META REALITY LABS · LOS ANGELES, CA
         </p>
       </motion.div>
 
@@ -26,14 +26,16 @@ export function ResumeHero() {
       >
         <div className="max-w-[640px] flex flex-col gap-4">
           <p className="text-body text-[color:var(--surface-ink)]">
-            A creative technologist known for the ability to explore
-            future-states and create engaging future scenarios to inform design
-            ideas.
+            Senior product designer with 5 years of shipping consumer
+            experiences at scale. I lead identity, account, and social-profile
+            design across Meta&rsquo;s wearables ecosystem, where I balance
+            complex platform systems with the visual craft that people
+            actually feel when they use a product.
           </p>
           <p className="text-body text-[color:var(--surface-graphite)]">
-            A demonstrated history in prototyping simple to complex concepts,
-            regardless of feasibility. From wild conceptualization and ideation
-            to realistic, shippable products - I love the entire spectrum.
+            Comfortable moving between strategy, storytelling, and execution,
+            and at home with the kind of cross-surface, multi-user-type
+            problems that account and admin experiences demand.
           </p>
         </div>
 

@@ -5,13 +5,13 @@ import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
 
 const awards = [
   {
-    title: "International Design Award",
-    detail: "Silver & Bronze",
+    title: "MUSE Design Awards",
+    detail: "Gold",
     year: "2020",
   },
   {
-    title: "MUSE Design Awards",
-    detail: "Gold",
+    title: "International Design Awards",
+    detail: "Silver & Bronze",
     year: "2020",
   },
   {
