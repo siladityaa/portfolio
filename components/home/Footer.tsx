@@ -33,7 +33,7 @@ export function Footer() {
           <FooterExternalLink href="https://www.linkedin.com/in/siladityaa/">
             LINKEDIN ↗
           </FooterExternalLink>
-          <FooterExternalLink href="https://www.instagram.com/siladityaa/">
+          <FooterExternalLink href="https://www.instagram.com/siladityaadesign">
             INSTAGRAM ↗
           </FooterExternalLink>
           <FooterExternalLink href="mailto:siladityaa@gmail.com">
