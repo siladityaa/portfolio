@@ -80,7 +80,7 @@ export function WipHero() {
               variants={revealBlock}
               className="text-mono-s text-[color:var(--surface-graphite)]"
             >
-              SENIOR PRODUCT DESIGNER · WEARABLES + AI · BASED IN LOS ANGELES
+              SENIOR PRODUCT DESIGNER · WEARABLES + AI AT META · BASED IN LOS ANGELES
             </motion.p>
 
             {/* WIP notice + progress */}
