@@ -10,7 +10,7 @@
     "wearables",
     "consumer"
   ],
-  "keyColor": "#3B2E2A",
+  "keyColor": "#FF3B6B",
   "hero": {
     "src": "/work/sensor-feedback/hero.jpg",
     "alt": "Sensor feedback system \u2014 ambient still"

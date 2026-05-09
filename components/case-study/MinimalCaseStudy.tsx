@@ -133,32 +133,27 @@ export function MinimalCaseStudy({
         animate="visible"
         className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-7 lg:grid-rows-4"
       >
-        {/* TEXT CARD — explicitly placed at cols 1-2, rows 1-4 (full height) */}
+        {/* TEXT CARD — cols 1-2, rows 1-4 (full height). Permanently filled
+            with the project's keyColor so each case study reads as its own
+            vibrant brand moment. Title + body force-locked to white so we
+            don't depend on the dark/light theme variables. */}
         <motion.div
           variants={revealBlock}
-          style={
-            {
-              "--cs-bg":
-                "color-mix(in srgb, var(--surface-graphite) 4%, transparent)",
-              // Full keyColor on hover — solid background fills the tile.
-              "--cs-bg-hover": cs.keyColor,
-              "--cs-border-hover": cs.keyColor,
-              backgroundColor: "var(--cs-bg)",
-            } as React.CSSProperties
-          }
-          className="group flex flex-col gap-5 overflow-y-auto rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] p-6 pb-10 scrollbar-none transition-colors duration-500 ease-[var(--ease-out-soft)] hover:!bg-[var(--cs-bg-hover)] hover:!border-[color:var(--cs-border-hover)] lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-5 lg:p-7 lg:pb-12"
+          style={{
+            backgroundColor: cs.keyColor,
+            borderColor: cs.keyColor,
+          }}
+          className="flex flex-col gap-5 overflow-y-auto rounded-[4px] border p-6 pb-10 scrollbar-none lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-5 lg:p-7 lg:pb-12"
         >
-          <h1 className="text-display-m italic leading-tight text-[color:var(--surface-ink)]">
+          <h1 className="text-display-m italic leading-tight text-white">
             {cs.title}
           </h1>
 
           {brief && (
-            <p className="text-body text-[color:var(--surface-graphite)]">
-              {brief}
-            </p>
+            <p className="text-body text-white/85">{brief}</p>
           )}
 
-          <dl className="flex flex-col gap-2 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-4 text-mono-s">
+          <dl className="flex flex-col gap-2 border-t border-white/25 pt-4 text-mono-s">
             <Row label="Role" value={cs.role} />
             {cs.team && <Row label="Team" value={cs.team} />}
             {cs.credits && <Row label="Partners" value={cs.credits} />}
@@ -214,12 +209,8 @@ export function MinimalCaseStudy({
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="grid grid-cols-[80px_minmax(0,1fr)] gap-3">
-      <dt className="text-[color:var(--surface-graphite)]">
-        {label.toUpperCase()}
-      </dt>
-      <dd className="whitespace-pre-line text-[color:var(--surface-ink)]">
-        {value}
-      </dd>
+      <dt className="text-white/65">{label.toUpperCase()}</dt>
+      <dd className="whitespace-pre-line text-white">{value}</dd>
     </div>
   );
 }
