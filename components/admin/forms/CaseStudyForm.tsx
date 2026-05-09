@@ -179,14 +179,36 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
           />
         </section>
 
-        {/* Chapters */}
+        {/* Bento gallery — supporting tiles in the new minimal layout */}
         <section className="flex flex-col gap-6">
+          <header className="flex flex-col gap-2">
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
+                Bento gallery
+              </h2>
+              <GalleryAddButton />
+            </div>
+            <p className="text-body text-[color:var(--surface-graphite)]">
+              The five supporting tiles around the hero in the bento grid.
+              Tile shapes are fixed (s1 wide, s2 square, s3 portrait, s4/s5
+              squares) — assets will fill via object-cover.
+            </p>
+          </header>
+          <GalleryList slug={defaultValues.slug} />
+        </section>
+
+        {/* Chapters — legacy, not rendered in the new minimal layout */}
+        <section className="flex flex-col gap-6 opacity-60">
           <header className="flex items-baseline justify-between">
             <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
-              Chapters
+              Chapters <span className="text-mono-s text-[color:var(--surface-graphite)]">(legacy)</span>
             </h2>
             <ChaptersAddButton />
           </header>
+          <p className="text-body text-[color:var(--surface-graphite)]">
+            Chapters are no longer rendered in the public case-study layout.
+            Edits here only affect the data file and are kept for safekeeping.
+          </p>
           <ChaptersList />
         </section>
 
@@ -276,6 +298,114 @@ function ChaptersAddButton() {
       className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
     >
       + ADD CHAPTER
+    </button>
+  );
+}
+
+/* ---------- Gallery editor (bento supporting tiles) ----------------------- */
+
+const BENTO_LABELS = [
+  { label: "TILE 1 — wide landscape (under text card)", shape: "2 × 1" },
+  { label: "TILE 2 — medium square (top right)", shape: "2 × 2" },
+  { label: "TILE 3 — tall portrait (bottom-mid right)", shape: "1 × 2" },
+  { label: "TILE 4 — small square (right column)", shape: "1 × 1" },
+  { label: "TILE 5 — small square (right column)", shape: "1 × 1" },
+];
+
+function GalleryList({ slug }: { slug: string }) {
+  const gallery = useFieldArray<CaseStudy, "gallery">({ name: "gallery" });
+
+  if (gallery.fields.length === 0) {
+    return (
+      <p className="text-body text-[color:var(--surface-graphite)]">
+        No bento tiles yet. Use “+ Add tile” above to add up to 5 supporting
+        assets.
+      </p>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-6">
+      {gallery.fields.map((field, i) => {
+        const meta = BENTO_LABELS[i] ?? {
+          label: `TILE ${i + 1} — extra (not rendered, max 5)`,
+          shape: "—",
+        };
+        return (
+          <div
+            key={field.id}
+            className="flex flex-col gap-4 rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-5"
+          >
+            <header className="flex items-baseline justify-between gap-3">
+              <div className="flex flex-col gap-1">
+                <span className="text-mono-s text-[color:var(--surface-ink)]">
+                  {meta.label}
+                </span>
+                <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                  Span: {meta.shape}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                {i > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => gallery.move(i, i - 1)}
+                    className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                  >
+                    ↑
+                  </button>
+                )}
+                {i < gallery.fields.length - 1 && (
+                  <button
+                    type="button"
+                    onClick={() => gallery.move(i, i + 1)}
+                    className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                  >
+                    ↓
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => gallery.remove(i)}
+                  className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                >
+                  REMOVE
+                </button>
+              </div>
+            </header>
+
+            <div className="flex flex-col gap-4">
+              <ImageUploadField
+                name={`gallery.${i}.src`}
+                label="ASSET (image / gif / video)"
+                uploadDir={`work/${slug}`}
+              />
+              <TextField name={`gallery.${i}.alt`} label="ALT TEXT" />
+              <TextField
+                name={`gallery.${i}.caption`}
+                label="CAPTION (optional)"
+              />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function GalleryAddButton() {
+  const gallery = useFieldArray<CaseStudy, "gallery">({ name: "gallery" });
+  const filled = gallery.fields.length;
+  if (filled >= 5) return null;
+  return (
+    <button
+      type="button"
+      onClick={() =>
+        gallery.append({ src: "", alt: "", caption: "" })
+      }
+      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+    >
+      + ADD TILE ({filled}/5)
     </button>
   );
 }
