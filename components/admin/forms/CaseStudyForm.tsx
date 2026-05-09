@@ -179,7 +179,7 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
               <GalleryAddButton />
             </div>
             <p className="text-body text-[color:var(--surface-graphite)]">
-              The five supporting tiles around the hero. Tile shapes are
+              The four supporting tiles around the hero. Tile shapes are
               fixed — assets fill via object-cover.
             </p>
           </header>
@@ -206,12 +206,13 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
 /* ---------- Gallery editor (bento supporting tiles) ----------------------- */
 
 const BENTO_LABELS = [
-  { label: "TILE 1 — wide landscape (under text card)", shape: "2 × 1" },
-  { label: "TILE 2 — medium square (top right)", shape: "2 × 2" },
-  { label: "TILE 3 — tall portrait (right column)", shape: "1 × 2" },
+  { label: "TILE 1 — medium square (top right)", shape: "2 × 2" },
+  { label: "TILE 2 — tall portrait (right column)", shape: "1 × 2" },
+  { label: "TILE 3 — small square (right column)", shape: "1 × 1" },
   { label: "TILE 4 — small square (right column)", shape: "1 × 1" },
-  { label: "TILE 5 — small square (right column)", shape: "1 × 1" },
 ];
+
+const BENTO_MAX = 4;
 
 function GalleryList({ slug }: { slug: string }) {
   const gallery = useFieldArray<CaseStudy, "gallery">({ name: "gallery" });
@@ -229,7 +230,7 @@ function GalleryList({ slug }: { slug: string }) {
     <div className="flex flex-col gap-6">
       {gallery.fields.map((field, i) => {
         const meta = BENTO_LABELS[i] ?? {
-          label: `TILE ${i + 1} — extra (not rendered, max 5)`,
+          label: `TILE ${i + 1} — extra (not rendered, max ${BENTO_MAX})`,
           shape: "—",
         };
         return (
@@ -297,7 +298,7 @@ function GalleryList({ slug }: { slug: string }) {
 function GalleryAddButton() {
   const gallery = useFieldArray<CaseStudy, "gallery">({ name: "gallery" });
   const filled = gallery.fields.length;
-  if (filled >= 5) return null;
+  if (filled >= BENTO_MAX) return null;
   return (
     <button
       type="button"
@@ -306,7 +307,7 @@ function GalleryAddButton() {
       }
       className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
     >
-      + ADD TILE ({filled}/5)
+      + ADD TILE ({filled}/{BENTO_MAX})
     </button>
   );
 }

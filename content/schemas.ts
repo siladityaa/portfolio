@@ -51,8 +51,8 @@ export const caseStudySchema = z.object({
   keyColor: z.string(),
   hero: heroSchema,
   brief: z.string(),
-  /** Up to 5 supporting bento tiles. */
-  gallery: z.array(galleryItemSchema).max(5).optional(),
+  /** Up to 4 supporting bento tiles. */
+  gallery: z.array(galleryItemSchema).max(4).optional(),
 });
 
 /* =============================================================================

@@ -21,19 +21,20 @@ interface MinimalCaseStudyProps {
  * largest tiles, the rest fill in around them.
  *
  *   ┌────────┬─────────────────┬───────────┐
- *   │  TEXT  │                 │   s2      │
+ *   │  TEXT  │                 │   s1      │
  *   │  CARD  │                 │   (2x2)   │
- *   │  (2x3) │   MAIN ASSET    │           │
- *   │        │   (3x4 — the    ├─────┬─────┤
- *   │        │    tallest +    │     │ s4  │
- *   ├────────┤    biggest)     │ s3  ├─────┤
- *   │  s1    │                 │ 1x2 │ s5  │
- *   │  (2x1) │                 │     │     │
+ *   │  (2x4) │   MAIN ASSET    │           │
+ *   │  full  │   (3x4 — the    ├─────┬─────┤
+ *   │  height│    tallest +    │     │ s3  │
+ *   │        │    biggest)     │ s2  ├─────┤
+ *   │        │                 │ 1x2 │ s4  │
+ *   │        │                 │     │     │
  *   └────────┴─────────────────┴─────┴─────┘
  *
- * 7-column grid balances visual weight: hero claims the centre 3 cols
- * (43%), text + s1 claim the left 2 cols (29%), and the right 2 cols
- * (29%) host four supporting tiles in mixed portrait/square shapes.
+ * 7-column grid balances visual weight. Text card runs full height so
+ * the brief and meta never get clipped; hero claims the centre 3 cols
+ * (43%); right 2 cols (29%) host four supporting tiles in mixed
+ * portrait/square shapes.
  *
  * Single viewport at lg+, stacks vertically below.
  */
@@ -135,7 +136,7 @@ export function MinimalCaseStudy({
         {/* TEXT CARD — explicitly placed at cols 1-2, rows 1-3 */}
         <motion.div
           variants={revealBlock}
-          className="flex flex-col gap-5 overflow-y-auto rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-6 pb-10 scrollbar-none lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-4 lg:p-7 lg:pb-12"
+          className="flex flex-col gap-5 overflow-y-auto rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-6 pb-10 scrollbar-none lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-5 lg:p-7 lg:pb-12"
         >
           <h1 className="text-display-s italic leading-tight text-[color:var(--surface-ink)]">
             {cs.title}
@@ -163,44 +164,36 @@ export function MinimalCaseStudy({
           fallback="MAIN ASSET TBD"
         />
 
-        {/* s1 — cols 1-2, row 4 (small landscape under text card) */}
+        {/* s1 — cols 6-7, rows 1-2 (medium square 2x2) */}
         <BentoTile
           variants={revealBlock}
-          className="lg:col-start-1 lg:col-end-3 lg:row-start-4 lg:row-end-5"
+          className="lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3"
           src={bento[0]?.src}
           alt={bento[0]?.alt ?? `${cs.title} detail 1`}
         />
 
-        {/* s2 — cols 6-7, rows 1-2 (medium square 2x2) */}
+        {/* s2 — col 6, rows 3-4 (tall portrait 1x2) */}
         <BentoTile
           variants={revealBlock}
-          className="lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3"
+          className="lg:col-start-6 lg:col-end-7 lg:row-start-3 lg:row-end-5"
           src={bento[1]?.src}
           alt={bento[1]?.alt ?? `${cs.title} detail 2`}
         />
 
-        {/* s3 — col 6, rows 3-4 (tall portrait 1x2) */}
+        {/* s3 — col 7, row 3 (small square 1x1) */}
         <BentoTile
           variants={revealBlock}
-          className="lg:col-start-6 lg:col-end-7 lg:row-start-3 lg:row-end-5"
+          className="lg:col-start-7 lg:col-end-8 lg:row-start-3 lg:row-end-4"
           src={bento[2]?.src}
           alt={bento[2]?.alt ?? `${cs.title} detail 3`}
         />
 
-        {/* s4 — col 7, row 3 (small square 1x1) */}
-        <BentoTile
-          variants={revealBlock}
-          className="lg:col-start-7 lg:col-end-8 lg:row-start-3 lg:row-end-4"
-          src={bento[3]?.src}
-          alt={bento[3]?.alt ?? `${cs.title} detail 4`}
-        />
-
-        {/* s5 — col 7, row 4 (small square 1x1) */}
+        {/* s4 — col 7, row 4 (small square 1x1) */}
         <BentoTile
           variants={revealBlock}
           className="lg:col-start-7 lg:col-end-8 lg:row-start-4 lg:row-end-5"
-          src={bento[4]?.src}
-          alt={bento[4]?.alt ?? `${cs.title} detail 5`}
+          src={bento[3]?.src}
+          alt={bento[3]?.alt ?? `${cs.title} detail 4`}
         />
       </motion.div>
 
