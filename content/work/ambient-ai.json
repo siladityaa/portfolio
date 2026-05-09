@@ -1,10 +1,10 @@
 {
   "slug": "ambient-ai",
   "title": "Ambient AI for wearables",
-  "timeline": "2024 \u2014 2025",
+  "timeline": "2024 — 2025",
   "role": "Senior Product Designer\nDesign Engineer",
-  "team": "Design \u00b7 Research \u00b7 ML \u00b7 Hardware",
-  "credits": "Meta Reality Labs \u00b7 Wearables AI\nPM, Research, ML, Hardware partners",
+  "team": "Design · Research · ML · Hardware",
+  "credits": "Meta Reality Labs · Wearables AI\nPM, Research, ML, Hardware partners",
   "status": "public",
   "tags": [
     "wearables",
@@ -13,26 +13,20 @@
   "keyColor": "#FF4F1A",
   "hero": {
     "src": "/work/ambient-ai/hero.jpg",
-    "alt": "Pre-approved ambient still \u2014 Ambient AI for wearables",
+    "alt": "Pre-approved ambient still — Ambient AI for wearables",
     "caption": "Pre-approved ambient still"
   },
-  "brief": "TODO(siladityaa) \u2014 Frame the public problem: what an ambient AI on a wearable is supposed to feel like, the constraints that shaped it, and why the problem matters now. Leave the what/how for the locked chapters and the in-person walkthrough.",
+  "brief": "TODO(siladityaa) — Frame the public problem: what an ambient AI on a wearable is supposed to feel like, the constraints that shaped it, and why the problem matters now. Leave the what/how for the locked chapters and the in-person walkthrough.",
   "gallery": [
     {
       "src": "/work/ambient-ai/03.jpg",
-      "alt": "Detail 2"
+      "alt": "Detail 2",
+      "caption": ""
     },
     {
       "src": "/work/ambient-ai/04.jpg",
-      "alt": "Detail 3"
-    },
-    {
-      "src": "/work/ambient-ai/05.jpg",
-      "alt": "Detail 4"
-    },
-    {
-      "src": "/work/ambient-ai/06.jpg",
-      "alt": "Detail 5"
+      "alt": "Detail 3",
+      "caption": ""
     }
   ]
 }
