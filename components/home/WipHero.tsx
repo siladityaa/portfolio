@@ -72,7 +72,19 @@ export function WipHero() {
               className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)]"
             >
               Designing intelligence that whispers, not interrupts. Currently
-              at <MetaSymbol />.
+              at{" "}
+              <a
+                href="https://www.meta.com/ai-glasses/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Meta AI Glasses"
+                data-cursor="open"
+                data-no-stamp
+                className="inline-block transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-70"
+              >
+                <MetaSymbol />
+              </a>
+              .
             </motion.h1>
 
             {/* Subline */}
