@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 import type { CaseStudy } from "@/content/types";
@@ -254,8 +253,7 @@ interface BentoTileProps {
   className?: string;
   fallback?: string;
   variants?: import("framer-motion").Variants;
-  /** "hero" gets a taller mobile slot than "support" so the dominant
-   *  asset reads at proper size on phones. */
+  /** Currently unused on the public site; kept for forward compat. */
   size?: "hero" | "support";
 }
 
@@ -265,22 +263,22 @@ function BentoTile({
   className = "",
   fallback = "—",
   variants,
-  size = "support",
 }: BentoTileProps) {
-  // Generous mobile heights so assets aren't squished into a 200px slot.
-  // lg:min-h-0 hands sizing back to the bento grid above 1024px.
-  const mobileHeight =
-    size === "hero" ? "min-h-[58vh]" : "min-h-[42vh]";
-
+  // On mobile the tile auto-sizes to its asset's natural aspect ratio
+  // (w-full + h-auto on the media), so no min-h. Only the empty-state
+  // fallback needs a visible height. Desktop hands sizing back to the
+  // bento grid via lg:min-h-0.
   return (
     <motion.div
       variants={variants}
-      className={`relative ${mobileHeight} overflow-hidden rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)] lg:min-h-0 ${className}`}
+      className={`relative overflow-hidden rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)] ${
+        src ? "" : "min-h-[160px]"
+      } lg:min-h-0 ${className}`}
     >
       {src ? (
         <MediaFrame src={src} alt={alt} />
       ) : (
-        <div className="flex h-full w-full items-center justify-center text-mono-s text-[color:color-mix(in_srgb,var(--surface-graphite)_50%,transparent)]">
+        <div className="flex h-full min-h-[inherit] w-full items-center justify-center text-mono-s text-[color:color-mix(in_srgb,var(--surface-graphite)_50%,transparent)]">
           {fallback}
         </div>
       )}
@@ -293,10 +291,12 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
   // `https://blob.vercel-storage.com/hero.mp4?token=…` still detect as video.
   const ext = src.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
 
-  // On mobile the bento collapses to a single column with generous tile
-  // heights, so we want the full asset visible (object-contain). On lg+
-  // the grid sizes are intentional and we want clean fills (object-cover).
-  const fitClasses = "object-contain lg:object-cover";
+  // Mobile: render in normal flow with `block w-full h-auto`. The tile
+  // wraps tightly to the asset's natural aspect ratio — no letterbox bg.
+  // Desktop (lg+): switch to absolute fill so the asset covers the
+  // intentional bento grid cell with object-cover.
+  const fitClasses =
+    "block h-auto w-full lg:absolute lg:inset-0 lg:h-full lg:object-cover";
 
   if (ext === "mp4" || ext === "webm" || ext === "mov") {
     return (
@@ -306,33 +306,21 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
         loop
         muted
         playsInline
-        className={`absolute inset-0 h-full w-full ${fitClasses}`}
+        className={fitClasses}
       />
     );
   }
-  // External URLs (Vercel Blob, Cloudinary, S3, etc.) bypass Next/Image
-  // since they're not in next.config's remotePatterns allowlist.
-  if (/^https?:\/\//.test(src)) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={src}
-        alt={alt}
-        className={`absolute inset-0 h-full w-full ${fitClasses}`}
-      />
-    );
-  }
+  // Use plain <img> for everything (local + external) so we keep the
+  // same natural-sizing behavior on mobile. Next/Image's `fill` mode
+  // forces absolute positioning which would re-introduce the empty
+  // background problem.
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       src={src}
       alt={alt}
-      fill
-      sizes="(min-width: 1024px) 33vw, 100vw"
       className={fitClasses}
-      // Skip Next.js image optimization for animated formats — re-encoding
-      // would strip animation. WebP can be either, so we play it safe.
-      unoptimized={ext === "gif" || ext === "webp" || ext === "apng"}
-      priority
+      loading="eager"
     />
   );
 }
