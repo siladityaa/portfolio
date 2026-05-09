@@ -1,9 +1,9 @@
 {
   "slug": "sample-project",
   "title": "Sample Project",
-  "timeline": "2024 — 2025",
+  "timeline": "2024 \u2014 2025",
   "role": "Sole Product designer\nDesign Engineer",
-  "team": "Design · Research · Hardware · ML",
+  "team": "Design \u00b7 Research \u00b7 Hardware \u00b7 ML",
   "credits": "Huiqiao Z. /Design manager\nYiming M., Jason L. /PM",
   "status": "public",
   "tags": [
@@ -17,6 +17,12 @@
     "caption": "Pre-approved ambient still"
   },
   "brief": "A placeholder case study that exercises every chapter section type from the new xiangyi-style layout. Replace with a real project in Phase 4.",
+  "gallery": [
+    {
+      "src": "/work/sample-project/02.jpg",
+      "alt": "Sample project asset"
+    }
+  ],
   "chapters": [
     {
       "slug": "context",
@@ -25,7 +31,7 @@
       "sections": [
         {
           "kind": "proseBlock",
-          "body": "TODO(siladityaa) — a paragraph framing the public problem space. Why this work exists, what the constraints were, and what made the team take it on. Two or three sentences is plenty here; the rest of the page will do the heavy lifting."
+          "body": "TODO(siladityaa) \u2014 a paragraph framing the public problem space. Why this work exists, what the constraints were, and what made the team take it on. Two or three sentences is plenty here; the rest of the page will do the heavy lifting."
         },
         {
           "kind": "cardGrid",
@@ -96,8 +102,8 @@
             {
               "label": "Value",
               "cells": [
-                "Strategic — long-term value",
-                "Tactical — reliable returns"
+                "Strategic \u2014 long-term value",
+                "Tactical \u2014 reliable returns"
               ]
             }
           ],
@@ -105,7 +111,7 @@
         },
         {
           "kind": "proseBlock",
-          "body": "TODO(siladityaa) — three sentences describing how the strategy translates into shipped work. Use **bold inline highlights** for the load-bearing nouns."
+          "body": "TODO(siladityaa) \u2014 three sentences describing how the strategy translates into shipped work. Use **bold inline highlights** for the load-bearing nouns."
         }
       ]
     },
@@ -119,7 +125,7 @@
           "tabs": [
             {
               "label": "Side nav redesign",
-              "body": "TODO(siladityaa) — 1–2 sentences about what the side nav redesign accomplished and why the team prioritised it.",
+              "body": "TODO(siladityaa) \u2014 1\u20132 sentences about what the side nav redesign accomplished and why the team prioritised it.",
               "image": {
                 "src": "/work/sample/sidenav.jpg",
                 "alt": "Side nav redesign mockup"
@@ -127,7 +133,7 @@
             },
             {
               "label": "Suggest account",
-              "body": "TODO(siladityaa) — the account-suggestion experiment, what shipped, what the result was.",
+              "body": "TODO(siladityaa) \u2014 the account-suggestion experiment, what shipped, what the result was.",
               "image": {
                 "src": "/work/sample/suggest.jpg",
                 "alt": "Account suggestion mockup"
@@ -141,7 +147,7 @@
         {
           "kind": "mockupFrame",
           "src": "/work/sample/full-mock.jpg",
-          "alt": "Full TikTok.com home — production mockup",
+          "alt": "Full TikTok.com home \u2014 production mockup",
           "caption": "Production mockup, second iteration"
         }
       ]
@@ -165,7 +171,7 @@
       "sections": [
         {
           "kind": "proseBlock",
-          "body": "TODO(siladityaa) — one paragraph in first person about what you learned. What you'd change, what you'd keep, what surprised you. Around sixty words. This is the human moment in the case study."
+          "body": "TODO(siladityaa) \u2014 one paragraph in first person about what you learned. What you'd change, what you'd keep, what surprised you. Around sixty words. This is the human moment in the case study."
         }
       ]
     }

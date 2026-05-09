@@ -160,6 +160,17 @@ export const caseStudySchema = z.object({
   keyColor: z.string(),
   hero: heroSchema,
   brief: z.string(),
+  /** Optional flat gallery of additional media (images / gifs / videos) used
+   *  by the minimal case-study layout's thumbnail strip. */
+  gallery: z
+    .array(
+      z.object({
+        src: z.string(),
+        alt: z.string().optional(),
+        caption: z.string().optional(),
+      }),
+    )
+    .optional(),
   chapters: z.array(chapterSchema),
   next: z
     .object({ slug: z.string(), title: z.string() })

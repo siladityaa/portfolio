@@ -1,10 +1,10 @@
 {
   "slug": "sensor-feedback",
   "title": "Sensor feedback system",
-  "timeline": "2023 — 2024",
+  "timeline": "2023 \u2014 2024",
   "role": "Product Designer",
-  "team": "Design · Hardware · Firmware",
-  "credits": "Meta Reality Labs · Wearables hardware\nHardware + firmware partners",
+  "team": "Design \u00b7 Hardware \u00b7 Firmware",
+  "credits": "Meta Reality Labs \u00b7 Wearables hardware\nHardware + firmware partners",
   "status": "public",
   "tags": [
     "wearables",
@@ -13,9 +13,15 @@
   "keyColor": "#3B2E2A",
   "hero": {
     "src": "/work/sensor-feedback/hero.jpg",
-    "alt": "Sensor feedback system — ambient still"
+    "alt": "Sensor feedback system \u2014 ambient still"
   },
-  "brief": "TODO(siladityaa) — Frame the public problem: how a wearable communicates without a screen when the user's attention is elsewhere. Keep to ~80 words.",
+  "brief": "TODO(siladityaa) \u2014 Frame the public problem: how a wearable communicates without a screen when the user's attention is elsewhere. Keep to ~80 words.",
+  "gallery": [
+    {
+      "src": "/work/sensor-feedback/02.jpg",
+      "alt": "Sensor feedback exploration"
+    }
+  ],
   "chapters": [
     {
       "slug": "context",
@@ -24,11 +30,11 @@
       "sections": [
         {
           "kind": "proseBlock",
-          "body": "TODO(siladityaa) — public framing paragraph for the sensor feedback work. What the device does, what the user is doing while wearing it, and why a screen wasn't an option."
+          "body": "TODO(siladityaa) \u2014 public framing paragraph for the sensor feedback work. What the device does, what the user is doing while wearing it, and why a screen wasn't an option."
         },
         {
           "kind": "pullQuote",
-          "body": "TODO(siladityaa) — a quote from a partner that sharpened the framing.",
+          "body": "TODO(siladityaa) \u2014 a quote from a partner that sharpened the framing.",
           "attribution": "Partner Engineer"
         }
       ]
@@ -40,14 +46,14 @@
       "sections": [
         {
           "kind": "proseBlock",
-          "body": "TODO(siladityaa) — explain how the same wearable has to mean different things across different physical postures, and how the design system tracks that."
+          "body": "TODO(siladityaa) \u2014 explain how the same wearable has to mean different things across different physical postures, and how the design system tracks that."
         },
         {
           "kind": "cardGrid",
           "cards": [
             {
               "title": "Posture A",
-              "body": "TODO — what the wearable communicates here.",
+              "body": "TODO \u2014 what the wearable communicates here.",
               "chip": {
                 "label": "Posture",
                 "tone": "neutral"
@@ -55,7 +61,7 @@
             },
             {
               "title": "Posture B",
-              "body": "TODO — what shifts in this state.",
+              "body": "TODO \u2014 what shifts in this state.",
               "chip": {
                 "label": "Posture",
                 "tone": "neutral"
@@ -63,7 +69,7 @@
             },
             {
               "title": "Posture C",
-              "body": "TODO — and again.",
+              "body": "TODO \u2014 and again.",
               "chip": {
                 "label": "Posture",
                 "tone": "neutral"
@@ -82,7 +88,7 @@
           "kind": "mockupFrame",
           "src": "/work/sensor-feedback/spec.jpg",
           "alt": "Spec sheet for the haptic vocabulary",
-          "caption": "Spec sheet placeholder — pre-approved render goes here"
+          "caption": "Spec sheet placeholder \u2014 pre-approved render goes here"
         }
       ]
     },
@@ -93,7 +99,7 @@
       "sections": [
         {
           "kind": "proseBlock",
-          "body": "TODO(siladityaa) — first-person reflection on designing with hardware constraints. What you'd repeat, what you'd cut."
+          "body": "TODO(siladityaa) \u2014 first-person reflection on designing with hardware constraints. What you'd repeat, what you'd cut."
         }
       ]
     }

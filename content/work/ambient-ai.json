@@ -1,10 +1,10 @@
 {
   "slug": "ambient-ai",
   "title": "Ambient AI for wearables",
-  "timeline": "2024 — 2025",
+  "timeline": "2024 \u2014 2025",
   "role": "Senior Product Designer\nDesign Engineer",
-  "team": "Design · Research · ML · Hardware",
-  "credits": "Meta Reality Labs · Wearables AI\nPM, Research, ML, Hardware partners",
+  "team": "Design \u00b7 Research \u00b7 ML \u00b7 Hardware",
+  "credits": "Meta Reality Labs \u00b7 Wearables AI\nPM, Research, ML, Hardware partners",
   "status": "public",
   "tags": [
     "wearables",
@@ -13,10 +13,22 @@
   "keyColor": "#2E3A3A",
   "hero": {
     "src": "/work/ambient-ai/hero.jpg",
-    "alt": "Pre-approved ambient still — Ambient AI for wearables",
+    "alt": "Pre-approved ambient still \u2014 Ambient AI for wearables",
     "caption": "Pre-approved ambient still"
   },
-  "brief": "TODO(siladityaa) — Frame the public problem: what an ambient AI on a wearable is supposed to feel like, the constraints that shaped it, and why the problem matters now. Leave the what/how for the locked chapters and the in-person walkthrough.",
+  "brief": "TODO(siladityaa) \u2014 Frame the public problem: what an ambient AI on a wearable is supposed to feel like, the constraints that shaped it, and why the problem matters now. Leave the what/how for the locked chapters and the in-person walkthrough.",
+  "gallery": [
+    {
+      "src": "/work/ambient-ai/02.jpg",
+      "alt": "Ambient AI prototype",
+      "caption": "Prototype frame"
+    },
+    {
+      "src": "/work/ambient-ai/03.jpg",
+      "alt": "Wearable in context",
+      "caption": "In-context exploration"
+    }
+  ],
   "chapters": [
     {
       "slug": "context",
@@ -25,14 +37,14 @@
       "sections": [
         {
           "kind": "proseBlock",
-          "body": "TODO(siladityaa) — public framing paragraph. What the problem looks like from outside the company, why now, and what the team's mandate was."
+          "body": "TODO(siladityaa) \u2014 public framing paragraph. What the problem looks like from outside the company, why now, and what the team's mandate was."
         },
         {
           "kind": "cardGrid",
           "cards": [
             {
               "title": "PM",
-              "body": "TODO — held the framing and the metric.",
+              "body": "TODO \u2014 held the framing and the metric.",
               "chip": {
                 "label": "PM",
                 "tone": "pm"
@@ -40,7 +52,7 @@
             },
             {
               "title": "Design",
-              "body": "TODO — held the interaction model and the system.",
+              "body": "TODO \u2014 held the interaction model and the system.",
               "chip": {
                 "label": "Design",
                 "tone": "design"
@@ -48,7 +60,7 @@
             },
             {
               "title": "ML + Hardware",
-              "body": "TODO — held the on-device model and the sensors.",
+              "body": "TODO \u2014 held the on-device model and the sensors.",
               "chip": {
                 "label": "Engineer",
                 "tone": "engineer"
@@ -105,7 +117,7 @@
         },
         {
           "kind": "proseBlock",
-          "body": "TODO(siladityaa) — three sentences explaining how the team framed the trade-offs and what that meant for the design."
+          "body": "TODO(siladityaa) \u2014 three sentences explaining how the team framed the trade-offs and what that meant for the design."
         }
       ]
     },
@@ -116,7 +128,7 @@
       "sections": [
         {
           "kind": "pullQuote",
-          "body": "TODO(siladityaa) — a quote from a research session that sharpened the framing.",
+          "body": "TODO(siladityaa) \u2014 a quote from a research session that sharpened the framing.",
           "attribution": "Research participant"
         }
       ]
@@ -128,7 +140,7 @@
       "sections": [
         {
           "kind": "proseBlock",
-          "body": "TODO(siladityaa) — first-person paragraph about what you learned designing for an AI that's always there but rarely visible. Around sixty words."
+          "body": "TODO(siladityaa) \u2014 first-person paragraph about what you learned designing for an AI that's always there but rarely visible. Around sixty words."
         }
       ]
     }

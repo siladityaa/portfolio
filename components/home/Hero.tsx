@@ -41,7 +41,7 @@ export function Hero({ sentence, subline }: HeroProps) {
         >
           <motion.h1
             variants={revealBlock}
-            className="max-w-[26ch] text-display-xl italic text-[color:var(--surface-ink)]"
+            className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)]"
           >
             {renderSentence(sentence)}
           </motion.h1>

@@ -2,16 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { loadAllCaseStudies, loadCaseStudy } from "@/lib/content";
-import { HeroChapter } from "@/components/case-study/HeroChapter";
-import { ChapterContent } from "@/components/case-study/ChapterContent";
-import { ChapterSpy } from "@/components/case-study/ChapterSpy";
-import { CaseStudyTOC } from "@/components/case-study/CaseStudyTOC";
-import { ScrollRuler } from "@/components/case-study/ScrollRuler";
-import { NextProject } from "@/components/case-study/NextProject";
+import { MinimalCaseStudy } from "@/components/case-study/MinimalCaseStudy";
 import { KeyboardNav } from "@/components/case-study/KeyboardNav";
-import { ScrollToTop } from "@/components/case-study/ScrollToTop";
-import { MobileChapterNav } from "@/components/case-study/MobileChapterNav";
-import { StickyChapterPill } from "@/components/case-study/StickyChapterPill";
 
 export async function generateStaticParams() {
   const all = await loadAllCaseStudies();
@@ -33,21 +25,12 @@ export async function generateMetadata({
 }
 
 /**
- * Case study page — chapter-based, 3-column CSS-grid layout inspired by
- * xiangyidesign.com/tiktokweb, blended with this portfolio's serif + mono
- * language.
+ * Case study page — minimal single-viewport layout.
  *
- * Layout (≥1280px viewport):
- *   ┌─────────┬─────────────────┬───────┐
- *   │  TOC    │    content      │ ruler │
- *   │ (sticky)│ (HeroChapter +  │(sticky│
- *   │         │   chapters)     │       │
- *   └─────────┴─────────────────┴───────┘
- *
- * Below 1280px the rails collapse and the body becomes a single column.
- *
- * The whole grid is wrapped in `<ChapterSpy>` so the TOC and ruler can
- * share active-chapter state via Context without two duplicate observers.
+ * Replaces the previous chapter-based long-scroll experience with a
+ * single-frame summary: project info on the left, media gallery on the
+ * right. The chapter components are intentionally kept around in
+ * `components/case-study/` so this can be swapped back if needed.
  */
 export default async function CaseStudyPage({
   params,
@@ -58,51 +41,22 @@ export default async function CaseStudyPage({
   const cs = await loadCaseStudy(slug);
   if (!cs) notFound();
 
-  // Resolve prev/next case studies for keyboard nav.
   const all = await loadAllCaseStudies();
   const index = all.findIndex((c) => c.slug === slug);
   const prevSlug = index > 0 ? all[index - 1]?.slug : undefined;
   const nextSlug =
     index >= 0 && index < all.length - 1 ? all[index + 1]?.slug : undefined;
 
-  const chapterSlugs = cs.chapters.map((c) => c.slug);
-
   return (
     <article>
       <KeyboardNav prevSlug={prevSlug} nextSlug={nextSlug} />
-
-      <ChapterSpy chapterSlugs={chapterSlugs}>
-        {/* Mobile: sticky horizontal chapter nav (hidden ≥1280px) */}
-        <MobileChapterNav chapters={cs.chapters} />
-
-        {/* Desktop: sticky chapter pill at top-center (hidden <1280px) */}
-        <StickyChapterPill chapters={cs.chapters} />
-
-        <div className="case-study-grid">
-          {/* Left rail — TOC */}
-          <div className="case-study-rail">
-            <CaseStudyTOC chapters={cs.chapters} />
-          </div>
-
-          {/* Center column — hero + chapters */}
-          <div className="px-[clamp(20px,4vw,48px)] xl:px-0">
-            <HeroChapter cs={cs} index={Math.max(index, 0)} />
-            {cs.chapters.map((chapter) => (
-              <ChapterContent key={chapter.slug} chapter={chapter} cs={cs} />
-            ))}
-          </div>
-
-          {/* Right rail — ruler */}
-          <div className="case-study-rail">
-            <ScrollRuler chapters={cs.chapters} />
-          </div>
-        </div>
-      </ChapterSpy>
-
-      <NextProject cs={cs} />
-
-      {/* Mobile: scroll-to-top fab after long case studies */}
-      <ScrollToTop />
+      <MinimalCaseStudy
+        cs={cs}
+        index={Math.max(index, 0)}
+        total={all.length}
+        prevSlug={prevSlug}
+        nextSlug={nextSlug}
+      />
     </article>
   );
 }

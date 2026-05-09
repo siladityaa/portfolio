@@ -12,7 +12,7 @@
  *   - components/chrome/NavLinks.tsx (nav visibility)
  *   - app/(site)/page.tsx            (home composition)
  */
-export const WIP_MODE = true; // ← flip to false to go public
+export const WIP_MODE = false; // ← flip to true to gate behind WIP landing
 
 /** Routes always allowed through the WIP gate (in addition to home). */
 export const WIP_ALLOWED_ROUTES = new Set([
