@@ -18,7 +18,7 @@ import { z } from "zod";
    Case study frontmatter + bento gallery
    ============================================================================= */
 
-export const caseStudyStatusSchema = z.enum(["public"]);
+export const caseStudyStatusSchema = z.enum(["public", "comingSoon"]);
 
 export const caseStudyTagSchema = z.enum([
   "wearables",

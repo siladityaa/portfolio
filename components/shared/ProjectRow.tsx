@@ -10,7 +10,7 @@ export interface ProjectRowData {
   client: string;
   title: string;
   slug: string;
-  status: "public";
+  status: "public" | "comingSoon";
   keyColor: string;
   /** Hero asset that previews on row hover. Image or video src. */
   heroSrc?: string;
@@ -40,6 +40,7 @@ export function ProjectRowList({ rows }: ProjectListProps) {
       {rows.map((row, i) => {
         const isHovered = hoveredIndex === i;
         const isDimmed = hoveredIndex !== null && !isHovered;
+        const isComingSoon = row.status === "comingSoon";
         return (
           <li
             key={row.slug}
@@ -76,56 +77,91 @@ export function ProjectRowList({ rows }: ProjectListProps) {
                         : "text-[color:var(--surface-graphite)]",
                     )}
                   >
-                    [● PUBLIC]
+                    {isComingSoon ? "[ ◯ COMING SOON ]" : "[ ● PUBLIC ]"}
                   </span>
                 </div>
               </div>
 
-              {/* Right: title — the navigation link sits here, so the mailto
-                  in the left column can remain its own anchor. */}
-              <Link
-                href={`/work/${row.slug}`}
-                data-cursor="open"
-                className="flex flex-1 items-center justify-between gap-8"
-              >
-                <h3
-                  className={clsx(
-                    "text-display-l transition-colors duration-500 ease-[var(--ease-out-soft)]",
-                    isHovered
-                      ? "text-[color:#f6f5f1]"
-                      : "text-[color:var(--surface-ink)]",
-                  )}
-                >
-                  {row.title}
-                </h3>
-                {/* Hero preview — fades + slides in on hover. */}
-                <div
-                  className={clsx(
-                    "hidden h-[180px] w-[260px] shrink-0 overflow-hidden rounded-[2px] transition-all duration-500 ease-[var(--ease-out-soft)] md:block",
-                    isHovered
-                      ? "translate-x-0 opacity-100"
-                      : "translate-x-6 opacity-0",
-                  )}
-                  style={{
-                    backgroundColor:
-                      "color-mix(in srgb, #f6f5f1 15%, transparent)",
-                  }}
-                  aria-hidden
-                >
-                  {row.heroSrc ? (
-                    <HeroPreview
-                      src={row.heroSrc}
-                      alt={row.heroAlt ?? row.title}
-                      active={isHovered}
-                    />
-                  ) : null}
-                </div>
-              </Link>
+              {/* Right: title + hero preview. Links to the case study only
+                  when the project is public; coming-soon rows render the
+                  same content but unlinked + with cursor: not-allowed. */}
+              <RowBody
+                row={row}
+                isHovered={isHovered}
+                isComingSoon={isComingSoon}
+              />
             </div>
           </li>
         );
       })}
     </ul>
+  );
+}
+
+/**
+ * The right side of the row — title + slide-in hero preview. Wrapped in
+ * a Link for public projects; rendered as a plain div for coming-soon
+ * projects so the row can't be clicked.
+ */
+function RowBody({
+  row,
+  isHovered,
+  isComingSoon,
+}: {
+  row: ProjectRowData;
+  isHovered: boolean;
+  isComingSoon: boolean;
+}) {
+  const titleClass = clsx(
+    "text-display-l transition-colors duration-500 ease-[var(--ease-out-soft)]",
+    isHovered ? "text-[color:#f6f5f1]" : "text-[color:var(--surface-ink)]",
+  );
+  const previewWrapper = clsx(
+    "hidden h-[180px] w-[260px] shrink-0 overflow-hidden rounded-[2px] transition-all duration-500 ease-[var(--ease-out-soft)] md:block",
+    isHovered ? "translate-x-0 opacity-100" : "translate-x-6 opacity-0",
+  );
+
+  const inner = (
+    <>
+      <h3 className={titleClass}>{row.title}</h3>
+      <div
+        className={previewWrapper}
+        style={{
+          backgroundColor: "color-mix(in srgb, #f6f5f1 15%, transparent)",
+        }}
+        aria-hidden
+      >
+        {row.heroSrc ? (
+          <HeroPreview
+            src={row.heroSrc}
+            alt={row.heroAlt ?? row.title}
+            active={isHovered}
+          />
+        ) : null}
+      </div>
+    </>
+  );
+
+  if (isComingSoon) {
+    return (
+      <div
+        aria-disabled="true"
+        data-cursor="default"
+        className="flex flex-1 cursor-not-allowed items-center justify-between gap-8"
+      >
+        {inner}
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      href={`/work/${row.slug}`}
+      data-cursor="open"
+      className="flex flex-1 items-center justify-between gap-8"
+    >
+      {inner}
+    </Link>
   );
 }
 

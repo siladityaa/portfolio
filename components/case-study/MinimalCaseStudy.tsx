@@ -76,7 +76,13 @@ export function MinimalCaseStudy({
             <span>
               {cs.tags?.map((t) => t.toUpperCase()).join(" / ") ?? "PROJECT"}
             </span>
-            <span>{cs.status === "public" ? "PUBLIC" : "NDA"}</span>
+            <span>
+              {cs.status === "public"
+                ? "PUBLIC"
+                : cs.status === "comingSoon"
+                  ? "COMING SOON"
+                  : "NDA"}
+            </span>
           </div>
         </motion.div>
 

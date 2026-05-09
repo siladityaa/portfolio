@@ -26,6 +26,7 @@ interface CaseStudyFormProps {
 
 const STATUS_OPTIONS = [
   { value: "public", label: "Public" },
+  { value: "comingSoon", label: "Coming soon" },
 ] as const;
 
 const TAG_OPTIONS = [

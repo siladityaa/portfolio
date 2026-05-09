@@ -7,7 +7,10 @@ import { KeyboardNav } from "@/components/case-study/KeyboardNav";
 
 export async function generateStaticParams() {
   const all = await loadAllCaseStudies();
-  return all.map((cs) => ({ slug: cs.slug }));
+  // Only pre-render published case studies — coming-soon entries 404.
+  return all
+    .filter((cs) => cs.status === "public")
+    .map((cs) => ({ slug: cs.slug }));
 }
 
 export async function generateMetadata({
@@ -40,12 +43,21 @@ export default async function CaseStudyPage({
   const { slug } = await params;
   const cs = await loadCaseStudy(slug);
   if (!cs) notFound();
+  // Coming-soon entries are listed on the home page but their detail
+  // pages aren't published yet — show 404 so the URL can't be deep-linked.
+  if (cs.status === "comingSoon") notFound();
 
-  const all = await loadAllCaseStudies();
-  const index = all.findIndex((c) => c.slug === slug);
-  const prevSlug = index > 0 ? all[index - 1]?.slug : undefined;
+  // Build prev/next from published case studies only so keyboard nav
+  // never lands on a 404.
+  const published = (await loadAllCaseStudies()).filter(
+    (c) => c.status === "public",
+  );
+  const index = published.findIndex((c) => c.slug === slug);
+  const prevSlug = index > 0 ? published[index - 1]?.slug : undefined;
   const nextSlug =
-    index >= 0 && index < all.length - 1 ? all[index + 1]?.slug : undefined;
+    index >= 0 && index < published.length - 1
+      ? published[index + 1]?.slug
+      : undefined;
 
   return (
     <article>
@@ -53,7 +65,7 @@ export default async function CaseStudyPage({
       <MinimalCaseStudy
         cs={cs}
         index={Math.max(index, 0)}
-        total={all.length}
+        total={published.length}
         prevSlug={prevSlug}
         nextSlug={nextSlug}
       />
