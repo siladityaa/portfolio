@@ -59,9 +59,17 @@ async function listSlugsFromGitHub(): Promise<string[]> {
 async function loadCaseStudyFromGitHub(
   slug: string,
 ): Promise<CaseStudy | null> {
-  const res = await fetch(`${RAW_BASE}/content/work/${slug}.json`, {
-    next: { tags: [tagCaseStudy(slug)], revalidate: REVALIDATE },
-  });
+  // Use the Contents API instead of raw.githubusercontent.com because
+  // raw URLs sit behind a ~5min CDN cache that lags commits — content
+  // saved in the CMS would still serve stale even after our updateTag.
+  // The Contents API returns the live commit's content immediately.
+  const res = await fetch(
+    `${API_BASE}/content/work/${slug}.json?ref=${BRANCH}`,
+    {
+      next: { tags: [tagCaseStudy(slug)], revalidate: REVALIDATE },
+      headers: { Accept: "application/vnd.github.v3.raw" },
+    },
+  );
   if (!res.ok) return null;
   const parsed = caseStudySchema.safeParse(await res.json());
   return parsed.success ? parsed.data : null;

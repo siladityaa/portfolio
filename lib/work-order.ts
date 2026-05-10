@@ -16,7 +16,7 @@ const USE_GITHUB = process.env.NODE_ENV === "production";
 const OWNER = process.env.GITHUB_REPO_OWNER ?? "siladityaa";
 const REPO = process.env.GITHUB_REPO_NAME ?? "portfolio";
 const BRANCH = process.env.GITHUB_REPO_BRANCH ?? "main";
-const RAW_BASE = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
+const API_BASE = `https://api.github.com/repos/${OWNER}/${REPO}/contents`;
 const REVALIDATE = 3600;
 
 export const TAG_WORK_ORDER = "work-order";
@@ -28,9 +28,15 @@ export const workOrderSchema = z.object({
 export type WorkOrder = z.infer<typeof workOrderSchema>;
 
 async function readFromGitHub(): Promise<string[]> {
-  const res = await fetch(`${RAW_BASE}/${ORDER_FILE_REPO_PATH}`, {
-    next: { tags: [TAG_WORK_ORDER], revalidate: REVALIDATE },
-  });
+  // Contents API (vs raw URL) so updates land immediately — raw has a
+  // 5-min CDN cache that lags commits.
+  const res = await fetch(
+    `${API_BASE}/${ORDER_FILE_REPO_PATH}?ref=${BRANCH}`,
+    {
+      next: { tags: [TAG_WORK_ORDER], revalidate: REVALIDATE },
+      headers: { Accept: "application/vnd.github.v3.raw" },
+    },
+  );
   if (!res.ok) return [];
   try {
     const parsed = workOrderSchema.safeParse(await res.json());

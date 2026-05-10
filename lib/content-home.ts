@@ -13,7 +13,7 @@ const USE_GITHUB = process.env.NODE_ENV === "production";
 const OWNER = process.env.GITHUB_REPO_OWNER ?? "siladityaa";
 const REPO = process.env.GITHUB_REPO_NAME ?? "portfolio";
 const BRANCH = process.env.GITHUB_REPO_BRANCH ?? "main";
-const RAW_BASE = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
+const API_BASE = `https://api.github.com/repos/${OWNER}/${REPO}/contents`;
 const REVALIDATE = 3600;
 
 export const TAG_HOME_CONTENT = "home-content";
@@ -24,8 +24,12 @@ const FALLBACK: HomeContent = {
 
 export async function getHome(): Promise<HomeContent> {
   if (USE_GITHUB) {
-    const res = await fetch(`${RAW_BASE}/${REPO_PATH}`, {
+    // Contents API instead of raw URL so CMS saves are picked up
+    // immediately (raw.githubusercontent.com sits behind a CDN cache
+    // that lags commits).
+    const res = await fetch(`${API_BASE}/${REPO_PATH}?ref=${BRANCH}`, {
       next: { tags: [TAG_HOME_CONTENT], revalidate: REVALIDATE },
+      headers: { Accept: "application/vnd.github.v3.raw" },
     });
     if (!res.ok) return FALLBACK;
     const parsed = homeContentSchema.safeParse(await res.json());

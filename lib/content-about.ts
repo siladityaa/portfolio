@@ -14,7 +14,7 @@ const USE_GITHUB = process.env.NODE_ENV === "production";
 const OWNER = process.env.GITHUB_REPO_OWNER ?? "siladityaa";
 const REPO = process.env.GITHUB_REPO_NAME ?? "portfolio";
 const BRANCH = process.env.GITHUB_REPO_BRANCH ?? "main";
-const RAW_BASE = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
+const API_BASE = `https://api.github.com/repos/${OWNER}/${REPO}/contents`;
 const REVALIDATE = 3600;
 
 export const TAG_ABOUT_CONTENT = "about-content";
@@ -26,8 +26,11 @@ const FALLBACK: AboutContent = {
 
 export async function getAbout(): Promise<AboutContent> {
   if (USE_GITHUB) {
-    const res = await fetch(`${RAW_BASE}/${REPO_PATH}`, {
+    // Contents API instead of raw URL so CMS saves are picked up
+    // immediately.
+    const res = await fetch(`${API_BASE}/${REPO_PATH}?ref=${BRANCH}`, {
       next: { tags: [TAG_ABOUT_CONTENT], revalidate: REVALIDATE },
+      headers: { Accept: "application/vnd.github.v3.raw" },
     });
     if (!res.ok) return FALLBACK;
     const parsed = aboutContentSchema.safeParse(await res.json());
