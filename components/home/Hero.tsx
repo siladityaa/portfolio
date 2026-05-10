@@ -3,7 +3,7 @@
 import { Fragment } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-import { easeOutSoft, revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { easeOutSoft } from "@/lib/motion";
 import { MetaSymbol } from "@/components/chrome/MetaSymbol";
 
 interface HeroProps {
@@ -33,33 +33,28 @@ export function Hero({ sentence, subline }: HeroProps) {
       className="relative flex min-h-[88vh] w-full items-end"
     >
       <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-10 px-[clamp(24px,4vw,64px)] pt-[clamp(120px,20vh,220px)] pb-[clamp(60px,8vh,120px)]">
-        <motion.div
-          variants={revealStaggerBlocks}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col gap-10"
-        >
-          <motion.span
-            variants={revealBlock}
-            className="text-display-s italic text-[color:var(--surface-graphite)]"
-          >
-            Hi, I&rsquo;m Siladityaa Sharma
-          </motion.span>
+        <div className="flex flex-col gap-10">
+          {/* Each line animates independently rather than via a parent
+              stagger — more resilient than relying on staggerChildren
+              to cascade across mixed motion-element types. */}
+          <Reveal index={0}>
+            <span className="text-display-s italic text-[color:var(--surface-graphite)]">
+              Hi, I&rsquo;m Siladityaa Sharma
+            </span>
+          </Reveal>
 
-          <motion.h1
-            variants={revealBlock}
-            className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)]"
-          >
-            {renderSentence(sentence)}
-          </motion.h1>
+          <Reveal index={1}>
+            <h1 className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)]">
+              {renderSentence(sentence)}
+            </h1>
+          </Reveal>
 
-          <motion.p
-            variants={revealBlock}
-            className="text-mono-s text-[color:var(--surface-graphite)]"
-          >
-            {subline}
-          </motion.p>
-        </motion.div>
+          <Reveal index={2}>
+            <p className="text-mono-s text-[color:var(--surface-graphite)]">
+              {subline}
+            </p>
+          </Reveal>
+        </div>
       </div>
 
       {/* ↓ SCROLL mark, bottom-right of the hero block. Animation pauses
@@ -77,6 +72,34 @@ export function Hero({ sentence, subline }: HeroProps) {
         ↓ SCROLL
       </motion.span>
     </section>
+  );
+}
+
+/**
+ * Per-element fade-in. Each Reveal animates from y:24/opacity:0 → resting
+ * after a small index-derived delay. Independent animations dodge the
+ * staggerChildren-cascade edge case that left the h1 stuck at opacity 0
+ * when more than two children share a parent stagger container.
+ */
+function Reveal({
+  index,
+  children,
+}: {
+  index: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+        delay: 0.1 + index * 0.12,
+      }}
+    >
+      {children}
+    </motion.div>
   );
 }
 
