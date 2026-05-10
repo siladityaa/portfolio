@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Colophon — Siladityaa Sharma",
   description:
-    "The fonts, the grid, and the build tools behind siladityaa.com. A love letter to the people who notice.",
+    "The fonts, colors, grid, and stack behind siladityaa.com. Notes for the people who view-source.",
 };
 
 /**
- * Brief §5.5 — A tiny hidden page describing the fonts, the grid, and
- * the build tools. A love letter to the people who notice.
+ * Colophon — a tiny hidden page describing the fonts, the grid, and the
+ * build tools. Notes for the people who notice.
  */
 export default function ColophonPage() {
   return (
@@ -21,9 +21,9 @@ export default function ColophonPage() {
         How this site was made
       </h1>
       <p className="mt-8 max-w-[52ch] text-body text-[color:var(--surface-graphite)]">
-        A love letter to the people who view-source. Every decision here was
-        intentional — if something feels a certain way, it&apos;s because
-        someone sat with it until it did.
+        I get asked this enough that I figured I&rsquo;d write it down. Fonts,
+        colors, the stack, the things I sat with too long. Roughly in the
+        order it tends to come up.
       </p>
 
       {/* Sections */}
@@ -35,12 +35,12 @@ export default function ColophonPage() {
             {
               label: "DISPLAY",
               value: "Instrument Serif",
-              note: "Google Fonts — free fallback for PP Editorial New. Regular + italic, no variable weight. Hierarchy comes from size and leading, not weight.",
+              note: "I wanted PP Editorial New but didn't get around to licensing it. Instrument is on Google Fonts, free, and close enough that I haven't gone back.",
             },
             {
               label: "MONO",
               value: "JetBrains Mono",
-              note: "400 + 500 weights. Every label, timestamp, and breadcrumb. The brief says: every UI chrome element looks like it was labeled by an engineer.",
+              note: "Open-source. I use it in my editor, so the labels and timestamps on the site match what my code looks like. A bit selfish, but it works.",
             },
           ]}
         />
@@ -52,22 +52,22 @@ export default function ColophonPage() {
             {
               label: "PAPER",
               value: "#F6F5F1 / #0B0B0C",
-              note: "Warm off-white in light, near-black (not pure) in dark. Mid-century paper feel.",
+              note: "Warm off-white instead of true white, near-black instead of pure black. Pure tones always look a bit cheap to me.",
             },
             {
               label: "INK",
               value: "#111113 / #F6F5F1",
-              note: "Primary text. Inverts cleanly.",
+              note: "Body text. Switches with the OS theme.",
             },
             {
               label: "GRAPHITE",
               value: "#6B6B70 / #8A8A8F",
-              note: "Secondary text, labels, rules. Does 60% of the layout work.",
+              note: "All the secondary stuff — labels, dates, hairlines. Most of the design is just deciding which words are graphite and which are ink.",
             },
             {
               label: "SIGNAL",
               value: "#FF3B00 / #FF4A14",
-              note: "Burnt orange. Polestar / Nothing lineage. Appears in ~3% of pixels. Reserved for: cursor highlight, CTA, now-playing dot, section numbers.",
+              note: "Burnt orange. Polestar uses something close and I think their red is the best red on any product I've owned. Used sparingly. Cursor highlight, a couple of section numbers, the now-playing dot.",
             },
           ]}
         />
@@ -78,18 +78,18 @@ export default function ColophonPage() {
           entries={[
             {
               label: "CASE STUDY",
-              value: "3-column at 1280px+",
-              note: "TOC rail (160-200px) | content (up to 920px) | ruler (40-80px). Below 1280px the rails collapse to single column.",
+              value: "Single column, ~1100px",
+              note: "Title up top, big asset, body sections, then the rest of the assets. The first version had a TOC rail and a ruler rail on either side. I cut them — too much furniture for what is basically an article.",
             },
             {
               label: "PROSE",
-              value: "60ch max-width",
-              note: "Optimal reading measure. Never wider.",
+              value: "68ch max",
+              note: "Body text caps at 68 characters. Bigger screens get more whitespace, not wider lines.",
             },
             {
               label: "SPACING",
               value: "clamp() everywhere",
-              note: "No fixed breakpoint jumps. Fluid from 375px to 1600px.",
+              note: "Everything uses CSS clamp(). I don't have breakpoints. The page just stretches.",
             },
           ]}
         />
@@ -100,33 +100,33 @@ export default function ColophonPage() {
           entries={[
             {
               label: "FRAMEWORK",
-              value: "Next.js 16 + App Router",
-              note: "TypeScript, React 19, Turbopack.",
+              value: "Next.js 16",
+              note: "App Router, TypeScript, Turbopack. Current stable version of all of it.",
             },
             {
               label: "STYLING",
               value: "Tailwind CSS v4",
-              note: "CSS-first configuration. Design tokens in @theme, no tailwind.config.",
+              note: "Design tokens live in globals.css instead of a config file. There's exactly one place to look when something looks wrong.",
             },
             {
               label: "MOTION",
               value: "Framer Motion",
-              note: "Spring physics for the cursor, scroll-triggered reveals, page transitions. GSAP stayed on the bench.",
+              note: "Cursor physics, scroll reveals, page transitions. I tried GSAP and didn't switch.",
             },
             {
               label: "CONTENT",
-              value: "JSON + Zod schemas",
-              note: "Content lives as .json files committed to the repo. Zod schemas are the single source of truth for types + validation.",
+              value: "JSON + Zod",
+              note: "All the editable copy is JSON in the repo. Zod gives me types and runtime validation from one schema. Add a field, and everything downstream complains until I update it. It saves me from myself.",
             },
             {
               label: "CMS",
               value: "Custom /admin",
-              note: "React Hook Form + Zod. Saves commit directly to GitHub via Octokit. Single-user OAuth gate.",
+              note: "React Hook Form + Zod. Saves commit straight to GitHub via Octokit. Single-user — only my GitHub login can sign in. Edits skip the Vercel build via cache tags, so updates show up in a few seconds instead of a minute.",
             },
             {
               label: "DEPLOY",
               value: "Vercel",
-              note: "Git-push deploys. Every CMS save triggers a rebuild.",
+              note: "Git push deploys. Content-only commits skip the build via ignoreCommand. Code commits rebuild normally.",
             },
           ]}
         />
@@ -137,18 +137,18 @@ export default function ColophonPage() {
           entries={[
             {
               label: "DIRECTION",
-              value: "Playful & tactile on a quiet foundation",
-              note: "Teenage Engineering / Nothing lean, sitting on Apple-level restraint. A minimal editorial base with hardware-panel details poking through.",
+              value: "Tactile, on something quiet",
+              note: "Tactile and a little playful, sitting on something quiet. The Teenage Engineering / Nothing thing in the details — labels, units, hairlines. Apple in the foundation — lots of air, very little color.",
             },
             {
               label: "REFERENCES",
-              value: "OP-1, Polestar, mid-century modern",
-              note: "Monospace labels, dot-matrix accents, tiny unit markers. Everything has a name, a number, a range.",
+              value: "OP-1, Polestar, mid-century print",
+              note: "And the way Nothing photographs its products with every component called out. The throughline: nothing is unlabeled.",
             },
             {
               label: "PRINCIPLE",
-              value: "Whitespace is the primary design element",
-              note: "Restraint first, detail second. If a section feels empty, it's probably right.",
+              value: "Whitespace first",
+              note: "If a section feels too empty, leave it. That's the test I keep coming back to.",
             },
           ]}
         />
