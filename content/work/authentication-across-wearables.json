@@ -1,10 +1,10 @@
 {
   "slug": "authentication-across-wearables",
   "title": "Authentication across wearables",
-  "timeline": "2025 - Present",
-  "role": "",
-  "team": "",
-  "credits": "",
+  "timeline": "2025 — Present",
+  "role": "Senior Product Designer\nAuthentication Lead",
+  "team": "Design · Research · Hardware · Firmware · Security",
+  "credits": "Meta Reality Labs — Wearables\nHardware, firmware, and security partners across the wearables org",
   "status": "public",
   "tags": [
     "wearables"
@@ -15,17 +15,30 @@
     "alt": "",
     "caption": ""
   },
-  "brief": "",
-  "gallery": [
+  "brief": "Lead the authentication suite across Meta's wearables — passcodes, passive unlock from a paired phone, and emerging biometric methods. Designing for moments where the device is on your face but not in your hands, where a second of friction is a second too long.",
+  "metrics": [
+    { "value": "4", "label": "Unlock methods" },
+    { "value": "200ms", "label": "Target latency" },
+    { "value": "5", "label": "Hardware variants" },
+    { "value": "8", "label": "Quarters of work" }
+  ],
+  "body": [
     {
-      "src": "",
-      "alt": "",
-      "caption": ""
+      "heading": "Problem",
+      "body": "How do you authenticate someone wearing a device that has no screen, no keypad, and is in a different physical position from a phone? The familiar mental model — pull device out, look at it, tap it — doesn't apply when the device is already on your face.\n\nAt the same time, wearables are increasingly the primary surface for sensitive interactions: payments, voice notes, location, AI capture. Authentication can't be skipped. It just has to disappear into the background of the wearing experience."
     },
     {
-      "src": "",
-      "alt": "",
-      "caption": ""
+      "heading": "Approach",
+      "body": "Mapped the full unlock spectrum — from \"device sitting in its case\" (cold-start, full passcode) to \"user actively in conversation\" (warm, ambient confirmation only). Each state has a different appropriate auth gesture and a different acceptable latency budget.\n\nWorked weekly with hardware on what sensors are available (BLE proximity, capacitive touch, IMU presence detection) and with security on what guarantees each combination provides. The design output isn't pixels — it's a state machine the firmware can ship."
+    },
+    {
+      "heading": "Solution",
+      "body": "A layered model. Cold-start always requires the user to enter their passcode on the paired phone. From there, the glasses are warm — passive unlock kicks in via BLE proximity to the trusted phone, with capacitive touch on the temple confirming presence. Sensitive actions (payments, account changes) prompt a one-tap re-confirmation on the phone.\n\nThe whole system is opt-in per user, per device. Users always know which methods are active because the companion app shows a live status indicator: green dot = warm, grey = cold, red = lockdown."
+    },
+    {
+      "heading": "Reflection",
+      "body": "Authentication on wearables is design at the edge of the OS — a place where the pixels you ship are tiny but the constraints are vast. Most of the work is shaping what's possible upstream so the user-visible UX has any room to breathe at all."
     }
-  ]
+  ],
+  "gallery": []
 }
