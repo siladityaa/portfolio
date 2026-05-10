@@ -41,7 +41,7 @@ export function Hero({ sentence, subline }: HeroProps) {
         >
           <motion.span
             variants={revealBlock}
-            className="text-mono-s text-[color:var(--surface-graphite)]"
+            className="text-display-s italic text-[color:var(--surface-graphite)]"
           >
             Hi, I&rsquo;m Siladityaa Sharma
           </motion.span>
