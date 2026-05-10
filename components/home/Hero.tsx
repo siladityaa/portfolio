@@ -39,6 +39,13 @@ export function Hero({ sentence, subline }: HeroProps) {
           animate="visible"
           className="flex flex-col gap-10"
         >
+          <motion.span
+            variants={revealBlock}
+            className="text-mono-s text-[color:var(--surface-graphite)]"
+          >
+            Hi, I&rsquo;m Siladityaa Sharma
+          </motion.span>
+
           <motion.h1
             variants={revealBlock}
             className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)]"
