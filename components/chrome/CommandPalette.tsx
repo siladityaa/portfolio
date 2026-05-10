@@ -22,41 +22,21 @@ interface PaletteItem {
 
 const PAGES: PaletteItem[] = [
   { label: "Home", hint: "/", href: "/" },
-  { label: "Colophon", hint: "/colophon", href: "/colophon" },
   { label: "Resume", hint: "/resume", href: "/resume" },
+  { label: "Colophon", hint: "/colophon", href: "/colophon" },
 ];
-
-const PROJECTS: PaletteItem[] = [
-  { label: "Ambient AI", hint: "/work/ambient-ai", href: "/work/ambient-ai" },
-  {
-    label: "Sensor Feedback",
-    hint: "/work/sensor-feedback",
-    href: "/work/sensor-feedback",
-  },
-  {
-    label: "Tactile CLI",
-    hint: "/work/tactile-cli",
-    href: "/work/tactile-cli",
-  },
-  {
-    label: "Field Notes",
-    hint: "/work/field-notes",
-    href: "/work/field-notes",
-  },
-  {
-    label: "Sample Project",
-    hint: "/work/sample-project",
-    href: "/work/sample-project",
-  },
-];
-
-const ALL_ITEMS = [...PAGES, ...PROJECTS];
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-export function CommandPalette() {
+interface CommandPaletteProps {
+  /** Live list of published case studies, passed in from the server-side
+   *  layout so the palette always matches what's on the home page. */
+  projects?: Array<{ slug: string; title: string }>;
+}
+
+export function CommandPalette({ projects = [] }: CommandPaletteProps) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -64,16 +44,28 @@ export function CommandPalette() {
   const listRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  const allItems = useMemo<PaletteItem[]>(
+    () => [
+      ...PAGES,
+      ...projects.map((p) => ({
+        label: p.title,
+        hint: `/work/${p.slug}`,
+        href: `/work/${p.slug}`,
+      })),
+    ],
+    [projects],
+  );
+
   /* Filtered results */
   const results = useMemo(() => {
-    if (!query.trim()) return ALL_ITEMS;
+    if (!query.trim()) return allItems;
     const q = query.toLowerCase();
-    return ALL_ITEMS.filter(
+    return allItems.filter(
       (item) =>
         item.label.toLowerCase().includes(q) ||
         item.hint.toLowerCase().includes(q),
     );
-  }, [query]);
+  }, [query, allItems]);
 
   /* Keep selectedIndex in bounds */
   useEffect(() => {
