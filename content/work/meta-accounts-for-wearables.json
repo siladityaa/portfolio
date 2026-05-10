@@ -1,10 +1,10 @@
 {
   "slug": "meta-accounts-for-wearables",
   "title": "Meta Accounts for Wearables",
-  "timeline": "2023 — 2024",
+  "timeline": "2023 \u2014 2024",
   "role": "Senior Product Designer\nIdentity & Account Lead",
-  "team": "Design · Research · Identity Engineering · Product · Legal",
-  "credits": "Meta Reality Labs — Identity\nPM, Research, Engineering, and the Meta Identity team",
+  "team": "Design \u00b7 Research \u00b7 Identity Engineering \u00b7 Product \u00b7 Legal",
+  "credits": "Meta Reality Labs \u2014 Identity\nPM, Research, Engineering, and the Meta Identity team",
   "status": "public",
   "tags": [
     "wearables"
@@ -17,28 +17,56 @@
   },
   "brief": "Designed the migration from Facebook accounts to Meta accounts across the wearables ecosystem. Touched tens of millions of users worldwide, navigated complex account-linking flows, and made sure people always understood what was happening to their data at every step.",
   "metrics": [
-    { "value": "50M+", "label": "Users migrated" },
-    { "value": "92%", "label": "Completion rate" },
-    { "value": "6", "label": "Surfaces touched" },
-    { "value": "18mo", "label": "End-to-end" }
+    {
+      "value": "50M+",
+      "label": "Users migrated"
+    },
+    {
+      "value": "92%",
+      "label": "Completion rate"
+    },
+    {
+      "value": "6",
+      "label": "Surfaces touched"
+    },
+    {
+      "value": "18mo",
+      "label": "End-to-end"
+    }
   ],
   "body": [
     {
       "heading": "Problem",
-      "body": "How do you migrate millions of users from one identity system to another without losing trust, breaking sessions, or leaving anyone in a half-migrated state on the device they wear on their face?\n\nFacebook accounts had been the front door to wearables since Ray-Ban Stories. As Meta's identity platform evolved, the company needed every wearable user to land on a Meta account — but on their schedule, with full control, and without risk of losing access to their existing photos, settings, and paired devices."
+      "body": "How do you migrate millions of users from one identity system to another without losing trust, breaking sessions, or leaving anyone in a half-migrated state on the device they wear on their face?\n\nFacebook accounts had been the front door to wearables since Ray-Ban Stories. As Meta's identity platform evolved, the company needed every wearable user to land on a Meta account \u2014 but on their schedule, with full control, and without risk of losing access to their existing photos, settings, and paired devices."
     },
     {
       "heading": "Research",
-      "body": "Six weeks of qualitative interviews with 40+ Ray-Ban Meta users plus two large quantitative studies on intent-to-migrate language and consent-flow comprehension.\n\nThe biggest insight: users didn't care about the account system change. They cared about three things — \"will my photos be safe,\" \"will my glasses still pair,\" and \"can I undo this.\" The migration UX needed to answer those three questions in the first three screens, every time."
+      "body": "Six weeks of qualitative interviews with 40+ Ray-Ban Meta users plus two large quantitative studies on intent-to-migrate language and consent-flow comprehension.\n\nThe biggest insight: users didn't care about the account system change. They cared about three things \u2014 \"will my photos be safe,\" \"will my glasses still pair,\" and \"can I undo this.\" The migration UX needed to answer those three questions in the first three screens, every time."
     },
     {
       "heading": "Solution",
-      "body": "Progressive disclosure of complexity. Each screen does one thing well: introduce the change, confirm what carries over, get the consent, and verify the result.\n\nA central \"migration receipt\" screen captures everything that moved (photos, paired devices, payment methods, friends list when applicable) and gives the user a printable / emailable summary. This single artifact dropped support contact volume by an order of magnitude in the first market.\n\nA dedicated \"undo\" surface in the first 30 days post-migration meant the system could absorb mistakes — which gave Legal and Trust the confidence to ship the migration as opt-in defaults rather than gated."
+      "body": "Progressive disclosure of complexity. Each screen does one thing well: introduce the change, confirm what carries over, get the consent, and verify the result.\n\nA central \"migration receipt\" screen captures everything that moved (photos, paired devices, payment methods, friends list when applicable) and gives the user a printable / emailable summary. This single artifact dropped support contact volume by an order of magnitude in the first market.\n\nA dedicated \"undo\" surface in the first 30 days post-migration meant the system could absorb mistakes \u2014 which gave Legal and Trust the confidence to ship the migration as opt-in defaults rather than gated."
     },
     {
       "heading": "Reflection",
-      "body": "Account migrations are 80% trust and 20% UX. The pixels matter, but what really moved the metric was the team's collective discipline about being honest with users — naming what was changing, what wasn't, and what they could undo if they changed their mind. That's the work the design system can't do for you."
+      "body": "Account migrations are 80% trust and 20% UX. The pixels matter, but what really moved the metric was the team's collective discipline about being honest with users \u2014 naming what was changing, what wasn't, and what they could undo if they changed their mind. That's the work the design system can't do for you."
     }
   ],
-  "gallery": []
+  "gallery": [
+    {
+      "src": "/work/meta-accounts-for-wearables/gallery/01.jpg",
+      "alt": "Migration receipt summary screen.",
+      "caption": ""
+    },
+    {
+      "src": "/work/meta-accounts-for-wearables/gallery/02.jpg",
+      "alt": "Account-link consent flow on a paired phone.",
+      "caption": ""
+    },
+    {
+      "src": "/work/meta-accounts-for-wearables/gallery/03.jpg",
+      "alt": "30-day undo surface in the companion app settings.",
+      "caption": ""
+    }
+  ]
 }
