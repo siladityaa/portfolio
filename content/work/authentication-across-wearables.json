@@ -5,13 +5,13 @@
   "role": "Senior Product Designer\nAuthentication Lead",
   "team": "Design · Research · Hardware · Firmware · Security",
   "credits": "Meta Reality Labs — Wearables\nHardware, firmware, and security partners across the wearables org",
-  "status": "public",
+  "status": "comingSoon",
   "tags": [
     "wearables"
   ],
   "keyColor": "#32746D",
   "hero": {
-    "src": "/work/authentication-across-wearables/wip.jpg",
+    "src": "",
     "alt": "A wearable device sitting on a desk, ready to authenticate.",
     "caption": "Cold-start passcode entry on the paired phone."
   },
