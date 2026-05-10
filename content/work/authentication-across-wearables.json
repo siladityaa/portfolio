@@ -12,8 +12,8 @@
   "keyColor": "#32746D",
   "hero": {
     "src": "",
-    "alt": "A wearable device sitting on a desk, ready to authenticate.",
-    "caption": "Cold-start passcode entry on the paired phone."
+    "alt": " ",
+    "caption": " "
   },
   "brief": "Lead the authentication suite across Meta's wearables — passcodes, passive unlock from a paired phone, and emerging biometric methods. Designing for moments where the device is on your face but not in your hands, where a second of friction is a second too long.",
   "gallery": [],
