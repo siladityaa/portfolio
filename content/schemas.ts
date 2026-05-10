@@ -39,6 +39,16 @@ export const galleryItemSchema = z.object({
   caption: z.string().optional(),
 });
 
+export const caseStudyMetricSchema = z.object({
+  value: z.string(),
+  label: z.string(),
+});
+
+export const caseStudyBodySectionSchema = z.object({
+  heading: z.string(),
+  body: z.string(),
+});
+
 export const caseStudySchema = z.object({
   slug: z.string(),
   title: z.string(),
@@ -53,6 +63,10 @@ export const caseStudySchema = z.object({
   brief: z.string(),
   /** Up to 4 supporting bento tiles. */
   gallery: z.array(galleryItemSchema).max(4).optional(),
+  /** Up to 4 highlight metrics (big number + label). */
+  metrics: z.array(caseStudyMetricSchema).max(4).optional(),
+  /** Repeating body sections — heading + paragraph. */
+  body: z.array(caseStudyBodySectionSchema).optional(),
 });
 
 /* =============================================================================

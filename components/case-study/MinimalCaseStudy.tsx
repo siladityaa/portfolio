@@ -15,27 +15,17 @@ interface MinimalCaseStudyProps {
 }
 
 /**
- * Bento case study — every block (text, main asset, supporting assets)
- * lives inside the same grid. The text card and the hero are the two
- * largest tiles, the rest fill in around them.
+ * Editorial long-scroll case study, sized for read-through rather than
+ * single-frame consumption. Order:
  *
- *   ┌────────┬─────────────────┬───────────┐
- *   │  TEXT  │                 │   s1      │
- *   │  CARD  │                 │   (2x2)   │
- *   │  (2x4) │   MAIN ASSET    │           │
- *   │  full  │   (3x4 — the    ├─────┬─────┤
- *   │  height│    tallest +    │     │ s3  │
- *   │        │    biggest)     │ s2  ├─────┤
- *   │        │                 │ 1x2 │ s4  │
- *   │        │                 │     │     │
- *   └────────┴─────────────────┴─────┴─────┘
- *
- * 7-column grid balances visual weight. Text card runs full height so
- * the brief and meta never get clipped; hero claims the centre 3 cols
- * (43%); right 2 cols (29%) host four supporting tiles in mixed
- * portrait/square shapes.
- *
- * Single viewport at lg+, stacks vertically below.
+ *   1. Top mono nav strip
+ *   2. Rich hero block — title, role pills, timeline, team, tags
+ *   3. Overview paragraph (the brief, full-width body text)
+ *   4. Hero asset (boxed, generous max-width)
+ *   5. Optional metrics row — up to 4 big numbers
+ *   6. Optional body sections — heading + paragraph repeating
+ *   7. Optional gallery — additional assets stacked vertically
+ *   8. Footer — back link + prev/next nav
  */
 export function MinimalCaseStudy({
   cs,
@@ -46,69 +36,232 @@ export function MinimalCaseStudy({
 }: MinimalCaseStudyProps) {
   const brief = (cs.brief ?? "").replace(/^TODO\(.*?\)\s*[—–-]?\s*/i, "");
   const counter = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
-  const bento = (cs.gallery ?? []).slice(0, 5);
+  const roles = cs.role
+    .split(/\n|·|·|\//)
+    .map((r) => r.trim())
+    .filter(Boolean);
 
   return (
-    <section
+    <article
       data-cursor="default"
-      className="relative mx-auto flex w-full max-w-[1640px] flex-col px-[clamp(20px,3vw,48px)] pt-[clamp(120px,15vw,180px)] pb-[clamp(72px,9vw,104px)] lg:h-[100dvh] lg:overflow-hidden"
+      className="mx-auto w-full max-w-[1100px] px-[clamp(20px,4vw,64px)] pt-[clamp(96px,11vw,140px)] pb-[clamp(96px,12vw,160px)]"
     >
-      {/* Top mono strip */}
+      {/* ── 1. Top nav strip ──────────────────────────────────────────── */}
       <motion.div
         variants={revealStaggerBlocks}
         initial="hidden"
         animate="visible"
-        className="flex shrink-0 flex-wrap items-start justify-between gap-x-12 gap-y-3 pb-[clamp(12px,2vw,20px)]"
+        className="flex flex-wrap items-center justify-between gap-4 pb-[clamp(48px,7vw,96px)]"
       >
-        <motion.div
-          variants={revealBlock}
-          className="flex flex-wrap items-start gap-x-12 gap-y-3 text-mono-s text-[color:var(--surface-graphite)]"
-        >
-          <div className="flex flex-col">
-            <span>SILADITYAA SHARMA</span>
-            <span>{cs.timeline.split(" — ")[0] ?? cs.timeline}</span>
-          </div>
-          <div className="flex flex-col">
-            <span>{cs.team?.split("·")[0]?.trim().toUpperCase() ?? "META"}</span>
-            <span>LOS ANGELES, CA</span>
-          </div>
-          <div className="flex flex-col">
-            <span>
-              {cs.tags?.map((t) => t.toUpperCase()).join(" / ") ?? "PROJECT"}
-            </span>
-            <span>
-              {cs.status === "public"
-                ? "PUBLIC"
-                : cs.status === "comingSoon"
-                  ? "COMING SOON"
-                  : "NDA"}
-            </span>
-          </div>
-        </motion.div>
-
-        <motion.div
-          variants={revealBlock}
-          className="flex items-center gap-5 text-mono-s text-[color:var(--surface-graphite)]"
-        >
+        <motion.div variants={revealBlock}>
           <Link
             href="/#work"
             data-cursor="view"
-            className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+            className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           >
-            ← BACK
+            ← BACK TO WORK
           </Link>
-          <span className="tabular-nums">{counter}</span>
+        </motion.div>
+        <motion.span
+          variants={revealBlock}
+          className="text-mono-s text-[color:var(--surface-graphite)] tabular-nums"
+        >
+          {counter}
+        </motion.span>
+      </motion.div>
+
+      {/* ── 2. Hero block ─────────────────────────────────────────────── */}
+      <motion.header
+        variants={revealStaggerBlocks}
+        initial="hidden"
+        animate="visible"
+        className="flex flex-col gap-8"
+      >
+        <motion.h1
+          variants={revealBlock}
+          className="text-display-xl italic leading-[1.02] text-[color:var(--surface-ink)]"
+          style={{ color: cs.keyColor }}
+        >
+          {cs.title}
+        </motion.h1>
+
+        {(roles.length > 0 || cs.tags?.length) && (
+          <motion.div
+            variants={revealBlock}
+            className="flex flex-wrap gap-2"
+          >
+            {roles.map((r) => (
+              <Pill key={`role-${r}`}>{r}</Pill>
+            ))}
+            {cs.tags?.map((t) => (
+              <Pill key={`tag-${t}`}>{t.toUpperCase()}</Pill>
+            ))}
+          </motion.div>
+        )}
+
+        <motion.dl
+          variants={revealBlock}
+          className="grid grid-cols-1 gap-y-3 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-6 text-mono-s sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-x-6"
+        >
+          <MetaRow label="Timeline" value={cs.timeline} />
+          {cs.team && <MetaRow label="Team" value={cs.team} />}
+          {cs.credits && <MetaRow label="Partners" value={cs.credits} />}
+        </motion.dl>
+      </motion.header>
+
+      {/* ── 3. Overview paragraph ─────────────────────────────────────── */}
+      {brief && (
+        <motion.section
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-[clamp(64px,9vw,128px)]"
+        >
+          <Eyebrow>OVERVIEW</Eyebrow>
+          <p className="mt-6 max-w-[68ch] text-display-s text-[color:var(--surface-ink)]">
+            {brief}
+          </p>
+        </motion.section>
+      )}
+
+      {/* ── 4. Hero asset ─────────────────────────────────────────────── */}
+      {cs.hero?.src && (
+        <motion.figure
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-[clamp(64px,9vw,128px)] overflow-hidden rounded-[6px] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)]"
+        >
+          <MediaFrame
+            src={cs.hero.src}
+            alt={cs.hero.alt ?? cs.title}
+          />
+          {cs.hero.caption && (
+            <figcaption className="px-5 py-3 text-mono-s text-[color:var(--surface-graphite)]">
+              {cs.hero.caption}
+            </figcaption>
+          )}
+        </motion.figure>
+      )}
+
+      {/* ── 5. Metrics ────────────────────────────────────────────────── */}
+      {cs.metrics && cs.metrics.length > 0 && (
+        <motion.section
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-[clamp(72px,10vw,144px)]"
+        >
+          <Eyebrow>BY THE NUMBERS</Eyebrow>
+          <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
+            {cs.metrics.map((m, i) => (
+              <div key={i} className="flex flex-col gap-2">
+                <span
+                  className="text-display-l italic leading-none text-[color:var(--surface-ink)]"
+                  style={{ color: cs.keyColor }}
+                >
+                  {m.value}
+                </span>
+                <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                  {m.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </motion.section>
+      )}
+
+      {/* ── 6. Body sections ──────────────────────────────────────────── */}
+      {cs.body && cs.body.length > 0 && (
+        <div className="mt-[clamp(72px,10vw,144px)] flex flex-col gap-[clamp(56px,8vw,96px)]">
+          {cs.body.map((sec, i) => (
+            <motion.section
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{
+                duration: 0.7,
+                ease: [0.22, 1, 0.36, 1],
+                delay: 0.05,
+              }}
+              className="grid grid-cols-1 gap-6 md:grid-cols-[200px_minmax(0,1fr)] md:gap-12"
+            >
+              <Eyebrow>{String(i + 1).padStart(2, "0")} — {sec.heading.toUpperCase()}</Eyebrow>
+              <div className="flex flex-col gap-5">
+                <h2 className="text-display-m italic leading-tight text-[color:var(--surface-ink)]">
+                  {sec.heading}
+                </h2>
+                <p className="max-w-[68ch] whitespace-pre-line text-body text-[color:var(--surface-ink)]">
+                  {sec.body}
+                </p>
+              </div>
+            </motion.section>
+          ))}
+        </div>
+      )}
+
+      {/* ── 7. Gallery (additional assets) ────────────────────────────── */}
+      {cs.gallery && cs.gallery.length > 0 && (
+        <motion.section
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-[clamp(72px,10vw,144px)]"
+        >
+          <Eyebrow>SELECTED ASSETS</Eyebrow>
+          <div className="mt-8 flex flex-col gap-[clamp(32px,5vw,64px)]">
+            {cs.gallery.map((g, i) => (
+              <figure
+                key={i}
+                className="overflow-hidden rounded-[6px] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)]"
+              >
+                <MediaFrame
+                  src={g.src}
+                  alt={g.alt ?? `${cs.title} detail ${i + 1}`}
+                />
+                {g.caption && (
+                  <figcaption className="px-5 py-3 text-mono-s text-[color:var(--surface-graphite)]">
+                    {g.caption}
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        </motion.section>
+      )}
+
+      {/* ── 8. Footer nav ─────────────────────────────────────────────── */}
+      <motion.nav
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="mt-[clamp(96px,12vw,160px)] flex flex-wrap items-center justify-between gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-6"
+      >
+        <Link
+          href="/#work"
+          data-cursor="view"
+          className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+        >
+          ← ALL WORK
+        </Link>
+        <div className="flex items-center gap-5 text-mono-s">
           {prevSlug ? (
             <Link
               href={`/work/${prevSlug}`}
               data-cursor="view"
-              className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+              className="text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
-              ← PREV
+              ← PREVIOUS
             </Link>
           ) : (
             <span className="text-[color:color-mix(in_srgb,var(--surface-graphite)_40%,transparent)]">
-              ← PREV
+              ← PREVIOUS
             </span>
           )}
           {nextSlug ? (
@@ -117,194 +270,59 @@ export function MinimalCaseStudy({
               data-cursor="view"
               className="text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
-              NEXT →
+              NEXT PROJECT →
             </Link>
           ) : (
             <Link
               href="/#work"
               data-cursor="view"
-              className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+              className="text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
-              ALL →
+              ALL WORK →
             </Link>
           )}
-        </motion.div>
-      </motion.div>
-
-      {/* The bento — text card + hero + supporting assets all share one grid */}
-      <motion.div
-        variants={revealStaggerBlocks}
-        initial="hidden"
-        animate="visible"
-        className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-7 lg:grid-rows-4"
-      >
-        {/* TEXT CARD — cols 1-2, rows 1-4 (full height). Permanently filled
-            with the project's keyColor so each case study reads as its own
-            vibrant brand moment. Title + body force-locked to white so we
-            don't depend on the dark/light theme variables. */}
-        <motion.div
-          variants={revealBlock}
-          style={{
-            backgroundColor: cs.keyColor,
-            borderColor: cs.keyColor,
-          }}
-          className="flex flex-col gap-5 overflow-y-auto rounded-[4px] border p-6 pb-10 scrollbar-none lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-5 lg:p-7 lg:pb-12"
-        >
-          <h1 className="text-display-m italic leading-tight text-white">
-            {cs.title}
-          </h1>
-
-          {brief && (
-            <p className="text-body text-white/85">{brief}</p>
-          )}
-
-          <dl className="flex flex-col gap-2 border-t border-white/25 pt-4 text-mono-s">
-            <Row label="Role" value={cs.role} />
-            {cs.team && <Row label="Team" value={cs.team} />}
-            {cs.credits && <Row label="Partners" value={cs.credits} />}
-          </dl>
-        </motion.div>
-
-        {/* MAIN ASSET — geometry depends on how many bento tiles exist so
-            the hero claims any space the supporting tiles don't use. */}
-        <BentoTile
-          variants={revealBlock}
-          className={heroPlacementForCount(bento.length)}
-          src={cs.hero?.src}
-          alt={cs.hero?.alt ?? cs.title}
-          fallback="MAIN ASSET TBD"
-          size="hero"
-        />
-
-        {bentoPlacementsForCount(bento.length).map((placement, i) => (
-          <BentoTile
-            key={i}
-            variants={revealBlock}
-            className={placement}
-            src={bento[i]?.src}
-            alt={bento[i]?.alt ?? `${cs.title} detail ${i + 1}`}
-          />
-        ))}
-      </motion.div>
-
-    </section>
-  );
-}
-
-/**
- * Hero placement adapts to how many bento tiles exist so it claims any
- * space the supporting tiles don't fill.
- *
- *   0 tiles  → hero spans cols 3–7 (5×4) — full right side
- *   1+ tiles → hero spans cols 3–5 (3×4) — supporting tiles fill cols 6–7
- *
- * Strings are written out in full so Tailwind's JIT picks them up.
- */
-function heroPlacementForCount(n: number): string {
-  if (n === 0) {
-    return "lg:col-start-3 lg:col-end-8 lg:row-start-1 lg:row-end-5";
-  }
-  return "lg:col-start-3 lg:col-end-6 lg:row-start-1 lg:row-end-5";
-}
-
-/**
- * Bento tile placements indexed by tile count. Each layout fills the
- * cols-6/7 right column completely; missing tile slots collapse so the
- * grid never shows empty cells.
- */
-function bentoPlacementsForCount(n: number): string[] {
-  switch (n) {
-    case 0:
-      return [];
-    case 1:
-      // Single tile fills the full right column.
-      return ["lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-5"];
-    case 2:
-      // Two equal-height stacked tiles.
-      return [
-        "lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3",
-        "lg:col-start-6 lg:col-end-8 lg:row-start-3 lg:row-end-5",
-      ];
-    case 3:
-      // Top wide tile + two squares below.
-      return [
-        "lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3",
-        "lg:col-start-6 lg:col-end-7 lg:row-start-3 lg:row-end-5",
-        "lg:col-start-7 lg:col-end-8 lg:row-start-3 lg:row-end-5",
-      ];
-    case 4:
-    default:
-      // Top wide tile, tall portrait, and two stacked squares.
-      return [
-        "lg:col-start-6 lg:col-end-8 lg:row-start-1 lg:row-end-3",
-        "lg:col-start-6 lg:col-end-7 lg:row-start-3 lg:row-end-5",
-        "lg:col-start-7 lg:col-end-8 lg:row-start-3 lg:row-end-4",
-        "lg:col-start-7 lg:col-end-8 lg:row-start-4 lg:row-end-5",
-      ];
-  }
-}
-
-function Row({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="grid grid-cols-[80px_minmax(0,1fr)] gap-3">
-      <dt className="text-white/65">{label.toUpperCase()}</dt>
-      <dd className="whitespace-pre-line text-white">{value}</dd>
-    </div>
-  );
-}
-
-interface BentoTileProps {
-  src?: string;
-  alt: string;
-  className?: string;
-  fallback?: string;
-  variants?: import("framer-motion").Variants;
-  /** Currently unused on the public site; kept for forward compat. */
-  size?: "hero" | "support";
-}
-
-function BentoTile({
-  src,
-  alt,
-  className = "",
-  fallback = "—",
-  variants,
-}: BentoTileProps) {
-  // On mobile the tile auto-sizes to its asset's natural aspect ratio
-  // (w-full + h-auto on the media), so no min-h. Only the empty-state
-  // fallback needs a visible height. Desktop hands sizing back to the
-  // bento grid via lg:min-h-0.
-  return (
-    <motion.div
-      variants={variants}
-      className={`relative overflow-hidden rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)] ${
-        src ? "" : "min-h-[160px]"
-      } lg:min-h-0 ${className}`}
-    >
-      {src ? (
-        <MediaFrame src={src} alt={alt} />
-      ) : (
-        <div className="flex h-full min-h-[inherit] w-full items-center justify-center text-mono-s text-[color:color-mix(in_srgb,var(--surface-graphite)_50%,transparent)]">
-          {fallback}
         </div>
-      )}
-    </motion.div>
+      </motion.nav>
+    </article>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+
+function Pill({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] px-3 py-1 text-mono-s text-[color:var(--surface-graphite)]">
+      {children}
+    </span>
+  );
+}
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="text-mono-s text-[color:var(--surface-graphite)]">
+      {children}
+    </span>
+  );
+}
+
+function MetaRow({ label, value }: { label: string; value: string }) {
+  return (
+    <>
+      <dt className="text-[color:var(--surface-graphite)]">
+        {label.toUpperCase()}
+      </dt>
+      <dd className="whitespace-pre-line text-[color:var(--surface-ink)]">
+        {value}
+      </dd>
+    </>
   );
 }
 
 function MediaFrame({ src, alt }: { src: string; alt: string }) {
-  // Strip query strings before sniffing extension so URLs like
-  // `https://blob.vercel-storage.com/hero.mp4?token=…` still detect as video.
   const ext = src.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
+  const isVideo = ext === "mp4" || ext === "webm" || ext === "mov";
 
-  // Mobile: render in normal flow with `block w-full h-auto`. The tile
-  // wraps tightly to the asset's natural aspect ratio — no letterbox bg.
-  // Desktop (lg+): switch to absolute fill so the asset covers the
-  // intentional bento grid cell with object-cover.
-  const fitClasses =
-    "block h-auto w-full lg:absolute lg:inset-0 lg:h-full lg:object-cover";
-
-  if (ext === "mp4" || ext === "webm" || ext === "mov") {
+  if (isVideo) {
     return (
       <video
         src={src}
@@ -312,21 +330,17 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
         loop
         muted
         playsInline
-        className={fitClasses}
+        className="block h-auto w-full"
       />
     );
   }
-  // Use plain <img> for everything (local + external) so we keep the
-  // same natural-sizing behavior on mobile. Next/Image's `fill` mode
-  // forces absolute positioning which would re-introduce the empty
-  // background problem.
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt={alt}
-      className={fitClasses}
-      loading="eager"
+      className="block h-auto w-full"
+      loading="lazy"
     />
   );
 }

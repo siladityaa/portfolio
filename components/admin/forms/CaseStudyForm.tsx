@@ -171,18 +171,53 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
           />
         </section>
 
-        {/* Bento gallery */}
+        {/* Metrics */}
         <section className="flex flex-col gap-6">
           <header className="flex flex-col gap-2">
             <div className="flex items-baseline justify-between">
               <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
-                Bento gallery
+                Metrics
+              </h2>
+              <MetricsAddButton />
+            </div>
+            <p className="text-body text-[color:var(--surface-graphite)]">
+              Up to 4 highlight numbers — appears as a row beneath the hero
+              ("BY THE NUMBERS"). Leave empty to skip the section.
+            </p>
+          </header>
+          <MetricsList />
+        </section>
+
+        {/* Body sections */}
+        <section className="flex flex-col gap-6">
+          <header className="flex flex-col gap-2">
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
+                Body sections
+              </h2>
+              <BodyAddButton />
+            </div>
+            <p className="text-body text-[color:var(--surface-graphite)]">
+              Repeating heading + paragraph blocks (Problem, Research,
+              Solution, etc.). Order matters — they render top to bottom in
+              the order shown.
+            </p>
+          </header>
+          <BodyList />
+        </section>
+
+        {/* Gallery (additional assets) */}
+        <section className="flex flex-col gap-6">
+          <header className="flex flex-col gap-2">
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
+                Gallery
               </h2>
               <GalleryAddButton />
             </div>
             <p className="text-body text-[color:var(--surface-graphite)]">
-              The four supporting tiles around the hero. Tile shapes are
-              fixed — assets fill via object-cover.
+              Up to 4 supporting assets, stacked vertically beneath the body
+              sections under "SELECTED ASSETS".
             </p>
           </header>
           <GalleryList slug={defaultValues.slug} />
@@ -310,6 +345,176 @@ function GalleryAddButton() {
       className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
     >
       + ADD TILE ({filled}/{BENTO_MAX})
+    </button>
+  );
+}
+
+/* ---------- Metrics editor (up to 4 highlight numbers) -------------------- */
+
+const METRICS_MAX = 4;
+
+function MetricsList() {
+  const metrics = useFieldArray<CaseStudy, "metrics">({ name: "metrics" });
+
+  if (metrics.fields.length === 0) {
+    return (
+      <p className="text-body text-[color:var(--surface-graphite)]">
+        No metrics yet. Use “+ Add metric” above to add up to 4.
+      </p>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-4">
+      {metrics.fields.map((field, i) => (
+        <div
+          key={field.id}
+          className="flex flex-col gap-3 rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-4"
+        >
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="text-mono-s text-[color:var(--surface-ink)]">
+              METRIC {String(i + 1).padStart(2, "0")}
+            </span>
+            <div className="flex items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
+              {i > 0 && (
+                <button
+                  type="button"
+                  onClick={() => metrics.move(i, i - 1)}
+                  className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                >
+                  ↑
+                </button>
+              )}
+              {i < metrics.fields.length - 1 && (
+                <button
+                  type="button"
+                  onClick={() => metrics.move(i, i + 1)}
+                  className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                >
+                  ↓
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => metrics.remove(i)}
+                className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+              >
+                REMOVE
+              </button>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <TextField
+              name={`metrics.${i}.value`}
+              label="VALUE"
+              placeholder="10M+"
+            />
+            <TextField
+              name={`metrics.${i}.label`}
+              label="LABEL"
+              placeholder="users reached"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function MetricsAddButton() {
+  const metrics = useFieldArray<CaseStudy, "metrics">({ name: "metrics" });
+  const filled = metrics.fields.length;
+  if (filled >= METRICS_MAX) return null;
+  return (
+    <button
+      type="button"
+      onClick={() => metrics.append({ value: "", label: "" })}
+      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+    >
+      + ADD METRIC ({filled}/{METRICS_MAX})
+    </button>
+  );
+}
+
+/* ---------- Body sections editor ----------------------------------------- */
+
+function BodyList() {
+  const body = useFieldArray<CaseStudy, "body">({ name: "body" });
+
+  if (body.fields.length === 0) {
+    return (
+      <p className="text-body text-[color:var(--surface-graphite)]">
+        No body sections yet. Use “+ Add section” above to add Problem,
+        Research, Solution, etc.
+      </p>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-6">
+      {body.fields.map((field, i) => (
+        <div
+          key={field.id}
+          className="flex flex-col gap-4 rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-5"
+        >
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="text-mono-s text-[color:var(--surface-ink)]">
+              SECTION {String(i + 1).padStart(2, "0")}
+            </span>
+            <div className="flex items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
+              {i > 0 && (
+                <button
+                  type="button"
+                  onClick={() => body.move(i, i - 1)}
+                  className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                >
+                  ↑
+                </button>
+              )}
+              {i < body.fields.length - 1 && (
+                <button
+                  type="button"
+                  onClick={() => body.move(i, i + 1)}
+                  className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                >
+                  ↓
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => body.remove(i)}
+                className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+              >
+                REMOVE
+              </button>
+            </div>
+          </div>
+          <TextField
+            name={`body.${i}.heading`}
+            label="HEADING"
+            placeholder="Problem"
+          />
+          <TextareaField
+            name={`body.${i}.body`}
+            label="BODY"
+            description="Longform paragraph. Line breaks render as paragraph breaks."
+            rows={8}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function BodyAddButton() {
+  const body = useFieldArray<CaseStudy, "body">({ name: "body" });
+  return (
+    <button
+      type="button"
+      onClick={() => body.append({ heading: "", body: "" })}
+      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+    >
+      + ADD SECTION ({body.fields.length})
     </button>
   );
 }
