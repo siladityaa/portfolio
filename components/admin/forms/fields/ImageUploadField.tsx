@@ -273,7 +273,7 @@ export function ImageUploadField({
           {phase === "idle" && (
             <>
               <span className="text-mono-s text-[color:var(--surface-graphite)]">
-                DROP MEDIA OR CLICK TO UPLOAD
+                {showPreview ? "REPLACE — DROP OR CLICK" : "DROP MEDIA OR CLICK TO UPLOAD"}
               </span>
               <span className="text-[11px] text-[color:color-mix(in_srgb,var(--surface-graphite)_70%,transparent)]">
                 Images: JPG, PNG, WebP, GIF (auto-compressed) · Video: MP4,
@@ -282,6 +282,26 @@ export function ImageUploadField({
             </>
           )}
         </div>
+
+        {/* Clear button — visible when there's a saved value, idle phase. */}
+        {showPreview && phase === "idle" && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setValue(name, "", {
+                shouldDirty: true,
+                shouldValidate: true,
+              });
+              setLoadFailed(false);
+              setUploadError(null);
+            }}
+            aria-label="Clear asset"
+            className="shrink-0 self-start rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-3 py-1 text-mono-s text-[color:var(--surface-graphite)] transition-colors duration-200 hover:border-[color:var(--surface-signal)] hover:text-[color:var(--surface-signal)]"
+          >
+            CLEAR
+          </button>
+        )}
 
         {/* Hidden file input */}
         <input
