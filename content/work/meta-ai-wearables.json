@@ -1,11 +1,11 @@
 {
   "slug": "meta-ai-wearables",
-  "title": "Meta AI \u2014 Wearables",
-  "timeline": "2024 \u2014 Present",
+  "title": "Meta AI — Wearables",
+  "timeline": "2024 — Present",
   "role": "Senior Product Designer\nAI Experiences Lead",
-  "team": "Design \u00b7 Research \u00b7 ML \u00b7 Hardware \u00b7 Product",
-  "credits": "Meta Reality Labs \u2014 Wearables AI\nPM, Research, ML, and Hardware partners",
-  "status": "public",
+  "team": "Design · Research · ML · Hardware · Product",
+  "credits": "Meta Reality Labs — Wearables AI\nPM, Research, ML, and Hardware partners",
+  "status": "comingSoon",
   "tags": [
     "wearables",
     "ai"
@@ -13,46 +13,10 @@
   "keyColor": "#2b2d42",
   "hero": {
     "src": "/work/meta-ai-wearables/hero.jpg",
-    "alt": "An AI-powered companion device \u2014 multimodal interaction across the wearable and phone.",
+    "alt": "An AI-powered companion device — multimodal interaction across the wearable and phone.",
     "caption": "AI handoff between the wearable and the companion app."
   },
   "brief": "Lead designer for AI-powered experiences on Ray-Ban Meta. Defining how multimodal AI feels when you wear it: camera-aware vision, audio-first interactions, contextual prompts, and the seamless handoff between glasses and the companion app.",
-  "metrics": [
-    {
-      "value": "1M+",
-      "label": "Active users"
-    },
-    {
-      "value": "12",
-      "label": "Features shipped"
-    },
-    {
-      "value": "5",
-      "label": "Launch markets"
-    },
-    {
-      "value": "4.7\u2605",
-      "label": "App rating"
-    }
-  ],
-  "body": [
-    {
-      "heading": "Problem",
-      "body": "How do you make AI feel ambient \u2014 useful when you need it, invisible when you don't? Phones taught us to summon AI through chat windows. Glasses don't have a chat window. They have your eyes, your ears, and the world in front of you. The interaction model has to start over from first principles."
-    },
-    {
-      "heading": "Approach",
-      "body": "Started with field research with 30+ early adopters of Ray-Ban Stories and the original Meta-AI beta. Mapped the moments where AI is uniquely valuable on glasses (hands-free, eyes-up, in motion) vs. where it would just feel intrusive (in conversation, in flow, in privacy-sensitive contexts).\n\nFrom there, ran weekly cross-functional working sessions with PM, Research, ML, and Hardware to translate those moments into product surfaces \u2014 camera tap, audio tap, voice wake, and the companion app's chat history."
-    },
-    {
-      "heading": "Solution",
-      "body": "A privacy-first interaction model where the user always initiates. Explicit camera tap, \"Hey Meta\" wake word, or app launch \u2014 never silent capture. Every AI response is logged in the companion app's chat thread so users can audit what their glasses heard, said, and saw.\n\nThe visual system is two-layer: the LED on the glasses (a deliberate hardware tell that AI is engaged) and a soft type/audio response that fades after delivery. No persistent UI on the lens, no glanceable cards. The AI is loud when invoked, silent the rest of the time."
-    },
-    {
-      "heading": "Reflection",
-      "body": "Wearable AI is a fundamentally new design surface. The lessons here are about restraint as much as novelty: every milliwatt, every millisecond, every word the user has to say is a tax. The product wins by spending those resources very deliberately on the moments that actually matter to the wearer."
-    }
-  ],
   "gallery": [
     {
       "src": "/work/meta-ai-wearables/gallery/01.jpg",
@@ -68,6 +32,42 @@
       "src": "/work/meta-ai-wearables/gallery/03.jpg",
       "alt": "Cross-platform handoff between glasses and phone.",
       "caption": ""
+    }
+  ],
+  "metrics": [
+    {
+      "value": "1M+",
+      "label": "Active users"
+    },
+    {
+      "value": "12",
+      "label": "Features shipped"
+    },
+    {
+      "value": "5",
+      "label": "Launch markets"
+    },
+    {
+      "value": "4.7★",
+      "label": "App rating"
+    }
+  ],
+  "body": [
+    {
+      "heading": "Problem",
+      "body": "How do you make AI feel ambient — useful when you need it, invisible when you don't? Phones taught us to summon AI through chat windows. Glasses don't have a chat window. They have your eyes, your ears, and the world in front of you. The interaction model has to start over from first principles."
+    },
+    {
+      "heading": "Approach",
+      "body": "Started with field research with 30+ early adopters of Ray-Ban Stories and the original Meta-AI beta. Mapped the moments where AI is uniquely valuable on glasses (hands-free, eyes-up, in motion) vs. where it would just feel intrusive (in conversation, in flow, in privacy-sensitive contexts).\n\nFrom there, ran weekly cross-functional working sessions with PM, Research, ML, and Hardware to translate those moments into product surfaces — camera tap, audio tap, voice wake, and the companion app's chat history."
+    },
+    {
+      "heading": "Solution",
+      "body": "A privacy-first interaction model where the user always initiates. Explicit camera tap, \"Hey Meta\" wake word, or app launch — never silent capture. Every AI response is logged in the companion app's chat thread so users can audit what their glasses heard, said, and saw.\n\nThe visual system is two-layer: the LED on the glasses (a deliberate hardware tell that AI is engaged) and a soft type/audio response that fades after delivery. No persistent UI on the lens, no glanceable cards. The AI is loud when invoked, silent the rest of the time."
+    },
+    {
+      "heading": "Reflection",
+      "body": "Wearable AI is a fundamentally new design surface. The lessons here are about restraint as much as novelty: every milliwatt, every millisecond, every word the user has to say is a tax. The product wins by spending those resources very deliberately on the moments that actually matter to the wearer."
     }
   ]
 }
