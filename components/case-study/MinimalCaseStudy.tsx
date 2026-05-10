@@ -80,7 +80,6 @@ export function MinimalCaseStudy({
         <motion.h1
           variants={revealBlock}
           className="text-display-xl italic leading-[1.02] text-[color:var(--surface-ink)]"
-          style={{ color: cs.keyColor }}
         >
           {cs.title}
         </motion.h1>
@@ -159,10 +158,7 @@ export function MinimalCaseStudy({
           <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
             {cs.metrics.map((m, i) => (
               <div key={i} className="flex flex-col gap-2">
-                <span
-                  className="text-display-l italic leading-none text-[color:var(--surface-ink)]"
-                  style={{ color: cs.keyColor }}
-                >
+                <span className="text-display-l italic leading-none text-[color:var(--surface-ink)]">
                   {m.value}
                 </span>
                 <span className="text-mono-s text-[color:var(--surface-graphite)]">
