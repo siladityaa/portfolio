@@ -108,7 +108,7 @@ export function MinimalCaseStudy({
         </motion.dl>
       </motion.header>
 
-      {/* ── 3. Overview paragraph ─────────────────────────────────────── */}
+      {/* ── 3. Overview paragraph + optional asset ──────────────────── */}
       {brief && (
         <motion.section
           initial={{ opacity: 0, y: 16 }}
@@ -121,6 +121,14 @@ export function MinimalCaseStudy({
           <p className="mt-6 max-w-[68ch] text-display-s text-[color:var(--surface-ink)]">
             {brief}
           </p>
+          {cs.overviewMedia?.src && (
+            <MediaFigure
+              src={cs.overviewMedia.src}
+              alt={cs.overviewMedia.alt ?? `${cs.title} overview`}
+              caption={cs.overviewMedia.caption}
+              className="mt-10"
+            />
+          )}
         </motion.section>
       )}
 
@@ -194,6 +202,26 @@ export function MinimalCaseStudy({
                 <p className="max-w-[68ch] whitespace-pre-line text-body text-[color:var(--surface-ink)]">
                   {sec.body}
                 </p>
+                {sec.media && sec.media.length > 0 && (
+                  <div
+                    className={
+                      sec.media.length > 1
+                        ? "mt-4 grid grid-cols-1 gap-4 md:grid-cols-2"
+                        : "mt-4"
+                    }
+                  >
+                    {sec.media
+                      .filter((m) => m.src)
+                      .map((m, mi) => (
+                        <MediaFigure
+                          key={mi}
+                          src={m.src}
+                          alt={m.alt ?? `${sec.heading} asset ${mi + 1}`}
+                          caption={m.caption}
+                        />
+                      ))}
+                  </div>
+                )}
               </div>
             </motion.section>
           ))}
@@ -311,6 +339,37 @@ function MetaRow({ label, value }: { label: string; value: string }) {
         {value}
       </dd>
     </>
+  );
+}
+
+/**
+ * Boxed media block — image, gif, or video. Used for both the hero asset
+ * and the inline media inside body sections. The container handles the
+ * subtle bg + rounded corners; MediaFrame handles the actual asset
+ * element so it can be reused everywhere.
+ */
+function MediaFigure({
+  src,
+  alt,
+  caption,
+  className = "",
+}: {
+  src: string;
+  alt: string;
+  caption?: string;
+  className?: string;
+}) {
+  return (
+    <figure
+      className={`overflow-hidden rounded-[6px] bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)] ${className}`}
+    >
+      <MediaFrame src={src} alt={alt} />
+      {caption && (
+        <figcaption className="px-5 py-3 text-mono-s text-[color:var(--surface-graphite)]">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
   );
 }
 

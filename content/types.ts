@@ -14,6 +14,7 @@ import type {
   caseStudyTagSchema,
   caseStudyMetricSchema,
   caseStudyBodySectionSchema,
+  caseStudyMediaSchema,
   galleryItemSchema,
   homeContentSchema,
   aboutContentSchema,
@@ -42,6 +43,7 @@ export type CaseStudy = CaseStudyFrontmatter;
 export type GalleryItem = z.infer<typeof galleryItemSchema>;
 export type CaseStudyMetric = z.infer<typeof caseStudyMetricSchema>;
 export type CaseStudyBodySection = z.infer<typeof caseStudyBodySectionSchema>;
+export type CaseStudyMedia = z.infer<typeof caseStudyMediaSchema>;
 
 /* Page-level content shapes ----------------------------------------------- */
 

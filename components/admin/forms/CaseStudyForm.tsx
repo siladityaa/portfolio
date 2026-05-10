@@ -1,7 +1,13 @@
 "use client";
 
 import { useCallback } from "react";
-import { useForm, FormProvider, useFieldArray } from "react-hook-form";
+import {
+  useForm,
+  FormProvider,
+  useFieldArray,
+  useFormContext,
+  useWatch,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { caseStudySchema } from "@/content/schemas";
@@ -158,16 +164,27 @@ export function CaseStudyForm({ defaultValues }: CaseStudyFormProps) {
           <TextField name="hero.caption" label="CAPTION (optional)" />
         </section>
 
-        {/* Brief */}
+        {/* Brief + Overview asset */}
         <section className="flex flex-col gap-6">
           <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
-            Brief
+            Overview
           </h2>
           <TextareaField
             name="brief"
-            label="BRIEF"
-            description="The short paragraph in the text card. Aim for ~60–80 words."
+            label="OVERVIEW PARAGRAPH"
+            description="The short paragraph beneath the title (~60–80 words)."
             rows={5}
+          />
+          <ImageUploadField
+            name="overviewMedia.src"
+            label="OVERVIEW ASSET (optional)"
+            uploadDir={`work/${defaultValues.slug}`}
+            description="Image, GIF, or video shown right under the overview paragraph. Or paste an external URL."
+          />
+          <TextField name="overviewMedia.alt" label="ALT TEXT" />
+          <TextField
+            name="overviewMedia.caption"
+            label="CAPTION (optional)"
           />
         </section>
 
@@ -500,6 +517,7 @@ function BodyList() {
             description="Longform paragraph. Line breaks render as paragraph breaks."
             rows={8}
           />
+          <SectionMediaList sectionIndex={i} />
         </div>
       ))}
     </div>
@@ -511,10 +529,101 @@ function BodyAddButton() {
   return (
     <button
       type="button"
-      onClick={() => body.append({ heading: "", body: "" })}
+      onClick={() => body.append({ heading: "", body: "", media: [] })}
       className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
     >
       + ADD SECTION ({body.fields.length})
     </button>
+  );
+}
+
+/* ---------- Per-section inline media editor ----------------------------- */
+
+function SectionMediaList({ sectionIndex }: { sectionIndex: number }) {
+  const { control } = useFormContext<CaseStudy>();
+  const slug = useWatch({ control, name: "slug" });
+  const fieldName = `body.${sectionIndex}.media` as const;
+  const media = useFieldArray<CaseStudy>({
+    name: fieldName as "body.0.media",
+  });
+
+  return (
+    <div className="flex flex-col gap-3 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-4">
+      <div className="flex items-baseline justify-between gap-3">
+        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+          INLINE MEDIA
+        </span>
+        <button
+          type="button"
+          onClick={() =>
+            media.append({ src: "", alt: "", caption: "" })
+          }
+          className="text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+        >
+          + ADD ASSET
+        </button>
+      </div>
+      {media.fields.length === 0 ? (
+        <p className="text-mono-s text-[color:color-mix(in_srgb,var(--surface-graphite)_70%,transparent)]">
+          No inline media. Drop an image / video here, or paste an external
+          URL — saves on upload size for large assets.
+        </p>
+      ) : (
+        <div className="flex flex-col gap-4">
+          {media.fields.map((mField, mi) => (
+            <div
+              key={mField.id}
+              className="flex flex-col gap-3 rounded-[3px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_12%,transparent)] p-3"
+            >
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                  ASSET {String(mi + 1).padStart(2, "0")}
+                </span>
+                <div className="flex items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
+                  {mi > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => media.move(mi, mi - 1)}
+                      className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                    >
+                      ↑
+                    </button>
+                  )}
+                  {mi < media.fields.length - 1 && (
+                    <button
+                      type="button"
+                      onClick={() => media.move(mi, mi + 1)}
+                      className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                    >
+                      ↓
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => media.remove(mi)}
+                    className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                  >
+                    REMOVE
+                  </button>
+                </div>
+              </div>
+              <ImageUploadField
+                name={`body.${sectionIndex}.media.${mi}.src`}
+                label="ASSET"
+                uploadDir={`work/${slug || "untitled"}`}
+              />
+              <TextField
+                name={`body.${sectionIndex}.media.${mi}.alt`}
+                label="ALT TEXT"
+              />
+              <TextField
+                name={`body.${sectionIndex}.media.${mi}.caption`}
+                label="CAPTION (optional)"
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

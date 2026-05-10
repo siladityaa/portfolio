@@ -44,9 +44,18 @@ export const caseStudyMetricSchema = z.object({
   label: z.string(),
 });
 
+export const caseStudyMediaSchema = z.object({
+  src: z.string(),
+  alt: z.string().optional(),
+  caption: z.string().optional(),
+});
+
 export const caseStudyBodySectionSchema = z.object({
   heading: z.string(),
   body: z.string(),
+  /** Optional inline media (images, gifs, videos, external URLs). Renders
+   *  beneath the section's body text. */
+  media: z.array(caseStudyMediaSchema).optional(),
 });
 
 export const caseStudySchema = z.object({
@@ -65,7 +74,9 @@ export const caseStudySchema = z.object({
   gallery: z.array(galleryItemSchema).max(4).optional(),
   /** Up to 4 highlight metrics (big number + label). */
   metrics: z.array(caseStudyMetricSchema).max(4).optional(),
-  /** Repeating body sections — heading + paragraph. */
+  /** Optional asset shown right below the overview paragraph. */
+  overviewMedia: caseStudyMediaSchema.optional(),
+  /** Repeating body sections — heading + paragraph + optional inline media. */
   body: z.array(caseStudyBodySectionSchema).optional(),
 });
 
