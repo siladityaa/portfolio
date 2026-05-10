@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -194,27 +195,39 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
                   NO RESULTS
                 </div>
               ) : (
-                results.map((item, i) => (
-                  <button
-                    key={item.href}
-                    type="button"
-                    onClick={() => go(item)}
-                    onMouseEnter={() => setSelectedIndex(i)}
-                    className={`flex w-full items-center justify-between px-5 py-3 text-left transition-colors duration-100 ${
-                      i === selectedIndex
-                        ? "bg-[color:color-mix(in_srgb,var(--surface-graphite)_10%,transparent)]"
-                        : ""
-                    }`}
-                  >
-                    <span className="text-body text-[color:var(--surface-ink)]">
-                      {item.label}
-                    </span>
-                    <span className="text-mono-s text-[color:var(--surface-graphite)]">
-                      {item.hint}
-                      {item.external ? " ↗" : ""}
-                    </span>
-                  </button>
-                ))
+                results.map((item, i) => {
+                  const handleSelect = (e: React.MouseEvent) => {
+                    if (item.external) {
+                      e.preventDefault();
+                      window.open(item.href, "_blank", "noopener,noreferrer");
+                    }
+                    setOpen(false);
+                    setQuery("");
+                  };
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noopener noreferrer" : undefined}
+                      onClick={handleSelect}
+                      onMouseEnter={() => setSelectedIndex(i)}
+                      className={`flex w-full items-center justify-between px-5 py-3 text-left transition-colors duration-100 ${
+                        i === selectedIndex
+                          ? "bg-[color:color-mix(in_srgb,var(--surface-graphite)_10%,transparent)]"
+                          : ""
+                      }`}
+                    >
+                      <span className="text-body text-[color:var(--surface-ink)]">
+                        {item.label}
+                      </span>
+                      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                        {item.hint}
+                        {item.external ? " ↗" : ""}
+                      </span>
+                    </Link>
+                  );
+                })
               )}
             </div>
 
