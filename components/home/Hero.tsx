@@ -38,13 +38,13 @@ export function Hero({ sentence, subline }: HeroProps) {
               stagger — more resilient than relying on staggerChildren
               to cascade across mixed motion-element types. */}
           <Reveal index={0}>
-            <span className="text-[1.25rem] italic text-[color:var(--surface-graphite)] md:text-display-s">
+            <span className="text-display-s italic text-[color:var(--surface-graphite)] max-md:text-[1.25rem]">
               Hi, I&rsquo;m Siladityaa Sharma
             </span>
           </Reveal>
 
           <Reveal index={1}>
-            <h1 className="max-w-[34ch] text-[2rem] italic leading-[1.08] text-[color:var(--surface-ink)] md:text-display-l">
+            <h1 className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)] max-md:text-[2rem] max-md:leading-[1.08]">
               {renderSentence(sentence)}
             </h1>
           </Reveal>
