@@ -57,14 +57,6 @@ function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) 
           active={hovered}
         />
       ) : null}
-
-      {isComingSoon ? (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[color:color-mix(in_srgb,var(--surface-ink)_45%,transparent)]">
-          <span className="text-mono-s text-[color:#f6f5f1]">
-            ◯ COMING SOON
-          </span>
-        </div>
-      ) : null}
     </div>
   );
 
