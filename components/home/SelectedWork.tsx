@@ -20,10 +20,22 @@ export async function SelectedWork() {
     .filter((cs) => !cs.slug.startsWith("sample-"))
     .slice(0, 4);
 
+  // Map tag enum values to human-readable labels for the category line.
+  const TAG_LABEL: Record<string, string> = {
+    wearables: "Wearables",
+    ai: "AI",
+    consumer: "Consumer",
+    concept: "Concept",
+  };
+
   const rows: ProjectRowData[] = featured.map((cs, i) => ({
     number: String(i + 1).padStart(3, "0"),
     year: cs.timeline,
-    client: cs.team.split("·")[0]?.trim() || cs.team,
+    // First line of `credits` is the org + sub-team (e.g.
+    // "Meta Reality Labs — Wearables"). Falls back to a sensible default
+    // when credits are missing so the row still reads.
+    client: cs.credits?.split("\n")[0]?.trim() || "Meta",
+    categories: cs.tags.map((t) => TAG_LABEL[t] ?? t),
     title: cs.title,
     slug: cs.slug,
     status: cs.status,

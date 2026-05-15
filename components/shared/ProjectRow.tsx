@@ -7,7 +7,13 @@ import clsx from "clsx";
 export interface ProjectRowData {
   number: string; // "001"
   year: string; // "2024 — 2025"
+  /** Company / org line. First line of the case study's `credits` field
+   *  when present (e.g. "Meta Reality Labs — Wearables"), else a sensible
+   *  default. */
   client: string;
+  /** Readable project categories derived from the case study's tags
+   *  (e.g. ["Wearables", "AI"]). May be empty. */
+  categories?: string[];
   title: string;
   slug: string;
   status: "public" | "comingSoon";

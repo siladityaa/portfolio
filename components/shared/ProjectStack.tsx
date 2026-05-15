@@ -71,16 +71,20 @@ function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) 
   const captionBlock = (
     <div className="mt-8 grid grid-cols-1 gap-y-4 md:grid-cols-12 md:gap-x-8">
       {/* Meta — left column on desktop, full-width on mobile.
-          Status is inlined with the project number so the column stays
-          at three tidy lines. */}
+          Three lines: company / category / year, with status inlined on
+          the company line so the column doesn't grow a fourth row. */}
       <div className="flex flex-row flex-wrap gap-x-6 gap-y-1 text-mono-s text-[color:var(--surface-graphite)] md:col-span-4 md:flex-col md:gap-x-0">
         <span>
-          PROJECT {row.number}
+          {row.client.toUpperCase()}
           <span className="ml-3 text-[color:var(--surface-graphite)]">
             {isComingSoon ? "◯ COMING SOON" : "● PUBLIC"}
           </span>
         </span>
-        <span>{row.client.toUpperCase()}</span>
+        <span>
+          {row.categories && row.categories.length > 0
+            ? row.categories.map((c) => c.toUpperCase()).join(" · ")
+            : "DESIGN"}
+        </span>
         <span>{row.year}</span>
       </div>
 
