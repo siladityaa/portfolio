@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 
 import { loadAllCaseStudies, loadCaseStudy } from "@/lib/content";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const all = await loadAllCaseStudies();
   return all
