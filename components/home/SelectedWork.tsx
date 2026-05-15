@@ -32,9 +32,14 @@ export async function SelectedWork() {
     number: String(i + 1).padStart(3, "0"),
     year: cs.timeline,
     // First line of `credits` is the org + sub-team (e.g.
-    // "Meta Reality Labs — Wearables"). Falls back to a sensible default
-    // when credits are missing so the row still reads.
-    client: cs.credits?.split("\n")[0]?.trim() || "Meta",
+    // "Meta Reality Labs — Wearables"). We shorten "Meta Reality Labs"
+    // to "Meta" for the home-page row — the full org name stays on the
+    // case study page itself. Falls back to a sensible default when
+    // credits are missing so the row still reads.
+    client: (cs.credits?.split("\n")[0]?.trim() || "Meta").replace(
+      /Meta Reality Labs/gi,
+      "Meta",
+    ),
     categories: cs.tags.map((t) => TAG_LABEL[t] ?? t),
     title: cs.title,
     slug: cs.slug,
