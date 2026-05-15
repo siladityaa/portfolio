@@ -70,18 +70,22 @@ function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) 
 
   const captionBlock = (
     <div className="mt-8 grid grid-cols-1 gap-y-4 md:grid-cols-12 md:gap-x-8">
-      {/* Meta — left column on desktop, full-width on mobile */}
+      {/* Meta — left column on desktop, full-width on mobile.
+          Status is inlined with the project number so the column stays
+          at three tidy lines. */}
       <div className="flex flex-row flex-wrap gap-x-6 gap-y-1 text-mono-s text-[color:var(--surface-graphite)] md:col-span-4 md:flex-col md:gap-x-0">
-        <span>PROJECT {row.number}</span>
+        <span>
+          PROJECT {row.number}
+          <span className="ml-3 text-[color:var(--surface-graphite)]">
+            {isComingSoon ? "◯ COMING SOON" : "● PUBLIC"}
+          </span>
+        </span>
         <span>{row.client.toUpperCase()}</span>
         <span>{row.year}</span>
-        <span className="mt-0 md:mt-2">
-          {isComingSoon ? "[ ◯ COMING SOON ]" : "[ ● PUBLIC ]"}
-        </span>
       </div>
 
-      {/* Title — main column on desktop */}
-      <h3 className="text-display-l italic leading-[1.02] text-[color:var(--surface-ink)] md:col-span-8">
+      {/* Title — main column on desktop, right-aligned to container edge */}
+      <h3 className="text-display-l italic leading-[1.02] text-[color:var(--surface-ink)] md:col-span-8 md:text-right">
         {row.title}
       </h3>
     </div>
