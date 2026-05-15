@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { unlockPreview } from "@/app/(site)/work/[slug]/actions";
+import { unlockPreview } from "@/lib/preview-actions";
 
 interface PreviewGateProps {
   slug: string;
