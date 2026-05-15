@@ -1,8 +1,6 @@
 import { loadAllCaseStudies } from "@/lib/content";
-import {
-  ProjectRowList,
-  type ProjectRowData,
-} from "@/components/shared/ProjectRow";
+import { ProjectGrid } from "@/components/shared/ProjectGrid";
+import type { ProjectRowData } from "@/components/shared/ProjectRow";
 
 /**
  * Brief §4.1 — "01 — SELECTED WORK" + vertical list of up to 4 projects.
@@ -45,7 +43,7 @@ export async function SelectedWork() {
           {String(rows.length).padStart(2, "0")}
         </span>
       </header>
-      <ProjectRowList rows={rows} />
+      <ProjectGrid rows={rows} />
     </section>
   );
 }
