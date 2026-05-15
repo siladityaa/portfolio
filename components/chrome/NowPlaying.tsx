@@ -265,7 +265,7 @@ export function NowPlaying() {
   return (
     <div
       aria-label="Now playing"
-      className="fixed bottom-[clamp(24px,4vw,64px)] left-1/2 z-50 flex w-[calc(100%-48px)] -translate-x-1/2 items-center justify-center gap-2 whitespace-nowrap text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] md:left-[clamp(24px,4vw,64px)] md:w-auto md:translate-x-0 md:justify-start"
+      className="fixed bottom-[clamp(24px,4vw,64px)] left-1/2 z-50 flex w-[calc(100%-48px)] min-w-0 -translate-x-1/2 items-center justify-center gap-2 overflow-hidden text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] md:left-[clamp(24px,4vw,64px)] md:w-auto md:translate-x-0 md:justify-start md:overflow-visible md:whitespace-nowrap"
     >
       {canPlay ? (
         <button
@@ -293,8 +293,8 @@ export function NowPlaying() {
           style={{ background: "var(--surface-signal)" }}
         />
       )}
-      <span>{prefix} ▸</span>
-      <span className="text-[color:var(--surface-ink)]">
+      <span className="shrink-0">{prefix} ▸</span>
+      <span className="min-w-0 truncate text-[color:var(--surface-ink)]">
         {data.track.title.toUpperCase()} — {data.track.artist.toUpperCase()}
       </span>
     </div>

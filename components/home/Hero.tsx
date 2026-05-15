@@ -30,21 +30,21 @@ export function Hero({ sentence, subline }: HeroProps) {
   return (
     <section
       data-cursor="crosshair"
-      className="relative flex min-h-[88vh] w-full items-end"
+      className="relative flex min-h-[100svh] w-full items-start md:min-h-[88vh] md:items-end"
     >
-      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-10 px-[clamp(24px,4vw,64px)] pt-[clamp(120px,20vh,220px)] pb-[clamp(60px,8vh,120px)]">
-        <div className="flex flex-col gap-10">
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-10 px-[clamp(24px,4vw,64px)] pt-[clamp(112px,16vh,220px)] pb-[clamp(120px,16vh,160px)] md:pt-[clamp(120px,20vh,220px)] md:pb-[clamp(60px,8vh,120px)]">
+        <div className="flex flex-col gap-6 md:gap-10">
           {/* Each line animates independently rather than via a parent
               stagger — more resilient than relying on staggerChildren
               to cascade across mixed motion-element types. */}
           <Reveal index={0}>
-            <span className="text-display-s italic text-[color:var(--surface-graphite)]">
+            <span className="text-[1.25rem] italic text-[color:var(--surface-graphite)] md:text-display-s">
               Hi, I&rsquo;m Siladityaa Sharma
             </span>
           </Reveal>
 
           <Reveal index={1}>
-            <h1 className="max-w-[34ch] text-display-l italic text-[color:var(--surface-ink)]">
+            <h1 className="max-w-[34ch] text-[2rem] italic leading-[1.08] text-[color:var(--surface-ink)] md:text-display-l">
               {renderSentence(sentence)}
             </h1>
           </Reveal>
