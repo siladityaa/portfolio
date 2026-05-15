@@ -37,6 +37,10 @@ interface CommandPaletteProps {
   projects?: Array<{ slug: string; title: string }>;
 }
 
+// Temporarily disable the command palette entirely. Flip to `false`
+// to bring back the ⌘K palette + search button (see NavLinks.tsx).
+const PALETTE_DISABLED = true;
+
 export function CommandPalette({ projects = [] }: CommandPaletteProps) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -140,6 +144,8 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
       el?.scrollIntoView({ block: "nearest" });
     });
   }
+
+  if (PALETTE_DISABLED) return null;
 
   return (
     <AnimatePresence>

@@ -29,8 +29,9 @@ export function NavLinks() {
         RESUME
       </Link>
 
-      {/* Search button — opens ⌘K palette. Shortcut still works globally. */}
-      {!WIP_MODE && (
+      {/* Search button — temporarily hidden. Re-enable by restoring the
+          button below and removing the early return in CommandPalette. */}
+      {false && !WIP_MODE && (
         <button
           type="button"
           onClick={openPalette}
