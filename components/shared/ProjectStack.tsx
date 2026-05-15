@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
 import type { ProjectRowData } from "@/components/shared/ProjectRow";
@@ -36,27 +35,22 @@ export function ProjectStack({ rows }: ProjectStackProps) {
 }
 
 function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) {
-  const [hovered, setHovered] = useState(false);
   const isComingSoon = row.status === "comingSoon";
   const stagger = 0.04 * index;
 
+  // Media fills its 16:9 container directly — no backdrop, no frame.
+  // The empty state still shows a centered "coming soon" placeholder so
+  // those rows don't render as a gap.
   const mediaBlock = (
     <div
-      className="relative w-full overflow-hidden rounded-[4px]"
-      style={{
-        aspectRatio: "16 / 9",
-        backgroundColor: row.keyColor
-          ? `color-mix(in srgb, ${row.keyColor} 18%, transparent)`
-          : "color-mix(in srgb, var(--surface-graphite) 12%, transparent)",
-      }}
+      className="relative flex w-full items-center justify-center overflow-hidden rounded-[4px]"
+      style={{ aspectRatio: "16 / 9" }}
     >
       {row.heroSrc ? (
-        <HoverMedia
-          src={row.heroSrc}
-          alt={row.heroAlt ?? row.title}
-          active={hovered}
-        />
-      ) : null}
+        <AlwaysPlayingMedia src={row.heroSrc} alt={row.heroAlt ?? row.title} />
+      ) : (
+        <ComingSoonPlaceholder />
+      )}
     </div>
   );
 
@@ -91,8 +85,6 @@ function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) 
 
   return (
     <li
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         animation: `feature-rise 0.7s cubic-bezier(0.22,1,0.36,1) ${stagger}s both`,
       }}
@@ -137,43 +129,43 @@ function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) 
 }
 
 /**
- * Plays a video on `active`, pauses + rewinds on inactive. Non-video
- * assets render as a plain <img> (GIFs autoplay by design).
+ * Empty-state badge shown inside the inset frame when a project has no
+ * hero asset yet. Hollow dot + mono label, hairline divider, italic
+ * serif "Coming soon" tagline — quiet placeholder that still reads like
+ * deliberate composition.
  */
-function HoverMedia({
-  src,
-  alt,
-  active,
-}: {
-  src: string;
-  alt: string;
-  active: boolean;
-}) {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+function ComingSoonPlaceholder() {
+  return (
+    <div className="flex flex-col items-center gap-3 px-6 py-8 text-center">
+      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        ◯ COMING SOON
+      </span>
+      <span className="block h-[1px] w-10 bg-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)]" />
+      <span className="text-display-s italic text-[color:var(--surface-graphite)]">
+        Documenting in progress
+      </span>
+    </div>
+  );
+}
+
+/**
+ * Auto-playing media. Videos autoplay muted+looped on mount across
+ * every tile so the grid feels alive; non-video assets render as a
+ * plain <img> (GIFs autoplay by design).
+ */
+function AlwaysPlayingMedia({ src, alt }: { src: string; alt: string }) {
   const ext = src.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
   const isVideo = ext === "mp4" || ext === "webm" || ext === "mov";
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (active) {
-      const p = v.play();
-      if (p) p.catch(() => {});
-    } else {
-      v.pause();
-      v.currentTime = 0;
-    }
-  }, [active]);
 
   if (isVideo) {
     return (
       <video
-        ref={videoRef}
         src={src}
+        autoPlay
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         aria-label={alt}
         className="absolute inset-0 h-full w-full object-cover"
       />

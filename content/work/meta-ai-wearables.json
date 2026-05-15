@@ -12,7 +12,7 @@
   ],
   "keyColor": "#2b2d42",
   "hero": {
-    "src": "/work/meta-ai-wearables/hero.jpg",
+    "src": "/work/meta-ai-wearables/hero.webp",
     "alt": "Ray-Ban Meta companion app — Devices home with paired glasses, gallery, and the Ask Meta AI input.",
     "caption": "Devices home in the companion app — paired glasses status, gallery, and the Ask Meta AI input."
   },
@@ -68,7 +68,7 @@
           "caption": ""
         },
         {
-          "src": "/work/meta-ai-wearables/hero.jpg",
+          "src": "/work/meta-ai-wearables/hero.webp",
           "alt": "An AI-powered companion device — multimodal interaction across the wearable and phone.",
           "caption": "AI handoff between the wearable and the companion app."
         }
