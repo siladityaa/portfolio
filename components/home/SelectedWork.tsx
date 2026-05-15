@@ -1,5 +1,5 @@
 import { loadAllCaseStudies } from "@/lib/content";
-import { ProjectGrid } from "@/components/shared/ProjectGrid";
+import { ProjectStack } from "@/components/shared/ProjectStack";
 import type { ProjectRowData } from "@/components/shared/ProjectRow";
 
 /**
@@ -43,7 +43,7 @@ export async function SelectedWork() {
           {String(rows.length).padStart(2, "0")}
         </span>
       </header>
-      <ProjectGrid rows={rows} />
+      <ProjectStack rows={rows} />
     </section>
   );
 }
