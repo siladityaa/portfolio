@@ -54,7 +54,7 @@ export default async function CaseStudyPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ bad?: string }>;
+  searchParams: Promise<{ bad?: string }>;
 }) {
   const { slug } = await params;
   const cs = await loadCaseStudy(slug);
@@ -64,9 +64,9 @@ export default async function CaseStudyPage({
     const jar = await cookies();
     const unlocked = jar.get(PREVIEW_COOKIE)?.value === "1";
     if (!unlocked) {
-      const sp = (await searchParams) ?? {};
+      const sp = await searchParams;
       return (
-        <PreviewGate slug={slug} title={cs.title} hadBadAttempt={!!sp.bad} />
+        <PreviewGate slug={slug} title={cs.title} hadBadAttempt={!!sp?.bad} />
       );
     }
   }
