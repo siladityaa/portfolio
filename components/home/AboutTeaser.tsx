@@ -27,7 +27,7 @@ export function AboutTeaser() {
             experiences at scale. I lead authentication, account, and
             social-profile design across Meta&rsquo;s wearables ecosystem,
             where I balance complex platform systems with the visual craft
-            that people actually feel when they use a product.
+            that people actually feel.
           </p>
         </div>
 
