@@ -39,12 +39,20 @@ function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) 
   const stagger = 0.04 * index;
 
   // Media fills its 16:9 container directly — no backdrop, no frame.
-  // The empty state still shows a centered "coming soon" placeholder so
-  // those rows don't render as a gap.
+  // Empty rows get a tinted card so they read as deliberate placeholders
+  // rather than blank gaps. A faint dot grid gives the empty state a
+  // blueprint feel and helps it separate from the page background.
+  const isEmpty = !row.heroSrc;
+  const emptyBg = `radial-gradient(circle, color-mix(in srgb, var(--surface-graphite) 22%, transparent) 1px, transparent 1px) 0 0 / 16px 16px,
+       color-mix(in srgb, var(--surface-graphite) 9%, var(--surface-paper))`;
+
   const mediaBlock = (
     <div
       className="relative flex w-full items-center justify-center overflow-hidden rounded-[4px]"
-      style={{ aspectRatio: "16 / 9" }}
+      style={{
+        aspectRatio: "16 / 9",
+        background: isEmpty ? emptyBg : undefined,
+      }}
     >
       {row.heroSrc ? (
         <AlwaysPlayingMedia src={row.heroSrc} alt={row.heroAlt ?? row.title} />
