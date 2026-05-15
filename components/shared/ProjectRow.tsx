@@ -16,7 +16,7 @@ export interface ProjectRowData {
   categories?: string[];
   title: string;
   slug: string;
-  status: "public" | "comingSoon";
+  status: "public" | "private";
   keyColor: string;
   /** Hero asset that previews on row hover. Image or video src. */
   heroSrc?: string;
@@ -46,7 +46,7 @@ export function ProjectRowList({ rows }: ProjectListProps) {
       {rows.map((row, i) => {
         const isHovered = hoveredIndex === i;
         const isDimmed = hoveredIndex !== null && !isHovered;
-        const isComingSoon = row.status === "comingSoon";
+        const isComingSoon = row.status === "private";
         return (
           <li
             key={row.slug}

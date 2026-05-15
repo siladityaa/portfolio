@@ -35,13 +35,11 @@ export function ProjectStack({ rows }: ProjectStackProps) {
 }
 
 function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) {
-  const isComingSoon = row.status === "comingSoon";
   const stagger = 0.04 * index;
 
   // Media fills its 16:9 container directly — no backdrop, no frame.
-  // Empty rows get a tinted card so they read as deliberate placeholders
-  // rather than blank gaps. A faint dot grid gives the empty state a
-  // blueprint feel and helps it separate from the page background.
+  // Empty rows get a tinted card with a faint dot grid so they read as
+  // deliberate placeholders rather than blank gaps.
   const isEmpty = !row.heroSrc;
   const emptyBg = `radial-gradient(circle, color-mix(in srgb, var(--surface-graphite) 22%, transparent) 1px, transparent 1px) 0 0 / 16px 16px,
        color-mix(in srgb, var(--surface-graphite) 9%, var(--surface-paper))`;
@@ -64,16 +62,8 @@ function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) 
 
   const captionBlock = (
     <div className="mt-8 grid grid-cols-1 gap-y-4 md:grid-cols-12 md:gap-x-8">
-      {/* Meta — left column on desktop, full-width on mobile.
-          Two lines: company (with status inlined) and year. The category
-          read is already implicit in the company sub-team string. */}
       <div className="flex flex-row flex-wrap gap-x-6 gap-y-1 text-mono-s text-[color:var(--surface-graphite)] md:col-span-4 md:flex-col md:gap-x-0">
-        <span>
-          {row.client.toUpperCase()}
-          <span className="ml-3 text-[color:var(--surface-graphite)]">
-            {isComingSoon ? "◯ COMING SOON" : "● PUBLIC"}
-          </span>
-        </span>
+        <span>{row.client.toUpperCase()}</span>
         <span>{row.year}</span>
       </div>
 
@@ -84,36 +74,20 @@ function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) 
     </div>
   );
 
-  const inner = (
-    <>
-      {mediaBlock}
-      {captionBlock}
-    </>
-  );
-
   return (
     <li
       style={{
         animation: `feature-rise 0.7s cubic-bezier(0.22,1,0.36,1) ${stagger}s both`,
       }}
     >
-      {isComingSoon ? (
-        <div
-          aria-disabled="true"
-          data-cursor="default"
-          className="flex cursor-not-allowed flex-col"
-        >
-          {inner}
-        </div>
-      ) : (
-        <Link
-          href={`/work/${row.slug}`}
-          data-cursor="open"
-          className="flex flex-col"
-        >
-          {inner}
-        </Link>
-      )}
+      <Link
+        href={`/work/${row.slug}`}
+        data-cursor="open"
+        className="flex flex-col"
+      >
+        {mediaBlock}
+        {captionBlock}
+      </Link>
 
       <style jsx>{`
         @keyframes feature-rise {

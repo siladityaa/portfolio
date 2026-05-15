@@ -37,7 +37,7 @@ export function ProjectGrid({ rows }: ProjectGridProps) {
 
 function ProjectTile({ row, index }: { row: ProjectRowData; index: number }) {
   const [hovered, setHovered] = useState(false);
-  const isComingSoon = row.status === "comingSoon";
+  const isComingSoon = row.status === "private";
 
   // Stagger the first paint a touch so the grid lays in instead of slamming
   // — same easing curve as the rest of the site.

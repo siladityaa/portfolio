@@ -32,7 +32,7 @@ interface CaseStudyFormProps {
 
 const STATUS_OPTIONS = [
   { value: "public", label: "Public" },
-  { value: "comingSoon", label: "Coming soon" },
+  { value: "private", label: "Private (password-gated)" },
 ] as const;
 
 const TAG_OPTIONS = [
