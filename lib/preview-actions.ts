@@ -1,19 +1,30 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { SignJWT } from "jose";
 
 /**
- * Preview-gate cookie. Lives outside the admin session so non-admins can
- * still preview private case studies with the shared password.
+ * Stateless preview-gate auth. No cookie — the only way to land on an
+ * unlocked case-study page is to post the password through the form,
+ * receive a short-lived HMAC token in the URL, and have the page render
+ * the study before the token expires.
  *
- * Set by `unlockPreview` after a successful password match. Read by the
- * case-study page server component. Plain "1" value — anyone could set
- * this cookie manually if they knew the name, which is fine for a
- * "design in private for now" gate (not a security boundary).
+ * Net effect: every visit requires the password. Even refreshing more
+ * than ~PREVIEW_TOKEN_TTL_SEC after a successful unlock kicks the user
+ * back to the gate.
+ *
+ * Signed with the same `SESSION_COOKIE_SECRET` the admin JWE uses, so
+ * we don't add a new env var.
  */
-const PREVIEW_COOKIE = "studio-preview";
-const COOKIE_MAX_AGE_SEC = 60 * 60 * 24 * 30; // 30 days
+const PREVIEW_TOKEN_TTL_SEC = 3;
+
+function getSecret(): Uint8Array {
+  const raw = process.env.SESSION_COOKIE_SECRET;
+  if (!raw) {
+    throw new Error("SESSION_COOKIE_SECRET is required for preview tokens");
+  }
+  return new TextEncoder().encode(raw);
+}
 
 export async function unlockPreview(slug: string, formData: FormData) {
   const password = formData.get("password");
@@ -28,19 +39,11 @@ export async function unlockPreview(slug: string, formData: FormData) {
     redirect(`/work/${slug}?bad=1`);
   }
 
-  const jar = await cookies();
-  jar.set(PREVIEW_COOKIE, "1", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: COOKIE_MAX_AGE_SEC,
-  });
-  redirect(`/work/${slug}`);
-}
+  const token = await new SignJWT({ slug })
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime(`${PREVIEW_TOKEN_TTL_SEC}s`)
+    .sign(getSecret());
 
-export async function lockPreview() {
-  const jar = await cookies();
-  jar.delete(PREVIEW_COOKIE);
-  redirect("/");
+  redirect(`/work/${slug}?t=${encodeURIComponent(token)}`);
 }

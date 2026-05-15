@@ -1,13 +1,34 @@
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { jwtVerify } from "jose";
 
 import { loadAllCaseStudies, loadCaseStudy } from "@/lib/content";
 import { MinimalCaseStudy } from "@/components/case-study/MinimalCaseStudy";
 import { KeyboardNav } from "@/components/case-study/KeyboardNav";
 import { PreviewGate } from "@/components/case-study/PreviewGate";
 
-const PREVIEW_COOKIE = "studio-preview";
+/** Same secret as the admin JWE. Verified per request, never persisted. */
+function getPreviewSecret(): Uint8Array | null {
+  const raw = process.env.SESSION_COOKIE_SECRET;
+  if (!raw) return null;
+  return new TextEncoder().encode(raw);
+}
+
+async function isUnlockedFor(
+  token: string | undefined,
+  slug: string,
+): Promise<boolean> {
+  if (!token) return false;
+  const secret = getPreviewSecret();
+  if (!secret) return false;
+  try {
+    const { payload } = await jwtVerify(token, secret);
+    return payload.slug === slug;
+  } catch {
+    // expired, tampered, or otherwise invalid
+    return false;
+  }
+}
 
 /**
  * Force per-request rendering. The cookie-reading branch below is
@@ -62,17 +83,16 @@ export default async function CaseStudyPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ bad?: string }>;
+  searchParams: Promise<{ bad?: string; t?: string }>;
 }) {
   const { slug } = await params;
   const cs = await loadCaseStudy(slug);
   if (!cs) notFound();
 
   if (cs.status === "private") {
-    const jar = await cookies();
-    const unlocked = jar.get(PREVIEW_COOKIE)?.value === "1";
+    const sp = await searchParams;
+    const unlocked = await isUnlockedFor(sp?.t, slug);
     if (!unlocked) {
-      const sp = await searchParams;
       return (
         <PreviewGate slug={slug} title={cs.title} hadBadAttempt={!!sp?.bad} />
       );
