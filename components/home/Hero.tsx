@@ -57,11 +57,12 @@ export function Hero({ sentence, subline }: HeroProps) {
         </div>
       </div>
 
-      {/* ↓ SCROLL mark, bottom-right of the hero block. Animation pauses
-          when the user has requested reduced motion. */}
+      {/* ↓ SCROLL mark, bottom-right of the hero block. Hidden on mobile
+          where it would overlap the subline and the centered NowPlaying
+          widget. Animation pauses when reduced motion is requested. */}
       <motion.span
         aria-hidden
-        className="absolute right-[clamp(24px,4vw,64px)] bottom-[clamp(80px,10vh,140px)] text-mono-s text-[color:var(--surface-graphite)]"
+        className="absolute right-[clamp(24px,4vw,64px)] bottom-[clamp(80px,10vh,140px)] hidden text-mono-s text-[color:var(--surface-graphite)] md:inline-block"
         animate={reducedMotion ? undefined : { y: [0, 3, 0] }}
         transition={
           reducedMotion
