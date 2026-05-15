@@ -373,7 +373,20 @@ function MediaFigure({
   );
 }
 
+/**
+ * Toggle: while we're still designing the case study layout without
+ * final artwork, every MediaFrame renders as an empty 16:9 placeholder
+ * (a graphite-tinted rectangle with a photo icon) regardless of what
+ * `src` it was given. Flip `PLACEHOLDERS_ON` to `false` to restore the
+ * real assets.
+ */
+const PLACEHOLDERS_ON = true;
+
 function MediaFrame({ src, alt }: { src: string; alt: string }) {
+  if (PLACEHOLDERS_ON) {
+    return <PlaceholderRect alt={alt} />;
+  }
+
   const ext = src.split("?")[0].split(".").pop()?.toLowerCase() ?? "";
   const isVideo = ext === "mp4" || ext === "webm" || ext === "mov";
 
@@ -397,5 +410,45 @@ function MediaFrame({ src, alt }: { src: string; alt: string }) {
       className="block h-auto w-full"
       loading="lazy"
     />
+  );
+}
+
+/**
+ * Empty 16:9 stand-in for case-study media. Subtle paper-on-graphite
+ * tint + sparse dot grid + a centered photo icon, so the layout reads
+ * intentionally placeholder rather than broken.
+ */
+function PlaceholderRect({ alt }: { alt?: string }) {
+  const bg = `radial-gradient(circle, color-mix(in srgb, var(--surface-graphite) 22%, transparent) 1px, transparent 1px) 0 0 / 18px 18px,
+       color-mix(in srgb, var(--surface-graphite) 8%, var(--surface-paper))`;
+  return (
+    <div
+      role="img"
+      aria-label={alt || "Image placeholder"}
+      className="flex w-full items-center justify-center"
+      style={{ aspectRatio: "16 / 9", background: bg }}
+    >
+      <PhotoIcon />
+    </div>
+  );
+}
+
+function PhotoIcon() {
+  return (
+    <svg
+      aria-hidden
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="color-mix(in srgb, var(--surface-graphite) 70%, transparent)"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="5" width="18" height="14" rx="1.5" />
+      <circle cx="8.5" cy="10" r="1.25" />
+      <path d="m3 16 4.5-4 4 3.5L16 11l5 4.5" />
+    </svg>
   );
 }
