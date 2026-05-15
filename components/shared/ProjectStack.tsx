@@ -26,7 +26,7 @@ export function ProjectStack({ rows }: ProjectStackProps) {
   return (
     <ul
       role="list"
-      className="mx-auto flex max-w-[1280px] flex-col gap-[clamp(96px,14vh,160px)] px-[clamp(24px,4vw,64px)]"
+      className="mx-auto flex max-w-[1280px] flex-col gap-[clamp(160px,24vh,260px)] px-[clamp(24px,4vw,64px)]"
     >
       {rows.map((row, i) => (
         <ProjectFeature key={row.slug} row={row} index={i} />
