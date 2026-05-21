@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { resume } from "@/content/resume";
+
+const { education } = resume;
 
 export function ResumeEducation() {
   return (
@@ -25,19 +28,15 @@ export function ResumeEducation() {
       >
         <div className="flex flex-col gap-1">
           <h3 className="text-display-s italic text-[color:var(--surface-ink)]">
-            ArtCenter College of Design
+            {education.school}
           </h3>
           <p className="text-mono-s text-[color:var(--surface-graphite)]">
-            BS INTERACTION DESIGN · BUSINESS MINOR · PASADENA, CA
+            {`${education.degree} · ${education.minor} · ${education.location}`.toUpperCase()}
           </p>
         </div>
 
         <ul className="flex flex-col gap-2">
-          {[
-            "Graduated with Honors",
-            "Provost List — GPA above 3.80",
-            "Interaction Design Scholarship Recipient",
-          ].map((item, i) => (
+          {education.highlights.map((item, i) => (
             <li
               key={i}
               className="flex items-start gap-3 text-body text-[color:var(--surface-ink)]"

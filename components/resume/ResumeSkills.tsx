@@ -2,43 +2,9 @@
 
 import { motion } from "framer-motion";
 import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { resume } from "@/content/resume";
 
-const skillGroups = [
-  {
-    title: "Product & Craft",
-    skills: [
-      "Account & Identity UX",
-      "Design Systems",
-      "Visual Design",
-      "Typography",
-      "Composition & Layout",
-      "Interaction Design",
-      "Information Architecture",
-      "Prototyping",
-    ],
-  },
-  {
-    title: "Strategy & Process",
-    skills: [
-      "Designing for Multiple User Types",
-      "Cross-functional Partnership",
-      "Working with PM, Eng & Research",
-      "Mentorship",
-      "Design Critique",
-    ],
-  },
-  {
-    title: "Tools",
-    skills: [
-      "Figma",
-      "Cursor",
-      "HTML / CSS / JavaScript",
-      "Principle",
-      "After Effects",
-      "Adobe Creative Suite",
-    ],
-  },
-];
+const skillGroups = resume.skills;
 
 export function ResumeSkills() {
   return (

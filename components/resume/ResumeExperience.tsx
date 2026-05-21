@@ -2,40 +2,9 @@
 
 import { motion } from "framer-motion";
 import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { resume } from "@/content/resume";
 
-const experience = [
-  {
-    company: "Meta",
-    role: "Senior Product Designer",
-    period: "Feb 2022 — Present",
-    location: "Los Angeles, CA",
-    bullets: [
-      "Lead identity, account, and social-profile design for the new Meta AI app. Partner with PM and engineering to ship a consumer AI product that spans phone and Ray-Ban Meta glasses, including cross-surface migration logic and regional edge cases. Contributed to the design-system principles guiding the launch.",
-      "Drove the Facebook to Meta account platform migration across product surfaces. Moved millions of users to the new company account system, navigated regulatory and legacy-hardware constraints, and designed the migration flow so users understood what was happening at each step.",
-      "Own the authentication suite across Meta's wearables: passcodes, passive unlock from a paired phone, and emerging biometric methods. A multi-device, multi-user-type system shaped end-to-end with hardware, firmware, and product partners.",
-      "Shipped the Spotify Tap integration on Ray-Ban Stories — a temple-gesture-driven music control surface that became a flagship example of hardware-first interaction design.",
-      "Mentor designers on the team, contribute to design critiques, and partner with research to ground product strategy in qualitative insight. Build functional prototypes in Cursor and Figma when behavior under real data is the only way to settle a debate.",
-    ],
-  },
-  {
-    company: "ArtCenter College of Design",
-    role: "Adjunct Instructor",
-    period: "May 2022 — Present",
-    location: "Pasadena, CA",
-    bullets: [
-      "Teach Interactive Prototyping 2. Mentor undergraduates from idea to multi-modal interactive prototype, with a high bar for visual craft, typography, and layout.",
-    ],
-  },
-  {
-    company: "Meta",
-    role: "Product Design Intern",
-    period: "Jun — Sep 2021",
-    location: "Remote",
-    bullets: [
-      "Established design direction in an ambiguous, early-stage AR program (under NDA), exploring novel input paradigms alongside hardware, ML, and research partners.",
-    ],
-  },
-];
+const experience = resume.experience;
 
 export function ResumeExperience() {
   return (

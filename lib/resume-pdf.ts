@@ -1,29 +1,56 @@
 import jsPDF from "jspdf";
 
+import { resume } from "@/content/resume";
+
 /**
- * Generate an ATS-friendly, single-page PDF of the resume.
+ * Generate an ATS-friendly PDF of the résumé — built fresh on every
+ * download click, straight from `content/resume.ts`.
  *
- * ATS-friendly means: real text (not images), simple formatting, standard
- * fonts, clear section headings, and no columns or tables that confuse
- * parsers. We use Helvetica (built into jsPDF / every PDF reader) for
- * maximum compatibility.
+ * Because the résumé page and this generator both read that one module,
+ * the downloaded PDF is always identical in content to the live page.
+ * There is no stored PDF file and no second copy of the data to drift.
  *
- * Letter size = 612 × 792 pt. With 36pt margins we get 720pt of vertical
- * space — every pixel counts.
+ * ATS-friendly means: real selectable text (not images), standard fonts
+ * (Helvetica, built into every PDF reader), clear section headings, and
+ * no multi-column layouts or tables that resume parsers choke on.
+ *
+ * Letter size = 612 × 792 pt. Content flows top-to-bottom and paginates
+ * automatically — `ensureSpace()` adds a page before any block that
+ * wouldn't fit, so rich content never gets clipped.
  */
 export function generateResumePDF() {
   const doc = new jsPDF({ unit: "pt", format: "letter" });
   const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
   const m = 40; // margin
   const w = pageWidth - m * 2; // content width
+  const bottom = pageHeight - m; // last usable y
   let y = 38;
 
-  /* ---- helper: section divider ---- */
+  /** Add a page + reset the cursor if `needed` pt won't fit below `y`. */
+  const ensureSpace = (needed: number) => {
+    if (y + needed > bottom) {
+      doc.addPage();
+      y = 38;
+    }
+  };
+
+  /** Section divider hairline. */
   const divider = () => {
     doc.setDrawColor(195, 195, 195);
     doc.setLineWidth(0.4);
     doc.line(m, y, pageWidth - m, y);
     y += 10;
+  };
+
+  /** Section heading — bold 9pt label, with a page-break guard. */
+  const sectionHeading = (label: string) => {
+    ensureSpace(40);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(17, 17, 19);
+    doc.text(label, m, y);
+    y += 13;
   };
 
   /* ================================================================== */
@@ -32,25 +59,18 @@ export function generateResumePDF() {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(18);
   doc.setTextColor(17, 17, 19);
-  doc.text("Siladityaa Sharma", m, y);
+  doc.text(resume.name, m, y);
   y += 15;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.5);
   doc.setTextColor(100, 100, 100);
-  doc.text(
-    "Senior Product Designer  |  Meta  |  Los Angeles, CA",
-    m,
-    y
-  );
+  doc.text(resume.tagline, m, y);
   y += 11;
 
   doc.setFontSize(8);
-  doc.text(
-    "hi@siladityaa.com  |  linkedin.com/in/siladityaa  |  siladityaa.com",
-    m,
-    y
-  );
+  const contactLine = resume.contact.map((c) => c.label).join("  |  ");
+  doc.text(contactLine, m, y);
   y += 12;
 
   divider();
@@ -58,73 +78,36 @@ export function generateResumePDF() {
   /* ================================================================== */
   /* Summary                                                             */
   /* ================================================================== */
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(17, 17, 19);
-  doc.text("SUMMARY", m, y);
-  y += 11;
+  sectionHeading("SUMMARY");
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(40, 40, 40);
-  const summary =
-    "Senior product designer with 5 years of shipping consumer experiences at scale. I lead identity, account, and social-profile design across Meta's wearables ecosystem, balancing complex platform systems with the visual craft people actually feel. Comfortable across strategy, storytelling, and execution.";
-  const sLines = doc.splitTextToSize(summary, w);
-  doc.text(sLines, m, y);
-  y += sLines.length * 10 + 8;
+  for (const para of [resume.summary.primary, resume.summary.secondary]) {
+    const lines = doc.splitTextToSize(para, w);
+    ensureSpace(lines.length * 10);
+    doc.text(lines, m, y);
+    y += lines.length * 10 + 4;
+  }
+  y += 4;
 
   divider();
 
   /* ================================================================== */
   /* Experience                                                          */
   /* ================================================================== */
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(17, 17, 19);
-  doc.text("EXPERIENCE", m, y);
-  y += 13;
+  sectionHeading("EXPERIENCE");
 
-  const jobs = [
-    {
-      title: "Senior Product Designer",
-      company: "Meta",
-      period: "Feb 2022 — Present",
-      location: "Los Angeles, CA",
-      bullets: [
-        "Lead identity, account, and social-profile design for the new Meta AI app — a consumer AI product spanning phone and Ray-Ban Meta glasses, including cross-surface migration logic and regional edge cases.",
-        "Drove the Facebook to Meta account platform migration. Moved millions of users to the new company account system, navigating regulatory and legacy-hardware constraints.",
-        "Own the authentication suite across Meta's wearables: passcodes, passive unlock from a paired phone, and emerging biometric methods. End-to-end work with hardware, firmware, and product partners.",
-        "Shipped the Spotify Tap integration on Ray-Ban Stories — temple-gesture-driven music control, a flagship example of hardware-first interaction design.",
-        "Mentor designers, contribute to critiques, and partner with research. Build functional prototypes in Cursor and Figma when behavior under real data is the only way to settle a debate.",
-      ],
-    },
-    {
-      title: "Adjunct Instructor",
-      company: "ArtCenter College of Design",
-      period: "May 2022 — Present",
-      location: "Pasadena, CA",
-      bullets: [
-        "Teach Interactive Prototyping 2. Mentor undergraduates from idea to multi-modal interactive prototype, with a high bar for visual craft, typography, and layout.",
-      ],
-    },
-    {
-      title: "Product Design Intern",
-      company: "Meta",
-      period: "Jun — Sep 2021",
-      location: "Remote",
-      bullets: [
-        "Established design direction in an ambiguous, early-stage AR program (under NDA), exploring novel input paradigms alongside hardware, ML, and research partners.",
-      ],
-    },
-  ];
+  for (let j = 0; j < resume.experience.length; j++) {
+    const job = resume.experience[j];
 
-  for (let j = 0; j < jobs.length; j++) {
-    const job = jobs[j];
+    // Keep the job header + first bullet line together on one page.
+    ensureSpace(40);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(8.5);
     doc.setTextColor(17, 17, 19);
-    doc.text(job.title, m, y);
+    doc.text(job.role, m, y);
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(8);
@@ -143,12 +126,13 @@ export function generateResumePDF() {
     doc.setTextColor(40, 40, 40);
     for (const bullet of job.bullets) {
       const lines = doc.splitTextToSize(bullet, w - 12);
+      ensureSpace(lines.length * 10);
       lines.forEach((line: string, i: number) => {
         doc.text(i === 0 ? `•  ${line}` : `   ${line}`, m + 4, y);
         y += 10;
       });
     }
-    y += j < jobs.length - 1 ? 6 : 8;
+    y += j < resume.experience.length - 1 ? 6 : 8;
   }
 
   divider();
@@ -156,70 +140,54 @@ export function generateResumePDF() {
   /* ================================================================== */
   /* Education                                                           */
   /* ================================================================== */
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(17, 17, 19);
-  doc.text("EDUCATION", m, y);
-  y += 13;
+  sectionHeading("EDUCATION");
 
+  ensureSpace(36);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(8.5);
-  doc.text("ArtCenter College of Design", m, y);
+  doc.setTextColor(17, 17, 19);
+  doc.text(resume.education.school, m, y);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(100, 100, 100);
-  doc.text("Pasadena, CA", pageWidth - m, y, { align: "right" });
+  doc.text(resume.education.location, pageWidth - m, y, { align: "right" });
   y += 11;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(60, 60, 60);
-  doc.text(
-    "BS Interaction Design  ·  Business Minor  ·  Graduated with Honors  ·  Provost List (GPA 3.80+)",
-    m,
-    y
-  );
-  y += 14;
+  const eduLine = [
+    resume.education.degree,
+    resume.education.minor,
+    ...resume.education.highlights,
+  ].join("  ·  ");
+  const eduLines = doc.splitTextToSize(eduLine, w);
+  doc.text(eduLines, m, y);
+  y += eduLines.length * 10 + 6;
 
   divider();
 
   /* ================================================================== */
   /* Skills                                                              */
   /* ================================================================== */
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(17, 17, 19);
-  doc.text("SKILLS", m, y);
-  y += 13;
+  sectionHeading("SKILLS");
 
   doc.setFontSize(8);
   doc.setTextColor(40, 40, 40);
 
-  const skillSections = [
-    {
-      label: "Product & Craft:",
-      items:
-        "Account & Identity UX, Design Systems, Visual Design (typography, composition, layout), Interaction Design, Information Architecture, Prototyping",
-    },
-    {
-      label: "Strategy & Process:",
-      items:
-        "Designing for multiple user types (consumers, admins, cross-platform users), Cross-functional partnership with PM, Engineering, and Research, Mentorship and design critique",
-    },
-    {
-      label: "Tools:",
-      items:
-        "Figma, Cursor, HTML/CSS/JavaScript, Principle, After Effects, Adobe Creative Suite",
-    },
-  ];
-
-  for (const section of skillSections) {
+  for (const group of resume.skills) {
+    const label = `${group.title}: `;
+    const items = group.skills.join(", ");
     doc.setFont("helvetica", "bold");
-    doc.text(section.label + " ", m, y);
-    const lw = doc.getTextWidth(section.label + " ");
+    const lw = doc.getTextWidth(label);
     doc.setFont("helvetica", "normal");
-    const skLines = doc.splitTextToSize(section.items, w - lw);
+    const skLines = doc.splitTextToSize(items, w - lw);
+    ensureSpace(skLines.length * 10 + 3);
+
+    doc.setFont("helvetica", "bold");
+    doc.text(label, m, y);
+    doc.setFont("helvetica", "normal");
     doc.text(skLines[0], m + lw, y);
     for (let i = 1; i < skLines.length; i++) {
       y += 10;
@@ -234,26 +202,15 @@ export function generateResumePDF() {
   /* ================================================================== */
   /* Awards                                                              */
   /* ================================================================== */
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(17, 17, 19);
-  doc.text("AWARDS", m, y);
-  y += 13;
+  sectionHeading("AWARDS");
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(40, 40, 40);
 
-  const awards = [
-    { title: "MUSE Design Awards — Gold", year: "2020" },
-    { title: "International Design Awards — Silver & Bronze", year: "2020" },
-    { title: "Adobe Design Achievement Awards — Semifinalist", year: "2020" },
-    { title: "Dutch Design Week — Featured Project", year: "2020" },
-    { title: "Bradford Hall End Scholarship — Recipient", year: "2019" },
-  ];
-
-  for (const award of awards) {
-    doc.text(`•  ${award.title}`, m + 4, y);
+  for (const award of resume.awards) {
+    ensureSpace(12);
+    doc.text(`•  ${award.title} — ${award.detail}`, m + 4, y);
     doc.setTextColor(100, 100, 100);
     doc.text(award.year, pageWidth - m, y, { align: "right" });
     doc.setTextColor(40, 40, 40);

@@ -2,34 +2,9 @@
 
 import { motion } from "framer-motion";
 import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { resume } from "@/content/resume";
 
-const awards = [
-  {
-    title: "MUSE Design Awards",
-    detail: "Gold",
-    year: "2020",
-  },
-  {
-    title: "International Design Awards",
-    detail: "Silver & Bronze",
-    year: "2020",
-  },
-  {
-    title: "Adobe Design Achievement Awards",
-    detail: "Semifinalist",
-    year: "2020",
-  },
-  {
-    title: "Dutch Design Week",
-    detail: "Featured Project",
-    year: "2020",
-  },
-  {
-    title: "Bradford Hall End Scholarship",
-    detail: "Recipient",
-    year: "2019",
-  },
-];
+const awards = resume.awards;
 
 export function ResumeAwards() {
   return (

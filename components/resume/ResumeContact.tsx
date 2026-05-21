@@ -2,24 +2,9 @@
 
 import { motion } from "framer-motion";
 import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { resume } from "@/content/resume";
 
-const links = [
-  {
-    label: "hi@siladityaa.com",
-    href: "mailto:hi@siladityaa.com",
-    kind: "EMAIL",
-  },
-  {
-    label: "linkedin.com/in/siladityaa",
-    href: "https://linkedin.com/in/siladityaa",
-    kind: "LINKEDIN",
-  },
-  {
-    label: "siladityaa.com",
-    href: "https://siladityaa.com",
-    kind: "PORTFOLIO",
-  },
-];
+const links = resume.contact;
 
 export function ResumeContact() {
   return (

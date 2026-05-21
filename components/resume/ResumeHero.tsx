@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { revealBlock, revealStaggerBlocks } from "@/lib/motion";
+import { resume } from "@/content/resume";
 
 export function ResumeHero() {
   return (
@@ -13,10 +14,10 @@ export function ResumeHero() {
     >
       <motion.div variants={revealBlock} className="flex flex-col gap-3">
         <h1 className="text-display-l italic text-[color:var(--surface-ink)]">
-          Siladityaa Sharma
+          {resume.name}
         </h1>
         <p className="text-mono-s tracking-wider text-[color:var(--surface-graphite)]">
-          SENIOR PRODUCT DESIGNER · META · LOS ANGELES, CA
+          {resume.tagline.toUpperCase()}
         </p>
       </motion.div>
 
@@ -26,31 +27,24 @@ export function ResumeHero() {
       >
         <div className="max-w-[640px] flex flex-col gap-4">
           <p className="text-body text-[color:var(--surface-ink)]">
-            Senior product designer with 5 years of shipping consumer
-            experiences at scale. I lead identity, account, and social-profile
-            design across Meta&rsquo;s wearables ecosystem, where I balance
-            complex platform systems with the visual craft that people
-            actually feel when they use a product.
+            {resume.summary.primary}
           </p>
           <p className="text-body text-[color:var(--surface-graphite)]">
-            Comfortable moving between strategy, storytelling, and execution,
-            and at home with the kind of cross-surface, multi-user-type
-            problems that account and admin experiences demand.
+            {resume.summary.secondary}
           </p>
         </div>
 
         {/* Quick stats */}
         <div className="flex gap-8 md:flex-col md:gap-6 md:border-l md:border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] md:pl-8">
-          <Stat value="5+" label="Years in Tech" />
-          <Stat value="10+" label="Product Launches" />
-          <Stat value="1M+" label="Products Sold" />
-          <Stat value="2+" label="Years in Academia" />
+          {resume.stats.map((stat) => (
+            <Stat key={stat.label} value={stat.value} label={stat.label} />
+          ))}
         </div>
       </motion.div>
 
       {/* Tags */}
       <motion.div variants={revealBlock} className="flex flex-wrap gap-2">
-        {["AI", "Hardware", "Wearables"].map((tag) => (
+        {resume.tags.map((tag) => (
           <span
             key={tag}
             className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_20%,transparent)] px-3 py-1 text-mono-s text-[color:var(--surface-graphite)]"
