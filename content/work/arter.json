@@ -2,9 +2,9 @@
   "slug": "arter",
   "title": "Arter",
   "timeline": "2020",
-  "role": "Co-Designer & Researcher\nProduct, Prototype & Strategy",
+  "role": "Co-Designer & Researcher\nProduct, Prototype & ML Strategy",
   "team": "Rodney Edwards · Siladityaa Sharma",
-  "credits": "ArtCenter College of Design\nAdvisors: Jenny Rodenhouse, Todd Masilko, Krystina Castella, Robbie Nock",
+  "credits": "ArtCenter College of Design — Graduate ML Immersion Lab\nInstructors: Jenny Rodenhouse & Todd Masilko · Advisors: Krystina Castella, Robbie Nock",
   "status": "public",
   "tags": [
     "ai",
@@ -14,9 +14,9 @@
   "hero": {
     "src": "/work/arter/hero.mp4",
     "alt": "Art — the Arter AI agent, a dark orb with a soft rainbow halo.",
-    "caption": "Meet Art — the AI agent at the heart of Arter."
+    "caption": "Meet Art — the AI agent at the heart of Arter. \"Where machine meets human.\""
   },
-  "brief": "Arter is an AI-powered storyboarding tool. Its AI agent, Art, listens for a user's input and, through natural language processing, parses each word into an image object using image-association analysis — turning a spoken or written idea into a visual storyboard in real time. A graduate thesis project at ArtCenter College of Design exploring machine learning and agentive technology.",
+  "brief": "Arter is an AI-powered storyboarding tool. Its agent, Art, listens for a user's input and, through natural language processing, parses each word into an image object — turning a spoken or written idea into a visual storyboard in real time. Built over two terms in ArtCenter's graduate machine-learning immersion lab, the project paired a complete product concept with a working ML pipeline that achieved genuine text-to-sketch generation.",
   "gallery": [],
   "metrics": [
     {
@@ -28,55 +28,98 @@
       "label": "Int'l Design Awards 2020"
     },
     {
-      "value": "2 terms",
-      "label": "ArtCenter thesis"
+      "value": "Text → Sketch",
+      "label": "Working ML pipeline"
     },
     {
-      "value": "NLP",
-      "label": "Word → image agent"
+      "value": "2 terms",
+      "label": "ArtCenter thesis"
     }
   ],
   "overviewMedia": {
-    "src": "/work/arter/sections/product-ui.webp",
-    "alt": "The Arter interface — natural-language input turning into a storyboard.",
-    "caption": "Speak or type an idea; Art parses each word into an image object and assembles the storyboard."
+    "src": "/work/arter/sections/promo-poster.webp",
+    "alt": "The Arter cafe-scene storyboard, generated from a typed description.",
+    "caption": "Type a scene; Art assembles a storyboard from it, frame by frame."
   },
   "body": [
     {
       "heading": "Why",
-      "body": "As humans, the need to communicate is paramount. Our primary tool is language — most often written or spoken. But more often than not, much is lost in translation. That's why they say a picture is worth a thousand words.\n\nArter started from a simple frustration: the distance between the idea in your head and your ability to show it to someone else. Sketching is a skill not everyone has, and even those who can sketch don't always feel comfortable putting rough work in front of a client.",
+      "body": "As humans, the need to communicate is paramount. Our primary tool is language — most often written or spoken. But more often than not, much is lost in translation. That's why they say a picture is worth a thousand words.\n\nArter started from a simple frustration: the distance between the idea in your head and your ability to show it to someone else. Sketching is a skill not everyone has, and even people who can sketch don't always feel comfortable putting rough work in front of a client.",
       "media": []
     },
     {
       "heading": "The brief",
-      "body": "How might we leverage the power of machine learning and natural language processing to enhance the way we communicate and visualize our ideas?\n\nRealized over two terms at ArtCenter College of Design, the project spanned the core product experience, a working prototype, and research into machine learning and agentive technology — alongside business viability, market segmentation, and a go-to-market plan.",
+      "body": "How might we leverage the power of machine learning and natural language processing to enhance the way we communicate and visualize our ideas?\n\nThe project came out of a graduate machine-learning immersion lab at ArtCenter College of Design. The goal of the class was to gain a deeper understanding of ML by exploring its associated technologies — and to let that discovery drive the concept, rather than starting from a fixed idea. Over two terms it spanned the core product experience, a working prototype, and research, alongside business viability, market segmentation, and a go-to-market plan.",
       "media": []
     },
     {
-      "heading": "Meet Sam — the visual thinker",
-      "body": "Sam is a Creative Director working in customer experience. His agency is working with Blue Bottle Coffee on revamping the experience of their cafe space. Sam needs to visualize the user journey to find opportunities.\n\nTypically, he works with the design team to imagine his storyboard when mapping. But they're busy — and Sam isn't comfortable presenting his own sketches to the client. He needs a way to think visually, fast, on his own terms.",
+      "heading": "Meet the users",
+      "body": "We designed for two kinds of visual thinker.\n\nSam is a Creative Director in customer experience — \"the visual thinker.\" His agency is working with Blue Bottle Coffee on revamping their cafe space, and he needs to visualize the user journey to find opportunities. Normally he'd lean on the design team to imagine his storyboard, but they're busy, and he isn't comfortable presenting his own sketches to the client.\n\nMary is a Product Manager — \"the product launch.\" Her company is announcing a new product roadmap and leadership wants a sizzle reel to attract a new demographic. Mary needs to hand her media team a storyboard that communicates the marketing message and highlights new ways to use the product.",
       "media": [
         {
           "src": "/work/arter/sections/scenario-coffee.webp",
           "alt": "A Blue Bottle-style cafe — the setting for Sam's customer-experience project.",
-          "caption": "The scenario: mapping the customer journey through a cafe space."
+          "caption": "Sam's scenario: mapping the customer journey through a cafe space."
         }
       ]
     },
     {
-      "heading": "How Art works",
-      "body": "Art is the agent at the center of Arter. It listens for the user's input and, through natural language processing, parses each word into an image object using image-association analysis.\n\nYou describe a scene — \"a person sitting in a cafe, walking in, ordering a coffee\" — and Art breaks the sentence into its visual nouns and actions, retrieves a matching illustration for each, and lays them out as sequential storyboard frames. The agent does the drawing so the thinker can stay in the flow of the idea.",
+      "heading": "The concept",
+      "body": "Art is the agent at the center of Arter. It listens for the user's input and, through natural language processing, parses each word into an image object using image-association analysis.\n\nYou type or speak a scene — \"a person sitting in a cafe, working on their laptop, drinking coffee\" — and Art breaks the sentence into its visual nouns and actions, retrieves a matching illustration for each, and lays them onto the canvas as an editable storyboard frame. The agent does the drawing so the thinker can stay in the flow of the idea.",
+      "media": [
+        {
+          "src": "/work/arter/promo.mp4",
+          "alt": "The full Arter product promo — typing a scene and watching Art assemble the storyboard.",
+          "caption": "The concept film — from a blank canvas to a finished cafe-scene storyboard."
+        }
+      ]
+    },
+    {
+      "heading": "Type a scene",
+      "body": "The core interaction is a single input bar. As you type, Art highlights the words it recognizes as objects and actions — \"person,\" \"cafe,\" \"laptop,\" \"coffee\" — and offers them as draggable elements. Drag a word onto the frame and the matching illustration drops into place on a perspective ground plane you can arrange freely.\n\nArt isn't a black box that hands back a finished image; it's a collaborator. A conversational side panel lets you ask it to adjust, swap, or explain what it placed and why.",
+      "media": [
+        {
+          "src": "/work/arter/sections/cafe-scene.webp",
+          "alt": "The finished Cafe Scene storyboard frame, generated from a typed description.",
+          "caption": "\"A person sitting in a cafe working on their laptop drinking coffee\" — rendered as a storyboard frame."
+        },
+        {
+          "src": "/work/arter/sections/art-assistant.webp",
+          "alt": "Art's conversational assistant placing a 'person' object on the canvas ground plane.",
+          "caption": "Art as collaborator — placing objects and explaining its choices in a side panel."
+        }
+      ]
+    },
+    {
+      "heading": "The technology",
+      "body": "The concept was backed by a real, working ML pipeline — not a mockup.\n\nFor the visuals, we used a SPADE-COCO model chained with an Edge-Detection model that converts simple doodles into sketches, and used AttGAN to achieve genuine text-to-sketch generation. To prototype the conversational experience, we built a model using AWS Lex and a sandboxed experience inside Runway ML, driven by Apple's dictation. Standing up the actual models — YOLOv3, Keras-OCR, SketchToPix, face trackers — is what grounded the product decisions in what the technology could really do.",
+      "media": [
+        {
+          "src": "/work/arter/sections/ml-prototype.webp",
+          "alt": "The Runway ML workspace running the COCO model, with the chained model pipeline in the sidebar.",
+          "caption": "The Runway ML sandbox — the chained model pipeline behind Art's text-to-sketch."
+        }
+      ]
+    },
+    {
+      "heading": "Craft & system",
+      "body": "Arter is set in Archia, a typeface chosen for the idea at the project's core — \"where machine meets human.\" The interface pairs that with a calm, near-monochrome canvas and one bright accent: the rainbow halo around Art, the only place color enters the system.\n\nMuch of the design work happened in the lock guides — the redlined specs for every screen, micro-interaction, and object state — so the system would hold together as it grew beyond the few screens we could show.",
       "media": [
         {
           "src": "/work/arter/sections/product-ui.mp4",
-          "alt": "The Arter interface parsing a natural-language prompt into storyboard frames.",
-          "caption": "Natural language in; a sequenced, editable storyboard out."
+          "alt": "The Arter interface in motion — the agent, the input bar, and the storyboard cards.",
+          "caption": "Key screens and micro-interactions across the product."
+        },
+        {
+          "src": "/work/arter/sections/lock-guides.webp",
+          "alt": "Redlined lock guides specifying layout and spacing for the interface.",
+          "caption": "Lock guides — the redlined specs holding the system together."
         }
       ]
     },
     {
       "heading": "Process",
-      "body": "The project was grounded in hands-on research — journey mapping, storyboarding workshops, and rounds of whiteboard sketching to understand how visual thinkers actually move from idea to artifact. We mapped where the friction lives (the moment of translation between language and image) and designed the agent to live exactly there.\n\nThe output wasn't just an interface — it was a point of view on agentive technology: software that doesn't wait for commands but actively collaborates, anticipating what the visual thinker needs next.",
+      "body": "The project was grounded in hands-on research — journey mapping, storyboarding workshops, and rounds of whiteboard sketching to understand how visual thinkers actually move from idea to artifact. We mapped where the friction lives — the moment of translation between language and image — and designed the agent to live exactly there.\n\nThe output wasn't just an interface; it was a point of view on agentive technology: software that doesn't wait for commands but actively collaborates, anticipating what the visual thinker needs next.",
       "media": [
         {
           "src": "/work/arter/sections/journey-mapping.webp",
@@ -91,8 +134,13 @@
       ]
     },
     {
+      "heading": "Key takeaways",
+      "body": "Four insights came out of the work:\n\nMachine learning can off-load the pain point of initial design brainstorming. It can also drive accessibility-first design and help eliminate edge cases. Designers make better decisions when they understand the technology powering their projects. And — most importantly — machine learning shouldn't replace the designer; it should elevate their decisions and assist them.\n\nIf we'd had more time, we'd have kept refining the UX flow, covered more edge cases, built out features like the object context menu and brush tool, and shipped a fully interactive prototype.",
+      "media": []
+    },
+    {
       "heading": "Recognition",
-      "body": "Arter went on to be recognized internationally: Gold at the MUSE Design Awards 2020; Silver in Interface Design and Bronze in Web Design at the 2020 International Design Awards; featured at Dutch Design Week and on Bestfolio; and nominated for the A' Design Awards, Fast Company, Core77, and the Spark Awards.\n\nA project co-created with Rodney Edwards at ArtCenter College of Design, advised by Jenny Rodenhouse, Todd Masilko, Krystina Castella, and Robbie Nock.",
+      "body": "Arter was recognized internationally: Gold at the MUSE Design Awards 2020; Silver in Interface Design and Bronze in Web Design at the 2020 International Design Awards; featured at Dutch Design Week and on Bestfolio; and nominated for the A' Design Awards, Fast Company, Core77, and the Spark Awards.\n\nA project co-created with Rodney Edwards at ArtCenter College of Design, in the graduate ML immersion lab led by Jenny Rodenhouse and Todd Masilko, with advisors Krystina Castella and Robbie Nock.",
       "media": [
         {
           "src": "/work/arter/sections/awards.webp",
