@@ -1,0 +1,105 @@
+{
+  "slug": "arter",
+  "title": "Arter",
+  "timeline": "2020",
+  "role": "Co-Designer & Researcher\nProduct, Prototype & Strategy",
+  "team": "Rodney Edwards · Siladityaa Sharma",
+  "credits": "ArtCenter College of Design\nAdvisors: Jenny Rodenhouse, Todd Masilko, Krystina Castella, Robbie Nock",
+  "status": "public",
+  "tags": [
+    "ai",
+    "concept"
+  ],
+  "keyColor": "#6366f1",
+  "hero": {
+    "src": "/work/arter/hero.mp4",
+    "alt": "Art — the Arter AI agent, a dark orb with a soft rainbow halo.",
+    "caption": "Meet Art — the AI agent at the heart of Arter."
+  },
+  "brief": "Arter is an AI-powered storyboarding tool. Its AI agent, Art, listens for a user's input and, through natural language processing, parses each word into an image object using image-association analysis — turning a spoken or written idea into a visual storyboard in real time. A graduate thesis project at ArtCenter College of Design exploring machine learning and agentive technology.",
+  "gallery": [],
+  "metrics": [
+    {
+      "value": "Gold",
+      "label": "MUSE Design Awards 2020"
+    },
+    {
+      "value": "Silver / Bronze",
+      "label": "Int'l Design Awards 2020"
+    },
+    {
+      "value": "2 terms",
+      "label": "ArtCenter thesis"
+    },
+    {
+      "value": "NLP",
+      "label": "Word → image agent"
+    }
+  ],
+  "overviewMedia": {
+    "src": "/work/arter/sections/product-ui.webp",
+    "alt": "The Arter interface — natural-language input turning into a storyboard.",
+    "caption": "Speak or type an idea; Art parses each word into an image object and assembles the storyboard."
+  },
+  "body": [
+    {
+      "heading": "Why",
+      "body": "As humans, the need to communicate is paramount. Our primary tool is language — most often written or spoken. But more often than not, much is lost in translation. That's why they say a picture is worth a thousand words.\n\nArter started from a simple frustration: the distance between the idea in your head and your ability to show it to someone else. Sketching is a skill not everyone has, and even those who can sketch don't always feel comfortable putting rough work in front of a client.",
+      "media": []
+    },
+    {
+      "heading": "The brief",
+      "body": "How might we leverage the power of machine learning and natural language processing to enhance the way we communicate and visualize our ideas?\n\nRealized over two terms at ArtCenter College of Design, the project spanned the core product experience, a working prototype, and research into machine learning and agentive technology — alongside business viability, market segmentation, and a go-to-market plan.",
+      "media": []
+    },
+    {
+      "heading": "Meet Sam — the visual thinker",
+      "body": "Sam is a Creative Director working in customer experience. His agency is working with Blue Bottle Coffee on revamping the experience of their cafe space. Sam needs to visualize the user journey to find opportunities.\n\nTypically, he works with the design team to imagine his storyboard when mapping. But they're busy — and Sam isn't comfortable presenting his own sketches to the client. He needs a way to think visually, fast, on his own terms.",
+      "media": [
+        {
+          "src": "/work/arter/sections/scenario-coffee.webp",
+          "alt": "A Blue Bottle-style cafe — the setting for Sam's customer-experience project.",
+          "caption": "The scenario: mapping the customer journey through a cafe space."
+        }
+      ]
+    },
+    {
+      "heading": "How Art works",
+      "body": "Art is the agent at the center of Arter. It listens for the user's input and, through natural language processing, parses each word into an image object using image-association analysis.\n\nYou describe a scene — \"a person sitting in a cafe, walking in, ordering a coffee\" — and Art breaks the sentence into its visual nouns and actions, retrieves a matching illustration for each, and lays them out as sequential storyboard frames. The agent does the drawing so the thinker can stay in the flow of the idea.",
+      "media": [
+        {
+          "src": "/work/arter/sections/product-ui.mp4",
+          "alt": "The Arter interface parsing a natural-language prompt into storyboard frames.",
+          "caption": "Natural language in; a sequenced, editable storyboard out."
+        }
+      ]
+    },
+    {
+      "heading": "Process",
+      "body": "The project was grounded in hands-on research — journey mapping, storyboarding workshops, and rounds of whiteboard sketching to understand how visual thinkers actually move from idea to artifact. We mapped where the friction lives (the moment of translation between language and image) and designed the agent to live exactly there.\n\nThe output wasn't just an interface — it was a point of view on agentive technology: software that doesn't wait for commands but actively collaborates, anticipating what the visual thinker needs next.",
+      "media": [
+        {
+          "src": "/work/arter/sections/journey-mapping.webp",
+          "alt": "Journey-mapping session with sticky notes over a printed storyboard.",
+          "caption": "Journey mapping and storyboarding research."
+        },
+        {
+          "src": "/work/arter/sections/whiteboard.webp",
+          "alt": "Two people sketching interface flows on a whiteboard.",
+          "caption": "Whiteboarding the core product flow."
+        }
+      ]
+    },
+    {
+      "heading": "Recognition",
+      "body": "Arter went on to be recognized internationally: Gold at the MUSE Design Awards 2020; Silver in Interface Design and Bronze in Web Design at the 2020 International Design Awards; featured at Dutch Design Week and on Bestfolio; and nominated for the A' Design Awards, Fast Company, Core77, and the Spark Awards.\n\nA project co-created with Rodney Edwards at ArtCenter College of Design, advised by Jenny Rodenhouse, Todd Masilko, Krystina Castella, and Robbie Nock.",
+      "media": [
+        {
+          "src": "/work/arter/sections/awards.webp",
+          "alt": "Award badges: IDA Silver and Bronze 2020, MUSE Design Awards, Bestfolios 2020, Dutch Design Week Eindhoven.",
+          "caption": ""
+        }
+      ]
+    }
+  ]
+}

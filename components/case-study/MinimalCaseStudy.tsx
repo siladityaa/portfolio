@@ -380,7 +380,7 @@ function MediaFigure({
  * `src` it was given. Flip `PLACEHOLDERS_ON` to `false` to restore the
  * real assets.
  */
-const PLACEHOLDERS_ON = true;
+const PLACEHOLDERS_ON = false;
 
 function MediaFrame({ src, alt }: { src: string; alt: string }) {
   if (PLACEHOLDERS_ON) {

@@ -1,10 +1,10 @@
 {
   "slug": "meta-ai-wearables",
-  "title": "Meta AI \u2014 Wearables",
-  "timeline": "2024 \u2014 Present",
-  "role": "Senior Product Designer\nAI Experiences Lead",
-  "team": "Design \u00b7 Research \u00b7 ML \u00b7 Hardware \u00b7 Product",
-  "credits": "Meta Reality Labs \u2014 Wearables AI\nPM, Research, ML, and Hardware partners",
+  "title": "Meta AI — Wearables",
+  "timeline": "2024 — Present",
+  "role": "Senior Product Designer\nMigration UX Lead — Meta AI App",
+  "team": "Design · Product · Engineering · Legal · Gen AI · Meta Account Access · UXR",
+  "credits": "Meta Reality Labs — Wearables AI\nProduct, Engineering, PXFN, Legal, and Gen AI partner teams",
   "status": "private",
   "tags": [
     "wearables",
@@ -12,72 +12,167 @@
   ],
   "keyColor": "#2b2d42",
   "hero": {
-    "src": "/work/meta-ai-wearables/hero.webp",
-    "alt": "Ray-Ban Meta companion app \u2014 Devices home with paired glasses, gallery, and the Ask Meta AI input.",
-    "caption": "Devices home in the companion app \u2014 paired glasses status, gallery, and the Ask Meta AI input."
+    "src": "/work/meta-ai-wearables/sections/hero.webp",
+    "alt": "Meta AI App — Migration UX. Meta View is now Meta AI.",
+    "caption": "Meta AI App — Migration UX. Meta View becomes Meta AI: manage your devices, interact with AI, and get inspiration from others."
   },
-  "brief": "Lead designer for AI-powered experiences on Ray-Ban Meta. Defining how multimodal AI feels when you wear it: camera-aware vision, audio-first interactions, contextual prompts, and the seamless handoff between glasses and the companion app.",
+  "brief": "Owned the end-to-end Migration UX for the Meta AI app — the experience that moved over a million existing Ray-Ban Meta users onto a new app and public profile. The work spanned a clear value proposition, mandatory profile creation, and complex privacy and legal requirements across global jurisdictions, all while keeping the glasses usable for people who depend on them daily.",
   "gallery": [],
   "metrics": [
     {
-      "value": "1M+",
-      "label": "Active users"
+      "value": "97% / 99%",
+      "label": "iOS / Android completion"
     },
     {
-      "value": "12",
-      "label": "Features shipped"
+      "value": "1.08M",
+      "label": "Active users in scope"
     },
     {
-      "value": "5",
-      "label": "Launch markets"
+      "value": "51",
+      "label": "Global migration scenarios"
     },
     {
-      "value": "4.7\u2605",
-      "label": "App rating"
+      "value": "20+",
+      "label": "Cross-functional partners"
     }
   ],
   "overviewMedia": {
-    "src": "",
-    "alt": "Field testing the camera-tap interaction in daylight.",
-    "caption": ""
+    "src": "/work/meta-ai-wearables/sections/problem.webp",
+    "alt": "The problem — the Meta AI app required all existing Meta Wearables users to create a new public profile.",
+    "caption": "From 1.08M Ray-Ban Meta active users, 613K were eligible for the Meta AI app launch."
   },
   "body": [
     {
       "heading": "Problem",
-      "body": "How do you make AI feel ambient \u2014 useful when you need it, invisible when you don't? Phones taught us to summon AI through chat windows. Glasses don't have a chat window. They have your eyes, your ears, and the world in front of you. The interaction model has to start over from first principles.",
-      "media": []
-    },
-    {
-      "heading": "Approach",
-      "body": "Started with field research with 30+ early adopters of Ray-Ban Stories and the original Meta-AI beta. Mapped the moments where AI is uniquely valuable on glasses (hands-free, eyes-up, in motion) vs. where it would just feel intrusive (in conversation, in flow, in privacy-sensitive contexts).\n\nFrom there, ran weekly cross-functional working sessions with PM, Research, ML, and Hardware to translate those moments into product surfaces \u2014 camera tap, audio tap, voice wake, and the companion app's chat history.",
+      "body": "The Meta AI app required all existing Meta Wearables app users to create a new public profile. From 1.08M Ray-Ban Meta active users, 613K were eligible for the Meta AI app launch — every one of whom would have to pass through a migration flow to keep using the glasses they already owned.",
       "media": [
         {
-          "src": "/work/meta-ai-wearables/gallery/02.jpg",
-          "alt": "Voice-first response surfaces in the companion app.",
+          "src": "/work/meta-ai-wearables/sections/problem.webp",
+          "alt": "Problem statement — 613K of 1.08M active users eligible for the Meta AI launch.",
           "caption": ""
         }
       ]
     },
     {
-      "heading": "Solution",
-      "body": "A privacy-first interaction model where the user always initiates. Explicit camera tap, \"Hey Meta\" wake word, or app launch \u2014 never silent capture. Every AI response is logged in the companion app's chat thread so users can audit what their glasses heard, said, and saw.\n\nThe visual system is two-layer: the LED on the glasses (a deliberate hardware tell that AI is engaged) and a soft type/audio response that fades after delivery. No persistent UI on the lens, no glanceable cards. The AI is loud when invoked, silent the rest of the time.",
+      "heading": "Complexity",
+      "body": "The migration UX needed to communicate a clear value proposition, explain why profile creation was mandatory, and handle complex privacy and legal requirements across global jurisdictions — all while maintaining device access for users who depend on the app daily. Getting any one of those wrong risked either a regulatory problem or a drop in the wearables active-user metric.",
       "media": [
         {
-          "src": "/work/meta-ai-wearables/gallery/03.jpg",
-          "alt": "Cross-platform handoff between glasses and phone.",
+          "src": "/work/meta-ai-wearables/sections/complexity.webp",
+          "alt": "Complexity — value prop, mandatory profile, and global privacy/legal requirements at once.",
           "caption": ""
-        },
-        {
-          "src": "/work/meta-ai-wearables/hero.webp",
-          "alt": "An AI-powered companion device \u2014 multimodal interaction across the wearable and phone.",
-          "caption": "AI handoff between the wearable and the companion app."
         }
       ]
     },
     {
-      "heading": "Reflection",
-      "body": "Wearable AI is a fundamentally new design surface. The lessons here are about restraint as much as novelty: every milliwatt, every millisecond, every word the user has to say is a tax. The product wins by spending those resources very deliberately on the moments that actually matter to the wearer.",
-      "media": []
+      "heading": "My role",
+      "body": "Owned the end-to-end Migration UX design — coordinating across Product, Engineering, PXFN, Legal, Gen AI, and Meta Account Access teams through constantly changing requirements.\n\nI proactively surfaced privacy and integrity risks early with PXFN, Legal, Trust, and Product, then drove alignment on final designs against the current plan of record. I led design-driven bug bashes and gave real-time design guidance during development, significantly improving turnaround for fixes and launch quality. And I designed for CEO-level review — contributing to decks reviewed directly by Mark Zuckerberg, then rapidly iterating on his specific feedback.",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/my-role.webp",
+          "alt": "My role — owning end-to-end migration UX across Product, Engineering, Legal, and Gen AI.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Existing users — happy path",
+      "body": "For an existing user, the flow is five beats: open the Meta AI app, see a welcome and value proposition, create a public profile, accept the privacy and legal consents, and land in the Device tab.\n\nThe governing design principle: migration never blocks the glasses. Users who depend on the app daily keep capture, calls, and audio while the profile step is pending. The only hard gate is the one-time consent.",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/existing-path.webp",
+          "alt": "Existing users happy path — five steps, with the glasses never blocked.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Privacy & legal across jurisdictions",
+      "body": "Consent, supplemental terms, and disclosures varied by market and had to be presented without stalling the flow or burying the value.\n\nI consolidated the required notices into a single \"Continue as…\" consent surfaced at the right moment, and used region-aware copy swaps to keep one layout while satisfying each jurisdiction's requirements. One surface, many legal realities.",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/privacy-legal.webp",
+          "alt": "Privacy and legal consent consolidated into a single region-aware surface.",
+          "caption": "Note: this slide contains motion in the source deck — currently shown as a still."
+        }
+      ]
+    },
+    {
+      "heading": "Phase 1 — global scenarios",
+      "body": "The first phase mapped 31 scenarios globally across 7 screen variations. The matrix covered users staying in the same country and gaining capability via an app upgrade; users staying in-region but entering a new country and gaining, losing, or keeping capability; and users entering an entirely new region and gaining, losing, or keeping capability. Each combination changed what Meta AI could legally do with the device's camera, and therefore what the migration screen had to say.",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/phase-1.webp",
+          "alt": "Phase 1 — 31 global scenarios across 7 screen variations.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Phase 2 — multimodal AI",
+      "body": "With the launch of multimodal AI and LLMs, we had to account for even more gaps in the global market due to the different privacy and legal landscape in each one. Illinois and Texas became a new privacy jurisdiction; rest-of-world multimodal AI changed to a notice model instead of consents; and each scenario now had its own migration experience. A total of 20 new scenarios were added on top of Phase 1.",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/phase-2.webp",
+          "alt": "Phase 2 — 20 new multimodal-AI scenarios and a shift to a notice model in some regions.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "New users — happy path",
+      "body": "New users follow five beats too: download Meta AI, log in or create an account, see the welcome and create a profile, accept privacy and legal consents, then continue with the rest of OOBE.\n\nThe biggest divergence from the existing-user path is the login screen — it merges sign-in and sign-up so we can detect a previously created account up front, directly addressing the duplicate-account problem seen on adjacent launches.",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/new-path.webp",
+          "alt": "New users happy path — merged sign-in/sign-up to catch duplicate accounts.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Account & profile creation",
+      "body": "Profile creation had to do two jobs at once — set up the underlying Meta account and the user-facing Meta AI social profile — while making the data use legible. The confirm screen imports name and username from an existing account, states plainly that tapping Confirm creates a Meta account and agrees to the AI terms, and links out to how info is combined across accounts. We tested both a separate account-plus-profile path (7 screens) and a combined one (4 screens).",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/account-creation.webp",
+          "alt": "Meta account and Meta AI social profile creation flow.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Post-launch regression",
+      "body": "Thirty days after launch, the team noticed a drop in daily active wearables users — which would eventually translate into a regression in monthly active users, a top-line metric for the Wearables team.\n\nThe funnel told the story: 100% open the app, 80.6% reach Meta account login/creation, then 19.4% leave before landing on the value proposition, and a further 7.9% drop off at the profile-creation screen. Two specific, fixable moments were costing real users.",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/regression.webp",
+          "alt": "Post-launch funnel — 19.4% drop before value prop, 7.9% at profile creation.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Proposed mitigations",
+      "body": "I used those funnel metrics to drive a focused set of mitigations: simplify the migration UX overall, opt users out of the in-app Meta AI feed and social-profile experiences by default (offering opt-in later), and defer profile creation so it no longer gated the first valuable moment. Each mitigation mapped directly to a measured drop-off point rather than a hunch.",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/mitigations.webp",
+          "alt": "Proposed mitigations — simplify MUX, opt out of feed/profile, defer profile creation.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Impact & outcomes",
+      "body": "97% (iOS) and 99% (Android) completion rates at launch, reached through iterative design across 20+ cross-functional partners. When the DAU regression appeared, I designed the mitigation within days, presented it at leadership reviews, and shipped a solution to recover the metric. The work established a multi-journey new-user framework now used by the Meta AI app for all user types globally — using specific funnel metrics (the 19.4% welcome drop-off and 7.9% profile drop-off) to drive five targeted, UXR-backed mitigation designs, and reducing onboarding steps without compromising privacy or legal requirements.",
+      "media": [
+        {
+          "src": "/work/meta-ai-wearables/sections/impact.webp",
+          "alt": "Impact and outcomes — 97%/99% completion, recovered DAU regression, reusable NUX framework.",
+          "caption": ""
+        }
+      ]
     }
   ]
 }

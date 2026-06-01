@@ -1,82 +1,171 @@
 {
   "slug": "meta-accounts-for-wearables",
   "title": "Meta Accounts for Wearables",
-  "timeline": "2023 \u2014 2024",
-  "role": "Senior Product Designer\nIdentity & Account Lead",
-  "team": "Design \u00b7 Research \u00b7 Identity Engineering \u00b7 Product \u00b7 Legal",
-  "credits": "Meta Reality Labs \u2014 Identity\nPM, Research, Engineering, and the Meta Identity team",
+  "timeline": "2023 — 2024",
+  "role": "Senior Product Designer\nSole Design Lead — Project Simile",
+  "team": "Design · Legal · Privacy · Comms · PM · Content Design · Engineering",
+  "credits": "Meta Reality Labs — Identity\nProject Simile · Smart Glasses + VR partner teams",
   "status": "private",
   "tags": [
     "wearables"
   ],
   "keyColor": "#d76a03",
   "hero": {
-    "src": "/work/meta-accounts-for-wearables/hero.mp4",
-    "alt": "",
-    "caption": ""
+    "src": "/work/meta-accounts-for-wearables/sections/hero.webp",
+    "alt": "Project Simile — Meta Account migration for Reality Labs wearables.",
+    "caption": "Project Simile — migrating every Reality Labs device user onto a Meta account."
   },
-  "brief": "Designed the migration from Facebook accounts to Meta accounts across the wearables ecosystem. Touched tens of millions of users worldwide, navigated complex account-linking flows, and made sure people always understood what was happening to their data at every step.",
+  "brief": "Project Simile migrated every device user across Reality Labs onto Meta accounts, removing the long-standing Facebook requirement for Ray-Ban Stories and the next-gen glasses. As sole design lead, I coordinated Legal, Privacy, Comms, PM, Design Systems, Content Design, and Engineering across the full go-to-market and launch — operating for over a year through shifting legal, technical, and regulatory requirements.",
   "gallery": [],
   "metrics": [
     {
-      "value": "50M+",
-      "label": "Users migrated"
+      "value": "All",
+      "label": "Smart glasses users migrated"
     },
     {
-      "value": "92%",
-      "label": "Completion rate"
+      "value": "#1",
+      "label": "Negative review theme removed"
     },
     {
-      "value": "6",
-      "label": "Surfaces touched"
+      "value": "28%",
+      "label": "Of complaints were FB-related"
     },
     {
-      "value": "18mo",
-      "label": "End-to-end"
+      "value": "1yr+",
+      "label": "End-to-end launch"
     }
   ],
   "overviewMedia": {
-    "src": "/work/meta-accounts-for-wearables/gallery/01.jpg",
-    "alt": "Migration receipt summary screen.",
-    "caption": ""
+    "src": "/work/meta-accounts-for-wearables/sections/what-is.webp",
+    "alt": "What is Project Simile — overview of the Meta account value proposition.",
+    "caption": "A Meta account gives users more control over their identity, better shared experiences across the Family of Apps, and the freedom to use email and password to access Reality Labs devices."
   },
   "body": [
     {
-      "heading": "Problem",
-      "body": "How do you migrate millions of users from one identity system to another without losing trust, breaking sessions, or leaving anyone in a half-migrated state on the device they wear on their face?\n\nFacebook accounts had been the front door to wearables since Ray-Ban Stories. As Meta's identity platform evolved, the company needed every wearable user to land on a Meta account \u2014 but on their schedule, with full control, and without risk of losing access to their existing photos, settings, and paired devices.",
-      "media": []
-    },
-    {
-      "heading": "Research",
-      "body": "Six weeks of qualitative interviews with 40+ Ray-Ban Meta users plus two large quantitative studies on intent-to-migrate language and consent-flow comprehension.\n\nThe biggest insight: users didn't care about the account system change. They cared about three things \u2014 \"will my photos be safe,\" \"will my glasses still pair,\" and \"can I undo this.\" The migration UX needed to answer those three questions in the first three screens, every time.",
+      "heading": "What is Project Simile?",
+      "body": "Project Simile migrates all device users across Reality Labs onto Meta accounts. At a high level, a Meta account gives users more flexibility and control over how they manage their identity, better shared experiences across the Family of Apps, and the freedom to choose an email and password to access Reality Labs devices — instead of being forced to use a Facebook account.",
       "media": [
         {
-          "src": "/work/meta-accounts-for-wearables/gallery/02.jpg",
-          "alt": "Account-link consent flow on a paired phone.",
+          "src": "/work/meta-accounts-for-wearables/sections/what-is.webp",
+          "alt": "Project Simile value proposition: identity control, shared experiences, and email/password sign-in.",
           "caption": ""
         }
       ]
     },
     {
-      "heading": "Solution",
-      "body": "Progressive disclosure of complexity. Each screen does one thing well: introduce the change, confirm what carries over, get the consent, and verify the result.\n\nA central \"migration receipt\" screen captures everything that moved (photos, paired devices, payment methods, friends list when applicable) and gives the user a printable / emailable summary. This single artifact dropped support contact volume by an order of magnitude in the first market.\n\nA dedicated \"undo\" surface in the first 30 days post-migration meant the system could absorb mistakes \u2014 which gave Legal and Trust the confidence to ship the migration as opt-in defaults rather than gated.",
+      "heading": "My role",
+      "body": "Sole design lead coordinating Legal, Privacy, Comms, PM, Design Systems, Content Design, and Engineering across the full go-to-market and launch.\n\nStrategic influence: proactively inserted Wearables into the company-wide \"Future 3\" workstream, ensuring the wearables voice was at the table early rather than as an afterthought. Ambiguity navigation: operated for over a year through legal hurdles, technical challenges, and shifting requirements. Proactive risk mitigation: de-risked the next-gen glasses months ahead by documenting edge cases and driving resolution before they became blockers.",
       "media": [
         {
-          "src": "/work/meta-accounts-for-wearables/gallery/03.jpg",
-          "alt": "30-day undo surface in the companion app settings.",
+          "src": "/work/meta-accounts-for-wearables/sections/my-role.webp",
+          "alt": "My role on Project Simile — cross-functional design leadership across Legal, Privacy, PM, and Engineering.",
           "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Why users wanted this",
+      "body": "An app-store analysis identified that 28% of negative user reviews originated from being forced to use a Facebook account to use Ray-Ban Stories. Users were frustrated with the requirement — one actual review read: \"it makes you create a Facebook account. This is unnecessary for the functionality.\"\n\nRemoving the Facebook requirement wasn't just an identity-platform migration — it directly addressed the single biggest source of negative sentiment for the product.",
+      "media": [
+        {
+          "src": "/work/meta-accounts-for-wearables/sections/user-pain.webp",
+          "alt": "App-store review analysis — 28% of negative reviews were about the Facebook requirement.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Launch timeline",
+      "body": "The migration rolled out in stages across 2023. Existing glasses users were notified of the upcoming Meta account migration in May 2023. Meta accounts launched for all users in June 2023, with existing users migrating from their Facebook account and new users logging in or creating a Meta account directly. By October 2023, Meta login applied to the second-generation glasses.",
+      "media": [
+        {
+          "src": "/work/meta-accounts-for-wearables/sections/timeline.webp",
+          "alt": "Smart glasses launch timeline for the Meta account migration across 2023.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Partnership with VR",
+      "body": "Project Simile spanned both Smart Glasses and VR. For launch, we agreed to let the experiences diverge where appropriate — VR was mid-A/B-experimentation with no settled optimal flow, Smart Glasses was building on different (Native Bloks) technology, and there were known issues in the VR experience that Smart Glasses could improve on. Post-launch, the plan was to unify: VR would adopt the Native Bloks technology built by Smart Glasses, and we'd improve the combined experience with everything learned from both launches.",
+      "media": [
+        {
+          "src": "/work/meta-accounts-for-wearables/sections/vr-partnership.webp",
+          "alt": "Smart Glasses and VR partnership — diverge for launch, unify afterward.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Existing users — happy path",
+      "body": "For an existing user migrating immediately: we notify them of the upcoming migration in advance, they open the app, get educated on the change, create or log into a Meta account, update firmware if required, then turn on and connect their glasses — ready to use.\n\nThe migration flow was designed so users always understood what was changing at each step, never lost access to their imported media, and could resolve issues without contacting support.",
+      "media": [
+        {
+          "src": "/work/meta-accounts-for-wearables/sections/migration-path.webp",
+          "alt": "Existing users happy-path migration flow.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Delayed migration & forced reset",
+      "body": "Not everyone migrates immediately, so the system had to absorb delay gracefully. Users could postpone migration by a set number of days, with active notifications — push, email, and in-app modals — making it clear they had a limited window before risking a factory reset. Crucially, users could still access their already-imported media in the Gallery while postponing.\n\nIf a user kept delaying (or an inactive user opened the app afterward), they'd eventually have to factory reset their glasses — which would erase any unimported captures. Designing this edge case honestly, with repeated forewarning, was what let Legal and Trust ship the migration without a punitive feel.",
+      "media": [
+        {
+          "src": "/work/meta-accounts-for-wearables/sections/delayed-migration.webp",
+          "alt": "Delayed migration flow — postpone with active notifications.",
+          "caption": "Delayed migration: users can postpone, but are actively reminded before the window closes."
         },
         {
-          "src": "/work/meta-accounts-for-wearables/hero.mp4",
-          "alt": "Three Ray-Ban Meta phones showing the new Meta account login flow for wearables",
-          "caption": "The unified Meta account sign-in across Ray-Ban Meta and the View companion app."
+          "src": "/work/meta-accounts-for-wearables/sections/factory-reset.webp",
+          "alt": "Forced factory reset edge case after repeated delays.",
+          "caption": "The forced-reset edge case, designed with repeated forewarning so it never feels punitive."
         }
       ]
     },
     {
-      "heading": "Reflection",
-      "body": "Account migrations are 80% trust and 20% UX. The pixels matter, but what really moved the metric was the team's collective discipline about being honest with users \u2014 naming what was changing, what wasn't, and what they could undo if they changed their mind. That's the work the design system can't do for you.",
-      "media": []
+      "heading": "Value proposition & legal",
+      "body": "At launch we had a deliberately basic value prop until further functionality could be built into Account Center — we expected users to still have questions about how a Meta account benefits them. Regulators required that setting up with Facebook and with email be presented equally, so the create-account flow gave both options the same weight. Migrating users wouldn't see an option to create a Meta account with Instagram, but could always link Instagram later in Account Center.",
+      "media": [
+        {
+          "src": "/work/meta-accounts-for-wearables/sections/value-prop.webp",
+          "alt": "Meta account value proposition and regulator-driven equal presentation of sign-up options.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Design systems",
+      "body": "The migration spanned three different design systems, and part of the work was making a coherent experience across all of them. Project Simile experiences lived in the X-Meta Design System (gradient backgrounds, blue buttons); Smart Glasses experiences lived in the Ray-Ban Stories Design System (white background, black buttons); and the new app introduced a dark-mode-only, gradient-forward system. Reconciling the visual language across these handoffs — so a single migration never felt like three different products — was a core part of the craft.",
+      "media": [
+        {
+          "src": "/work/meta-accounts-for-wearables/sections/design-systems.webp",
+          "alt": "Three design systems reconciled across the migration: X-Meta DS, Ray-Ban Stories DS, and the new app DS.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "New users — happy path",
+      "body": "For brand-new users, the flow folded migration into the out-of-box experience: open Ray-Ban Stories and download the app, get started, land on the login screen, create or log into a Meta account, run any required firmware update, then continue through pairing and the rest of OOBE. Edge cases — like an existing user who hadn't finished migration arriving through the new-user path — were mapped explicitly so no one got stuck between the two flows.",
+      "media": [
+        {
+          "src": "/work/meta-accounts-for-wearables/sections/new-users.webp",
+          "alt": "New users happy-path flow with migration folded into onboarding.",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "heading": "Impact & outcome",
+      "body": "Successfully launched Meta accounts for all smart glasses users — eliminating the #1 negative feedback theme from app-store reviews. The migration was experienced as quick and frictionless: users understood what was changing and why, logged in fast, and could resolve issues painlessly. And we navigated heavy legal and regulatory scrutiny of the privacy-policy updates without negative press backlash.",
+      "media": [
+        {
+          "src": "/work/meta-accounts-for-wearables/sections/impact.webp",
+          "alt": "Impact and outcome — eliminated the top negative review theme, frictionless migration, no regulatory backlash.",
+          "caption": ""
+        }
+      ]
     }
   ]
 }
