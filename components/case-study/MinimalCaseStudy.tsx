@@ -15,6 +15,14 @@ interface MinimalCaseStudyProps {
 }
 
 /**
+ * Master switch for case-study media. While the studies are presented as
+ * text-only, every asset block (overview media, hero, inline section
+ * media, and gallery) is skipped. The JSON and files are left intact —
+ * flip this to `true` to bring all imagery back.
+ */
+const SHOW_MEDIA = false;
+
+/**
  * Editorial long-scroll case study, sized for read-through rather than
  * single-frame consumption. Order:
  *
@@ -121,7 +129,7 @@ export function MinimalCaseStudy({
           <p className="mt-6 max-w-[68ch] text-display-s text-[color:var(--surface-ink)]">
             {brief}
           </p>
-          {cs.overviewMedia?.src && (
+          {SHOW_MEDIA && cs.overviewMedia?.src && (
             <MediaFigure
               src={cs.overviewMedia.src}
               alt={cs.overviewMedia.alt ?? `${cs.title} overview`}
@@ -133,7 +141,7 @@ export function MinimalCaseStudy({
       )}
 
       {/* ── 4. Hero asset ─────────────────────────────────────────────── */}
-      {cs.hero?.src && (
+      {SHOW_MEDIA && cs.hero?.src && (
         <motion.figure
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -202,7 +210,7 @@ export function MinimalCaseStudy({
                 <p className="max-w-[68ch] whitespace-pre-line text-body text-[color:var(--surface-ink)]">
                   {sec.body}
                 </p>
-                {sec.media && sec.media.length > 0 && (
+                {SHOW_MEDIA && sec.media && sec.media.length > 0 && (
                   <div
                     className={
                       sec.media.length > 1
@@ -229,7 +237,7 @@ export function MinimalCaseStudy({
       )}
 
       {/* ── 7. Gallery (additional assets) ────────────────────────────── */}
-      {cs.gallery && cs.gallery.length > 0 && (
+      {SHOW_MEDIA && cs.gallery && cs.gallery.length > 0 && (
         <motion.section
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
