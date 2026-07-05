@@ -53,7 +53,7 @@ export async function SelectedWork() {
     <section id="work" className="scroll-mt-24 mt-[clamp(120px,20vh,200px)]">
       <header className="mx-auto flex max-w-[1280px] items-baseline gap-4 px-[clamp(24px,4vw,64px)] pt-24 pb-10">
         <span className="text-label-s text-[color:var(--surface-graphite)]">
-          01 — SELECTED WORK
+          01 — Selected work
         </span>
       </header>
       <ProjectList rows={rows} />

@@ -70,7 +70,7 @@ export function Hero({ sentence, subline }: HeroProps) {
             : { duration: 2, repeat: Infinity, ease: easeOutSoft }
         }
       >
-        ↓ SCROLL
+        ↓ Scroll
       </motion.span>
     </section>
   );

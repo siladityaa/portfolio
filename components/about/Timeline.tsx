@@ -30,7 +30,7 @@ export function Timeline() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-3">
             <span className="text-label-s text-[color:var(--surface-graphite)]">
-              02 — TIMELINE
+              02 — Timeline
             </span>
           </div>
 
@@ -51,7 +51,7 @@ export function Timeline() {
                     ) : null}
                   </span>
                   <span className="text-label-s text-[color:var(--surface-ink)] md:col-span-3">
-                    {role.company.toUpperCase()}
+                    {role.company}
                   </span>
                   <div className="md:col-span-6">
                     <div className="text-display-s text-[color:var(--surface-ink)]">
@@ -69,7 +69,7 @@ export function Timeline() {
 
             {/* Education */}
             <h3 className="mt-16 text-label-s text-[color:var(--surface-graphite)]">
-              EDUCATION
+              Education
             </h3>
             <ul className="mt-4 flex flex-col">
               {education.map((entry) => (
@@ -81,7 +81,7 @@ export function Timeline() {
                     {entry.start} — {entry.end}
                   </span>
                   <span className="text-label-s text-[color:var(--surface-ink)] md:col-span-3">
-                    {entry.school.toUpperCase()}
+                    {entry.school}
                   </span>
                   <div className="md:col-span-6">
                     <div className="text-display-s text-[color:var(--surface-ink)]">
@@ -99,7 +99,7 @@ export function Timeline() {
 
             {/* Awards */}
             <h3 className="mt-16 text-label-s text-[color:var(--surface-graphite)]">
-              SELECTED AWARDS
+              Selected awards
             </h3>
             <ul className="mt-4 flex flex-col">
               {awards.map((award) => (

@@ -17,9 +17,9 @@ export function ResumeAwards() {
     >
       <motion.h2
         variants={revealBlock}
-        className="text-label-s tracking-wider text-[color:var(--surface-graphite)]"
+        className="text-label-s text-[color:var(--surface-graphite)]"
       >
-        AWARDS & RECOGNITION
+        Awards & recognition
       </motion.h2>
 
       <div className="flex flex-col">
@@ -38,7 +38,7 @@ export function ResumeAwards() {
                 {award.title}
               </span>
               <span className="text-label-s text-[color:var(--surface-graphite)]">
-                {award.detail.toUpperCase()}
+                {award.detail}
               </span>
             </div>
             <span className="shrink-0 text-label-s text-[color:var(--surface-graphite)]">

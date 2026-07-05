@@ -17,9 +17,9 @@ export function ResumeEducation() {
     >
       <motion.h2
         variants={revealBlock}
-        className="text-label-s tracking-wider text-[color:var(--surface-graphite)]"
+        className="text-label-s text-[color:var(--surface-graphite)]"
       >
-        EDUCATION
+        Education
       </motion.h2>
 
       <motion.div
@@ -31,7 +31,7 @@ export function ResumeEducation() {
             {education.school}
           </h3>
           <p className="text-label-s text-[color:var(--surface-graphite)]">
-            {`${education.degree} · ${education.minor} · ${education.location}`.toUpperCase()}
+            {`${education.degree} · ${education.minor} · ${education.location}`}
           </p>
         </div>
 

@@ -25,11 +25,11 @@ export default function ResumePage() {
           {Array.from({ length: 4 }).map((_, i) => (
             <span
               key={i}
-              className="mx-8 text-label-s tracking-widest text-[color:var(--surface-graphite)]"
+              className="mx-8 text-label-s tracking-wide text-[color:var(--surface-graphite)]"
             >
-              PRODUCT DESIGN / AI DESIGN / WEARABLES / UX DESIGN / INTERACTION
-              DESIGN / DESIGN SYSTEMS / PROTOTYPING / MOTION DESIGN / UX
-              RESEARCH / DESIGN THINKING /
+              Product Design / AI Design / Wearables / UX Design / Interaction
+              Design / Design Systems / Prototyping / Motion Design / UX
+              Research / Design Thinking /
             </span>
           ))}
         </div>

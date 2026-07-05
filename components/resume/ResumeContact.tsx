@@ -17,9 +17,9 @@ export function ResumeContact() {
     >
       <motion.h2
         variants={revealBlock}
-        className="text-label-s tracking-wider text-[color:var(--surface-graphite)]"
+        className="text-label-s text-[color:var(--surface-graphite)]"
       >
-        CONTACT
+        Contact
       </motion.h2>
 
       <motion.div
@@ -48,8 +48,8 @@ export function ResumeContact() {
         variants={revealBlock}
         className="text-label-s text-[color:var(--surface-graphite)]"
       >
-        DESIGNED IN FIGMA · BUILT WITH NEXT.JS · SET IN INSTRUMENT SERIF +
-        JETBRAINS MONO
+        Designed in Figma · Built with Next.js · Set in Instrument Serif +
+        JetBrains Mono
       </motion.p>
     </motion.section>
   );

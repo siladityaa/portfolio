@@ -16,7 +16,7 @@ export function InfluencesGrid() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-3">
             <span className="text-label-s text-[color:var(--surface-graphite)]">
-              02 — INFLUENCES
+              02 — Influences
             </span>
             <p className="mt-6 max-w-[28ch] text-body text-[color:var(--surface-graphite)]">
               Twelve things I keep coming back to — one sentence on each.
@@ -34,7 +34,7 @@ export function InfluencesGrid() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="text-label-s text-[color:var(--surface-graphite)]">
-                    {inf.category.toUpperCase()}
+                    {inf.category}
                   </span>
                 </div>
                 <h3 className="text-display-s text-[color:var(--surface-ink)]">

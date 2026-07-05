@@ -15,7 +15,7 @@ export default function ForbiddenPage() {
       <div className="flex w-full max-w-[440px] flex-col gap-8">
         <header className="flex flex-col gap-3">
           <span className="text-label-s text-[color:var(--surface-graphite)]">
-            403 — FORBIDDEN
+            403 — Forbidden
           </span>
           <h1 className="text-display-l italic text-[color:var(--surface-ink)]">
             Not your CMS.
@@ -32,13 +32,13 @@ export default function ForbiddenPage() {
             href="/api/auth/github"
             className="inline-flex items-center border border-[color:var(--surface-ink)] bg-[color:var(--surface-ink)] px-4 py-3 text-label-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-90"
           >
-            TRY AGAIN
+            Try again
           </Link>
           <Link
             href="/"
             className="inline-flex items-center border border-[color:var(--surface-ink)] px-4 py-3 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           >
-            BACK TO SITE
+            Back to site
           </Link>
         </div>
       </div>

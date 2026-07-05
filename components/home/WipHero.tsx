@@ -92,7 +92,7 @@ export function WipHero() {
               variants={revealBlock}
               className="text-label-s text-[color:var(--surface-graphite)]"
             >
-              SENIOR PRODUCT DESIGNER · WEARABLES + AI AT META · BASED IN LOS ANGELES
+              Senior Product Designer · Wearables + AI at Meta · Based in Los Angeles
             </motion.p>
 
             {/* WIP notice + progress */}
@@ -275,7 +275,7 @@ function ProgressBar() {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between text-label-s text-[color:var(--surface-graphite)]">
-        <span>BUILD PROGRESS</span>
+        <span>Build progress</span>
         <span>{progress}%</span>
       </div>
       <div className="h-[3px] w-full overflow-hidden rounded-full bg-[color:color-mix(in_srgb,var(--surface-graphite)_20%,transparent)]">

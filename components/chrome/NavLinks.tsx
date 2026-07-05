@@ -26,7 +26,7 @@ export function NavLinks() {
         data-cursor="view"
         className="text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
       >
-        RESUME
+        Resume
       </Link>
 
       {/* Search button — temporarily hidden. Re-enable by restoring the

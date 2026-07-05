@@ -17,9 +17,9 @@ export function ResumeExperience() {
     >
       <motion.h2
         variants={revealBlock}
-        className="text-label-s tracking-wider text-[color:var(--surface-graphite)]"
+        className="text-label-s text-[color:var(--surface-graphite)]"
       >
-        EXPERIENCE
+        Experience
       </motion.h2>
 
       <div className="flex flex-col gap-10">
@@ -34,15 +34,15 @@ export function ResumeExperience() {
                 {job.role}
               </h3>
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-label-s text-[color:var(--surface-graphite)]">
-                <span>{job.company.toUpperCase()}</span>
+                <span>{job.company}</span>
                 <span className="text-[color:color-mix(in_srgb,var(--surface-graphite)_40%,transparent)]">
                   /
                 </span>
-                <span>{job.period.toUpperCase()}</span>
+                <span>{job.period}</span>
                 <span className="text-[color:color-mix(in_srgb,var(--surface-graphite)_40%,transparent)]">
                   /
                 </span>
-                <span>{job.location.toUpperCase()}</span>
+                <span>{job.location}</span>
               </div>
             </div>
 

@@ -187,7 +187,7 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
                 className="flex-1 bg-transparent text-body text-[color:var(--surface-ink)] outline-none placeholder:text-[color:var(--surface-graphite)]"
               />
               <kbd className="rounded border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-1.5 py-0.5 text-label-s text-[color:var(--surface-graphite)]">
-                ESC
+                Esc
               </kbd>
             </div>
 
@@ -198,7 +198,7 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
             >
               {results.length === 0 ? (
                 <div className="px-5 py-6 text-center text-label-s text-[color:var(--surface-graphite)]">
-                  NO RESULTS
+                  No results
                 </div>
               ) : (
                 results.map((item, i) => {
@@ -240,13 +240,13 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
             {/* Footer hint */}
             <div className="flex items-center gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] px-5 py-3">
               <span className="text-label-s text-[color:var(--surface-graphite)]">
-                ↑↓ NAVIGATE
+                ↑↓ Navigate
               </span>
               <span className="text-label-s text-[color:var(--surface-graphite)]">
-                ↵ OPEN
+                ↵ Open
               </span>
               <span className="text-label-s text-[color:var(--surface-graphite)]">
-                ESC CLOSE
+                Esc close
               </span>
             </div>
           </motion.div>

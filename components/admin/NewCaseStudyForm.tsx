@@ -69,13 +69,13 @@ export function NewCaseStudyForm() {
           className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           disabled={pending}
         >
-          CANCEL
+          Cancel
         </button>
       </div>
 
       <label className="flex flex-col gap-2">
         <span className="text-label-s text-[color:var(--surface-graphite)]">
-          TITLE
+          Title
         </span>
         <input
           type="text"
@@ -90,7 +90,7 @@ export function NewCaseStudyForm() {
 
       <label className="flex flex-col gap-2">
         <span className="text-label-s text-[color:var(--surface-graphite)]">
-          SLUG
+          Slug
         </span>
         <input
           type="text"

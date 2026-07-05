@@ -249,7 +249,7 @@ export function ImageUploadField({
             aria-hidden
             className="flex h-[56px] w-[80px] shrink-0 items-center justify-center rounded-md border border-dashed border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] text-label-s text-[color:var(--surface-graphite)]"
           >
-            MEDIA
+            Media
           </span>
         )}
 
@@ -273,7 +273,7 @@ export function ImageUploadField({
           {phase === "idle" && (
             <>
               <span className="text-label-s text-[color:var(--surface-graphite)]">
-                {showPreview ? "REPLACE — DROP OR CLICK" : "DROP MEDIA OR CLICK TO UPLOAD"}
+                {showPreview ? "REPLACE — DROP OR CLICK" : "DROP Media OR CLICK TO UPLOAD"}
               </span>
               <span className="text-[11px] text-[color:color-mix(in_srgb,var(--surface-graphite)_70%,transparent)]">
                 Images: JPG, PNG, WebP, GIF (auto-compressed) · Video: MP4,
@@ -299,7 +299,7 @@ export function ImageUploadField({
             aria-label="Clear asset"
             className="shrink-0 self-start rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-3 py-1 text-label-s text-[color:var(--surface-graphite)] transition-colors duration-200 hover:border-[color:var(--surface-signal)] hover:text-[color:var(--surface-signal)]"
           >
-            CLEAR
+            Clear
           </button>
         )}
 

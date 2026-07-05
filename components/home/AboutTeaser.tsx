@@ -10,10 +10,10 @@ export function AboutTeaser() {
     <section className="mt-[clamp(140px,22vh,240px)] hairline-top">
       <header className="mx-auto flex max-w-[1280px] items-baseline justify-between gap-4 px-[clamp(24px,4vw,64px)] pt-24 pb-10">
         <span className="text-label-s text-[color:var(--surface-graphite)]">
-          02 — ABOUT
+          02 — About
         </span>
         <span className="text-label-s text-[color:var(--surface-graphite)]">
-          BIO + NOW
+          Bio + now
         </span>
       </header>
 

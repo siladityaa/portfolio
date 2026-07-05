@@ -118,7 +118,7 @@ export function ProjectList({ rows }: ProjectListProps) {
                 {/* Right — meta */}
                 <div className="flex shrink-0 items-baseline gap-[clamp(12px,2vw,28px)] text-label-s text-[color:var(--surface-graphite)]">
                   <span className="hidden md:inline">
-                    {row.client.toUpperCase()}
+                    {row.client}
                   </span>
                   <span>{row.year}</span>
                   <span aria-hidden>{isPrivate ? "◯" : "●"}</span>

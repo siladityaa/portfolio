@@ -355,7 +355,7 @@ function CurrentCheckbox({ name }: { name: string }) {
         className="h-4 w-4 border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] text-[color:var(--surface-ink)] accent-[color:var(--surface-ink)]"
       />
       <span className="text-label-s text-[color:var(--surface-graphite)]">
-        CURRENT ROLE
+        Current role
       </span>
     </label>
   );

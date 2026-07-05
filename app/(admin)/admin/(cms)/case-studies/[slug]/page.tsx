@@ -32,7 +32,7 @@ export default async function CaseStudyEditPage({
         href="/admin/case-studies"
         className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
       >
-        ← CASE STUDIES
+        ← Case studies
       </Link>
       <h1 className="mt-6 max-w-[24ch] text-display-l italic text-[color:var(--surface-ink)]">
         {cs.title}

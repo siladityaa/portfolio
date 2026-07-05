@@ -17,9 +17,9 @@ export function ResumeSkills() {
     >
       <motion.h2
         variants={revealBlock}
-        className="text-label-s tracking-wider text-[color:var(--surface-graphite)]"
+        className="text-label-s text-[color:var(--surface-graphite)]"
       >
-        SKILLS
+        Skills
       </motion.h2>
 
       <div className="grid gap-8 md:grid-cols-3">

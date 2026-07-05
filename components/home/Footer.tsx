@@ -5,7 +5,7 @@ import { ThemeToggle } from "@/components/chrome/ThemeToggle";
 const LAST_DEPLOYED = new Date().toISOString().slice(0, 10);
 
 /**
- * Three-column footer: wordmark + tagline · ELSEWHERE links · last
+ * Three-column footer: wordmark + tagline · Elsewhere links · last
  * deployed + credit + theme toggle. (PAGES column was removed since the
  * primary nav is just RESUME now.)
  */
@@ -16,38 +16,38 @@ export function Footer() {
         {/* Col 1 — wordmark + tagline */}
         <div className="flex flex-col gap-3">
           <span className="text-label-s text-[color:var(--surface-ink)]">
-            SILADITYAA
+            Siladityaa
           </span>
           <p className="max-w-[28ch] text-label-s text-[color:var(--surface-graphite)]">
-            SENIOR PRODUCT DESIGNER
+            Senior Product Designer
             <br />
-            WEARABLES + AI · LOS ANGELES
+            Wearables + AI · Los Angeles
           </p>
         </div>
 
         {/* Col 2 — elsewhere */}
         <div className="flex flex-col gap-2">
           <span className="text-label-s text-[color:var(--surface-graphite)]">
-            ELSEWHERE
+            Elsewhere
           </span>
           <FooterExternalLink href="https://www.linkedin.com/in/siladityaa/">
-            LINKEDIN ↗
+            LinkedIn ↗
           </FooterExternalLink>
           <FooterExternalLink href="https://www.instagram.com/siladityaadesign">
-            INSTAGRAM ↗
+            Instagram ↗
           </FooterExternalLink>
           <FooterExternalLink href="mailto:siladityaa@gmail.com">
-            EMAIL ↗
+            Email ↗
           </FooterExternalLink>
         </div>
 
         {/* Col 3 — last deployed + credit + theme toggle */}
         <div className="flex flex-col gap-3">
           <span className="text-label-s text-[color:var(--surface-graphite)]">
-            LAST DEPLOYED · {LAST_DEPLOYED}
+            Last deployed · {LAST_DEPLOYED}
           </span>
           <span className="text-label-s text-[color:var(--surface-graphite)]">
-            DESIGNED &amp; BUILT BY SILADITYAA SHARMA · 2026
+            DESIGNED &amp; BUILT BY Siladityaa SHARMA · 2026
           </span>
           <div className="pt-2">
             <ThemeToggle />

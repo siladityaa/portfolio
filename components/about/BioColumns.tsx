@@ -15,14 +15,14 @@ export async function BioColumns() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-3">
             <span className="text-label-s text-[color:var(--surface-graphite)]">
-              01 — ABOUT
+              01 — About
             </span>
           </div>
 
           {/* Personal column */}
           <div className="md:col-span-4">
             <span className="text-label-s text-[color:var(--surface-graphite)]">
-              PERSONAL
+              Personal
             </span>
             <p className="mt-6 max-w-[36ch] text-body text-[color:var(--surface-ink)]">
               {about.bio.personal}
@@ -32,7 +32,7 @@ export async function BioColumns() {
           {/* Professional column */}
           <div className="md:col-span-5">
             <span className="text-label-s text-[color:var(--surface-graphite)]">
-              PROFESSIONAL
+              Professional
             </span>
             <p className="mt-6 max-w-[42ch] text-body text-[color:var(--surface-ink)]">
               {about.bio.professional}

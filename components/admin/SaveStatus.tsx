@@ -81,7 +81,7 @@ export function SaveStatus({ state, onSavedExpire }: SaveStatusProps) {
         aria-hidden
         className="inline-block h-[7px] w-[7px] rounded-full bg-[color:var(--surface-signal)]"
       />
-      {state.message.toUpperCase()}
+      {state.message}
     </span>
   );
 }

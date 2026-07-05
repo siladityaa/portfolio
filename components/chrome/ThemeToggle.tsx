@@ -74,7 +74,7 @@ export function ThemeToggle() {
       }
       className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
     >
-      ◑ {ready ? (theme === "dark" ? "LIGHT" : "DARK") : "THEME"}
+      ◑ {ready ? (theme === "dark" ? "Light" : "Dark") : "Theme"}
     </button>
   );
 }

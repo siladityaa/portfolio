@@ -13,7 +13,7 @@ import { useEffect } from "react";
  * want to invent — git already has that, and our forms don't have the right
  * shape for a three-way merge.
  *
- * Pressing ESC or clicking the backdrop cancels (same as "Keep editing").
+ * Pressing Esc or clicking the backdrop cancels (same as "Keep editing").
  */
 interface ConflictModalProps {
   open: boolean;
@@ -54,7 +54,7 @@ export function ConflictModal({
       />
       <div className="relative mx-6 w-full max-w-[520px] border border-[color:var(--surface-ink)] bg-[color:var(--surface-paper)] p-[clamp(24px,3vw,40px)]">
         <span className="text-label-s text-[color:var(--surface-graphite)]">
-          CONFLICT
+          Conflict
         </span>
         <h2
           id="conflict-modal-title"
@@ -72,14 +72,14 @@ export function ConflictModal({
             onClick={onReload}
             className="inline-flex items-center border border-[color:var(--surface-ink)] bg-[color:var(--surface-ink)] px-4 py-3 text-label-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-90"
           >
-            RELOAD LATEST
+            Reload latest
           </button>
           <button
             type="button"
             onClick={onCancel}
             className="inline-flex items-center border border-[color:var(--surface-ink)] px-4 py-3 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           >
-            KEEP EDITING
+            Keep editing
           </button>
         </div>
       </div>

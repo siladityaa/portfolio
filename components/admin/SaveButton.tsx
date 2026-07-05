@@ -61,7 +61,7 @@ export function SaveButton({
               : "bg-current",
           )}
         />
-        {visibleLabel.toUpperCase()}
+        {visibleLabel}
       </button>
       {!wired ? (
         <span className="text-label-s text-[color:var(--surface-graphite)]">
@@ -69,7 +69,7 @@ export function SaveButton({
         </span>
       ) : isDirty && status === "idle" ? (
         <span className="text-label-s text-[color:var(--surface-graphite)]">
-          UNSAVED CHANGES
+          Unsaved changes
         </span>
       ) : null}
       {/* Suppress the unused-var warning while keeping the import for Step 4. */}

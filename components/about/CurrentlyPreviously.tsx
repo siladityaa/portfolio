@@ -11,7 +11,7 @@ export function CurrentlyPreviously() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-3">
             <span className="text-label-s text-[color:var(--surface-graphite)]">
-              03 — SIDE PANEL
+              03 — Side panel
             </span>
           </div>
 

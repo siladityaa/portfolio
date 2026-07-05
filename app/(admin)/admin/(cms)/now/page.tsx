@@ -14,7 +14,7 @@ export default async function NowEditPage() {
   return (
     <div className="mx-auto max-w-[820px] px-[clamp(24px,4vw,64px)] py-[clamp(80px,12vh,160px)]">
       <span className="text-label-s text-[color:var(--surface-graphite)]">
-        04 — NOW
+        04 — Now
       </span>
       <h1 className="mt-6 max-w-[24ch] text-display-l italic text-[color:var(--surface-ink)]">
         Now block

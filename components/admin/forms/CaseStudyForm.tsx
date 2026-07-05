@@ -325,7 +325,7 @@ function GalleryList({ slug }: { slug: string }) {
                   onClick={() => gallery.remove(i)}
                   className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
                 >
-                  REMOVE
+                  Remove
                 </button>
               </div>
             </header>
@@ -416,7 +416,7 @@ function MetricsList() {
                 onClick={() => metrics.remove(i)}
                 className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
               >
-                REMOVE
+                Remove
               </button>
             </div>
           </div>
@@ -502,7 +502,7 @@ function BodyList() {
                 onClick={() => body.remove(i)}
                 className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
               >
-                REMOVE
+                Remove
               </button>
             </div>
           </div>
@@ -551,7 +551,7 @@ function SectionMediaList({ sectionIndex }: { sectionIndex: number }) {
     <div className="flex flex-col gap-3 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-4">
       <div className="flex items-baseline justify-between gap-3">
         <span className="text-label-s text-[color:var(--surface-graphite)]">
-          INLINE MEDIA
+          Inline media
         </span>
         <button
           type="button"
@@ -603,7 +603,7 @@ function SectionMediaList({ sectionIndex }: { sectionIndex: number }) {
                     onClick={() => media.remove(mi)}
                     className="transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
                   >
-                    REMOVE
+                    Remove
                   </button>
                 </div>
               </div>

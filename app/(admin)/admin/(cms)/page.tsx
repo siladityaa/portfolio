@@ -70,7 +70,7 @@ export default async function AdminDashboard() {
   return (
     <div className="mx-auto max-w-[920px] px-[clamp(24px,4vw,64px)] py-[clamp(80px,12vh,160px)]">
       <span className="text-label-s text-[color:var(--surface-graphite)]">
-        DASHBOARD
+        Dashboard
       </span>
       <h1 className="mt-6 max-w-[24ch] text-display-l italic text-[color:var(--surface-ink)]">
         What do you want to edit?

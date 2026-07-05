@@ -42,7 +42,7 @@ export function DeleteCaseStudyButton({
         onClick={() => setConfirming(true)}
         className="inline-flex items-center border border-[color:color-mix(in_srgb,var(--surface-signal)_60%,transparent)] px-3 py-2 text-label-s text-[color:var(--surface-signal)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
       >
-        DELETE CASE STUDY
+        Delete case study
       </button>
     );
   }
@@ -77,7 +77,7 @@ export function DeleteCaseStudyButton({
           disabled={pending}
           className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
-          CANCEL
+          Cancel
         </button>
       </div>
     </div>

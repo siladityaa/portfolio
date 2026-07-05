@@ -24,7 +24,7 @@ export function PreviewGate({ slug, title, hadBadAttempt }: PreviewGateProps) {
   return (
     <section className="mx-auto flex min-h-[100svh] max-w-[640px] flex-col justify-center px-[clamp(24px,4vw,64px)] py-[clamp(80px,16vh,160px)]">
       <span className="text-label-s text-[color:var(--surface-graphite)]">
-        PRIVATE CASE STUDY
+        Private case study
       </span>
       <h1 className="mt-6 text-display-l italic leading-[1.05] text-[color:var(--surface-ink)] max-md:text-[2rem]">
         {title}
@@ -39,7 +39,7 @@ export function PreviewGate({ slug, title, hadBadAttempt }: PreviewGateProps) {
           htmlFor="preview-password"
           className="text-label-s text-[color:var(--surface-graphite)]"
         >
-          PASSWORD
+          Password
         </label>
         <input
           id="preview-password"
@@ -52,7 +52,7 @@ export function PreviewGate({ slug, title, hadBadAttempt }: PreviewGateProps) {
         />
         {hadBadAttempt ? (
           <span className="text-label-s text-[color:var(--surface-signal)]">
-            ◯ INCORRECT — TRY AGAIN
+            ◯ INCORRECT — Try again
           </span>
         ) : null}
 
@@ -61,7 +61,7 @@ export function PreviewGate({ slug, title, hadBadAttempt }: PreviewGateProps) {
             href="/"
             className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 hover:opacity-60"
           >
-            ← BACK HOME
+            ← Back home
           </Link>
           <button
             type="submit"

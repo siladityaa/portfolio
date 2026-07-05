@@ -16,8 +16,8 @@ export function ResumeHero() {
         <h1 className="text-display-l italic text-[color:var(--surface-ink)]">
           {resume.name}
         </h1>
-        <p className="text-label-s tracking-wider text-[color:var(--surface-graphite)]">
-          {resume.tagline.toUpperCase()}
+        <p className="text-label-s text-[color:var(--surface-graphite)]">
+          {resume.tagline}
         </p>
       </motion.div>
 

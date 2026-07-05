@@ -67,7 +67,7 @@ export function MinimalCaseStudy({
             data-cursor="view"
             className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           >
-            ← BACK TO WORK
+            ← Back to work
           </Link>
         </motion.div>
         <motion.span
@@ -101,7 +101,7 @@ export function MinimalCaseStudy({
               <Pill key={`role-${r}`}>{r}</Pill>
             ))}
             {cs.tags?.map((t) => (
-              <Pill key={`tag-${t}`}>{t.toUpperCase()}</Pill>
+              <Pill key={`tag-${t}`}>{t}</Pill>
             ))}
           </motion.div>
         )}
@@ -202,7 +202,7 @@ export function MinimalCaseStudy({
               }}
               className="grid grid-cols-1 gap-6 md:grid-cols-[200px_minmax(0,1fr)] md:gap-12"
             >
-              <Eyebrow>{String(i + 1).padStart(2, "0")} — {sec.heading.toUpperCase()}</Eyebrow>
+              <Eyebrow>{String(i + 1).padStart(2, "0")} — {sec.heading}</Eyebrow>
               <div className="flex flex-col gap-5">
                 <h2 className="text-display-m italic leading-tight text-[color:var(--surface-ink)]">
                   {sec.heading}
@@ -280,7 +280,7 @@ export function MinimalCaseStudy({
           data-cursor="view"
           className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
-          ← ALL WORK
+          ← All work
         </Link>
         <div className="flex items-center gap-5 text-label-s">
           {prevSlug ? (
@@ -289,11 +289,11 @@ export function MinimalCaseStudy({
               data-cursor="view"
               className="text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
-              ← PREVIOUS
+              ← Previous
             </Link>
           ) : (
             <span className="text-[color:color-mix(in_srgb,var(--surface-graphite)_40%,transparent)]">
-              ← PREVIOUS
+              ← Previous
             </span>
           )}
           {nextSlug ? (
@@ -302,7 +302,7 @@ export function MinimalCaseStudy({
               data-cursor="view"
               className="text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
-              NEXT PROJECT →
+              Next project →
             </Link>
           ) : (
             <Link
@@ -310,7 +310,7 @@ export function MinimalCaseStudy({
               data-cursor="view"
               className="text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
-              ALL WORK →
+              All work →
             </Link>
           )}
         </div>
@@ -341,7 +341,7 @@ function MetaRow({ label, value }: { label: string; value: string }) {
   return (
     <>
       <dt className="text-[color:var(--surface-graphite)]">
-        {label.toUpperCase()}
+        {label}
       </dt>
       <dd className="whitespace-pre-line text-[color:var(--surface-ink)]">
         {value}

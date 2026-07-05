@@ -74,7 +74,7 @@ export function CaseStudyReorderList({ rows }: { rows: CaseStudyRow[] }) {
               disabled={pending}
               className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
-              RESET
+              Reset
             </button>
             <button
               type="button"
@@ -126,7 +126,7 @@ export function CaseStudyReorderList({ rows }: { rows: CaseStudyRow[] }) {
                     key={tag}
                     className="inline-flex items-center rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_40%,transparent)] px-2 py-0.5"
                   >
-                    {tag.toUpperCase()}
+                    {tag}
                   </span>
                 ))}
               </div>

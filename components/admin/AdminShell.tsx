@@ -44,7 +44,7 @@ export function AdminShell({ breadcrumb, user, children }: AdminShellProps) {
             href="/admin"
             className="text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           >
-            SILADITYAA · CMS
+            Siladityaa · CMS
           </Link>
           {breadcrumb ? (
             <span className="text-label-s text-[color:var(--surface-graphite)]">
@@ -57,7 +57,7 @@ export function AdminShell({ breadcrumb, user, children }: AdminShellProps) {
             href="/"
             className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
           >
-            ← VIEW SITE
+            ← View site
           </Link>
           {user ? (
             <span className="hidden items-center gap-2 text-label-s text-[color:var(--surface-graphite)] sm:flex">
@@ -69,7 +69,7 @@ export function AdminShell({ breadcrumb, user, children }: AdminShellProps) {
                 height={18}
                 className="rounded-full"
               />
-              {user.login.toUpperCase()}
+              {user.login}
             </span>
           ) : null}
           {/* Logout — POST so prefetchers can't sign the user out accidentally. */}
@@ -78,7 +78,7 @@ export function AdminShell({ breadcrumb, user, children }: AdminShellProps) {
               type="submit"
               className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
             >
-              LOGOUT
+              Logout
             </button>
           </form>
         </div>

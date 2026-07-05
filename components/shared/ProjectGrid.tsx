@@ -73,7 +73,7 @@ function ProjectTile({ row, index }: { row: ProjectRowData; index: number }) {
 
       <div className="mt-5 flex items-baseline justify-between gap-4">
         <span className="text-label-s text-[color:var(--surface-graphite)]">
-          {row.number} · {row.client.toUpperCase()} · {row.year}
+          {row.number} · {row.client} · {row.year}
         </span>
         <span className="text-label-s text-[color:var(--surface-graphite)]">
           {isComingSoon ? "◯" : "●"}

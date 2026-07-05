@@ -63,7 +63,7 @@ function ProjectFeature({ row, index }: { row: ProjectRowData; index: number }) 
   const captionBlock = (
     <div className="mt-8 grid grid-cols-1 gap-y-4 md:grid-cols-12 md:gap-x-8">
       <div className="flex flex-row flex-wrap gap-x-6 gap-y-1 text-label-s text-[color:var(--surface-graphite)] md:col-span-4 md:flex-col md:gap-x-0">
-        <span>{row.client.toUpperCase()}</span>
+        <span>{row.client}</span>
         <span>{row.year}</span>
       </div>
 

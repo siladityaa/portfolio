@@ -42,7 +42,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             href="/"
             className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
           >
-            SILADITYAA · CMS
+            Siladityaa · CMS
           </Link>
           <h1 className="text-display-l italic text-[color:var(--surface-ink)]">
             Sign in.
@@ -60,7 +60,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             className="inline-flex items-center justify-center gap-3 border border-[color:var(--surface-ink)] bg-[color:var(--surface-ink)] px-6 py-4 text-label-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-90"
           >
             <GitHubMark />
-            SIGN IN WITH GITHUB
+            Sign in with GitHub
           </button>
 
           {errorMessage ? (
@@ -68,13 +68,13 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               role="alert"
               className="border-l-2 border-[color:var(--surface-signal)] pl-3 text-label-s text-[color:var(--surface-signal)]"
             >
-              {errorMessage.toUpperCase()}
+              {errorMessage}
             </p>
           ) : null}
         </form>
 
         <footer className="text-label-s text-[color:var(--surface-graphite)]">
-          ← <Link href="/" className="hover:text-[color:var(--surface-ink)]">BACK TO SITE</Link>
+          ← <Link href="/" className="hover:text-[color:var(--surface-ink)]">Back to site</Link>
         </footer>
       </div>
     </main>
