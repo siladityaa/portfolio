@@ -61,7 +61,7 @@ export function WipHero() {
             {/* Mobile clock — inline, hidden on desktop where the fixed chrome shows */}
             <motion.div
               variants={revealBlock}
-              className="block text-mono-s text-[color:var(--surface-graphite)] tabular-nums md:hidden"
+              className="block text-label-s text-[color:var(--surface-graphite)] tabular-nums md:hidden"
             >
               <MobileClock />
             </motion.div>
@@ -90,7 +90,7 @@ export function WipHero() {
             {/* Subline */}
             <motion.p
               variants={revealBlock}
-              className="text-mono-s text-[color:var(--surface-graphite)]"
+              className="text-label-s text-[color:var(--surface-graphite)]"
             >
               SENIOR PRODUCT DESIGNER · WEARABLES + AI AT META · BASED IN LOS ANGELES
             </motion.p>
@@ -102,7 +102,7 @@ export function WipHero() {
             >
               <div className="flex items-center gap-3">
                 <span
-                  className="text-mono-s italic text-[color:var(--surface-graphite)]"
+                  className="text-label-s italic text-[color:var(--surface-graphite)]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   Portfolio under construction
@@ -274,7 +274,7 @@ function ProgressBar() {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-center justify-between text-mono-s text-[color:var(--surface-graphite)]">
+      <div className="flex items-center justify-between text-label-s text-[color:var(--surface-graphite)]">
         <span>BUILD PROGRESS</span>
         <span>{progress}%</span>
       </div>
@@ -325,7 +325,7 @@ function RotatingStatus() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.3 }}
-          className="text-mono-s text-[color:var(--surface-graphite)]"
+          className="text-label-s text-[color:var(--surface-graphite)]"
         >
           {messages[index]}
         </motion.span>

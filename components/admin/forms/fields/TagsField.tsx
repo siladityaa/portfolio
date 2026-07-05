@@ -25,7 +25,7 @@ export function TagsField({
 
   return (
     <div className="flex flex-col gap-3">
-      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+      <span className="text-label-s text-[color:var(--surface-graphite)]">
         {label}
       </span>
       {description ? (
@@ -57,7 +57,7 @@ export function TagsField({
                     }}
                     aria-pressed={isOn}
                     className={clsx(
-                      "inline-flex items-center rounded-full border px-4 py-2 text-mono-s transition-colors duration-300 ease-[var(--ease-out-soft)]",
+                      "inline-flex items-center rounded-full border px-4 py-2 text-label-s transition-colors duration-300 ease-[var(--ease-out-soft)]",
                       isOn
                         ? "border-[color:var(--surface-ink)] bg-[color:var(--surface-ink)] text-[color:var(--surface-paper)]"
                         : "border-[color:color-mix(in_srgb,var(--surface-graphite)_40%,transparent)] text-[color:var(--surface-graphite)] hover:border-[color:var(--surface-ink)] hover:text-[color:var(--surface-ink)]",

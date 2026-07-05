@@ -40,7 +40,7 @@ export function DeleteCaseStudyButton({
       <button
         type="button"
         onClick={() => setConfirming(true)}
-        className="inline-flex items-center border border-[color:color-mix(in_srgb,var(--surface-signal)_60%,transparent)] px-3 py-2 text-mono-s text-[color:var(--surface-signal)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+        className="inline-flex items-center border border-[color:color-mix(in_srgb,var(--surface-signal)_60%,transparent)] px-3 py-2 text-label-s text-[color:var(--surface-signal)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
       >
         DELETE CASE STUDY
       </button>
@@ -55,7 +55,7 @@ export function DeleteCaseStudyButton({
         stay (delete them manually if desired).
       </p>
       {error && (
-        <p className="text-mono-s text-[color:var(--surface-signal)]">
+        <p className="text-label-s text-[color:var(--surface-signal)]">
           {error}
         </p>
       )}
@@ -64,7 +64,7 @@ export function DeleteCaseStudyButton({
           type="button"
           onClick={handleDelete}
           disabled={pending}
-          className="inline-flex items-center bg-[color:var(--surface-signal)] px-3 py-2 text-mono-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-80 disabled:opacity-40"
+          className="inline-flex items-center bg-[color:var(--surface-signal)] px-3 py-2 text-label-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-80 disabled:opacity-40"
         >
           {pending ? "DELETING…" : "YES, DELETE"}
         </button>
@@ -75,7 +75,7 @@ export function DeleteCaseStudyButton({
             setError(null);
           }}
           disabled={pending}
-          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
           CANCEL
         </button>

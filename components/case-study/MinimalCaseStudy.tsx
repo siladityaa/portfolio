@@ -65,14 +65,14 @@ export function MinimalCaseStudy({
           <Link
             href="/#work"
             data-cursor="view"
-            className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+            className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           >
             ← BACK TO WORK
           </Link>
         </motion.div>
         <motion.span
           variants={revealBlock}
-          className="text-mono-s text-[color:var(--surface-graphite)] tabular-nums"
+          className="text-label-s text-[color:var(--surface-graphite)] tabular-nums"
         >
           {counter}
         </motion.span>
@@ -108,7 +108,7 @@ export function MinimalCaseStudy({
 
         <motion.dl
           variants={revealBlock}
-          className="grid grid-cols-1 gap-y-3 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-6 text-mono-s sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-x-6"
+          className="grid grid-cols-1 gap-y-3 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-6 text-label-s sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-x-6"
         >
           <MetaRow label="Timeline" value={cs.timeline} />
           {cs.team && <MetaRow label="Team" value={cs.team} />}
@@ -154,7 +154,7 @@ export function MinimalCaseStudy({
             alt={cs.hero.alt ?? cs.title}
           />
           {cs.hero.caption && (
-            <figcaption className="px-5 py-3 text-mono-s text-[color:var(--surface-graphite)]">
+            <figcaption className="px-5 py-3 text-label-s text-[color:var(--surface-graphite)]">
               {cs.hero.caption}
             </figcaption>
           )}
@@ -177,7 +177,7 @@ export function MinimalCaseStudy({
                 <span className="text-display-l italic leading-none text-[color:var(--surface-ink)]">
                   {m.value}
                 </span>
-                <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                <span className="text-label-s text-[color:var(--surface-graphite)]">
                   {m.label}
                 </span>
               </div>
@@ -257,7 +257,7 @@ export function MinimalCaseStudy({
                   alt={g.alt ?? `${cs.title} detail ${i + 1}`}
                 />
                 {g.caption && (
-                  <figcaption className="px-5 py-3 text-mono-s text-[color:var(--surface-graphite)]">
+                  <figcaption className="px-5 py-3 text-label-s text-[color:var(--surface-graphite)]">
                     {g.caption}
                   </figcaption>
                 )}
@@ -278,11 +278,11 @@ export function MinimalCaseStudy({
         <Link
           href="/#work"
           data-cursor="view"
-          className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+          className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
           ← ALL WORK
         </Link>
-        <div className="flex items-center gap-5 text-mono-s">
+        <div className="flex items-center gap-5 text-label-s">
           {prevSlug ? (
             <Link
               href={`/work/${prevSlug}`}
@@ -323,7 +323,7 @@ export function MinimalCaseStudy({
 
 function Pill({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] px-3 py-1 text-mono-s text-[color:var(--surface-graphite)]">
+    <span className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] px-3 py-1 text-label-s text-[color:var(--surface-graphite)]">
       {children}
     </span>
   );
@@ -331,7 +331,7 @@ function Pill({ children }: { children: React.ReactNode }) {
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <span className="text-mono-s text-[color:var(--surface-graphite)]">
+    <span className="text-label-s text-[color:var(--surface-graphite)]">
       {children}
     </span>
   );
@@ -373,7 +373,7 @@ function MediaFigure({
     >
       <MediaFrame src={src} alt={alt} />
       {caption && (
-        <figcaption className="px-5 py-3 text-mono-s text-[color:var(--surface-graphite)]">
+        <figcaption className="px-5 py-3 text-label-s text-[color:var(--surface-graphite)]">
           {caption}
         </figcaption>
       )}

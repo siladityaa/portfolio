@@ -104,7 +104,7 @@ function NowPlayingSection() {
         <button
           type="button"
           onClick={() => append({ title: "", artist: "", album: undefined })}
-          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
           + ADD TRACK
         </button>
@@ -173,7 +173,7 @@ function FactList({
         <button
           type="button"
           onClick={() => append({ label: "", value: "" })}
-          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
           + ADD ROW
         </button>

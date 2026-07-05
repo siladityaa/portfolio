@@ -42,12 +42,12 @@ export function AdminShell({ breadcrumb, user, children }: AdminShellProps) {
         <div className="flex items-center gap-6">
           <Link
             href="/admin"
-            className="text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+            className="text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           >
             SILADITYAA · CMS
           </Link>
           {breadcrumb ? (
-            <span className="text-mono-s text-[color:var(--surface-graphite)]">
+            <span className="text-label-s text-[color:var(--surface-graphite)]">
               {breadcrumb}
             </span>
           ) : null}
@@ -55,12 +55,12 @@ export function AdminShell({ breadcrumb, user, children }: AdminShellProps) {
         <div className="flex items-center gap-6">
           <Link
             href="/"
-            className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+            className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
           >
             ← VIEW SITE
           </Link>
           {user ? (
-            <span className="hidden items-center gap-2 text-mono-s text-[color:var(--surface-graphite)] sm:flex">
+            <span className="hidden items-center gap-2 text-label-s text-[color:var(--surface-graphite)] sm:flex">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={user.avatarUrl}
@@ -76,7 +76,7 @@ export function AdminShell({ breadcrumb, user, children }: AdminShellProps) {
           <form method="POST" action="/api/auth/logout">
             <button
               type="submit"
-              className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+              className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
             >
               LOGOUT
             </button>
@@ -93,7 +93,7 @@ export function AdminShell({ breadcrumb, user, children }: AdminShellProps) {
               href={item.href}
               className="group flex flex-col gap-1 transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
-              <span className="text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="text-label-s text-[color:var(--surface-graphite)]">
                 {item.number}
               </span>
               <span className="text-display-s italic text-[color:var(--surface-ink)]">

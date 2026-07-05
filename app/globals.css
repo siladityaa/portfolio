@@ -21,12 +21,16 @@
   --color-signal: #ff3b00;
   --color-signal-dark: #ff4a14;
 
-  /* Fonts — display (Instrument Serif) + mono (JetBrains Mono).
+  /* Fonts — three faces: display (Instrument Serif), label sans (Geist),
+     and mono (JetBrains Mono) for small technical readouts.
      PP Editorial New kept in the fallback chain so a future license swap is
      a single next/font/local drop with zero component changes. */
   --font-display:
     var(--font-display-serif), "PP Editorial New", "Instrument Serif", Georgia,
     serif;
+  --font-sans:
+    var(--font-sans-ui), "Geist", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono:
     var(--font-mono-ui), "JetBrains Mono", "Berkeley Mono", ui-monospace,
     SFMono-Regular, Menlo, monospace;
@@ -187,6 +191,24 @@ html.dark {
     font-size: 0.75rem;
     line-height: 1.3;
     letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Label sans (Geist) — the primary UI label roles: eyebrows, nav, meta
+     lines, buttons. Same metrics as the mono label classes so swapping the
+     class in a component is a drop-in. Slightly tighter tracking since a
+     proportional sans doesn't need the mono's wide spacing. */
+  .text-label-m {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .text-label-s {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 

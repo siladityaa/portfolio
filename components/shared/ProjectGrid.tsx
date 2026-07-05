@@ -64,7 +64,7 @@ function ProjectTile({ row, index }: { row: ProjectRowData; index: number }) {
 
         {isComingSoon ? (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[color:color-mix(in_srgb,var(--surface-ink)_50%,transparent)]">
-            <span className="text-mono-s text-[color:#f6f5f1]">
+            <span className="text-label-s text-[color:#f6f5f1]">
               ◯ COMING SOON
             </span>
           </div>
@@ -72,10 +72,10 @@ function ProjectTile({ row, index }: { row: ProjectRowData; index: number }) {
       </div>
 
       <div className="mt-5 flex items-baseline justify-between gap-4">
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           {row.number} · {row.client.toUpperCase()} · {row.year}
         </span>
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           {isComingSoon ? "◯" : "●"}
         </span>
       </div>

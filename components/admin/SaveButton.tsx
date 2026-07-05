@@ -46,7 +46,7 @@ export function SaveButton({
         disabled={disabled}
         title={!wired ? "Save not wired yet (Step 4)" : undefined}
         className={clsx(
-          "inline-flex items-center gap-2 border px-5 py-3 text-mono-s transition-colors duration-300 ease-[var(--ease-out-soft)]",
+          "inline-flex items-center gap-2 border px-5 py-3 text-label-s transition-colors duration-300 ease-[var(--ease-out-soft)]",
           disabled
             ? "cursor-not-allowed border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] text-[color:var(--surface-graphite)]"
             : "border-[color:var(--surface-ink)] bg-[color:var(--surface-ink)] text-[color:var(--surface-paper)] hover:opacity-90",
@@ -64,11 +64,11 @@ export function SaveButton({
         {visibleLabel.toUpperCase()}
       </button>
       {!wired ? (
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           STEP 4 WIRES SAVE · FORM IS LOCAL-STATE ONLY
         </span>
       ) : isDirty && status === "idle" ? (
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           UNSAVED CHANGES
         </span>
       ) : null}

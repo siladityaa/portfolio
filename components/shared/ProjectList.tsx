@@ -96,7 +96,7 @@ export function ProjectList({ rows }: ProjectListProps) {
               >
                 {/* Left — index + title */}
                 <div className="flex items-baseline gap-[clamp(16px,3vw,48px)]">
-                  <span className="hidden shrink-0 text-mono-s text-[color:var(--surface-graphite)] sm:inline">
+                  <span className="hidden shrink-0 text-label-s text-[color:var(--surface-graphite)] sm:inline">
                     {row.number}
                   </span>
                   <h3 className="flex items-baseline gap-3 text-display-m italic leading-[1.05] text-[color:var(--surface-ink)]">
@@ -116,7 +116,7 @@ export function ProjectList({ rows }: ProjectListProps) {
                 </div>
 
                 {/* Right — meta */}
-                <div className="flex shrink-0 items-baseline gap-[clamp(12px,2vw,28px)] text-mono-s text-[color:var(--surface-graphite)]">
+                <div className="flex shrink-0 items-baseline gap-[clamp(12px,2vw,28px)] text-label-s text-[color:var(--surface-graphite)]">
                   <span className="hidden md:inline">
                     {row.client.toUpperCase()}
                   </span>
@@ -183,7 +183,7 @@ function PreviewMedia({
       <div
         className={clsx(
           common,
-          "flex items-center justify-center bg-[color:color-mix(in_srgb,var(--surface-graphite)_12%,var(--surface-paper))] text-mono-s text-[color:var(--surface-graphite)]",
+          "flex items-center justify-center bg-[color:color-mix(in_srgb,var(--surface-graphite)_12%,var(--surface-paper))] text-label-s text-[color:var(--surface-graphite)]",
         )}
       >
         {row.title}

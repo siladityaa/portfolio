@@ -15,10 +15,10 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-[clamp(24px,4vw,64px)] pt-16 pb-[clamp(120px,16vw,180px)] md:grid-cols-3">
         {/* Col 1 — wordmark + tagline */}
         <div className="flex flex-col gap-3">
-          <span className="text-mono-s text-[color:var(--surface-ink)]">
+          <span className="text-label-s text-[color:var(--surface-ink)]">
             SILADITYAA
           </span>
-          <p className="max-w-[28ch] text-mono-s text-[color:var(--surface-graphite)]">
+          <p className="max-w-[28ch] text-label-s text-[color:var(--surface-graphite)]">
             SENIOR PRODUCT DESIGNER
             <br />
             WEARABLES + AI · LOS ANGELES
@@ -27,7 +27,7 @@ export function Footer() {
 
         {/* Col 2 — elsewhere */}
         <div className="flex flex-col gap-2">
-          <span className="text-mono-s text-[color:var(--surface-graphite)]">
+          <span className="text-label-s text-[color:var(--surface-graphite)]">
             ELSEWHERE
           </span>
           <FooterExternalLink href="https://www.linkedin.com/in/siladityaa/">
@@ -43,10 +43,10 @@ export function Footer() {
 
         {/* Col 3 — last deployed + credit + theme toggle */}
         <div className="flex flex-col gap-3">
-          <span className="text-mono-s text-[color:var(--surface-graphite)]">
+          <span className="text-label-s text-[color:var(--surface-graphite)]">
             LAST DEPLOYED · {LAST_DEPLOYED}
           </span>
-          <span className="text-mono-s text-[color:var(--surface-graphite)]">
+          <span className="text-label-s text-[color:var(--surface-graphite)]">
             DESIGNED &amp; BUILT BY SILADITYAA SHARMA · 2026
           </span>
           <div className="pt-2">
@@ -71,7 +71,7 @@ function FooterExternalLink({
       data-cursor="view"
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-      className="text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+      className="text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
     >
       {children}
     </a>

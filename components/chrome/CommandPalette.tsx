@@ -174,7 +174,7 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
           >
             {/* Search input */}
             <div className="flex items-center gap-3 border-b border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] px-5 py-4">
-              <span className="text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="text-label-s text-[color:var(--surface-graphite)]">
                 {">"}
               </span>
               <input
@@ -186,7 +186,7 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
                 onKeyDown={handleInputKeyDown}
                 className="flex-1 bg-transparent text-body text-[color:var(--surface-ink)] outline-none placeholder:text-[color:var(--surface-graphite)]"
               />
-              <kbd className="rounded border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-1.5 py-0.5 text-mono-s text-[color:var(--surface-graphite)]">
+              <kbd className="rounded border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-1.5 py-0.5 text-label-s text-[color:var(--surface-graphite)]">
                 ESC
               </kbd>
             </div>
@@ -197,7 +197,7 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
               className="max-h-[320px] overflow-y-auto overscroll-contain py-2"
             >
               {results.length === 0 ? (
-                <div className="px-5 py-6 text-center text-mono-s text-[color:var(--surface-graphite)]">
+                <div className="px-5 py-6 text-center text-label-s text-[color:var(--surface-graphite)]">
                   NO RESULTS
                 </div>
               ) : (
@@ -227,7 +227,7 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
                       <span className="text-body text-[color:var(--surface-ink)]">
                         {item.label}
                       </span>
-                      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                      <span className="text-label-s text-[color:var(--surface-graphite)]">
                         {item.hint}
                         {item.external ? " ↗" : ""}
                       </span>
@@ -239,13 +239,13 @@ export function CommandPalette({ projects = [] }: CommandPaletteProps) {
 
             {/* Footer hint */}
             <div className="flex items-center gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] px-5 py-3">
-              <span className="text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="text-label-s text-[color:var(--surface-graphite)]">
                 ↑↓ NAVIGATE
               </span>
-              <span className="text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="text-label-s text-[color:var(--surface-graphite)]">
                 ↵ OPEN
               </span>
-              <span className="text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="text-label-s text-[color:var(--surface-graphite)]">
                 ESC CLOSE
               </span>
             </div>

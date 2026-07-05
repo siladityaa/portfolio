@@ -42,7 +42,7 @@ export function NewCaseStudyForm() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+        className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
       >
         + NEW CASE STUDY
       </button>
@@ -66,7 +66,7 @@ export function NewCaseStudyForm() {
             setSlug("");
             setError(null);
           }}
-          className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+          className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           disabled={pending}
         >
           CANCEL
@@ -74,7 +74,7 @@ export function NewCaseStudyForm() {
       </div>
 
       <label className="flex flex-col gap-2">
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           TITLE
         </span>
         <input
@@ -89,7 +89,7 @@ export function NewCaseStudyForm() {
       </label>
 
       <label className="flex flex-col gap-2">
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           SLUG
         </span>
         <input
@@ -99,16 +99,16 @@ export function NewCaseStudyForm() {
           required
           placeholder="my-new-project"
           pattern="[a-z0-9]+(-[a-z0-9]+)*"
-          className="border-b border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] bg-transparent py-2 text-mono-m text-[color:var(--surface-ink)] outline-none focus:border-[color:var(--surface-ink)]"
+          className="border-b border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] bg-transparent py-2 text-label-m text-[color:var(--surface-ink)] outline-none focus:border-[color:var(--surface-ink)]"
         />
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           URL will be /work/{slug || "…"} · also the JSON filename. Lowercase
           letters, numbers, and dashes only.
         </span>
       </label>
 
       {error && (
-        <p className="text-mono-s text-[color:var(--surface-signal)]">
+        <p className="text-label-s text-[color:var(--surface-signal)]">
           {error}
         </p>
       )}
@@ -116,7 +116,7 @@ export function NewCaseStudyForm() {
       <button
         type="submit"
         disabled={pending || !title.trim() || !slug.trim()}
-        className="self-start bg-[color:var(--surface-ink)] px-4 py-2 text-mono-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-80 disabled:opacity-40"
+        className="self-start bg-[color:var(--surface-ink)] px-4 py-2 text-label-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-80 disabled:opacity-40"
       >
         {pending ? "CREATING…" : "CREATE CASE STUDY"}
       </button>

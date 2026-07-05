@@ -53,7 +53,7 @@ export function ConflictModal({
         className="absolute inset-0 bg-[color:color-mix(in_srgb,var(--surface-ink)_60%,transparent)]"
       />
       <div className="relative mx-6 w-full max-w-[520px] border border-[color:var(--surface-ink)] bg-[color:var(--surface-paper)] p-[clamp(24px,3vw,40px)]">
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           CONFLICT
         </span>
         <h2
@@ -70,14 +70,14 @@ export function ConflictModal({
           <button
             type="button"
             onClick={onReload}
-            className="inline-flex items-center border border-[color:var(--surface-ink)] bg-[color:var(--surface-ink)] px-4 py-3 text-mono-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-90"
+            className="inline-flex items-center border border-[color:var(--surface-ink)] bg-[color:var(--surface-ink)] px-4 py-3 text-label-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-90"
           >
             RELOAD LATEST
           </button>
           <button
             type="button"
             onClick={onCancel}
-            className="inline-flex items-center border border-[color:var(--surface-ink)] px-4 py-3 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+            className="inline-flex items-center border border-[color:var(--surface-ink)] px-4 py-3 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
           >
             KEEP EDITING
           </button>

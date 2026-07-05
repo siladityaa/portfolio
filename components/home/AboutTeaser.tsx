@@ -9,10 +9,10 @@ export function AboutTeaser() {
   return (
     <section className="mt-[clamp(140px,22vh,240px)] hairline-top">
       <header className="mx-auto flex max-w-[1280px] items-baseline justify-between gap-4 px-[clamp(24px,4vw,64px)] pt-24 pb-10">
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           02 — ABOUT
         </span>
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           BIO + NOW
         </span>
       </header>
@@ -38,10 +38,10 @@ export function AboutTeaser() {
               key={fact.label}
               className="flex items-baseline justify-between gap-6 hairline-bottom pb-3"
             >
-              <dt className="text-mono-s text-[color:var(--surface-graphite)]">
+              <dt className="text-label-s text-[color:var(--surface-graphite)]">
                 {fact.label}
               </dt>
-              <dd className="text-mono-s text-right text-[color:var(--surface-ink)]">
+              <dd className="text-label-s text-right text-[color:var(--surface-ink)]">
                 {fact.value}
               </dd>
             </div>

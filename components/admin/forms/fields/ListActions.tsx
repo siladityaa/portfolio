@@ -76,7 +76,7 @@ function IconButton({
       aria-label={label}
       title={label}
       className={clsx(
-        "inline-flex h-8 w-8 items-center justify-center border border-transparent text-mono-s transition-colors duration-300 ease-[var(--ease-out-soft)]",
+        "inline-flex h-8 w-8 items-center justify-center border border-transparent text-label-s transition-colors duration-300 ease-[var(--ease-out-soft)]",
         disabled && "cursor-not-allowed opacity-30",
         !disabled &&
           tone === "default" &&

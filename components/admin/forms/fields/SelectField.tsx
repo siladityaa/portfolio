@@ -40,7 +40,7 @@ export function SelectField({
 
   return (
     <label className="flex flex-col gap-2">
-      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+      <span className="text-label-s text-[color:var(--surface-graphite)]">
         {label}
       </span>
       {description ? (
@@ -59,7 +59,7 @@ export function SelectField({
         ))}
       </select>
       {errorMessage ? (
-        <span className="text-mono-s text-[color:var(--surface-signal)]">
+        <span className="text-label-s text-[color:var(--surface-signal)]">
           {errorMessage}
         </span>
       ) : null}

@@ -29,7 +29,7 @@ export function Timeline() {
       <div className="mx-auto max-w-[1280px] px-[clamp(24px,4vw,64px)] py-[clamp(120px,18vh,200px)]">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-3">
-            <span className="text-mono-s text-[color:var(--surface-graphite)]">
+            <span className="text-label-s text-[color:var(--surface-graphite)]">
               02 — TIMELINE
             </span>
           </div>
@@ -41,7 +41,7 @@ export function Timeline() {
                   key={`${role.company}-${role.start}-${role.role}`}
                   className="grid grid-cols-1 gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] py-6 md:grid-cols-12 md:gap-6"
                 >
-                  <span className="text-mono-s text-[color:var(--surface-graphite)] md:col-span-3">
+                  <span className="text-label-s text-[color:var(--surface-graphite)] md:col-span-3">
                     {formatRange(role.start, role.end)}
                     {role.kind !== "full-time" ? (
                       <span className="opacity-70">
@@ -50,7 +50,7 @@ export function Timeline() {
                       </span>
                     ) : null}
                   </span>
-                  <span className="text-mono-s text-[color:var(--surface-ink)] md:col-span-3">
+                  <span className="text-label-s text-[color:var(--surface-ink)] md:col-span-3">
                     {role.company.toUpperCase()}
                   </span>
                   <div className="md:col-span-6">
@@ -58,7 +58,7 @@ export function Timeline() {
                       {role.role}
                     </div>
                     {role.highlight ? (
-                      <div className="mt-1 text-mono-s text-[color:var(--surface-graphite)]">
+                      <div className="mt-1 text-label-s text-[color:var(--surface-graphite)]">
                         {role.highlight}
                       </div>
                     ) : null}
@@ -68,7 +68,7 @@ export function Timeline() {
             </ol>
 
             {/* Education */}
-            <h3 className="mt-16 text-mono-s text-[color:var(--surface-graphite)]">
+            <h3 className="mt-16 text-label-s text-[color:var(--surface-graphite)]">
               EDUCATION
             </h3>
             <ul className="mt-4 flex flex-col">
@@ -77,10 +77,10 @@ export function Timeline() {
                   key={entry.school}
                   className="grid grid-cols-1 gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] py-6 md:grid-cols-12 md:gap-6"
                 >
-                  <span className="text-mono-s text-[color:var(--surface-graphite)] md:col-span-3">
+                  <span className="text-label-s text-[color:var(--surface-graphite)] md:col-span-3">
                     {entry.start} — {entry.end}
                   </span>
-                  <span className="text-mono-s text-[color:var(--surface-ink)] md:col-span-3">
+                  <span className="text-label-s text-[color:var(--surface-ink)] md:col-span-3">
                     {entry.school.toUpperCase()}
                   </span>
                   <div className="md:col-span-6">
@@ -88,7 +88,7 @@ export function Timeline() {
                       {entry.degree}
                     </div>
                     {entry.highlight ? (
-                      <div className="mt-1 text-mono-s text-[color:var(--surface-graphite)]">
+                      <div className="mt-1 text-label-s text-[color:var(--surface-graphite)]">
                         {entry.highlight}
                       </div>
                     ) : null}
@@ -98,7 +98,7 @@ export function Timeline() {
             </ul>
 
             {/* Awards */}
-            <h3 className="mt-16 text-mono-s text-[color:var(--surface-graphite)]">
+            <h3 className="mt-16 text-label-s text-[color:var(--surface-graphite)]">
               SELECTED AWARDS
             </h3>
             <ul className="mt-4 flex flex-col">

@@ -17,7 +17,7 @@ export function ResumeContact() {
     >
       <motion.h2
         variants={revealBlock}
-        className="text-mono-s tracking-wider text-[color:var(--surface-graphite)]"
+        className="text-label-s tracking-wider text-[color:var(--surface-graphite)]"
       >
         CONTACT
       </motion.h2>
@@ -28,7 +28,7 @@ export function ResumeContact() {
       >
         {links.map((link) => (
           <div key={link.kind} className="flex flex-col gap-1">
-            <span className="text-mono-s text-[color:var(--surface-graphite)]">
+            <span className="text-label-s text-[color:var(--surface-graphite)]">
               {link.kind}
             </span>
             <a
@@ -46,7 +46,7 @@ export function ResumeContact() {
 
       <motion.p
         variants={revealBlock}
-        className="text-mono-s text-[color:var(--surface-graphite)]"
+        className="text-label-s text-[color:var(--surface-graphite)]"
       >
         DESIGNED IN FIGMA · BUILT WITH NEXT.JS · SET IN INSTRUMENT SERIF +
         JETBRAINS MONO

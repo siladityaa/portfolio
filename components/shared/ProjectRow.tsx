@@ -66,7 +66,7 @@ export function ProjectRowList({ rows }: ProjectListProps) {
               {/* Left: metadata column — stacks above title on mobile */}
               <div
                 className={clsx(
-                  "flex flex-row flex-wrap gap-x-4 gap-y-1 text-mono-s md:w-[220px] md:shrink-0 md:flex-col md:gap-x-0",
+                  "flex flex-row flex-wrap gap-x-4 gap-y-1 text-label-s md:w-[220px] md:shrink-0 md:flex-col md:gap-x-0",
                   isHovered
                     ? "text-[color:rgba(246,245,241,0.85)]"
                     : "text-[color:var(--surface-graphite)]",

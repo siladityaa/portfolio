@@ -17,7 +17,7 @@ export function ResumeSkills() {
     >
       <motion.h2
         variants={revealBlock}
-        className="text-mono-s tracking-wider text-[color:var(--surface-graphite)]"
+        className="text-label-s tracking-wider text-[color:var(--surface-graphite)]"
       >
         SKILLS
       </motion.h2>
@@ -36,7 +36,7 @@ export function ResumeSkills() {
               {group.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_20%,transparent)] px-3 py-1 text-mono-s text-[color:var(--surface-graphite)]"
+                  className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_20%,transparent)] px-3 py-1 text-label-s text-[color:var(--surface-graphite)]"
                 >
                   {skill}
                 </span>

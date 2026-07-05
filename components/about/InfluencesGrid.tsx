@@ -15,7 +15,7 @@ export function InfluencesGrid() {
       <div className="mx-auto max-w-[1280px] px-[clamp(24px,4vw,64px)] py-[clamp(120px,18vh,200px)]">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-3">
-            <span className="text-mono-s text-[color:var(--surface-graphite)]">
+            <span className="text-label-s text-[color:var(--surface-graphite)]">
               02 — INFLUENCES
             </span>
             <p className="mt-6 max-w-[28ch] text-body text-[color:var(--surface-graphite)]">
@@ -30,10 +30,10 @@ export function InfluencesGrid() {
                 className="flex flex-col gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] pt-6"
               >
                 <div className="flex items-baseline justify-between gap-4">
-                  <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                  <span className="text-label-s text-[color:var(--surface-graphite)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                  <span className="text-label-s text-[color:var(--surface-graphite)]">
                     {inf.category.toUpperCase()}
                   </span>
                 </div>

@@ -82,7 +82,7 @@ export function InfluencesForm({ defaultValues }: InfluencesFormProps) {
               onClick={() =>
                 append({ name: "", category: "brand", why: "" })
               }
-              className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+              className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
               + ADD INFLUENCE
             </button>
@@ -95,7 +95,7 @@ export function InfluencesForm({ defaultValues }: InfluencesFormProps) {
                 className="flex flex-col gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] pt-6"
               >
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                  <span className="text-label-s text-[color:var(--surface-graphite)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <ListActions

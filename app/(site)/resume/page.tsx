@@ -25,7 +25,7 @@ export default function ResumePage() {
           {Array.from({ length: 4 }).map((_, i) => (
             <span
               key={i}
-              className="mx-8 text-mono-s tracking-widest text-[color:var(--surface-graphite)]"
+              className="mx-8 text-label-s tracking-widest text-[color:var(--surface-graphite)]"
             >
               PRODUCT DESIGN / AI DESIGN / WEARABLES / UX DESIGN / INTERACTION
               DESIGN / DESIGN SYSTEMS / PROTOTYPING / MOTION DESIGN / UX

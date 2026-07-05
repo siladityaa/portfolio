@@ -49,7 +49,7 @@ export function SaveStatus({ state, onSavedExpire }: SaveStatusProps) {
 
   if (state.kind === "saving") {
     return (
-      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+      <span className="text-label-s text-[color:var(--surface-graphite)]">
         SAVING TO GITHUB…
       </span>
     );
@@ -57,7 +57,7 @@ export function SaveStatus({ state, onSavedExpire }: SaveStatusProps) {
 
   if (state.kind === "saved") {
     return (
-      <span className="flex items-center gap-2 text-mono-s text-[color:var(--surface-graphite)]">
+      <span className="flex items-center gap-2 text-label-s text-[color:var(--surface-graphite)]">
         <span
           aria-hidden
           className="inline-block h-[7px] w-[7px] rounded-full bg-[color:var(--surface-signal)]"
@@ -73,7 +73,7 @@ export function SaveStatus({ state, onSavedExpire }: SaveStatusProps) {
   return (
     <span
       className={clsx(
-        "flex items-center gap-2 text-mono-s",
+        "flex items-center gap-2 text-label-s",
         "text-[color:var(--surface-signal)]",
       )}
     >

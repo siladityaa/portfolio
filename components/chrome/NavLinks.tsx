@@ -24,7 +24,7 @@ export function NavLinks() {
       <Link
         href="/resume"
         data-cursor="view"
-        className="text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+        className="text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
       >
         RESUME
       </Link>

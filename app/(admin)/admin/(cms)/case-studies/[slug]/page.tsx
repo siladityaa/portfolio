@@ -30,7 +30,7 @@ export default async function CaseStudyEditPage({
     <div className="mx-auto max-w-[920px] px-[clamp(24px,4vw,64px)] py-[clamp(80px,12vh,160px)]">
       <Link
         href="/admin/case-studies"
-        className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+        className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
       >
         ← CASE STUDIES
       </Link>

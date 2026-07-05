@@ -40,7 +40,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <header className="flex flex-col gap-3">
           <Link
             href="/"
-            className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+            className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
           >
             SILADITYAA · CMS
           </Link>
@@ -57,7 +57,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           <input type="hidden" name="from" value={safeFrom} />
           <button
             type="submit"
-            className="inline-flex items-center justify-center gap-3 border border-[color:var(--surface-ink)] bg-[color:var(--surface-ink)] px-6 py-4 text-mono-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-90"
+            className="inline-flex items-center justify-center gap-3 border border-[color:var(--surface-ink)] bg-[color:var(--surface-ink)] px-6 py-4 text-label-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-90"
           >
             <GitHubMark />
             SIGN IN WITH GITHUB
@@ -66,14 +66,14 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           {errorMessage ? (
             <p
               role="alert"
-              className="border-l-2 border-[color:var(--surface-signal)] pl-3 text-mono-s text-[color:var(--surface-signal)]"
+              className="border-l-2 border-[color:var(--surface-signal)] pl-3 text-label-s text-[color:var(--surface-signal)]"
             >
               {errorMessage.toUpperCase()}
             </p>
           ) : null}
         </form>
 
-        <footer className="text-mono-s text-[color:var(--surface-graphite)]">
+        <footer className="text-label-s text-[color:var(--surface-graphite)]">
           ← <Link href="/" className="hover:text-[color:var(--surface-ink)]">BACK TO SITE</Link>
         </footer>
       </div>

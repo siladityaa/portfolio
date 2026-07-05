@@ -120,7 +120,7 @@ function WorkSection() {
               current: false,
             })
           }
-          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
           + ADD ROLE
         </button>
@@ -133,7 +133,7 @@ function WorkSection() {
             className="flex flex-col gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] pt-6"
           >
             <div className="flex items-center justify-between gap-3">
-              <span className="text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="text-label-s text-[color:var(--surface-graphite)]">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <ListActions
@@ -224,7 +224,7 @@ function EducationSection() {
               highlight: "",
             })
           }
-          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
           + ADD SCHOOL
         </button>
@@ -237,7 +237,7 @@ function EducationSection() {
             className="flex flex-col gap-4 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] pt-6"
           >
             <div className="flex items-center justify-between gap-3">
-              <span className="text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="text-label-s text-[color:var(--surface-graphite)]">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <ListActions
@@ -307,7 +307,7 @@ function AwardsSection() {
         <button
           type="button"
           onClick={() => append({ name: "" })}
-          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+          className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
           + ADD AWARD
         </button>
@@ -354,7 +354,7 @@ function CurrentCheckbox({ name }: { name: string }) {
         {...register(name)}
         className="h-4 w-4 border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] text-[color:var(--surface-ink)] accent-[color:var(--surface-ink)]"
       />
-      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+      <span className="text-label-s text-[color:var(--surface-graphite)]">
         CURRENT ROLE
       </span>
     </label>

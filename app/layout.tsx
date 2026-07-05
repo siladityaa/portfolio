@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, JetBrains_Mono, Geist } from "next/font/google";
 import "./globals.css";
 
 import { ThemeAutoSync } from "@/components/chrome/ThemeAutoSync";
+
+// Type stack (three faces):
+//   · Instrument Serif — display / headlines (italic-forward)
+//   · Geist            — primary UI labels, nav, eyebrows, meta
+//   · JetBrains Mono   — small technical readouts (clock, now-playing,
+//                        cursor coordinates, the colophon spec sheet)
 
 // Instrument Serif ships the regular (400) and italic weights only —
 // the brief calls for variable weight play but Instrument Serif is the free
@@ -12,6 +18,13 @@ const display = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
   style: ["normal", "italic"],
+  display: "swap",
+});
+
+// Geist is a variable font — no explicit weight array needed.
+const sans = Geist({
+  variable: "--font-sans-ui",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -68,7 +81,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${display.variable} ${mono.variable}`}
+      className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />

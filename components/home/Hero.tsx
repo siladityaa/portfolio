@@ -50,7 +50,7 @@ export function Hero({ sentence, subline }: HeroProps) {
           </Reveal>
 
           <Reveal index={2}>
-            <p className="text-mono-s text-[color:var(--surface-graphite)]">
+            <p className="text-label-s text-[color:var(--surface-graphite)]">
               {subline}
             </p>
           </Reveal>
@@ -62,7 +62,7 @@ export function Hero({ sentence, subline }: HeroProps) {
           widget. Animation pauses when reduced motion is requested. */}
       <motion.span
         aria-hidden
-        className="absolute right-[clamp(24px,4vw,64px)] bottom-[clamp(80px,10vh,140px)] hidden text-mono-s text-[color:var(--surface-graphite)] md:inline-block"
+        className="absolute right-[clamp(24px,4vw,64px)] bottom-[clamp(80px,10vh,140px)] hidden text-label-s text-[color:var(--surface-graphite)] md:inline-block"
         animate={reducedMotion ? undefined : { y: [0, 3, 0] }}
         transition={
           reducedMotion

@@ -69,7 +69,7 @@ export default async function AdminDashboard() {
 
   return (
     <div className="mx-auto max-w-[920px] px-[clamp(24px,4vw,64px)] py-[clamp(80px,12vh,160px)]">
-      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+      <span className="text-label-s text-[color:var(--surface-graphite)]">
         DASHBOARD
       </span>
       <h1 className="mt-6 max-w-[24ch] text-display-l italic text-[color:var(--surface-ink)]">
@@ -87,7 +87,7 @@ export default async function AdminDashboard() {
               href={collection.href}
               className="group grid grid-cols-12 gap-6 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] py-8 transition-colors duration-500 ease-[var(--ease-out-soft)] last:border-b hover:bg-[color:color-mix(in_srgb,var(--surface-graphite)_8%,transparent)]"
             >
-              <span className="col-span-1 text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="col-span-1 text-label-s text-[color:var(--surface-graphite)]">
                 {collection.number}
               </span>
               <div className="col-span-9">
@@ -98,7 +98,7 @@ export default async function AdminDashboard() {
                   {collection.description}
                 </p>
               </div>
-              <span className="col-span-2 self-start text-right text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="col-span-2 self-start text-right text-label-s text-[color:var(--surface-graphite)]">
                 {collection.count}
               </span>
             </Link>

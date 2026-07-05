@@ -12,7 +12,7 @@ export default async function AboutEditPage() {
   const about = await getAbout();
   return (
     <div className="mx-auto max-w-[820px] px-[clamp(24px,4vw,64px)] py-[clamp(80px,12vh,160px)]">
-      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+      <span className="text-label-s text-[color:var(--surface-graphite)]">
         02 — ABOUT
       </span>
       <h1 className="mt-6 max-w-[24ch] text-display-l italic text-[color:var(--surface-ink)]">

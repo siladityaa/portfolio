@@ -16,7 +16,7 @@ export function ResumeHero() {
         <h1 className="text-display-l italic text-[color:var(--surface-ink)]">
           {resume.name}
         </h1>
-        <p className="text-mono-s tracking-wider text-[color:var(--surface-graphite)]">
+        <p className="text-label-s tracking-wider text-[color:var(--surface-graphite)]">
           {resume.tagline.toUpperCase()}
         </p>
       </motion.div>
@@ -47,7 +47,7 @@ export function ResumeHero() {
         {resume.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_20%,transparent)] px-3 py-1 text-mono-s text-[color:var(--surface-graphite)]"
+            className="rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_20%,transparent)] px-3 py-1 text-label-s text-[color:var(--surface-graphite)]"
           >
             {tag}
           </span>
@@ -63,7 +63,7 @@ function Stat({ value, label }: { value: string; label: string }) {
       <span className="text-display-s italic text-[color:var(--surface-ink)]">
         {value}
       </span>
-      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+      <span className="text-label-s text-[color:var(--surface-graphite)]">
         {label}
       </span>
     </div>

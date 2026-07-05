@@ -64,7 +64,7 @@ export function CaseStudyReorderList({ rows }: { rows: CaseStudyRow[] }) {
     <div className="flex flex-col gap-6">
       {dirty && (
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-signal)_50%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-signal)_8%,transparent)] p-4">
-          <span className="text-mono-s text-[color:var(--surface-ink)]">
+          <span className="text-label-s text-[color:var(--surface-ink)]">
             Order changed — unsaved
           </span>
           <div className="flex items-center gap-3">
@@ -72,7 +72,7 @@ export function CaseStudyReorderList({ rows }: { rows: CaseStudyRow[] }) {
               type="button"
               onClick={reset}
               disabled={pending}
-              className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+              className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
             >
               RESET
             </button>
@@ -80,7 +80,7 @@ export function CaseStudyReorderList({ rows }: { rows: CaseStudyRow[] }) {
               type="button"
               onClick={save}
               disabled={pending}
-              className="bg-[color:var(--surface-ink)] px-4 py-2 text-mono-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-80 disabled:opacity-40"
+              className="bg-[color:var(--surface-ink)] px-4 py-2 text-label-s text-[color:var(--surface-paper)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-80 disabled:opacity-40"
             >
               {pending ? "SAVING…" : "SAVE ORDER"}
             </button>
@@ -88,12 +88,12 @@ export function CaseStudyReorderList({ rows }: { rows: CaseStudyRow[] }) {
         </div>
       )}
       {!dirty && savedAt && (
-        <div className="rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-4 text-mono-s text-[color:var(--surface-graphite)]">
+        <div className="rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-4 text-label-s text-[color:var(--surface-graphite)]">
           ORDER SAVED · LIVE IN ~60S
         </div>
       )}
       {error && (
-        <div className="rounded-[4px] border border-[color:var(--surface-signal)] bg-[color:color-mix(in_srgb,var(--surface-signal)_8%,transparent)] p-4 text-mono-s text-[color:var(--surface-signal)]">
+        <div className="rounded-[4px] border border-[color:var(--surface-signal)] bg-[color:color-mix(in_srgb,var(--surface-signal)_8%,transparent)] p-4 text-label-s text-[color:var(--surface-signal)]">
           {error}
         </div>
       )}
@@ -104,7 +104,7 @@ export function CaseStudyReorderList({ rows }: { rows: CaseStudyRow[] }) {
             key={row.slug}
             className="grid grid-cols-12 items-center gap-6 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_25%,transparent)] py-6 last:border-b"
           >
-            <span className="col-span-1 text-mono-s text-[color:var(--surface-graphite)] tabular-nums">
+            <span className="col-span-1 text-label-s text-[color:var(--surface-graphite)] tabular-nums">
               {String(i + 1).padStart(2, "0")}
             </span>
             <Link
@@ -114,7 +114,7 @@ export function CaseStudyReorderList({ rows }: { rows: CaseStudyRow[] }) {
               <h2 className="text-display-s italic text-[color:var(--surface-ink)]">
                 {row.title}
               </h2>
-              <div className="mt-2 flex flex-wrap items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
+              <div className="mt-2 flex flex-wrap items-center gap-3 text-label-s text-[color:var(--surface-graphite)]">
                 <span>{row.timeline}</span>
                 <span>·</span>
                 <span>
@@ -131,7 +131,7 @@ export function CaseStudyReorderList({ rows }: { rows: CaseStudyRow[] }) {
                 ))}
               </div>
             </Link>
-            <div className="col-span-4 flex items-center justify-end gap-3 text-mono-s">
+            <div className="col-span-4 flex items-center justify-end gap-3 text-label-s">
               <button
                 type="button"
                 onClick={() => move(i, -1)}

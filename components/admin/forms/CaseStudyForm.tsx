@@ -294,10 +294,10 @@ function GalleryList({ slug }: { slug: string }) {
           >
             <header className="flex items-baseline justify-between gap-3">
               <div className="flex flex-col gap-1">
-                <span className="text-mono-s text-[color:var(--surface-ink)]">
+                <span className="text-label-s text-[color:var(--surface-ink)]">
                   {meta.label}
                 </span>
-                <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                <span className="text-label-s text-[color:var(--surface-graphite)]">
                   Span: {meta.shape}
                 </span>
               </div>
@@ -306,7 +306,7 @@ function GalleryList({ slug }: { slug: string }) {
                   <button
                     type="button"
                     onClick={() => gallery.move(i, i - 1)}
-                    className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                    className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
                   >
                     ↑
                   </button>
@@ -315,7 +315,7 @@ function GalleryList({ slug }: { slug: string }) {
                   <button
                     type="button"
                     onClick={() => gallery.move(i, i + 1)}
-                    className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                    className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
                   >
                     ↓
                   </button>
@@ -323,7 +323,7 @@ function GalleryList({ slug }: { slug: string }) {
                 <button
                   type="button"
                   onClick={() => gallery.remove(i)}
-                  className="text-mono-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
+                  className="text-label-s text-[color:var(--surface-graphite)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:text-[color:var(--surface-ink)]"
                 >
                   REMOVE
                 </button>
@@ -359,7 +359,7 @@ function GalleryAddButton() {
       onClick={() =>
         gallery.append({ src: "", alt: "", caption: "" })
       }
-      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
     >
       + ADD TILE ({filled}/{BENTO_MAX})
     </button>
@@ -389,10 +389,10 @@ function MetricsList() {
           className="flex flex-col gap-3 rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-4"
         >
           <div className="flex items-baseline justify-between gap-3">
-            <span className="text-mono-s text-[color:var(--surface-ink)]">
+            <span className="text-label-s text-[color:var(--surface-ink)]">
               METRIC {String(i + 1).padStart(2, "0")}
             </span>
-            <div className="flex items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
+            <div className="flex items-center gap-3 text-label-s text-[color:var(--surface-graphite)]">
               {i > 0 && (
                 <button
                   type="button"
@@ -446,7 +446,7 @@ function MetricsAddButton() {
     <button
       type="button"
       onClick={() => metrics.append({ value: "", label: "" })}
-      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
     >
       + ADD METRIC ({filled}/{METRICS_MAX})
     </button>
@@ -475,10 +475,10 @@ function BodyList() {
           className="flex flex-col gap-4 rounded-[4px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] bg-[color:color-mix(in_srgb,var(--surface-graphite)_4%,transparent)] p-5"
         >
           <div className="flex items-baseline justify-between gap-3">
-            <span className="text-mono-s text-[color:var(--surface-ink)]">
+            <span className="text-label-s text-[color:var(--surface-ink)]">
               SECTION {String(i + 1).padStart(2, "0")}
             </span>
-            <div className="flex items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
+            <div className="flex items-center gap-3 text-label-s text-[color:var(--surface-graphite)]">
               {i > 0 && (
                 <button
                   type="button"
@@ -530,7 +530,7 @@ function BodyAddButton() {
     <button
       type="button"
       onClick={() => body.append({ heading: "", body: "", media: [] })}
-      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+      className="inline-flex items-center border border-[color:var(--surface-ink)] px-3 py-2 text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
     >
       + ADD SECTION ({body.fields.length})
     </button>
@@ -550,7 +550,7 @@ function SectionMediaList({ sectionIndex }: { sectionIndex: number }) {
   return (
     <div className="flex flex-col gap-3 border-t border-[color:color-mix(in_srgb,var(--surface-graphite)_15%,transparent)] pt-4">
       <div className="flex items-baseline justify-between gap-3">
-        <span className="text-mono-s text-[color:var(--surface-graphite)]">
+        <span className="text-label-s text-[color:var(--surface-graphite)]">
           INLINE MEDIA
         </span>
         <button
@@ -558,13 +558,13 @@ function SectionMediaList({ sectionIndex }: { sectionIndex: number }) {
           onClick={() =>
             media.append({ src: "", alt: "", caption: "" })
           }
-          className="text-mono-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
+          className="text-label-s text-[color:var(--surface-ink)] transition-opacity duration-300 ease-[var(--ease-out-soft)] hover:opacity-60"
         >
           + ADD ASSET
         </button>
       </div>
       {media.fields.length === 0 ? (
-        <p className="text-mono-s text-[color:color-mix(in_srgb,var(--surface-graphite)_70%,transparent)]">
+        <p className="text-label-s text-[color:color-mix(in_srgb,var(--surface-graphite)_70%,transparent)]">
           No inline media. Drop an image / video here, or paste an external
           URL — saves on upload size for large assets.
         </p>
@@ -576,10 +576,10 @@ function SectionMediaList({ sectionIndex }: { sectionIndex: number }) {
               className="flex flex-col gap-3 rounded-[3px] border border-[color:color-mix(in_srgb,var(--surface-graphite)_12%,transparent)] p-3"
             >
               <div className="flex items-baseline justify-between gap-3">
-                <span className="text-mono-s text-[color:var(--surface-graphite)]">
+                <span className="text-label-s text-[color:var(--surface-graphite)]">
                   ASSET {String(mi + 1).padStart(2, "0")}
                 </span>
-                <div className="flex items-center gap-3 text-mono-s text-[color:var(--surface-graphite)]">
+                <div className="flex items-center gap-3 text-label-s text-[color:var(--surface-graphite)]">
                   {mi > 0 && (
                     <button
                       type="button"

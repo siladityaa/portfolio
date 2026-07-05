@@ -178,7 +178,7 @@ export function ImageUploadField({
 
   return (
     <label className="flex flex-col gap-2">
-      <span className="text-mono-s text-[color:var(--surface-graphite)]">
+      <span className="text-label-s text-[color:var(--surface-graphite)]">
         {label}
       </span>
       {description ? (
@@ -247,7 +247,7 @@ export function ImageUploadField({
         ) : (
           <span
             aria-hidden
-            className="flex h-[56px] w-[80px] shrink-0 items-center justify-center rounded-md border border-dashed border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] text-mono-s text-[color:var(--surface-graphite)]"
+            className="flex h-[56px] w-[80px] shrink-0 items-center justify-center rounded-md border border-dashed border-[color:color-mix(in_srgb,var(--surface-graphite)_35%,transparent)] text-label-s text-[color:var(--surface-graphite)]"
           >
             MEDIA
           </span>
@@ -256,23 +256,23 @@ export function ImageUploadField({
         {/* Upload status / prompt */}
         <div className="flex flex-1 flex-col gap-1">
           {phase === "compressing" && (
-            <span className="flex items-center gap-2 text-mono-s text-[color:var(--surface-ink)]">
+            <span className="flex items-center gap-2 text-label-s text-[color:var(--surface-ink)]">
               <Spinner /> COMPRESSING IMAGE…
             </span>
           )}
           {phase === "uploading" && (
-            <span className="flex items-center gap-2 text-mono-s text-[color:var(--surface-ink)]">
+            <span className="flex items-center gap-2 text-label-s text-[color:var(--surface-ink)]">
               <Spinner /> UPLOADING TO GITHUB…
             </span>
           )}
           {phase === "success" && (
-            <span className="flex items-center gap-2 text-mono-s text-[color:#22a560]">
+            <span className="flex items-center gap-2 text-label-s text-[color:#22a560]">
               <CheckIcon /> UPLOADED
             </span>
           )}
           {phase === "idle" && (
             <>
-              <span className="text-mono-s text-[color:var(--surface-graphite)]">
+              <span className="text-label-s text-[color:var(--surface-graphite)]">
                 {showPreview ? "REPLACE — DROP OR CLICK" : "DROP MEDIA OR CLICK TO UPLOAD"}
               </span>
               <span className="text-[11px] text-[color:color-mix(in_srgb,var(--surface-graphite)_70%,transparent)]">
@@ -297,7 +297,7 @@ export function ImageUploadField({
               setUploadError(null);
             }}
             aria-label="Clear asset"
-            className="shrink-0 self-start rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-3 py-1 text-mono-s text-[color:var(--surface-graphite)] transition-colors duration-200 hover:border-[color:var(--surface-signal)] hover:text-[color:var(--surface-signal)]"
+            className="shrink-0 self-start rounded-full border border-[color:color-mix(in_srgb,var(--surface-graphite)_30%,transparent)] px-3 py-1 text-label-s text-[color:var(--surface-graphite)] transition-colors duration-200 hover:border-[color:var(--surface-signal)] hover:text-[color:var(--surface-signal)]"
           >
             CLEAR
           </button>
@@ -331,12 +331,12 @@ export function ImageUploadField({
 
       {/* Error messages */}
       {uploadError ? (
-        <span className="text-mono-s text-[color:var(--surface-signal)]">
+        <span className="text-label-s text-[color:var(--surface-signal)]">
           {uploadError}
         </span>
       ) : null}
       {errorMessage ? (
-        <span className="text-mono-s text-[color:var(--surface-signal)]">
+        <span className="text-label-s text-[color:var(--surface-signal)]">
           {errorMessage}
         </span>
       ) : null}
