@@ -90,12 +90,12 @@ export function ProjectList({ rows }: ProjectListProps) {
                 data-cursor="view"
                 onMouseEnter={() => setHovered(i)}
                 className={clsx(
-                  "group flex items-baseline justify-between gap-6 py-[clamp(20px,3.2vw,40px)] transition-opacity duration-500 ease-[var(--ease-out-soft)]",
+                  "group flex items-center justify-between gap-6 py-[clamp(20px,3.2vw,40px)] transition-opacity duration-500 ease-[var(--ease-out-soft)]",
                   dimmed ? "opacity-35" : "opacity-100",
                 )}
               >
                 {/* Left — index + title */}
-                <div className="flex items-baseline gap-[clamp(16px,3vw,48px)]">
+                <div className="flex items-center gap-[clamp(16px,3vw,48px)]">
                   <span className="hidden shrink-0 text-label-s text-[color:var(--surface-graphite)] sm:inline">
                     {row.number}
                   </span>
@@ -116,7 +116,7 @@ export function ProjectList({ rows }: ProjectListProps) {
                 </div>
 
                 {/* Right — meta */}
-                <div className="flex shrink-0 items-baseline gap-[clamp(12px,2vw,28px)] text-label-s text-[color:var(--surface-graphite)]">
+                <div className="flex shrink-0 items-center gap-[clamp(12px,2vw,28px)] text-label-s text-[color:var(--surface-graphite)]">
                   <span className="hidden md:inline">
                     {row.client}
                   </span>
