@@ -1,5 +1,5 @@
 import { loadAllCaseStudies } from "@/lib/content";
-import { ProjectStack } from "@/components/shared/ProjectStack";
+import { ProjectList } from "@/components/shared/ProjectList";
 import type { ProjectRowData } from "@/components/shared/ProjectRow";
 
 /**
@@ -56,7 +56,7 @@ export async function SelectedWork() {
           01 — SELECTED WORK
         </span>
       </header>
-      <ProjectStack rows={rows} />
+      <ProjectList rows={rows} />
     </section>
   );
 }
